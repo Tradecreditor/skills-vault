@@ -1,0 +1,13 @@
+{
+  "_comment": "macOS / Linux: merge into ~/.claude/settings.json. Windows users use claude-settings-user.windows.json instead. Adjust the path if the vault lives elsewhere.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          { "type": "command", "command": "bash \"$HOME/skills-vault/.claude/hooks/vault-suggest.sh\"", "timeout": 30 }
+        ]
+      }
+    ]
+  }
+}

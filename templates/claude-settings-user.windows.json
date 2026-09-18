@@ -1,0 +1,17 @@
+{
+  "_comment": "Windows: merge into %USERPROFILE%\\.claude\\settings.json. Adjust the path if the vault is not at %USERPROFILE%\\skills-vault.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"%USERPROFILE%\\skills-vault\\.claude\\hooks\\vault-suggest.ps1\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "tradecreditor-vault",
+  "owner": { "name": "Tradecreditor" },
+  "plugins": [
+    {
+      "name": "skills-vault",
+      "source": "./",
+      "description": "Captured skills plus the vault-capture / vault-search operating skills from Tradecreditor/skills-vault"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+# Weekly hot-list configuration. The weekly-hot-list routine reads this file; edit numbers here, not the routine prompt.
+window:
+  days: 7
+  runs: "Monday 01:00 UTC (09:00 HKT); window = previous Monday 00:00 UTC .. Sunday 23:59 UTC"
+scope: "AI agents, agent skills, MCP servers, coding agents (Claude Code / Codex / Gemini CLI / OpenClaw / Cursor), LLM knowledge tools (Obsidian, LLM wiki), developer tooling around them"
+topics:            # seed queries used on every source; add your own interests
+  - "claude code skill"
+  - "agent skills"
+  - "MCP server"
+  - "openclaw"
+  - "codex cli"
+  - "cursor rules"
+  - "ai coding agent"
+  - "obsidian ai"
+  - "llm wiki"
+  - "agent memory"
+
+sources:           # decision 5: Agent-Reach first, Exa as backup. xAI x_search is NOT used.
+  github: ["gh search repos locally; in the cloud (gh is proxy-blocked) use the GitHub connector search_repositories tool or Exa fetch of https://api.github.com/search/repositories?q=...", "snapshot delta from _snapshot.json (stars via https://api.github.com/repos/<o>/<r>)"]
+  x: ["agent-reach twitter-cli search (only if TWITTER_AUTH_TOKEN and TWITTER_CT0 are set; burner account)", "exa web_search_exa category=tweet startPublishedDate=window start"]
+  x_verify: "fxtwitter JSON for every candidate post (never trust search-result counts)"
+  threads: ["exa web_search_exa with site:threads.net startPublishedDate=window start", "jina reader to read the post; Scrape Creators (SC_API_KEY) for like/repost counts; Meta oEmbed only with THREADS_APP_TOKEN"]
+  registries: ["skills.sh trending page or GET https://skills.sh/api/v1/skills?view=trending", "GET https://clawhub.ai/api/v1/skills?limit=20&sort=trending&nonSuspiciousOnly=true", "GET https://skillsmp.com/api/v1/skills/search?q=<topic>&sortBy=stars&limit=20"]
+
+gates:             # an item is a candidate if it clears at least one gate on GitHub, X or Threads
+  github:
+    new_repo_max_age_days: 90
+    new_repo_min_total_stars: 10000
+    min_stars_gained_7d: 3000
+    min_stars_gained_7d_if_topical: 1500     # README/topics mention agent, skill, MCP, Claude Code, Codex, OpenClaw
+  x:
+    min_likes: 2000
+    min_reposts: 500
+    min_views: 1000000
+    distinct_authors: 3
+    distinct_author_min_likes: 300
+  threads:
+    min_likes: 1000
+    min_reposts: 150
+    distinct_authors: 3
+    distinct_author_min_likes: 200
+  registries:      # corroboration only, never a gate on its own
+    skills_sh_weekly_installs: 1000
+    clawhub_trending_top_n: 20
+
+score:
+  weights: { github: 0.40, x: 0.35, threads: 0.15, registries: 0.10 }   # each component = min(1, metric / threshold)
+  multi_platform_bonus: 1.25          # applied when gates are cleared on 2+ of {github, x, threads}
+  corroboration:
+    min_platforms_with_gate: 2
+    single_source_min_heat: 0.60      # a single-platform blockbuster still qualifies
+  social_rule: "at least one winner per week must have cleared the X or Threads gate"
+  winners: { min: 2, max: 3 }
+  quiet_week: "if fewer than 2 qualify, title the report 'quiet week', list the best 3 sub-threshold items under Watch, never lower thresholds"
+
+dedupe:
+  skip_if_already_in_vault: true                # grep -rF "<canonical_id>" wiki/index.md wiki/pages wiki/stars finds a hit
+  write_update_if_stars_gained_7d_at_least: 10000
+  note_on_existing_page: "append '- also trending YYYY-Www (numbers)' under ## Notes"
+
+cost_caps_per_run:
+  exa_searches: 12
+  twitter_cli_searches: 10
+  fxtwitter_fetches: 40
+  github_api_calls: 200
+
+output:
+  report: "wiki/hot-list/YYYY-Www.md"
+  snapshot: "wiki/hot-list/_snapshot.json"      # { "<owner>/<repo>": { "stars": n, "as_of": "YYYY-MM-DD" } }
+  branch: "hot-list/YYYY-Www"                   # decision 6: weekly list opens a PR, never pushes to main
+  pr_title: "hot-list: YYYY-Www"

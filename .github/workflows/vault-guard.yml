@@ -1,0 +1,58 @@
+name: vault-guard
+# Enforces the vault write rules (scripts/vault-guard-check.sh), judged by the GitHub ACCOUNT acting:
+#   everyone: raw/ add-only, skills valid · non-core accounts: no deletes/renames, no edits to protected paths.
+# Job "guard" runs on pull requests and is the REQUIRED status check in the main ruleset. With "Require a pull request"
+# + bypass list = owner only, the owner (Josep's Claude Code, Routines, obsidian-git) can still push straight to main,
+# while any other account (the agents' machine account) can only land changes through a PR that passes this check.
+# Job "audit" re-runs the same rules on whatever reached main and is advisory (never blocks).
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check the pull request (rules taken from the base branch)
+        env:
+          VAULT_CORE_LOGINS: ${{ vars.VAULT_CORE_LOGINS }}
+          VAULT_OWNER: ${{ github.repository_owner }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          git show "origin/$BASE_REF:scripts/vault-guard-check.sh" > /tmp/vault-guard-check.sh   # a PR cannot weaken its own check
+          BASE=$(git merge-base "$BASE_SHA" "$HEAD_SHA" || echo "$BASE_SHA")
+          bash /tmp/vault-guard-check.sh "$BASE" "$HEAD_SHA" "$PR_AUTHOR"
+
+  audit:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Audit what landed on main (advisory)
+        continue-on-error: true
+        env:
+          VAULT_CORE_LOGINS: ${{ vars.VAULT_CORE_LOGINS }}
+          VAULT_OWNER: ${{ github.repository_owner }}
+          BEFORE: ${{ github.event.before }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          BASE="$BEFORE"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            BASE=$(git rev-parse HEAD~1 2>/dev/null || git hash-object -t tree /dev/null)
+          fi
+          bash scripts/vault-guard-check.sh "$BASE" "$GITHUB_SHA" "$ACTOR"
