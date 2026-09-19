@@ -4,6 +4,7 @@
 （等第一次 weekly-hot-list Routine 跑完會出現喺度：`wiki/hot-list/YYYY-Www.md`）
 
 ## 最近 20 項
+- 2026-09-19 · repo · [[stars/LottieFiles--motion-design-skill|motion-design-skill]]
 - 2026-09-19 · repo · [[stars/Panniantong--Agent-Reach|Agent-Reach]]
 - 2026-09-19 · repo · [[stars/cathrynlavery--diagram-design|diagram-design]]
 - 2026-09-19 · repo · [[stars/DietrichGebert--ponytail|ponytail]]

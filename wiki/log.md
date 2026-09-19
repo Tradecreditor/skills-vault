@@ -11,3 +11,4 @@
 ## [2026-09-19] star | lewislulu/html-ppt-skill | lewislulu--html-ppt-skill
 ## [2026-09-19] star | jackwener/OpenCLI | jackwener--OpenCLI
 ## [2026-09-19] star | googleanalytics/google-analytics-mcp | googleanalytics--google-analytics-mcp
+## [2026-09-19] star | LottieFiles/motion-design-skill | LottieFiles--motion-design-skill

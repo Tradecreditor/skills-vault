@@ -4,6 +4,7 @@ Newest first. The github-stars-sync routine stops paging when it reaches a row a
 
 | starred_at | repo | note |
 |---|---|---|
+| 2026-09-19 | LottieFiles/motion-design-skill | Motion design principles for AI agents |
 | 2026-09-19 | Panniantong/Agent-Reach | Agent infrastructure for web scraping |
 | 2026-09-19 | cathrynlavery/diagram-design | Editorial diagram design for Claude Code |
 | 2026-09-19 | DietrichGebert/ponytail | YAGNI principle for AI agents |
