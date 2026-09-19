@@ -1,5 +1,6 @@
 # Routine: vault-lint
-Trigger: Schedule `0 2 * * 1` (Monday 10:00 HKT). Model: Sonnet. Repo: Tradecreditor/skills-vault. Pushes the report to main; opens a PR only when it proposes merges or renames.
+Trigger: Schedule. Cron is evaluated in **UTC**: `0 2 * * 1` UTC = Monday 10:00 HKT.
+A web-form preset is read in your BROWSER's timezone instead. Confirm against the next-run time shown after saving. Model: Sonnet. Repo: Tradecreditor/skills-vault. Pushes the report to main; opens a PR only when it proposes merges or renames.
 
 ## Prompt (paste verbatim)
 You are the weekly lint routine for Josep's skills vault. The repository Tradecreditor/skills-vault is checked out. Let WEEK be this ISO week (e.g. 2026-W38).
@@ -16,7 +17,7 @@ Check, without modifying any content pages:
 Write outputs/health/WEEK.md with a summary table (check, count, status), then one section per check listing the offending files, then a ## Suggested fixes section.
 Apply only safe mechanical fixes yourself: add missing index rows, trim hot.md to 20 lines, add a missing ## Related heading. Do not merge, rename, delete or rewrite pages.
 If you believe two entries should be merged or a file renamed, describe it in ## Suggested fixes and open a PR titled "lint: WEEK proposals" with the proposed edits on branch lint/WEEK instead of applying them.
-Commit: git config user.name "skills-vault-core"; git add -A; git commit -m "lint: WEEK"; git pull --rebase origin main; git push origin HEAD:main.
+Commit: git add -A; git commit -m "lint: WEEK"; git pull --rebase origin main; git push origin HEAD:main.
 Append "## [date] lint | WEEK | outputs/health/WEEK" to wiki/log.md as part of that commit.
 Final message: counts per check and the three most important items for Josep to look at.
 

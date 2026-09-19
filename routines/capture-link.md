@@ -19,7 +19,7 @@ STEPS
    If every reader fails, still write the page with needs_manual_text: true. Never invent content.
 3. Write raw/<slug>.md, wiki/pages/<slug>.md, a draft skills/<name>/SKILL.md only when the content is an actionable procedure,
    and append rows to wiki/index.md, wiki/log.md and wiki/hot.md. Summaries in Traditional Chinese, commands and SKILL.md bodies in English.
-4. Commit and push: git config user.name "skills-vault-core"; git add -A; git commit -m "capture: <slug>" (one commit per URL);
+4. Commit and push: git add -A; git commit -m "capture: <slug>" (one commit per URL);
    git pull --rebase origin main; git push origin HEAD:main (this routine runs as the owner account, which may push to main).
    If the push is rejected, pull --rebase again and retry once; then report the failure.
 5. Final message (3 lines max): files written, reader used per URL, anything flagged needs_manual_text.

@@ -1,5 +1,6 @@
 # Routine: github-stars-sync
-Trigger: Schedule `0 23 * * *` (07:00 HKT daily). Model: Haiku (Sonnet if summaries look thin). Repo: Tradecreditor/skills-vault. Pushes to main.
+Trigger: Schedule. Cron is evaluated in **UTC**: `0 23 * * *` UTC = 07:00 HKT the next morning.
+If you use the web form's daily preset instead, the time is read in your BROWSER's timezone, so enter the time that equals 07:00 HKT there. Always confirm against the next-run time the UI shows after saving. Model: Haiku (Sonnet if summaries look thin). Repo: Tradecreditor/skills-vault. Pushes to main.
 
 ## Prompt (paste verbatim)
 You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: Tradecreditor). The repository Tradecreditor/skills-vault is checked out.
@@ -23,7 +24,7 @@ You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: 
 5. Prepend a row to the table in wiki/github-stars.md (| starred_at or run date | owner/repo | one-line note |), add a row to wiki/index.md
    (slug <owner>--<repo>, type repo, tags from topics, canonical_id github:<owner>/<repo>), append "## [date] star | <owner>/<repo> | stars/<owner>--<repo>" to wiki/log.md,
    and add the item under 最近 20 項 in wiki/hot.md.
-6. git config user.name "skills-vault-core"; git add -A; git commit -m "stars: +<N>"; git pull --rebase origin main; git push origin HEAD:main.
+6. git add -A; git commit -m "stars: +<N>"; git pull --rebase origin main; git push origin HEAD:main.
    If there are no new stars, do not commit; just print "no new stars".
 7. Final message: N repos added, any that failed, and whether more remain for tomorrow.
 

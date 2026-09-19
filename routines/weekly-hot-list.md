@@ -1,5 +1,6 @@
 # Routine: weekly-hot-list
-Trigger: Schedule `0 1 * * 1` (Monday 09:00 HKT). Model: Opus. Repo: Tradecreditor/skills-vault. Opens a PR (never pushes to main).
+Trigger: Schedule. Cron is evaluated in **UTC**: `0 1 * * 1` UTC = Monday 09:00 HKT.
+A web-form preset is read in your BROWSER's timezone instead. Confirm against the next-run time shown after saving. Model: Opus. Repo: Tradecreditor/skills-vault. Opens a PR (never pushes to main).
 
 ## Prompt (paste verbatim)
 You are the weekly hot-list routine for Josep's skills vault. The repository Tradecreditor/skills-vault is checked out. Today is Monday; the window is the previous Monday 00:00 UTC to Sunday 23:59 UTC. Let WEEK be the ISO week label of that window, e.g. 2026-W37.
@@ -29,7 +30,7 @@ You are the weekly hot-list routine for Josep's skills vault. The repository Tra
    For each winner also: capture its primary source with the vault-capture procedure (raw/ + wiki/pages/<slug>.md with type and captured_by: routine:weekly-hot-list, tags including hot-list, WEEK),
    draft skills/<name>/SKILL.md only if it is an installable skill or a repeatable procedure, add rows to wiki/index.md and wiki/log.md ("## [date] hot-list | WEEK | hot-list/WEEK"),
    and replace the ## 本週熱門榜 section of wiki/hot.md with the 2–3 winners linking to the report.
-4. Commit on a branch and open a PR (decision 6): git config user.name "skills-vault-core"; git checkout -b hot-list/WEEK; git add -A; git commit -m "hot-list: WEEK"; git push -u origin hot-list/WEEK;
+4. Commit on a branch and open a PR (decision 6): git checkout -b hot-list/WEEK; git add -A; git commit -m "hot-list: WEEK"; git push -u origin hot-list/WEEK;
    gh pr create --title "hot-list: WEEK" --body "<the 本週入選 section plus a link to the report>" --base main.
 5. Final message: the winners with heat scores, the PR URL, and any source that failed or hit a cost cap.
 

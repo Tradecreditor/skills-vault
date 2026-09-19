@@ -1,22 +1,159 @@
 # routines/
-Prompts for the Claude Code cloud Routines (claude.ai/code → Routines). Create each Routine with the settings in its file and paste its
-prompt verbatim. Prompts point at files in this repo, so tuning thresholds or rules never requires editing the Routine itself.
 
-| Routine | Trigger | Model (tiering) | Writes |
+Prompts for the four Claude Code cloud Routines. Each file has a `## Prompt (paste verbatim)` heading; everything below that
+heading is the routine's prompt. The prompts point at files in this repo, so tuning thresholds or rules later means editing
+`wiki/hot-list/_config.yaml` or `CLAUDE.md`, never the routine itself.
+
+| Routine | Trigger | Model | Writes |
 |---|---|---|---|
-| capture-link | API (fired by the Supabase `capture` function / iPhone Shortcut / Telegram) | Sonnet | pushes to `main` |
-| github-stars-sync | Schedule `0 23 * * *` (07:00 HKT daily) | Haiku (or Sonnet) | pushes to `main` |
-| weekly-hot-list | Schedule `0 1 * * 1` (Monday 09:00 HKT) | Opus | opens a PR from `hot-list/YYYY-Www` |
-| vault-lint | Schedule `0 2 * * 1` (Monday 10:00 HKT) | Sonnet | pushes report to `main`; PR if it proposes merges |
+| `capture-link` | API (fired by the Supabase `capture` function / iPhone Shortcut / Telegram) | Sonnet | pushes to `main` |
+| `github-stars-sync` | Schedule, daily 07:00 HKT | Haiku (Sonnet if summaries look thin) | pushes to `main` |
+| `weekly-hot-list` | Schedule, Monday 09:00 HKT | Opus | opens a PR from `hot-list/YYYY-Www` |
+| `vault-lint` | Schedule, Monday 10:00 HKT | Sonnet | pushes report to `main`; PR if it proposes merges |
 
-Common settings for all four: repository `Tradecreditor/skills-vault`; environment "Skills Management" with network access set to
-**Custom** including the default package-manager list plus: `api.fxtwitter.com`, `r.jina.ai`, `graph.threads.net`, `api.github.com`,
-`raw.githubusercontent.com`, `api.supadata.ai`, `api.scrapecreators.com`, `skills.sh`, `clawhub.ai`, `skillsmp.com`, `www.youtube.com`,
-`x.com`, `www.threads.net`, `www.instagram.com`; connectors: Exa (backup reader; also the cloud route to GitHub JSON), GitHub;
-**Permissions → Allow unrestricted branch pushes** enabled for this repo (Routines act as the owner account, so they may push to `main`);
-optional secrets `SUPADATA_KEY`, `SC_API_KEY`, `THREADS_APP_TOKEN`, `TWITTER_AUTH_TOKEN`, `TWITTER_CT0` (burner account only).
+---
 
-Cloud caveat (verified 2026-09-13 inside a Claude cloud session): the sandbox's GitHub proxy returns 403 for `gh api user/starred`,
-`gh search repos`, GraphQL (`gh repo view --json`) and any repo not attached to the session. Every prompt below therefore has a cloud path
-that uses plain `curl` to public `api.github.com` JSON (may also be blocked), the GitHub connector's `search_repositories` /
-`get_file_contents` tools, and the Exa connector's `web_fetch_exa` on `https://api.github.com/...` URLs (verified working).
+## Step 0 — configure the environment once (shared by all four)
+
+Every routine inherits its network policy from its cloud environment, so do this once before creating any routine.
+
+1. Go to https://claude.ai/code/routines and click **New routine** (you can discard it afterwards, or continue into Step 1).
+2. Below the **Instructions** box, click the cloud icon showing the environment name.
+3. Hover the environment you want (e.g. **Skills Management**) and click the settings icon on its right.
+4. Set **Network access** to **Custom**, tick **Also include default list of common package managers**, and add these
+   **Allowed domains**:
+
+   ```
+   api.fxtwitter.com
+   r.jina.ai
+   api.github.com
+   raw.githubusercontent.com
+   graph.threads.net
+   api.supadata.ai
+   api.scrapecreators.com
+   skills.sh
+   clawhub.ai
+   skillsmp.com
+   www.youtube.com
+   x.com
+   www.threads.net
+   www.instagram.com
+   ```
+
+5. Optional keys, only if you have them: add `SUPADATA_KEY` (YouTube / Reel transcripts), `SC_API_KEY` (Threads counts),
+   `THREADS_APP_TOKEN`, `TWITTER_AUTH_TOKEN` + `TWITTER_CT0` (burner account, X search for the weekly list).
+   On Pro/Max prefer **API credentials** over plain environment variables: environment variables are visible to anyone
+   using the environment.
+6. **Save changes.** The policy applies from the next run.
+
+Without this, requests to the reader hosts fail with `403` and `x-deny-reason: host_not_allowed`, and every capture lands with
+`needs_manual_text: true`.
+
+---
+
+## Step 1 — `capture-link` (create on the web; it needs an API trigger)
+
+The API URL and token only exist after the routine is saved, so this one cannot be done from the CLI.
+
+1. https://claude.ai/code/routines → **New routine**.
+2. **Name**: `capture-link`.
+3. **Instructions**: paste everything below `## Prompt (paste verbatim)` in `routines/capture-link.md`.
+4. **Model** (selector inside the instructions box): Sonnet.
+5. **Repositories**: add `Tradecreditor/skills-vault`. If it is not listed, your account has no GitHub access to it yet:
+   grant it at https://github.com/apps/claude or run `/web-setup` in a local Claude Code session inside the vault.
+6. **Environment**: the one configured in Step 0.
+7. **Select a trigger** → **API**. Save the routine first; the URL and token are generated afterwards.
+8. **Connectors**: keep **Exa** and **GitHub**, remove the rest. Claude can use every tool of an included connector without
+   asking during a run, so keep the list tight.
+9. Click **Create**.
+10. Reopen the routine → menu next to its name → **Edit** → **Select a trigger** → **Add another trigger** → **API**.
+    Copy the URL, click **Generate token**, and copy the token immediately. **It is shown once and cannot be retrieved later.**
+    Store both; `supabase/README.md` needs them as `ROUTINE_FIRE_URL` and `ROUTINE_TOKEN`.
+11. Test: on the routine's detail page click **Run now** and supply a URL as the run text, e.g.
+    `https://github.com/kepano/obsidian-skills`. Open the run and confirm it committed to `main`.
+
+---
+
+## Steps 2-4 — the three scheduled routines
+
+Two ways. The CLI is faster and attaches the right repository automatically.
+
+### Option A (recommended): local Claude Code
+
+`/schedule` is unavailable inside cloud sessions, so run this on your own machine:
+
+```bash
+cd ~/skills-vault        # Windows: cd $HOME\skills-vault
+claude
+```
+
+Then, once per routine, paste this and follow Claude's questions:
+
+```
+/schedule create a routine named github-stars-sync that runs daily at 07:00 Hong Kong time,
+using the repository Tradecreditor/skills-vault and the "Skills Management" environment,
+with this prompt:
+
+<paste everything below "## Prompt (paste verbatim)" in routines/github-stars-sync.md>
+```
+
+Repeat for `weekly-hot-list` (Mondays 09:00 HKT) and `vault-lint` (Mondays 10:00 HKT).
+
+Claude confirms before saving. If it says it cannot reach your claude.ai account, or `/schedule` is an unknown command,
+you are signed in with an API key rather than a claude.ai subscription; use Option B instead.
+
+The model selector is part of the web form, so after `/schedule` saves each routine, open it on the web and set the model
+from the table above. `/schedule list` shows what you have, `/schedule update` edits one, `/schedule run` fires it now.
+
+### Option B: the web form
+
+Same as Step 1, except **Select a trigger** → **Schedule**. Pick the nearest preset (daily / weekly, entered in your local
+time), then use `/schedule update` from a local session if you want the exact cron:
+
+| Routine | Cron (always UTC) | Equals, in HKT |
+|---|---|---|
+| `github-stars-sync` | `0 23 * * *` | daily 07:00 |
+| `weekly-hot-list` | `0 1 * * 1` | Monday 09:00 |
+| `vault-lint` | `0 2 * * 1` | Monday 10:00 |
+
+**Timezones, the one thing that silently goes wrong.** A cron expression is always evaluated in UTC; there is no timezone
+picker for it. The web form's *presets* are different: those are entered in your browser's local timezone and converted for
+you. So if your machine is not on HKT, a "daily 07:00" preset does not mean 07:00 Hong Kong time. Whichever route you take,
+after saving read the **next run** time the UI shows and check it is the wall-clock time you wanted. That display is the
+only ground truth.
+
+Minimum interval is one hour. Runs may start a few minutes late; the offset is consistent per routine.
+
+---
+
+## Step 5 — first run and tuning
+
+Open each routine and click **Run now** once, then read the transcript.
+
+A green status only means the session started and exited without an infrastructure error. It does **not** mean the task
+succeeded. Open the run and check what Claude actually did: blocked network requests, missing connector tools and task
+failures all show up there, not in the status dot.
+
+Expected on the first runs:
+
+- `github-stars-sync` prints `no stars on this account yet` until the `Tradecreditor` account has starred something.
+- `weekly-hot-list` may report a quiet week. That is by design: thresholds are never lowered to fill the list.
+  Tune `wiki/hot-list/_config.yaml` after two real runs, not before.
+- `vault-lint` will flag the vault as thin while it holds only a handful of notes.
+
+## Things worth knowing
+
+- **Every commit on `main` must be authored by you.** Claude Code refuses to push to a branch other than a
+  `claude/`-prefixed one when that branch "carries commits authored by someone other than you". One commit with a made-up
+  author is enough to make every routine push to `main` fail silently-ish: the run reports success, but nothing lands.
+  Check with `git log --format='%an <%ae>' origin/main | sort -u` — it should list only your GitHub identity.
+- Routines belong to your personal claude.ai account, count against a daily run cap, and draw down subscription usage.
+  Commits appear under your GitHub user.
+- Pushing to `main` works while `main` is unprotected and carries only your commits. After you add the branch ruleset in
+  README step 5, keep your own account on the ruleset's bypass list or the routines' pushes start failing.
+- Fire text arrives wrapped in a `<routine-fire-payload>` block marked untrusted. `capture-link`'s prompt references it
+  explicitly, which is why it acts on the pasted URL; do not remove that wording.
+- The GitHub proxy inside a cloud session returns `403` for `gh api user/starred`, `gh search repos` and GraphQL calls such
+  as `gh repo view --json`, and for any repo not attached to the session. Every prompt already has a fallback path using
+  plain `curl` against public `api.github.com` JSON, the GitHub connector's `search_repositories` / `get_file_contents`,
+  and the Exa connector's `web_fetch_exa` on `https://api.github.com/...` URLs (verified working from a cloud session).
