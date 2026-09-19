@@ -9,8 +9,13 @@ You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: 
 2. List stars newest first. Try in this order and use the first that returns data:
    a. gh api "user/starred?sort=created&direction=desc&per_page=100&page=N" -H "Accept: application/vnd.github.star+json" (items have starred_at + repo; works locally).
    b. curl -s "https://api.github.com/users/Tradecreditor/starred?per_page=100&page=N" (public list, newest first, no starred_at).
-   c. Exa connector: web_fetch_exa on the same https://api.github.com/users/Tradecreditor/starred?per_page=100&page=N URL (verified to work from the cloud; returns JSON text).
+   c. Exa connector: web_fetch_exa on https://api.github.com/users/Tradecreditor/starred?per_page=100&page=N&cb=<YYYYMMDDHHMM of right now>
+      The cb parameter is ignored by GitHub, but it is REQUIRED: Exa caches by exact URL, so without a fresh cb it can replay an
+      older response - including an empty list captured before the account's stars were public. Always vary cb on every run.
    In this cloud environment expect (a) to fail with 403 from the GitHub proxy and (b) possibly too; (c) is the reliable path.
+   If any method returns an empty list, do not conclude "no stars" immediately: retry (c) once with a different cb value. Only if the
+   second fetch is also empty, report "no stars on this account yet" and add one line saying the account's stars may be hidden
+   (GitHub Settings > Public profile > "Make profile private and hide activity") or that an authenticated path is needed.
    Walk pages until you reach a repo that already has a row in wiki/github-stars.md (or starred_at <= LAST_SEEN when available). Process at most 20 new repos per run
    (oldest of the new ones first, so nothing is skipped); the rest will be picked up tomorrow. If the list is empty, print "no stars on this account yet" and stop.
 3. For each new repo, metadata + README, again first that works: gh repo view <owner>/<repo> --json name,description,stargazerCount,forkCount,primaryLanguage,repositoryTopics,licenseInfo,pushedAt,createdAt,url
