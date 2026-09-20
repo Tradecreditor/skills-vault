@@ -1,9 +1,15 @@
 # Hot — read me first
 
 ## 本週熱門榜
-（等第一次 weekly-hot-list Routine 跑完會出現喺度：`wiki/hot-list/YYYY-Www.md`）
+`2026-W38`（quiet week — 只有 1 個項目兩個平台都過 gate，冇夾硬砌夠 2 個），完整報告見
+[[hot-list/2026-W38|hot-list/2026-W38]]：
+
+- **[[pages/20260920-fast-jev-compaction|fast-jev-compaction]]**（tamaratran）— Claude Code plugin，
+  用 Jev 逐個 tool call 判斷留/截/刪嚟做逐字 context compaction。GitHub 3 日 5,089 stars + X 創作者
+  貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-20 · repo · [[pages/20260920-fast-jev-compaction|fast-jev-compaction]]
 - 2026-09-20 · repo · [[stars/nolangz--pixel2motion|pixel2motion]]
 - 2026-09-20 · repo · [[stars/NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]]
 - 2026-09-20 · repo · [[stars/greensock--gsap-skills|gsap-skills]]
@@ -23,4 +29,3 @@
 - 2026-09-19 · repo · [[stars/cathrynlavery--diagram-design|diagram-design]]
 - 2026-09-19 · repo · [[stars/DietrichGebert--ponytail|ponytail]]
 - 2026-09-19 · repo · [[stars/ScrapeGraphAI--Scrapegraph-ai|Scrapegraph-ai]]
-- 2026-09-19 · repo · [[stars/m-bain--whisperX|whisperX]]

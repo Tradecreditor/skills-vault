@@ -3,6 +3,8 @@
 ## [2026-09-13] init | vault scaffolded | —
 ## [2026-09-13] capture | 2026 我的 Obsidian 完整分享 | 20260904-jackywine-obsidian-2026
 ## [2026-09-18] capture | obsidian-skills: Agent Skills for Obsidian | 20260918-obsidian-skills
+## [2026-09-20] capture | fast-jev-compaction — verbatim Jev-scored compaction for Claude Code | 20260920-fast-jev-compaction
+## [2026-09-20] hot-list | 2026-W38 | hot-list/2026-W38
 ## [2026-09-19] star | Panniantong/Agent-Reach | Panniantong--Agent-Reach
 ## [2026-09-19] star | cathrynlavery/diagram-design | cathrynlavery--diagram-design
 ## [2026-09-19] star | DietrichGebert/ponytail | DietrichGebert--ponytail
