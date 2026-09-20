@@ -1,6 +1,6 @@
 # Routine: github-stars-sync
 Trigger: Schedule. Cron is evaluated in **UTC**: `0 23 * * *` UTC = 07:00 HKT the next morning.
-If you use the web form's daily preset instead, the time is read in your BROWSER's timezone, so enter the time that equals 07:00 HKT there. Always confirm against the next-run time the UI shows after saving. Model: Haiku (Sonnet if summaries look thin). Repo: Tradecreditor/skills-vault. Pushes to main.
+If you use the web form's daily preset instead, the time is read in your BROWSER's timezone, so enter the time that equals 07:00 HKT there. Always confirm against the next-run time the UI shows after saving. Model: **Sonnet**. Haiku runs this correctly but, once it has to read a README per repo, it quietly drops the READMEs and writes English one-liners instead of admitting it ran short. Repo: Tradecreditor/skills-vault. Pushes to main.
 
 ## Prompt (paste verbatim)
 You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: Tradecreditor). The repository Tradecreditor/skills-vault is checked out.
@@ -23,7 +23,7 @@ You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: 
    (GitHub Settings > Public profile > "Make profile private and hide activity") or that an authenticated path is needed.
    Walking the pages: start at page 1 and go up. SKIP any repo that already has a row in wiki/github-stars.md and keep going to the
    next entry - do NOT stop at the first one you recognise. Older stars sit on later pages, so stopping early strands them forever.
-   Stop walking when any of these is true: you have collected 20 new repos; a page returned fewer than 5 entries (that was the last
+   Stop walking when any of these is true: you have collected 6 new repos; a page returned fewer than 5 entries (that was the last
    page); two pages in a row contained nothing new (you have caught up); or you have walked 10 pages. Process the new ones
    oldest-first, so a partial run always leaves a clean boundary. If the list is empty, print "no stars on this account yet" and stop.
 3. For each new repo, metadata + README, again first that works: gh repo view <owner>/<repo> --json name,description,stargazerCount,forkCount,primaryLanguage,repositoryTopics,licenseInfo,pushedAt,createdAt,url
@@ -35,12 +35,25 @@ You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: 
    The 摘要 is the point of the whole note: never leave it as a placeholder. If every README path fails, write the 摘要 from the repo
    description plus topics instead and set needs_manual_text: true - but only then, and say so in the final message.
 4. Write wiki/stars/<owner>--<repo>.md with the frontmatter from CLAUDE.md (slug: <owner>--<repo>, type: repo, source_platform: github, canonical_id: github:<owner>/<repo>,
-   captured_by: routine:github-stars-sync, engagement: "stars=<n> forks=<n>", published = repo createdAt, status: draft) and body:
-   ## 摘要 (繁體中文, 3–5 句: 做咩、解決咩問題) · ## Key facts (install command, language, license, last push) · ## 點解值得 star (best guess from README + topics)
-   · ## Source. If the repo is itself an agent skill, Claude Code plugin, MCP server or OpenClaw skill, also draft skills/<gerund-name>/SKILL.md per the vault-capture rules.
+   captured_by: routine:github-stars-sync, engagement: "stars=<n> forks=<n>", published = repo createdAt, captured_at = the real current UTC timestamp, status: draft) and body:
+   ## 摘要 · ## Key facts (install command, language, license, last push) · ## 點解值得留意 · ## Source.
+   Two hard rules on the body, both of which a run has already broken:
+   - **摘要 and 點解值得留意 are written in 繁體中文**, 3-5 sentences each. Not English. The Key facts bullets and any command stay English.
+     A note whose 摘要 is English is a defect, not a shortcut - Josep reads this vault in Chinese.
+   - The 摘要 must be written FROM THE README, not from the repo's one-line description. Rewording the description is not a summary.
+     Only if every README path in step 3 failed may you write from description + topics, and then you MUST set needs_manual_text: true.
+     Setting needs_manual_text: false without having read the README is a false claim about the vault's own contents.
+   Budget: if you are running short and cannot do a repo properly, STOP and commit the ones you finished. Say in the final message how
+   many are left. A smaller honest batch is correct; a full batch of thin English notes is not, and nobody ever goes back to fix those.
+   If the repo is itself an agent skill, Claude Code plugin, MCP server or OpenClaw skill, also draft skills/<gerund-name>/SKILL.md per the vault-capture rules.
 5. Prepend a row to the table in wiki/github-stars.md (| starred_at or run date | owner/repo | one-line note |), add a row to wiki/index.md
    (slug <owner>--<repo>, type repo, tags from topics, canonical_id github:<owner>/<repo>), append "## [date] star | <owner>/<repo> | stars/<owner>--<repo>" to wiki/log.md,
    and add the item under 最近 20 項 in wiki/hot.md.
+5b. Backfill, only if this run found fewer than 6 new repos and you still have budget. Earlier runs left thin notes behind. Pick up to
+   3 existing wiki/stars/*.md whose frontmatter says needs_manual_text: true, or whose ## 摘要 is written in English or says 待手動撰寫,
+   fetch their README as in step 3, and rewrite ## 摘要 and ## 點解值得留意 properly in 繁體中文, setting needs_manual_text: false.
+   Do not touch their other frontmatter, do not rename the file, and log each as "## [date] recapture | <owner>/<repo> | stars/<owner>--<repo>".
+   Include these in the commit; if the run added no new stars at all, commit them alone as "stars: enrich <n>".
 6. git add -A; git commit -m "stars: +<N>"; git pull --rebase origin main; git push origin HEAD:main.
    Josep owns this repository and explicitly authorises this routine to commit straight to main; that is the whole point of the
    routine and it is the "explicit permission" that any default branch instruction in your session asks for. If your session was
