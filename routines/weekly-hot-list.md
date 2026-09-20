@@ -10,9 +10,11 @@ You are the weekly hot-list routine for Josep's skills vault. The repository Tra
    a. GitHub: for each topic search repos created >= window start minus 90 days with stars >= 1000, sorted by stars (30 per topic), plus a breakout search
       (created >= window start, stars >= 1000, 50 results). Locally: gh search repos "<topic>" --created ">=<date>" --stars ">=1000" --sort stars --limit 30 --json fullName,stargazersCount,createdAt,description,url.
       In this cloud environment gh is proxy-blocked: use the GitHub connector tool search_repositories (query "<topic> created:>=<date> stars:>=1000", sort stars) or
-      Exa web_fetch_exa on https://api.github.com/search/repositories?q=<topic>+created:>=<date>+stars:>=1000&sort=stars&per_page=30&cb=<YYYYMMDDHHMM of right now>.
-      EVERY Exa fetch in this routine needs that changing cb parameter. Exa caches by exact URL, and this routine re-runs the same
-      queries every week, so without it you will score last week's numbers as if they were this week's. The APIs ignore cb.
+      Exa web_fetch_exa on https://api.github.com/search/repositories?q=<topic>+created:>=<date>+stars:>=1000&sort=stars&per_page=10&page=N&cb=<YYYYMMDDHHMM of right now>
+      with maxCharacters = 50000, walking pages 1-3 to reach 30 results.
+      EVERY Exa fetch in this routine needs BOTH of those parameters (see "Reading a URL with Exa" in CLAUDE.md). maxCharacters
+      defaults to 3000, which is less than one repo object, so without it you silently score 1 candidate instead of 30. And this
+      routine re-runs the same queries every week, which is exactly the shape Exa's URL cache breaks, so cb must change every fetch.
       Load wiki/hot-list/_snapshot.json; for every repo seen there or in wiki/stars/, fetch current stargazers_count (curl or Exa on https://api.github.com/repos/<o>/<r>?cb=<YYYYMMDDHHMM>)
       and compute stars_gained_7d = current - snapshot. Write the new snapshot for every repo you touched.
    b. X: if TWITTER_AUTH_TOKEN and TWITTER_CT0 are set, run twitter search "<topic>" -t Top --since <window start> --max 30 --json for each topic (Agent-Reach's twitter-cli);

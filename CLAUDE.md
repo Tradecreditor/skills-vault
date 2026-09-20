@@ -42,6 +42,14 @@ Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is
 Every capture produces `raw/<slug>.md` (verbatim), `wiki/pages/<slug>.md` (compiled), optionally `skills/<name>/SKILL.md`
 (gerund name, see "Skill format"), plus rows in `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`.
 
+## Reading a URL with Exa (applies to every agent and every routine)
+`web_fetch_exa` defaults to **maxCharacters: 3000** and truncates silently — no error, no marker, the tail just is not there.
+3000 characters is less than one GitHub repo object and less than half of a normal article, so always pass `maxCharacters`
+explicitly: 30000 for an API listing, 50000+ for a page whose full text goes into `raw/`. If the result ends mid-sentence or
+mid-object, it was cut: raise the limit or fetch a smaller page, never write the truncated version to `raw/`.
+Exa also **caches by exact URL**. For anything you poll or re-run (a starred list, a weekly search, an engagement count),
+append a changing `&cb=<YYYYMMDDHHMM>` — the APIs ignore it, and without it you will score a stale response as fresh.
+
 ## Note format (`wiki/pages/<slug>.md` and `wiki/stars/<slug>.md`)
 ```yaml
 ---

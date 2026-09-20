@@ -14,7 +14,7 @@ STEPS
 2. Reader order stays exactly as in the skill (Agent-Reach upstream tools -> Exa -> per-platform fallbacks). Cloud notes: the Agent-Reach
    upstream readers that work here via plain curl are api.fxtwitter.com (X), r.jina.ai (web, Threads), api.github.com REST + raw.githubusercontent.com
    (GitHub, public repos only; gh itself is proxy-blocked for repos not attached to this session, so do not rely on gh). yt-dlp is blocked from
-   this IP: go to Exa (web_fetch_exa on the URL) and then Supadata if SUPADATA_KEY is set. Exa web_fetch_exa also works as the relay for any
+   this IP: go to Exa (web_fetch_exa on the URL, with maxCharacters = 50000 — the default 3000 truncates the source silently and raw/ must be verbatim) and then Supadata if SUPADATA_KEY is set. Exa web_fetch_exa also works as the relay for any
    host the sandbox cannot reach (e.g. fetch https://api.fxtwitter.com/<user>/status/<id> or https://api.github.com/repos/<o>/<r> through it).
    If every reader fails, still write the page with needs_manual_text: true. Never invent content.
 3. Write raw/<slug>.md, wiki/pages/<slug>.md, a draft skills/<name>/SKILL.md only when the content is an actionable procedure,

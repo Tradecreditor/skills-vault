@@ -31,7 +31,7 @@ Run `agent-reach doctor --json` once if unsure which backends are alive. Stop at
 | `github.com/<o>/<r>` | `gh repo view <o>/<r> --json name,description,stargazerCount,forkCount,primaryLanguage,repositoryTopics,licenseInfo,pushedAt,createdAt,url` + `gh api repos/<o>/<r>/readme -H 'Accept: application/vnd.github.raw+json'` (first 300 lines). In Claude cloud sessions the GitHub proxy returns 403 for repos not attached to the session: then use `curl -s https://api.github.com/repos/<o>/<r>` (public JSON) and `curl -s https://raw.githubusercontent.com/<o>/<r>/HEAD/README.md` | Exa fetch of `https://api.github.com/repos/<o>/<r>` (stars, topics, dates) and of the repo page (README) | `curl -s https://r.jina.ai/<url>` |
 | anything else | `curl -s https://r.jina.ai/<url>` | Exa fetch | Firecrawl: `firecrawl scrape <url> --only-main-content` or the Firecrawl MCP `scrape` tool |
 
-Exa: in Claude Code use the Exa MCP (`web_fetch_exa` with the URL; `web_search_exa` to find the canonical post if a share link redirects). From a shell with Agent-Reach: `mcporter call exa.web_fetch_exa urls='["<url>"]'`.
+Exa: in Claude Code use the Exa MCP (`web_fetch_exa` with the URL and `maxCharacters` set to 50000 — the default is 3000 and truncates silently, and `raw/` must be verbatim; `web_search_exa` to find the canonical post if a share link redirects). From a shell with Agent-Reach: `mcporter call exa.web_fetch_exa urls='["<url>"]'`.
 Never use cookie-authenticated search from a cloud routine. Never store cookies in the repo.
 
 If every reader fails: still create the page with `needs_manual_text: true`, a one-line `摘要` saying what the link is (from the URL and any user note), and stop after committing. Do not invent content.
