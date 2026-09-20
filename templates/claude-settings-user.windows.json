@@ -1,5 +1,5 @@
 {
-  "_comment": "Windows: merge into %USERPROFILE%\\.claude\\settings.json. Adjust the path if the vault is not at %USERPROFILE%\\skills-vault.",
+  "_comment": "Windows: merge into your user settings at C:/Users/<you>/.claude/settings.json. REPLACE <you> below with your Windows username - %USERPROFILE% and ~ are NOT expanded inside a hook command, and a hook whose path does not resolve fails silently. Forward slashes are deliberate: PowerShell accepts them, and a single backslash in JSON is an escape character that would eat the separator (C:\\Users becomes C:Users). Adjust the path if the vault is not at C:/Users/<you>/skills-vault.",
   "hooks": {
     "SessionStart": [
       {
@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"%USERPROFILE%\\skills-vault\\.claude\\hooks\\vault-suggest.ps1\"",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"C:/Users/<you>/skills-vault/.claude/hooks/vault-suggest.ps1\"",
             "timeout": 30
           }
         ]
