@@ -31,3 +31,9 @@
 ## [2026-09-20] recapture | DietrichGebert/ponytail | stars/DietrichGebert--ponytail
 ## [2026-09-20] recapture | Panniantong/Agent-Reach | stars/Panniantong--Agent-Reach
 ## [2026-09-20] recapture | cathrynlavery/diagram-design | stars/cathrynlavery--diagram-design
+## [2026-09-20] star | OWASP/secure-coding-practices-quick-reference-guide | stars/OWASP--secure-coding-practices-quick-reference-guide
+## [2026-09-20] star | VoltAgent/awesome-design-md | stars/VoltAgent--awesome-design-md
+## [2026-09-20] star | calcom/cal.diy | stars/calcom--cal.diy
+## [2026-09-20] star | upstash/context7 | stars/upstash--context7
+## [2026-09-20] star | MadsLorentzen/ai-job-search | stars/MadsLorentzen--ai-job-search
+## [2026-09-20] star | microsoft/markitdown | stars/microsoft--markitdown

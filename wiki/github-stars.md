@@ -11,6 +11,12 @@ early again. Set it back to `no` by hand if you ever suspect the ledger has gaps
 
 | starred_at | repo | note |
 |---|---|---|
+| 2026-09-20 | microsoft/markitdown | Python tool converting files/office docs to Markdown for LLMs |
+| 2026-09-20 | MadsLorentzen/ai-job-search | AI job application framework built on Claude Code |
+| 2026-09-20 | upstash/context7 | Up-to-date code docs for LLMs via MCP server or skill |
+| 2026-09-20 | calcom/cal.diy | Community open-source fork of Cal.com scheduling, no EE code |
+| 2026-09-20 | VoltAgent/awesome-design-md | Curated DESIGN.md files for AI-agent-consistent UI generation |
+| 2026-09-20 | OWASP/secure-coding-practices-quick-reference-guide | OWASP secure coding checklist (archived, moved to owasp.org) |
 | 2026-09-20 | nolangz/pixel2motion | AI logo animation skill: raster to SVG motion |
 | 2026-09-20 | NousResearch/hermes-agent-self-evolution | Agent self-improvement framework with DSPy + GEPA |
 | 2026-09-20 | greensock/gsap-skills | Official GSAP AI skills for animation agents |

@@ -9,6 +9,12 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-20 · repo · [[stars/microsoft--markitdown|markitdown]]
+- 2026-09-20 · repo · [[stars/MadsLorentzen--ai-job-search|ai-job-search]]
+- 2026-09-20 · repo · [[stars/upstash--context7|context7]]
+- 2026-09-20 · repo · [[stars/calcom--cal.diy|cal.diy]]
+- 2026-09-20 · repo · [[stars/VoltAgent--awesome-design-md|awesome-design-md]]
+- 2026-09-20 · repo · [[stars/OWASP--secure-coding-practices-quick-reference-guide|secure-coding-practices-quick-reference-guide]]
 - 2026-09-20 · repo · [[pages/20260920-fast-jev-compaction|fast-jev-compaction]]
 - 2026-09-20 · repo · [[stars/nolangz--pixel2motion|pixel2motion]]
 - 2026-09-20 · repo · [[stars/NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]]
@@ -23,9 +29,3 @@
 - 2026-09-20 · repo · [[stars/hakimel--reveal.js|reveal.js]]
 - 2026-09-20 · repo · [[stars/zarazhangrui--frontend-slides|frontend-slides]]
 - 2026-09-20 · repo · [[stars/motion-canvas--motion-canvas|motion-canvas]]
-- 2026-09-20 · repo · [[stars/slidevjs--slidev|slidev]]
-- 2026-09-19 · repo · [[stars/LottieFiles--motion-design-skill|motion-design-skill]]
-- 2026-09-19 · repo · [[stars/Panniantong--Agent-Reach|Agent-Reach]]
-- 2026-09-19 · repo · [[stars/cathrynlavery--diagram-design|diagram-design]]
-- 2026-09-19 · repo · [[stars/DietrichGebert--ponytail|ponytail]]
-- 2026-09-19 · repo · [[stars/ScrapeGraphAI--Scrapegraph-ai|Scrapegraph-ai]]

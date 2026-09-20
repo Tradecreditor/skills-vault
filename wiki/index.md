@@ -30,3 +30,9 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | greensock--gsap-skills | repo | gsap-skills | github | 2026-09-20 | draft | animation, gsap, agent-skill, agent-skills | github:greensock/gsap-skills |
 | NousResearch--hermes-agent-self-evolution | repo | hermes-agent-self-evolution | github | 2026-09-20 | draft | hermes, agent, ai, dspy, gepa, self-improvement | github:NousResearch/hermes-agent-self-evolution |
 | nolangz--pixel2motion | repo | pixel2motion | github | 2026-09-20 | draft | logo-animation, svg-animation, ai-design-tools, motion-design, claude-skill | github:nolangz/pixel2motion |
+| OWASP--secure-coding-practices-quick-reference-guide | repo | secure-coding-practices-quick-reference-guide | github | 2026-09-20 | draft | coding, owasp, security | github:OWASP/secure-coding-practices-quick-reference-guide |
+| VoltAgent--awesome-design-md | repo | awesome-design-md | github | 2026-09-20 | draft | awesome-list, design-md, design-system, design-tokens, vibe-coding | github:VoltAgent/awesome-design-md |
+| calcom--cal.diy | repo | cal.diy | github | 2026-09-20 | draft | nextjs, trpc, prisma, typescript, open-source | github:calcom/cal.diy |
+| upstash--context7 | repo | context7 | github | 2026-09-20 | draft | llm, mcp, mcp-server, vibe-coding | github:upstash/context7 |
+| MadsLorentzen--ai-job-search | repo | ai-job-search | github | 2026-09-20 | draft | ai, ai-agents, career, claude-code, job-search | github:MadsLorentzen/ai-job-search |
+| microsoft--markitdown | repo | markitdown | github | 2026-09-20 | draft | markdown, pdf, microsoft-office, langchain, openai | github:microsoft/markitdown |
