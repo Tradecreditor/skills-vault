@@ -26,3 +26,6 @@
 ## [2026-09-20] star | greensock/gsap-skills | greensock--gsap-skills
 ## [2026-09-20] star | NousResearch/hermes-agent-self-evolution | NousResearch--hermes-agent-self-evolution
 ## [2026-09-20] star | nolangz/pixel2motion | nolangz--pixel2motion
+## [2026-09-20] recapture | DietrichGebert/ponytail | stars/DietrichGebert--ponytail
+## [2026-09-20] recapture | Panniantong/Agent-Reach | stars/Panniantong--Agent-Reach
+## [2026-09-20] recapture | cathrynlavery/diagram-design | stars/cathrynlavery--diagram-design
