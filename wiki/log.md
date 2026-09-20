@@ -12,3 +12,6 @@
 ## [2026-09-19] star | jackwener/OpenCLI | jackwener--OpenCLI
 ## [2026-09-19] star | googleanalytics/google-analytics-mcp | googleanalytics--google-analytics-mcp
 ## [2026-09-19] star | LottieFiles/motion-design-skill | LottieFiles--motion-design-skill
+## [2026-09-20] star | slidevjs/slidev | slidevjs--slidev
+## [2026-09-20] star | motion-canvas/motion-canvas | motion-canvas--motion-canvas
+## [2026-09-20] star | zarazhangrui/frontend-slides | zarazhangrui--frontend-slides

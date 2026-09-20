@@ -4,6 +4,9 @@ Newest first. The github-stars-sync routine stops paging when it reaches a row a
 
 | starred_at | repo | note |
 |---|---|---|
+| 2026-09-20 | zarazhangrui/frontend-slides | AI-powered HTML presentation skill for Claude Code |
+| 2026-09-20 | motion-canvas/motion-canvas | Vector animation and motion graphics library with live editor |
+| 2026-09-20 | slidevjs/slidev | Markdown-based presentation framework for developers |
 | 2026-09-19 | LottieFiles/motion-design-skill | Motion design principles for AI agents |
 | 2026-09-19 | Panniantong/Agent-Reach | Agent infrastructure for web scraping |
 | 2026-09-19 | cathrynlavery/diagram-design | Editorial diagram design for Claude Code |
