@@ -49,6 +49,16 @@ score:
   corroboration:
     min_platforms_with_gate: 2
     single_source_min_heat: 0.60      # a single-platform blockbuster still qualifies
+    single_source_overshoot_cap: 2.0
+    # How the single-source path works, because the obvious reading of it is dead:
+    # in the normal (multi-platform) score every component is min(1, metric / threshold), so a GitHub-only item
+    # tops out at 0.40 and can never reach 0.60 no matter how big it gets. For the single-source path ONLY,
+    # drop that cap and use min(single_source_overshoot_cap, metric / threshold) instead, taking the item's
+    # best-performing metric on its one gated platform. So an item must beat its threshold by roughly 1.5x to
+    # qualify alone (GitHub: 0.40 x 1.5 = 0.60), and merely clearing it is not enough. The 2.0 cap stops X
+    # views and likes - which overshoot far more easily than stars - from dominating the whole list.
+    # Worked: 17,934 stars / 10,000 = 1.79 -> 0.40 x 1.79 = 0.72, qualifies. 10,814 / 10,000 = 1.08 -> 0.43, does not.
+    # The multi_platform_bonus never applies here; by definition only one platform was gated.
   social_rule: "at least one winner per week must have cleared the X or Threads gate"
   winners: { min: 2, max: 3 }
   quiet_week: "if fewer than 2 qualify, title the report 'quiet week', list the best 3 sub-threshold items under Watch, never lower thresholds"
