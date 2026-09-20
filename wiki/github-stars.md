@@ -1,6 +1,13 @@
 # GitHub stars ledger (account: Tradecreditor)
 
-Newest first. The github-stars-sync routine stops paging when it reaches a row already present here.
+Newest first.
+
+<!-- full_scan_complete: no -->
+
+The marker above is read and written by the github-stars-sync routine. While it says `no`, a run must page all the way to the
+end of the starred list, because the rows here were gathered out of order and a known repo can sit above an unknown one.
+Once a run reaches the last page with nothing new left to add, it flips the marker to `yes: <date>`, and later runs may stop
+early again. Set it back to `no` by hand if you ever suspect the ledger has gaps.
 
 | starred_at | repo | note |
 |---|---|---|

@@ -24,8 +24,14 @@ You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: 
    Walking the pages: start at page 1 and go up. SKIP any repo that already has a row in wiki/github-stars.md and keep going to the
    next entry - do NOT stop at the first one you recognise. Older stars sit on later pages, so stopping early strands them forever.
    Stop walking when any of these is true: you have collected 6 new repos; a page returned fewer than 5 entries (that was the last
-   page); two pages in a row contained nothing new (you have caught up); or you have walked 10 pages. Process the new ones
-   oldest-first, so a partial run always leaves a clean boundary. If the list is empty, print "no stars on this account yet" and stop.
+   page); or you have walked 12 pages.
+   There is ONE more shortcut, and it is only allowed when wiki/github-stars.md's `full_scan_complete` marker says `yes`: then you
+   may also stop after two pages in a row that contained nothing new. While the marker says `no`, that shortcut is forbidden - the
+   ledger was gathered out of order, so the first three pages being familiar tells you nothing about page four. A run once stopped
+   at 15 of 35 stars this way and reported itself caught up.
+   When a run reaches the last page (fewer than 5 entries) with no new repos left behind it, set the marker to `yes: <today>` in
+   wiki/github-stars.md and include that edit in the commit. Anything that makes you doubt the ledger, set it back to `no`.
+   Process the new ones oldest-first, so a partial run always leaves a clean boundary. If the list is empty, print "no stars on this account yet" and stop.
 3. For each new repo, metadata + README, again first that works: gh repo view <owner>/<repo> --json name,description,stargazerCount,forkCount,primaryLanguage,repositoryTopics,licenseInfo,pushedAt,createdAt,url
    and gh api repos/<owner>/<repo>/readme -H "Accept: application/vnd.github.raw+json"; else curl -s https://api.github.com/repos/<owner>/<repo> and
    curl -s https://raw.githubusercontent.com/<owner>/<repo>/HEAD/README.md; else the GitHub connector get_file_contents (path README.md); else Exa web_fetch_exa on
