@@ -15,3 +15,14 @@
 ## [2026-09-20] star | slidevjs/slidev | slidevjs--slidev
 ## [2026-09-20] star | motion-canvas/motion-canvas | motion-canvas--motion-canvas
 ## [2026-09-20] star | zarazhangrui/frontend-slides | zarazhangrui--frontend-slides
+## [2026-09-20] star | hakimel/reveal.js | hakimel--reveal.js
+## [2026-09-20] star | assafelovic/gpt-researcher | assafelovic--gpt-researcher
+## [2026-09-20] star | langchain-ai/open_deep_research | langchain-ai--open_deep_research
+## [2026-09-20] star | bytedance/deer-flow | bytedance--deer-flow
+## [2026-09-20] star | Fission-AI/OpenSpec | Fission-AI--OpenSpec
+## [2026-09-20] star | hugohe3/ppt-master | hugohe3--ppt-master
+## [2026-09-20] star | vercel-labs/skills | vercel-labs--skills
+## [2026-09-20] star | Leonxlnx/taste-skill | Leonxlnx--taste-skill
+## [2026-09-20] star | greensock/gsap-skills | greensock--gsap-skills
+## [2026-09-20] star | NousResearch/hermes-agent-self-evolution | NousResearch--hermes-agent-self-evolution
+## [2026-09-20] star | nolangz/pixel2motion | nolangz--pixel2motion

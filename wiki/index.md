@@ -18,3 +18,14 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | lewislulu--html-ppt-skill | repo | html-ppt-skill | github | 2026-09-19 | draft | | github:lewislulu/html-ppt-skill |
 | jackwener--OpenCLI | repo | OpenCLI | github | 2026-09-19 | draft | ai-agent, ai-agents, ai-tools, browser-automation, browser-use, cli, playwright | github:jackwener/OpenCLI |
 | googleanalytics--google-analytics-mcp | repo | google-analytics-mcp | github | 2026-09-19 | draft | | github:googleanalytics/google-analytics-mcp |
+| hakimel--reveal.js | repo | reveal.js | github | 2026-09-20 | draft | presentation, slides, slideshow, html | github:hakimel/reveal.js |
+| assafelovic--gpt-researcher | repo | gpt-researcher | github | 2026-09-20 | draft | agent, ai, automation, deepresearch, llms, mcp, research | github:assafelovic/gpt-researcher |
+| langchain-ai--open_deep_research | repo | open_deep_research | github | 2026-09-20 | draft | research, langchain, llm, agents | github:langchain-ai/open_deep_research |
+| bytedance--deer-flow | repo | deer-flow | github | 2026-09-20 | draft | agent, agentic, ai-agents, deep-research, superagent, multi-agent | github:bytedance/deer-flow |
+| Fission-AI--OpenSpec | repo | OpenSpec | github | 2026-09-20 | draft | sdd, spec-driven-development, ai, planning, engineering | github:Fission-AI/OpenSpec |
+| hugohe3--ppt-master | repo | ppt-master | github | 2026-09-20 | draft | powerpoint, ai-agent, presentation, pptx, office | github:hugohe3/ppt-master |
+| vercel-labs--skills | repo | skills | github | 2026-09-20 | draft | agent-skills, agents, tools | github:vercel-labs/skills |
+| Leonxlnx--taste-skill | repo | taste-skill | github | 2026-09-20 | draft | agent-skill, claude-code, codex, design, vibecoding, ai | github:Leonxlnx/taste-skill |
+| greensock--gsap-skills | repo | gsap-skills | github | 2026-09-20 | draft | animation, gsap, agent-skill, agent-skills | github:greensock/gsap-skills |
+| NousResearch--hermes-agent-self-evolution | repo | hermes-agent-self-evolution | github | 2026-09-20 | draft | hermes, agent, ai, dspy, gepa, self-improvement | github:NousResearch/hermes-agent-self-evolution |
+| nolangz--pixel2motion | repo | pixel2motion | github | 2026-09-20 | draft | logo-animation, svg-animation, ai-design-tools, motion-design, claude-skill | github:nolangz/pixel2motion |
