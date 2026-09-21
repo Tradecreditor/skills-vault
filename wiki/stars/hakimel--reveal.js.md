@@ -35,3 +35,5 @@ Classic HTML presentation framework that has been a standard for web-based prese
 GitHub repository: https://github.com/hakimel/reveal.js
 Author: Hakim El Hattab
 Captured: 2026-09-20
+
+## Related

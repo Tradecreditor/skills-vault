@@ -36,3 +36,5 @@ Well-developed AI tool for presentation generation with modern features (native 
 GitHub repository: https://github.com/hugohe3/ppt-master
 Author: Hugo He
 Captured: 2026-09-20
+
+## Related

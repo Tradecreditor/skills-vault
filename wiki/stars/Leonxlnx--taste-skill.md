@@ -37,3 +37,5 @@ High-engagement skill (88K stars!) focused on output quality and aesthetics. Rec
 GitHub repository: https://github.com/Leonxlnx/taste-skill
 Author: Leon
 Captured: 2026-09-20
+
+## Related

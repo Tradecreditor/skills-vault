@@ -35,3 +35,5 @@ Official vendor-provided agent skills for GSAP library. Shows trend of library m
 GitHub repository: https://github.com/greensock/gsap-skills
 Author: GreenSock
 Captured: 2026-09-20
+
+## Related

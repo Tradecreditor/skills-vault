@@ -36,3 +36,5 @@ Vercel's approach to agent skills as composable, reusable components. CLI-first 
 GitHub repository: https://github.com/vercel-labs/skills
 Author: Vercel Labs
 Captured: 2026-09-20
+
+## Related

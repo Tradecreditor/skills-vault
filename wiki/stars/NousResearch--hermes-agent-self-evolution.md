@@ -36,3 +36,5 @@ Demonstrates agent self-improvement through evolutionary programming. Combines D
 GitHub repository: https://github.com/NousResearch/hermes-agent-self-evolution
 Author: Nous Research
 Captured: 2026-09-20
+
+## Related

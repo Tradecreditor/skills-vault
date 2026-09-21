@@ -36,3 +36,5 @@ Strong example of autonomous research agent pattern. Demonstrates multi-provider
 GitHub repository: https://github.com/assafelovic/gpt-researcher
 Author: Assaf Elovici
 Captured: 2026-09-20
+
+## Related

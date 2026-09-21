@@ -35,3 +35,5 @@ needs_manual_text: true
 - URL: https://github.com/lewislulu/html-ppt-skill
 - Created: 2026-04-15
 - Reader: routine:github-stars-sync
+
+## Related

@@ -35,3 +35,5 @@ Reference implementation from LangChain for research agent patterns. Though arch
 GitHub repository: https://github.com/langchain-ai/open_deep_research
 Author: LangChain
 Captured: 2026-09-20
+
+## Related

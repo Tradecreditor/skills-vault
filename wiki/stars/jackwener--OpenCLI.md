@@ -35,3 +35,5 @@ needs_manual_text: true
 - URL: https://github.com/jackwener/OpenCLI
 - Created: 2026-03-14
 - Reader: routine:github-stars-sync
+
+## Related
