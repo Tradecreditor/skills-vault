@@ -25,7 +25,7 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 
 ## Who is "core" (enforced by the GitHub ruleset on `main` + `.github/workflows/vault-guard.yml`)
 - **Core = the repository owner's GitHub account (`Tradecreditor`)**: Josep's own Claude Code sessions, the Claude Code Routines, obsidian-git on his laptop. Core may push to `main` directly, may delete, may edit protected files.
-- **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-agents`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, touches `raw/`, or edits `.github/`, `scripts/vault-guard-check.sh`, `CLAUDE.md`, `AGENTS.md`.
+- **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-ui`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, touches `raw/`, or edits `.github/`, `scripts/vault-guard-check.sh`, `CLAUDE.md`, `AGENTS.md`.
 - Identity is the GitHub account behind the token, not the commit author line. If every agent uses the owner's tokens, every agent is core and the guard is only an audit trail.
 
 ### How this is actually configured (2026-09-21)

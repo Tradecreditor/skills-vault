@@ -1,6 +1,6 @@
 # skills-vault — Josep 嘅個人 Agent 技能倉庫
 
-一個私人 GitHub repo，同時係：**Obsidian vault**（你自己睇）、**LLM wiki**（agent 讀 `wiki/hot.md` → `wiki/index.md` → 頁面）、
+一個公開 GitHub repo，同時係：**Obsidian vault**（你自己睇）、**LLM wiki**（agent 讀 `wiki/hot.md` → `wiki/index.md` → 頁面）、
 同一個**任何 agent 都可以一句指令安裝嘅 skills 資料夾**（`skills/`）。自動化交俾 Claude Code Routines（`routines/`）。
 
 完整計劃同研究背景：`Tradecreditor/Tradecreditor.github.io` branch `claude/skills-vault-system-opru6q` 嘅 `docs/skills-vault-plan.md`。
@@ -10,13 +10,13 @@
 | # | 決定 | 結果 |
 |---|---|---|
 | 1 | Agentreach | GitHub `Panniantong/Agent-Reach`（免費 CLI 工具箱），本機第一閱讀器 |
-| 2 | GitHub 帳戶 | `Tradecreditor`（掃呢個帳戶嘅 stars；vault repo 開喺呢度，私人） |
+| 2 | GitHub 帳戶 | `Tradecreditor`（掃呢個帳戶嘅 stars；vault repo 開喺呢度）|
 | 3 | Claude plan | Max（Routine 每日次數上限較高；實際數字喺 claude.ai/code/routines 睇） |
 | 4 | IG / Threads | 接受第三方讀取；Agent-Reach 先行 |
 | 5 | X 熱度來源 | Agent-Reach（twitter-cli）先，Exa 後備；**唔用 xAI** |
 | 6 | 寫入模式 | 貼 link 直接入 `main`；每週榜開 PR |
 | 7 | Wiki 引擎 | 先用 repo 自帶嘅輕量規則（`CLAUDE.md`），`claude-obsidian` 列為可選加裝（見「可選」） |
-| 8 | 身份模型（我嘅建議，第 5 步先需要） | 核心 = 你嘅 GitHub 帳戶 `Tradecreditor`；其他 agent 用一個獨立嘅機器帳戶（例如 `tradecreditor-agents`）。GitHub 只認帳戶唔認 token，冇第二個帳戶就分唔開「核心」同「其他」 |
+| 8 | 身份模型（已落實 2026-09-21）| 核心 = GitHub 帳戶 `Tradecreditor`；其他 agent 用機器帳戶 `tradecreditor-ui`。GitHub 只認帳戶唔認 token，冇第二個帳戶就分唔開「核心」同「其他」。`main` 上嘅 `main-protection` ruleset 逼非核心帳號一定要開 PR，`guard` 檢查再擋刪檔／改名／郁 `raw/` |
 
 ## 資料夾地圖
 ```
