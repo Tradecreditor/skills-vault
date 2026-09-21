@@ -74,6 +74,20 @@ The API URL and token only exist after the routine is saved, so this one cannot 
 
 ---
 
+### Firing it afterwards
+
+The API trigger gives you a URL ending in `/fire` and a token shown exactly once. Together they can start a run on your
+account, so treat the token as a secret and keep it out of the repo.
+
+`scripts/capture.ps1` (Windows) and `scripts/capture.sh` (macOS/Linux) wrap the call, so capturing a link is one command
+instead of a remembered curl incantation. Each reads `VAULT_FIRE_URL` and `VAULT_FIRE_TOKEN` from the environment and
+refuses to run if the URL does not end in `/fire` — a stray character there returns a 404 that reads like a broken routine
+rather than a typo. Setup instructions are in the comment at the bottom of each script.
+
+```powershell
+.\scripts\capture.ps1 https://x.com/someone/status/123
+```
+
 ## Steps 2-4 — the three scheduled routines
 
 Two ways. The CLI is faster and attaches the right repository automatically.
