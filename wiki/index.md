@@ -36,3 +36,8 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | upstash--context7 | repo | context7 | github | 2026-09-20 | draft | llm, mcp, mcp-server, vibe-coding | github:upstash/context7 |
 | MadsLorentzen--ai-job-search | repo | ai-job-search | github | 2026-09-20 | draft | ai, ai-agents, career, claude-code, job-search | github:MadsLorentzen/ai-job-search |
 | microsoft--markitdown | repo | markitdown | github | 2026-09-20 | draft | markdown, pdf, microsoft-office, langchain, openai | github:microsoft/markitdown |
+| THU-MAIC--OpenMAIC | repo | OpenMAIC | github | 2026-09-21 | draft | ai, ai-agents, education, multi-agent | github:THU-MAIC/OpenMAIC |
+| Forget-C--Jellyfish | repo | Jellyfish | github | 2026-09-21 | draft | ai, short-drama, video-generation | github:Forget-C/Jellyfish |
+| microsoft--playwright-mcp | repo | playwright-mcp | github | 2026-09-21 | draft | mcp, playwright | github:microsoft/playwright-mcp |
+| career-ops-hq--career-ops | repo | career-ops | github | 2026-09-21 | draft | ai-agent, job-search, career, claude-code, cli | github:career-ops-hq/career-ops |
+| openai--codex-plugin-cc | repo | codex-plugin-cc | github | 2026-09-21 | draft | claude-code-plugin, codex, code-review | github:openai/codex-plugin-cc |

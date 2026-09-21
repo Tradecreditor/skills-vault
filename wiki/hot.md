@@ -9,6 +9,11 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-21 · repo · [[stars/openai--codex-plugin-cc|codex-plugin-cc]]
+- 2026-09-21 · repo · [[stars/career-ops-hq--career-ops|career-ops]]
+- 2026-09-21 · repo · [[stars/microsoft--playwright-mcp|playwright-mcp]]
+- 2026-09-21 · repo · [[stars/Forget-C--Jellyfish|Jellyfish]]
+- 2026-09-21 · repo · [[stars/THU-MAIC--OpenMAIC|OpenMAIC]]
 - 2026-09-20 · repo · [[stars/microsoft--markitdown|markitdown]]
 - 2026-09-20 · repo · [[stars/MadsLorentzen--ai-job-search|ai-job-search]]
 - 2026-09-20 · repo · [[stars/upstash--context7|context7]]
@@ -24,8 +29,3 @@
 - 2026-09-20 · repo · [[stars/hugohe3--ppt-master|ppt-master]]
 - 2026-09-20 · repo · [[stars/Fission-AI--OpenSpec|OpenSpec]]
 - 2026-09-20 · repo · [[stars/bytedance--deer-flow|deer-flow]]
-- 2026-09-20 · repo · [[stars/langchain-ai--open_deep_research|open_deep_research]]
-- 2026-09-20 · repo · [[stars/assafelovic--gpt-researcher|gpt-researcher]]
-- 2026-09-20 · repo · [[stars/hakimel--reveal.js|reveal.js]]
-- 2026-09-20 · repo · [[stars/zarazhangrui--frontend-slides|frontend-slides]]
-- 2026-09-20 · repo · [[stars/motion-canvas--motion-canvas|motion-canvas]]

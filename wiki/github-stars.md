@@ -2,7 +2,7 @@
 
 Newest first.
 
-<!-- full_scan_complete: no -->
+<!-- full_scan_complete: yes: 2026-09-21 -->
 
 The marker above is read and written by the github-stars-sync routine. While it says `no`, a run must page all the way to the
 end of the starred list, because the rows here were gathered out of order and a known repo can sit above an unknown one.
@@ -11,6 +11,11 @@ early again. Set it back to `no` by hand if you ever suspect the ledger has gaps
 
 | starred_at | repo | note |
 |---|---|---|
+| 2026-09-21 | openai/codex-plugin-cc | Official OpenAI Claude Code plugin: call Codex for review or delegate tasks |
+| 2026-09-21 | career-ops-hq/career-ops | Open-source AI job search CLI: evaluate, tailor CV, track — never auto-submits |
+| 2026-09-21 | microsoft/playwright-mcp | Official Playwright MCP server: browser automation via accessibility tree |
+| 2026-09-21 | Forget-C/Jellyfish | End-to-end AI short-drama production workspace with consistency management |
+| 2026-09-21 | THU-MAIC/OpenMAIC | Open multi-agent interactive classroom; one prompt generates a full course |
 | 2026-09-20 | microsoft/markitdown | Python tool converting files/office docs to Markdown for LLMs |
 | 2026-09-20 | MadsLorentzen/ai-job-search | AI job application framework built on Claude Code |
 | 2026-09-20 | upstash/context7 | Up-to-date code docs for LLMs via MCP server or skill |
