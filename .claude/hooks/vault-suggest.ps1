@@ -2,6 +2,10 @@
 # Register in C:/Users/<you>/.claude/settings.json - see templates/claude-settings-user.windows.json (note: %USERPROFILE% is NOT expanded in a hook command).
 # Prints nothing and exits 0 when there is no vault or no match.
 $ErrorActionPreference = "SilentlyContinue"
+# Windows PowerShell 5.1 reads files and writes stdout in the system ANSI code page, not UTF-8, so a
+# Traditional Chinese title comes back as mojibake ("2026 ?? Obsidian ..."). Force UTF-8 on both sides:
+# every Get-Content/Select-String below passes -Encoding UTF8, and this fixes what we hand back to the host.
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch { }
 
 $raw = [Console]::In.ReadToEnd()
 $cwd = $null
@@ -26,7 +30,7 @@ $stop = @('dependencies','devdependencies','peerdependencies','version','scripts
 $text = ""
 foreach ($f in @("package.json","requirements.txt","pyproject.toml","go.mod","Cargo.toml","Gemfile","README.md","CLAUDE.md")) {
   $p = Join-Path $cwd $f
-  if (Test-Path $p) { $text += (Get-Content $p -Raw -ErrorAction SilentlyContinue) + "`n" }
+  if (Test-Path $p) { $text += (Get-Content $p -Raw -Encoding UTF8 -ErrorAction SilentlyContinue) + "`n" }
 }
 if (-not $text) { exit 0 }
 
@@ -39,7 +43,7 @@ $pat = ($words | ForEach-Object { [regex]::Escape($_) }) -join "|"
 # $hits, not $matches: $matches is a PowerShell automatic variable that every -imatch below overwrites with its
 # capture groups, so accumulating into it silently produced one "System.Collections.Hashtable" line.
 $hits = @()
-foreach ($line in (Get-Content (Join-Path $vault "wiki/index.md") -ErrorAction SilentlyContinue)) {
+foreach ($line in (Get-Content (Join-Path $vault "wiki/index.md") -Encoding UTF8 -ErrorAction SilentlyContinue)) {
   if ($line -notmatch '^\| ' -or $line -match '^\| slug ' -or $line -match '^\|-') { continue }
   $c = $line.Split('|')
   if ($c.Count -lt 8) { continue }
@@ -49,7 +53,7 @@ foreach ($line in (Get-Content (Join-Path $vault "wiki/index.md") -ErrorAction S
 foreach ($sk in (Get-ChildItem (Join-Path $vault "skills") -Directory -ErrorAction SilentlyContinue)) {
   $sm = Join-Path $sk.FullName "SKILL.md"
   if (-not (Test-Path $sm)) { continue }
-  $desc = (Select-String -Path $sm -Pattern '^description:' -ErrorAction SilentlyContinue | Select-Object -First 1).Line
+  $desc = (Select-String -Path $sm -Pattern '^description:' -Encoding UTF8 -ErrorAction SilentlyContinue | Select-Object -First 1).Line
   if ($desc -and $desc -imatch $pat) { $hits += "skill: $($sk.Name)" }
 }
 $hits = $hits | Select-Object -Unique | Select-Object -First 6
