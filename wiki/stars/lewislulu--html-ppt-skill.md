@@ -6,7 +6,7 @@ status: draft
 source_url: "https://github.com/lewislulu/html-ppt-skill"
 source_platform: github
 published: "2026-04-15"
-captured_at: "2026-09-19T11:09:28.036052+00:00Z"
+captured_at: "2026-09-19T11:09:28.036052Z"
 captured_by: "routine:github-stars-sync"
 canonical_id: "github:lewislulu/html-ppt-skill"
 engagement: "stars=8430 forks=722"

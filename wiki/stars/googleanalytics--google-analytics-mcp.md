@@ -6,7 +6,7 @@ status: draft
 source_url: "https://github.com/googleanalytics/google-analytics-mcp"
 source_platform: github
 published: "2025-07-16"
-captured_at: "2026-09-19T11:09:28.036193+00:00Z"
+captured_at: "2026-09-19T11:09:28.036193Z"
 captured_by: "routine:github-stars-sync"
 canonical_id: "github:googleanalytics/google-analytics-mcp"
 engagement: "stars=3242 forks=693"

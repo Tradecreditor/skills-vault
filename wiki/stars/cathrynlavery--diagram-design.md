@@ -6,7 +6,7 @@ status: draft
 source_url: "https://github.com/cathrynlavery/diagram-design"
 source_platform: github
 published: "2026-04-16"
-captured_at: "2026-09-19T11:09:28.035450+00:00Z"
+captured_at: "2026-09-19T11:09:28.035450Z"
 captured_by: "routine:github-stars-sync"
 canonical_id: "github:cathrynlavery/diagram-design"
 engagement: "stars=41245 forks=2637"

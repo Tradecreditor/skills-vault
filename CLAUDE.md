@@ -15,7 +15,7 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 | `inbox/` | anyone | drop zone: Web Clipper clips, half-processed captures, notes for the core agent |
 | `raw/` | capture skill only | verbatim source text of every capture. **Immutable**: add only, never edit/rename/delete (CI rejects it for everyone) |
 | `wiki/pages/` | agents | compiled notes, one per captured item (frontmatter below); file = `wiki/pages/<slug>.md`, slug = `<yyyymmdd>-<kebab-title>` |
-| `wiki/stars/` | github-stars-sync routine | one note per starred GitHub repo; for these `type: repo` entries the slug **is** `<owner>--<repo>` and the file is `wiki/stars/<slug>.md` |
+| `wiki/stars/` | github-stars-sync routine | one note per starred GitHub repo; for these the slug **is** `<owner>--<repo>` and the file is `wiki/stars/<slug>.md`. This folder is defined by *who wrote it*, not by `type`: a repo you captured yourself by pasting its link stays in `wiki/pages/` with a date-slug, even though it is also `type: repo`. Do not move pages between the two. |
 | `wiki/hot-list/` | weekly-hot-list routine | `YYYY-Www.md` weekly reports, `_config.yaml` thresholds, `_snapshot.json` star snapshots |
 | `wiki/index.md`, `wiki/log.md`, `wiki/hot.md` | agents (append/update rows) | catalogue, append-only log, recent context |
 | `skills/<name>/` | agents (drafts) / core (verified) | Agent-Skills spec folders installable in any agent; folder name == `name` (gerund, e.g. `reviewing-supabase-rls`) |
@@ -70,6 +70,7 @@ related: []
 needs_manual_text: false
 ---
 ```
+`captured_at` is strict ISO-8601 UTC: `YYYY-MM-DDTHH:MM:SSZ` (fractional seconds allowed). Exactly one zone marker - `+00:00Z` carries both and parses nowhere.
 Body sections, in this order: **摘要**（繁體中文，3–6 句）· **Key facts**（English bullets: what it is, how to install/use, numbers）· **點解值得留意** · **Source**（link + author + date + reader used）· **Related**（wikilinks）.
 Summaries are Traditional Chinese; commands, code and SKILL.md bodies are English.
 

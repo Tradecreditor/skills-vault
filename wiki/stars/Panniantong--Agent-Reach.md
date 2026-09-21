@@ -6,7 +6,7 @@ status: draft
 source_url: "https://github.com/Panniantong/Agent-Reach"
 source_platform: github
 published: "2026-02-24"
-captured_at: "2026-09-19T11:09:28.035252+00:00Z"
+captured_at: "2026-09-19T11:09:28.035252Z"
 captured_by: "routine:github-stars-sync"
 canonical_id: "github:Panniantong/Agent-Reach"
 engagement: "stars=83273 forks=7296"
