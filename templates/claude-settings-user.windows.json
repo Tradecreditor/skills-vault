@@ -1,5 +1,5 @@
 {
-  "_comment": "Windows: merge into your user settings at C:/Users/<you>/.claude/settings.json. REPLACE <you> below with your Windows username - %USERPROFILE% and ~ are NOT expanded inside a hook command, and a hook whose path does not resolve fails silently. Forward slashes are deliberate: PowerShell accepts them, and a single backslash in JSON is an escape character that would eat the separator (C:\\Users becomes C:Users). Adjust the path if the vault is not at C:/Users/<you>/skills-vault.",
+  "_comment": "Windows: merge into your user settings at C:/Users/<you>/.claude/settings.json. REPLACE <you> below with your Windows username - %USERPROFILE% and ~ are NOT expanded inside a hook command, and a hook whose path does not resolve fails silently. Forward slashes are deliberate, and not a style choice. A hook command is handed to a shell before it reaches powershell.exe, and that shell treats a backslash as an escape character, so C:\\Users\\user\\.claude\\hooks\\stop.ps1 - correctly written, correctly JSON-escaped, pointing at a file that exists - still arrives as C:Usersuser.claudehooksstop.ps1 and fails. A SessionStart hook fails silently this way; only Stop reports it. PowerShell accepts forward slashes in paths, and nothing escapes them. Adjust the path if the vault is not at C:/Users/<you>/skills-vault.",
   "hooks": {
     "SessionStart": [
       {
