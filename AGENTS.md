@@ -28,6 +28,16 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 - **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-agents`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, touches `raw/`, or edits `.github/`, `scripts/vault-guard-check.sh`, `CLAUDE.md`, `AGENTS.md`.
 - Identity is the GitHub account behind the token, not the commit author line. If every agent uses the owner's tokens, every agent is core and the guard is only an audit trail.
 
+### How this is actually configured (2026-09-21)
+The repository is **public**, which is what makes the ruleset free and lets any agent install from it with
+`npx skills add Tradecreditor/skills-vault` without a token. Public means readable, not writable: a stranger
+can fork and open a pull request, and nothing changes here until Josep merges it.
+A `main-protection` ruleset on `main` restricts deletions, blocks force pushes, requires a pull request with
+1 approval, and requires the `guard` check. Josep bypasses it as repository admin, so his own sessions and the
+cloud Routines keep pushing straight to `main`; the machine account does not, so its only route in is a PR.
+Approvals are set to 1 rather than 0 for one reason: at 0 the machine account could merge its own pull request,
+and the whole arrangement would be decoration.
+
 ## Access rules (all agents)
 - Create and edit freely under `inbox/`, `agents/`, `wiki/pages/`, `wiki/stars/`, `wiki/hot-list/`, `skills/`, `outputs/`; append rows to `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`.
 - **Never delete or rename files.** To retire an entry set `status: deprecated` and add `deprecated_reason:` in its frontmatter (skills: `vault_status: "deprecated"`).
