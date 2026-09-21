@@ -36,24 +36,26 @@ $words = [regex]::Matches($text.ToLower(), '[a-z][a-z0-9._-]{3,30}') | ForEach-O
 if (-not $words) { exit 0 }
 $pat = ($words | ForEach-Object { [regex]::Escape($_) }) -join "|"
 
-$matches = @()
+# $hits, not $matches: $matches is a PowerShell automatic variable that every -imatch below overwrites with its
+# capture groups, so accumulating into it silently produced one "System.Collections.Hashtable" line.
+$hits = @()
 foreach ($line in (Get-Content (Join-Path $vault "wiki/index.md") -ErrorAction SilentlyContinue)) {
   if ($line -notmatch '^\| ' -or $line -match '^\| slug ' -or $line -match '^\|-') { continue }
   $c = $line.Split('|')
   if ($c.Count -lt 8) { continue }
   $title = $c[3].Trim(); $tags = $c[7].Trim(); $slug = $c[1].Trim()
-  if ("$title $tags" -imatch $pat) { $matches += "$title ($slug)" }
+  if ("$title $tags" -imatch $pat) { $hits += "$title ($slug)" }
 }
 foreach ($sk in (Get-ChildItem (Join-Path $vault "skills") -Directory -ErrorAction SilentlyContinue)) {
   $sm = Join-Path $sk.FullName "SKILL.md"
   if (-not (Test-Path $sm)) { continue }
   $desc = (Select-String -Path $sm -Pattern '^description:' -ErrorAction SilentlyContinue | Select-Object -First 1).Line
-  if ($desc -and $desc -imatch $pat) { $matches += "skill: $($sk.Name)" }
+  if ($desc -and $desc -imatch $pat) { $hits += "skill: $($sk.Name)" }
 }
-$matches = $matches | Select-Object -Unique | Select-Object -First 6
-if (-not $matches) { exit 0 }
+$hits = $hits | Select-Object -Unique | Select-Object -First 6
+if (-not $hits) { exit 0 }
 
 $ctx = "Skills vault (Tradecreditor/skills-vault) entries that look relevant to this project:`n" +
-       (($matches | ForEach-Object { "- $_" }) -join "`n") +
+       (($hits | ForEach-Object { "- $_" }) -join "`n") +
        "`nInstall a skill: npx skills add Tradecreditor/skills-vault --skill <name>  (Claude Code: /plugin install skills-vault@tradecreditor-vault). For more, read $vault\wiki\hot.md then wiki\index.md, or run the vault-search skill."
 @{ hookSpecificOutput = @{ hookEventName = "SessionStart"; additionalContext = $ctx } } | ConvertTo-Json -Compress -Depth 5
