@@ -17,7 +17,7 @@ needs_manual_text: false
 ---
 
 ## 摘要
-Open-source long-horizon SuperAgent harness from ByteDance. Researches, codes, and creates through orchestrated workflows. Supports sandboxes, memories, tools, skills, subagents and message gateways for multi-hour task execution.
+DeerFlow 係 ByteDance 開源嘅「超級 Agent Harness」,2.0 版由零重寫,唔再淨係一個 Deep Research 框架,而係一套識自己協調子 agent(sub-agents)、記憶(memory)同沙盒(sandbox)嘅通用執行引擎,靠可擴充嘅 skills 去完成幾乎任何任務。項目喺 2026 年 2 月 28 號 v2 推出之後攞咗 GitHub Trending 全球第一。安裝流程有一鍵設定精靈(`make setup`),兩分鐘內就可以揀 LLM provider、網絡搜尋、sandbox 模式、bash 權限等安全選項,推薦配合 Doubao-Seed-2.0-Code、DeepSeek v3.2 或者 Kimi 2.5 呢類模型使用。除咗 Docker 一鍵部署,佢仲支援 MCP server、IM channel 接入、LangSmith/Langfuse/Monocle 追蹤,同埋長期記憶、排程任務、終端機 TUI 等進階功能。
 
 ## Key facts
 - Language: Python
@@ -30,7 +30,7 @@ Open-source long-horizon SuperAgent harness from ByteDance. Researches, codes, a
 - Supports: Python, Node.js, TypeScript
 
 ## 點解值得留意
-Advanced agentic framework with support for long-running research and coding tasks. Demonstrates sophisticated agent orchestration patterns, memory management, and multi-agent coordination. Recent push shows active development.
+呢個項目由 v1 嘅純 Deep Research 工具,進化成有 sub-agent 編排、context engineering 同長期記憶嘅通用 agent harness,對想自己起一個可以長時間運行、多步驟研究/寫程式任務嘅 agent 底座嘅人有參考價值。原有 1.x 分支仍然維護,亦可以對比睇到框架設計嘅演進。
 
 ## Source
 GitHub repository: https://github.com/bytedance/deer-flow

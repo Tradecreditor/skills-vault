@@ -47,3 +47,6 @@
 ## [2026-09-21] recapture | googleanalytics/google-analytics-mcp | stars/googleanalytics--google-analytics-mcp
 ## [2026-09-21] recapture | jackwener/OpenCLI | stars/jackwener--OpenCLI
 ## [2026-09-22] lint | 2026-W39 | outputs/health/2026-W39
+## [2026-09-22] recapture | lewislulu/html-ppt-skill | stars/lewislulu--html-ppt-skill
+## [2026-09-22] recapture | m-bain/whisperX | stars/m-bain--whisperX
+## [2026-09-22] recapture | bytedance/deer-flow | stars/bytedance--deer-flow
