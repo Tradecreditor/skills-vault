@@ -46,3 +46,7 @@
 ## [2026-09-21] recapture | ScrapeGraphAI/Scrapegraph-ai | stars/ScrapeGraphAI--Scrapegraph-ai
 ## [2026-09-21] recapture | googleanalytics/google-analytics-mcp | stars/googleanalytics--google-analytics-mcp
 ## [2026-09-21] recapture | jackwener/OpenCLI | stars/jackwener--OpenCLI
+## [2026-09-22] capture | jev-ultrafast — Browser Use's decision-only web agent on TypeSafe's Jev | 20260916-jev-ultrafast
+## [2026-09-22] capture | ZCode — Z.ai open-sources its Claude Code rival after a git-history upload scandal | 20260920-zcode-open-source
+## [2026-09-22] capture | voxium 嘅「冇人再諗嘢」貼文——Claude Code 令工程師淪為按 Enter 機器 | 20260920-v0xium-ai-coding-burnout
+## [2026-09-22] hot-list | 2026-W39 | hot-list/2026-W39

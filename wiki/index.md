@@ -41,3 +41,6 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | microsoft--playwright-mcp | repo | playwright-mcp | github | 2026-09-21 | draft | mcp, playwright | github:microsoft/playwright-mcp |
 | career-ops-hq--career-ops | repo | career-ops | github | 2026-09-21 | draft | ai-agent, job-search, career, claude-code, cli | github:career-ops-hq/career-ops |
 | openai--codex-plugin-cc | repo | codex-plugin-cc | github | 2026-09-21 | draft | claude-code-plugin, codex, code-review | github:openai/codex-plugin-cc |
+| 20260916-jev-ultrafast | repo | jev-ultrafast — Browser Use's decision-only web agent on TypeSafe's Jev | github | 2026-09-22 | draft | hot-list, browser-agent, jev, typesafe, web-automation, python | github:browser-use/jev-ultrafast |
+| 20260920-zcode-open-source | repo | ZCode — Z.ai open-sources its Claude Code rival after a git-history upload scandal | github | 2026-09-22 | draft | hot-list, coding-agent, z.ai, glm, privacy-incident, typescript | github:zai-org/ZCode |
+| 20260920-v0xium-ai-coding-burnout | post | voxium 嘅「冇人再諗嘢」貼文——Claude Code 令工程師淪為按 Enter 機器 | x | 2026-09-22 | draft | hot-list, claude-code, ai-coding, burnout, x, opinion | x:tweet:2101526107128529120 |
