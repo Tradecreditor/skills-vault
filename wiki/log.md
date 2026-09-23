@@ -50,3 +50,7 @@
 ## [2026-09-22] recapture | lewislulu/html-ppt-skill | stars/lewislulu--html-ppt-skill
 ## [2026-09-22] recapture | m-bain/whisperX | stars/m-bain--whisperX
 ## [2026-09-22] recapture | bytedance/deer-flow | stars/bytedance--deer-flow
+## [2026-09-23] hot-list | 2026-W39 | hot-list/2026-W39
+## [2026-09-23] capture | jev-ultrafast — Browser Use's Jev-powered browser agent | 20260923-browser-use-jev-ultrafast
+## [2026-09-23] capture | Laya — open-source System 1 decision engine | 20260923-nandhakishorm-laya
+## [2026-09-23] capture | ZCode — Z.ai's open-sourced coding agent harness | 20260923-zai-org-zcode

@@ -41,3 +41,6 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | microsoft--playwright-mcp | repo | playwright-mcp | github | 2026-09-21 | draft | mcp, playwright | github:microsoft/playwright-mcp |
 | career-ops-hq--career-ops | repo | career-ops | github | 2026-09-21 | draft | ai-agent, job-search, career, claude-code, cli | github:career-ops-hq/career-ops |
 | openai--codex-plugin-cc | repo | codex-plugin-cc | github | 2026-09-21 | draft | claude-code-plugin, codex, code-review | github:openai/codex-plugin-cc |
+| 20260923-browser-use-jev-ultrafast | repo | jev-ultrafast — Browser Use's Jev-powered browser agent | github | 2026-09-23 | draft | hot-list, browser-agent, jev, typesafe, mcp, ai-agents, python | github:browser-use/jev-ultrafast |
+| 20260923-nandhakishorm-laya | repo | Laya — open-source System 1 decision engine, pitched as Jev's open alternative | github | 2026-09-23 | draft | hot-list, decision-model, jev, typesafe, classification, agent-memory, python, apache-2.0 | github:NandhaKishorM/laya |
+| 20260923-zai-org-zcode | repo | ZCode — Z.ai's open-sourced coding agent harness | github | 2026-09-23 | draft | hot-list, coding-agent, glm, desktop-app, cli, typescript | github:zai-org/ZCode |
