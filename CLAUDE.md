@@ -38,6 +38,18 @@ cloud Routines keep pushing straight to `main`; the machine account does not, so
 Approvals are set to 1 rather than 0 for one reason: at 0 the machine account could merge its own pull request,
 and the whole arrangement would be decoration.
 
+### Onboarding a non-core agent (Codex, Gemini CLI, OpenClaw, a script)
+Do this when Josep asks to give one of them access — he asked to be reminded, because the step is easy to skip and
+everything appears to work without it, right up until the agent pushes to `main` as him.
+1. Give the agent the **machine account `tradecreditor-ui`'s** classic PAT (scope `public_repo`), never Josep's own
+   GitHub credentials. The `main-protection` ruleset tells the two apart by account, not by the commit author line,
+   so an agent holding his credentials is core and bypasses every guard in this repo.
+2. The agent clones with that token into its own directory. It never runs inside Josep's Obsidian vault folder.
+3. It works on a branch and opens a PR. It cannot push to `main`; that is the point.
+4. If the token has expired (they are issued for 90 days), sign in as `tradecreditor-ui` and issue a new one —
+   github.com/settings/tokens → Tokens (classic) → `public_repo` only. Nothing else in the vault depends on it,
+   so an expired token blocks only this.
+
 ## Access rules (all agents)
 - Create and edit freely under `inbox/`, `agents/`, `wiki/pages/`, `wiki/stars/`, `wiki/hot-list/`, `skills/`, `outputs/`; append rows to `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`.
 - **Never delete or rename files.** To retire an entry set `status: deprecated` and add `deprecated_reason:` in its frontmatter (skills: `vault_status: "deprecated"`).
