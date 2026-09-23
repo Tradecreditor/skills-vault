@@ -5,6 +5,7 @@ type: repo
 status: draft
 source_url: "https://github.com/cathrynlavery/diagram-design"
 source_platform: github
+author: "Cathryn Lavery"
 published: "2026-04-16"
 captured_at: "2026-09-19T11:09:28.035450Z"
 captured_by: "routine:github-stars-sync"

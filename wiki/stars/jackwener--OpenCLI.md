@@ -5,6 +5,7 @@ type: repo
 status: draft
 source_url: "https://github.com/jackwener/OpenCLI"
 source_platform: github
+author: "jakevin (jackwener)"
 published: "2026-03-14"
 captured_at: "2026-09-19T11:09:28.036140Z"
 captured_by: "routine:github-stars-sync"

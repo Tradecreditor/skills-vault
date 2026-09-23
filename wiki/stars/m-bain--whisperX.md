@@ -5,6 +5,7 @@ type: repo
 status: draft
 source_url: "https://github.com/m-bain/whisperX"
 source_platform: github
+author: "Max Bain"
 published: "2022-12-09"
 captured_at: "2026-09-19T11:09:28.035983Z"
 captured_by: "routine:github-stars-sync"
