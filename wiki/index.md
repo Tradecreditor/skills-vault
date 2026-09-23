@@ -41,3 +41,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | microsoft--playwright-mcp | repo | playwright-mcp | github | 2026-09-21 | draft | mcp, playwright | github:microsoft/playwright-mcp |
 | career-ops-hq--career-ops | repo | career-ops | github | 2026-09-21 | draft | ai-agent, job-search, career, claude-code, cli | github:career-ops-hq/career-ops |
 | openai--codex-plugin-cc | repo | codex-plugin-cc | github | 2026-09-21 | draft | claude-code-plugin, codex, code-review | github:openai/codex-plugin-cc |
+| 20260923-promptfoo | tool | promptfoo: LLM Evals & Red Teaming | github | 2026-09-23 | draft | llm-eval, llm, red-teaming, pentesting, prompt-testing, evaluation-framework, ci-cd, rag, testing, ai-security | github:promptfoo/promptfoo |

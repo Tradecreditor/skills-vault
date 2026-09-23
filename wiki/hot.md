@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-23 · tool · [[pages/20260923-promptfoo|promptfoo: LLM Evals & Red Teaming]]
 - 2026-09-21 · repo · [[stars/openai--codex-plugin-cc|codex-plugin-cc]]
 - 2026-09-21 · repo · [[stars/career-ops-hq--career-ops|career-ops]]
 - 2026-09-21 · repo · [[stars/microsoft--playwright-mcp|playwright-mcp]]
@@ -28,4 +29,3 @@
 - 2026-09-20 · repo · [[stars/vercel-labs--skills|skills]]
 - 2026-09-20 · repo · [[stars/hugohe3--ppt-master|ppt-master]]
 - 2026-09-20 · repo · [[stars/Fission-AI--OpenSpec|OpenSpec]]
-- 2026-09-20 · repo · [[stars/bytedance--deer-flow|deer-flow]]
