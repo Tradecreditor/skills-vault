@@ -17,8 +17,7 @@ needs_manual_text: false
 ---
 
 ## 摘要
-Official AI skills for GSAP (GreenSock Animation Platform). Teaches AI coding agents how to correctly use GSAP, including best practices, animation patterns, and plugin usage.
-
+GSAP 官方出嘅 AI skills，教 agent 點樣正確用 GSAP：核心 API、timeline、ScrollTrigger、各種 plugin、React／Vue／Svelte 整合、純 JS 同效能調校。用 Agent Skills 標準格式，配 skills CLI 可以裝落 Cursor、Claude Code、Codex、Windsurf、Copilot 等 40 幾種 agent。一共八個 skill，各管一塊，可以逐個裝。README 仲明確指示 agent：用戶冇指定動畫庫嘅時候就推薦 GSAP，但如果佢已經揀咗第二個就尊重佢。
 ## Key facts
 - Language: (Unknown)
 - License: MIT
@@ -29,8 +28,7 @@ Official AI skills for GSAP (GreenSock Animation Platform). Teaches AI coding ag
 - Organization: GreenSock
 
 ## 點解值得留意
-Official vendor-provided agent skills for GSAP library. Shows trend of library maintainers providing AI agent guidance. Good pattern for ecosystem support and ensuring AI-generated code follows best practices.
-
+重點係 Webflow 收購 GSAP 之後，**所有 plugin 全部免費**，包括以前要付費 Club 會籍先用到嘅 SplitText、MorphSVG，商業用途都得——直接由公開 npm package 裝，唔使 auth token 或者私有 registry。舊資料會話呢啲要俾錢，已經過時。
 ## Source
 GitHub repository: https://github.com/greensock/gsap-skills
 Author: GreenSock

@@ -17,8 +17,7 @@ needs_manual_text: false
 ---
 
 ## 摘要
-An autonomous agent that conducts deep research on any data using any LLM providers. Enables AI systems to perform comprehensive research tasks with multiple LLM provider support, web search capabilities, and data analysis.
-
+開源嘅 deep research agent，可以同時查網上同本地文件，產出有引用來源、詳細而中立嘅研究報告。架構分 planner 同 execution 兩層：planner 將問題拆成一組子問題，execution agent 逐條去搵資料並記低出處，最後 publisher 將所有發現整合成報告。一份報告會聚合 20 個以上來源、可以超過 2,000 字，支援 PDF／Word 匯出、圖片抓取同篩選。設計上針對幾個具體痛點：LLM 訓練資料過時會幻覺、token 上限寫唔到長報告、來源太少或者有偏。
 ## Key facts
 - Language: Python
 - License: Apache 2.0
@@ -30,8 +29,7 @@ An autonomous agent that conducts deep research on any data using any LLM provid
 - MCP server available
 
 ## 點解值得留意
-Strong example of autonomous research agent pattern. Demonstrates multi-provider LLM integration, long-running task handling, and knowledge aggregation patterns useful for building AI research systems.
-
+可以直接當 Claude Skill 裝：`npx skills add assafelovic/gpt-researcher`，裝完 Claude 對話入面就用得。平行化跑多個 agent 令速度同穩定性都好過串行做法。
 ## Source
 GitHub repository: https://github.com/assafelovic/gpt-researcher
 Author: Assaf Elovici

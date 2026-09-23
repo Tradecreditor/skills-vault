@@ -55,9 +55,22 @@ You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: 
 5. Prepend a row to the table in wiki/github-stars.md (| starred_at or run date | owner/repo | one-line note |), add a row to wiki/index.md
    (slug <owner>--<repo>, type repo, tags from topics, canonical_id github:<owner>/<repo>), append "## [date] star | <owner>/<repo> | stars/<owner>--<repo>" to wiki/log.md,
    and add the item under 最近 20 項 in wiki/hot.md.
-5b. Backfill, only if this run found fewer than 6 new repos and you still have budget. Earlier runs left thin notes behind. Pick up to
-   3 existing wiki/stars/*.md whose frontmatter says needs_manual_text: true, or whose ## 摘要 is written in English or says 待手動撰寫,
+5b. Backfill, only if this run found fewer than 6 new repos and you still have budget. Earlier runs left thin notes behind.
+   Find them with this exact command. Do NOT improvise a shell regex for Chinese: that has now failed twice here, and both times
+   the run concluded there was nothing to fix and reported the vault clean while ten notes were still in English.
+     python3 - <<'PY'
+     import io, glob, re
+     cjk = re.compile(r'[\u4e00-\u9fff]')
+     for f in sorted(glob.glob('wiki/stars/*.md')):
+         t = io.open(f, encoding='utf-8').read()
+         m = re.search(r'##\s*摘要\s*\n+(.+?)(?=\n##|\Z)', t, re.S)
+         if not m or len(cjk.findall(m.group(1))) < 20: print(f)
+     PY
+   Every path it prints is a candidate, whatever that file's needs_manual_text says - an earlier run set that flag to false on
+   notes whose README it had never read, so the flag alone cannot be trusted. Take up to
+   3 of them,
    fetch their README as in step 3, and rewrite ## 摘要 and ## 點解值得留意 properly in 繁體中文, setting needs_manual_text: false.
+   Re-run the command above afterwards: if a note you just rewrote still prints, your rewrite did not take.
    Do not touch their other frontmatter, do not rename the file, and log each as "## [date] recapture | <owner>/<repo> | stars/<owner>--<repo>".
    Include these in the commit; if the run added no new stars at all, commit them alone as "stars: enrich <n>".
 6. git add -A; git commit -m "stars: +<N>"; git pull --rebase origin main; git push origin HEAD:main.

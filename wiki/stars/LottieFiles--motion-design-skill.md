@@ -29,7 +29,7 @@ needs_manual_text: false
 - **Last push:** 2026-05-18
 - **Works with:** 40+ agents (Claude Code, Cursor, Codex, GitHub Copilot, etc.)
 
-## 點解值得 star
+## 點解值得留意
 
 Agent Skills 規範實現，提供完整的動作設計教學套件。包括核心檢查清單、迪士尼原則改編版、情感映射、編舞指南、模式庫（入場/退場、狀態反饋、循環動作、多元素編排）和參考表。專為 AI 代理優化，幫助代理在寫 CSS、Framer Motion 或任何動畫框架前，先掌握動作設計的哲學思維。
 

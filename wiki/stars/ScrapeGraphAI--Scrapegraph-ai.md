@@ -28,7 +28,7 @@ ScrapeGraphAI 係一個用 LLM 加圖(graph)邏輯做網頁/本機文件擷取�
 - **也有 MCP server**:[smithery.ai/server/@ScrapeGraphAI/scrapegraph-mcp](https://smithery.ai/server/@ScrapeGraphAI/scrapegraph-mcp)
 - **Topics**: ai-crawler, ai-scraping, ai-search, crawler, data-extraction, firecrawl-alternative, large-language-model, llm, markdown, rag, scraping, scraping-python, web-crawler, web-crawlers, web-data, web-data-extraction, web-scraper, web-scraping, web-search, webscraping
 
-## 點解值得 star
+## 點解值得留意
 
 開源版本俾晒你完全控制(自己揀 LLM、自己管理 proxy 同瀏覽器),仲有一個對應嘅 managed cloud API(`scrapegraph-py`/`scrapegraph-js` SDK)俾唔想自己維運嘅人直接用 credit 叫用,兩條路線清楚分開,對想快速評估「自己起 vs 用現成服務」嘅人幾有參考價值。同 vault 入面其他 scraping/agent-reach 類工具（例如 Agent-Reach、OpenCLI)可以擺埋一齊比較唔同嘅擷取策略。
 

@@ -28,7 +28,7 @@ Diagram Design 係一套幫 Claude Code、Codex、Factory Droid、Pi 等 Agent S
 - **Gallery**: https://cathrynlavery.github.io/diagram-design/
 - **Topics**: agent-skills, claude-code, codex, data-visualization, diagrams, drawio, mermaid, svg
 
-## 點解值得 star
+## 點解值得留意
 
 同呢個 vault 已裝嘅 `artifact-diagramming` 類技能屬同一路數,但呢個係跨平台獨立 skill（Claude Code / Codex / Copilot / Factory Droid / Pi / Kiro / OpenCode 都有安裝方式），版面文法齊全兼且持續加新類型（v2.5.10 一次過加十種），對要出「畀客戶睇」而唔係「畀開發者睇」嘅圖表特別有用。
 

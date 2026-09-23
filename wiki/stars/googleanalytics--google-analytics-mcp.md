@@ -28,7 +28,7 @@ needs_manual_text: false
 - **Claude Code**: `claude mcp add analytics-mcp --scope user -e GOOGLE_APPLICATION_CREDENTIALS=... -e GOOGLE_PROJECT_ID=... -- pipx run analytics-mcp`
 - **Topics**: 冇(repo 未打 topic)
 
-## 點解值得 star
+## 點解值得留意
 
 Google 官方直接出嘅 GA MCP server(而唔係第三方包裝),對經常要問「網站流量點樣」嘅人嚟講幾直接,一個指令就可以喺 Claude Code / Gemini CLI 度直接查 Analytics 數據做分析,唔使開 GA 網頁介面篤嚟篤去。留意佢仲係 Experimental 階段,而且憑證授權步驟(OAuth client + ADC)幾多步,唔算即開即用。
 

@@ -27,7 +27,7 @@ WhisperX 係喺 OpenAI Whisper 基礎上,加入強制音位對齊(phoneme alignm
 - **License**: BSD 2-Clause "Simplified" License
 - **Topics**: asr, speech, speech-recognition, speech-to-text, whisper
 
-## 點解值得 star
+## 點解值得留意
 
 呢個 project 喺 2023 年 INTERSPEECH 收錄咗論文,亦攞過 Ego4d transcription challenge 冠軍,長期維護、star 數高達二萬幾,對要處理會議記錄、Podcast 或者影片字幕自動化嘅場景好有用。用開 Whisper 但覺得時間戳唔準嘅人,可以直接用嚟取代。
 

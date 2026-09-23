@@ -17,8 +17,7 @@ needs_manual_text: false
 ---
 
 ## 摘要
-AI logo animation skill - turns raster logos into smooth SVG animations. Generates animated HTML demos, GIF/video previews, and motion QA evidence for brand motion design.
-
+將點陣 logo（PNG／JPG／WebP／截圖）轉成乾淨嘅 SVG，再喺上面編排動畫，最後輸出一個可互動嘅 HTML 展示頁。關鍵係佢分兩段：先擬合出一個經過 QA 驗證嘅靜態向量，用疊圖逐次對比原圖，檢查標誌比例、圓點位置、文字基線同筆畫粗幼，確認之後先至開始做動態。IoU 只當診斷指標，平滑度同結構先係硬門檻——一個 IoU 高但邊緣鋸齒嘅描繪會被否決，寧要複雜度低而平滑嘅版本。交付物包括 logo.svg、motion.css、獨立可跑嘅 logo_motion.html、動態說明 motion_spec.md，同一批 QA 截圖做憑證。
 ## Key facts
 - Language: Python
 - License: MIT
@@ -30,8 +29,7 @@ AI logo animation skill - turns raster logos into smooth SVG animations. Generat
 - Focus: Logo animation, SVG generation, motion design
 
 ## 點解值得留意
-Specialized AI skill for logo animation combining raster-to-vector and animation. Shows AI capability in creative/design domain. Useful reference for motion design automation and brand asset generation.
-
+大部分向量化工具淨係追求貼近原圖，結果係一堆改唔郁嘅路徑。呢個輸出嘅 SVG 將標誌、圓點、文字拆成可個別定址嘅部件，所以動畫先至編排得到——呢個結構化嘅要求，正正係 AI 生成向量圖最容易失手嘅地方。
 ## Source
 GitHub repository: https://github.com/nolangz/pixel2motion
 Author: Nolan Z

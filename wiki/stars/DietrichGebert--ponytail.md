@@ -28,7 +28,7 @@ Ponytail 係一套令 AI agent 寫代碼變得「夠用就好」嘅 skill，靈�
 - **Install (Claude Code)**: `/plugin marketplace add DietrichGebert/ponytail` 再 `/plugin install ponytail@ponytail`
 - **Topics**: agent-skills, ai-agents, claude, claude-code, claude-code-plugin, cursor-rules, developer-tools, llm, prompt-engineering, yagni
 
-## 點解值得 star
+## 點解值得留意
 
 呢個 skill 直接解決 agent 「過度建構」嘅通病（例如求一個日期選擇器，agent 會裝成個 library 仲加埋 wrapper，Ponytail 就會直接用原生 `<input type="date">`）。跨十幾種 agent 平台（Claude Code、Codex、Cursor、Gemini CLI、OpenCode 等）都有安裝方式，且有真實 benchmark 數字支撐,唔止係得個講字。
 

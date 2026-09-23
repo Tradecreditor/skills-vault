@@ -29,7 +29,7 @@ OpenCLI 將網站、瀏覽器 session、Electron 桌面程式同本機工具全�
 - **裝 agent skills**: `npx skills add jackwener/opencli`(或者只裝某個 skill,例如 `--skill opencli-browser`)
 - **Topics**: ai-agent, ai-agents, ai-tools, browser-automation, browser-use, cli, playwright
 
-## 點解值得 star
+## 點解值得留意
 
 將「攞網站資料」呢件事拆做三層(內建 adapter / AI agent 即場操作瀏覽器 / 自己寫新 adapter),仲提供一套完整嘅 skill 套件(`opencli-browser`、`opencli-adapter-author`、`opencli-autofix` 等)俾 agent 用,skill 拆分粒度同呢個 vault 收藏嘅其他 agent-skill 項目(例如 Agent-Reach)有得直接比較。用「你已登入嘅瀏覽器」嚟做自動化,對唔想成日重新登入嘅場景(小紅書、LinkedIn 呢類要登入先睇到資料嘅網站)幾實用。
 

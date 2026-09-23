@@ -17,8 +17,7 @@ needs_manual_text: false
 ---
 
 ## 摘要
-An HTML Presentation Framework for creating beautiful slideshow presentations. Widely used for conference talks, technical presentations, and educational content. Supports various presentation features like transitions, animations, and speaker notes.
-
+開源嘅 HTML 簡報框架，用瀏覽器就做到簡報，唔使任何專用軟件。功能包括巢狀投影片（橫向切換主題、縱向展開細節）、Markdown 撰寫、Auto-Animate 自動補間動畫、PDF 匯出、講者模式（備註同計時）、LaTeX 數學排版、程式碼語法highlight，同一套完整嘅 API 俾你程式化控制。MIT 授權，由 2011 年維護到而家。
 ## Key facts
 - Language: JavaScript
 - License: MIT
@@ -29,8 +28,7 @@ An HTML Presentation Framework for creating beautiful slideshow presentations. W
 - Homepage: https://revealjs.com
 
 ## 點解值得留意
-Classic HTML presentation framework that has been a standard for web-based presentations for over a decade. Well-maintained and widely compatible. Good reference for presentation layer architecture and animation patterns.
-
+簡報以純 HTML／Markdown 存在，即係可以入 git、可以 diff、可以叫 agent 直接生成同修改——呢點係任何 PowerPoint 流程做唔到嘅。同一班人仲做咗 Slides.com 做圖形化編輯器，唔想寫 code 嗰陣有得揀。
 ## Source
 GitHub repository: https://github.com/hakimel/reveal.js
 Author: Hakim El Hattab

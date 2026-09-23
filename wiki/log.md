@@ -51,3 +51,13 @@
 ## [2026-09-22] recapture | m-bain/whisperX | stars/m-bain--whisperX
 ## [2026-09-22] recapture | bytedance/deer-flow | stars/bytedance--deer-flow
 ## [2026-09-23] lint | 2026-W39 | outputs/health/2026-W39
+## [2026-09-23] recapture | Fission-AI/OpenSpec | stars/Fission-AI--OpenSpec
+## [2026-09-23] recapture | Leonxlnx/taste-skill | stars/Leonxlnx--taste-skill
+## [2026-09-23] recapture | NousResearch/hermes-agent-self-evolution | stars/NousResearch--hermes-agent-self-evolution
+## [2026-09-23] recapture | assafelovic/gpt-researcher | stars/assafelovic--gpt-researcher
+## [2026-09-23] recapture | greensock/gsap-skills | stars/greensock--gsap-skills
+## [2026-09-23] recapture | hakimel/reveal.js | stars/hakimel--reveal.js
+## [2026-09-23] recapture | hugohe3/ppt-master | stars/hugohe3--ppt-master
+## [2026-09-23] recapture | langchain-ai/open_deep_research | stars/langchain-ai--open_deep_research
+## [2026-09-23] recapture | nolangz/pixel2motion | stars/nolangz--pixel2motion
+## [2026-09-23] recapture | vercel-labs/skills | stars/vercel-labs--skills

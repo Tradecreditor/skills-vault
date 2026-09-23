@@ -28,7 +28,7 @@ Agent-Reach 係一套「能力層」工具，畀 AI agent 一鍵裝上讀取全�
 - **Diagnose**: `agent-reach doctor`
 - **Topics**: agent-infrastructure, ai-agent, ai-search, automation, bilibili, claude-code, cli, cursor, free-api, llm-tools, mcp, python, reddit-scraper, twitter-scraper, web-scraper, xiaohongshu, youtube-transcript
 
-## 點解值得 star
+## 點解值得留意
 
 呢個項目正正就係呢個 vault 自己 capture 流程都要靠嘅底層工具（Agent-Reach upstream tools 排喺 reader order 第一位），一鍵幫任何 agent 裝好讀 Twitter/Reddit/YouTube/GitHub/小紅書嘅能力，慳返自己逐個平台踩坑嘅時間。可插拔架構加持續換代嘅承諾（邊個接入方式死咗會自動換路由）令佢維護成本低，適合長期依賴。
 

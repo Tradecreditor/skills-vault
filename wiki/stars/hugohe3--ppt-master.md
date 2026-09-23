@@ -17,8 +17,7 @@ needs_manual_text: false
 ---
 
 ## 摘要
-AI-powered PowerPoint generation tool. Transforms documents or topics into native PowerPoint presentations with shapes, transitions, animations, data-backed charts, and audio narration. Supports custom .pptx templates.
-
+將任何文件（PDF、DOCX、網頁）交俾 AI，生成**原生** PowerPoint 檔案。賣點唔係「可編輯」——佢強調嘅係原生深度：真正嘅 slide master、原生圖形物件、有資料支撐嘅圖表同表格，即係交到你手嗰陣，可以繼續喺 PowerPoint 入面照常修改，唔會變咗一堆貼死咗嘅圖片或者文字框。流程係讀懂原始材料、抽取重點、組織敘事結構，再輸出 PPTX。
 ## Key facts
 - Language: Python
 - License: MIT
@@ -30,8 +29,7 @@ AI-powered PowerPoint generation tool. Transforms documents or topics into nativ
 - Features: Native PPT generation, audio narration, template support
 
 ## 點解值得留意
-Well-developed AI tool for presentation generation with modern features (native shapes, transitions, audio). Shows active development and large community (55K stars). Useful reference for document generation and AI-driven content creation patterns.
-
+「AI 出 PPT」嘅工具好多，但多數輸出嘅係徒具其表、一改就散嘅檔案。呢個專攻嘅正正係交付之後嗰一步。專案本身靠贊助維持免費開源，README 大半篇幅係贊助商，攞資料嗰陣要識得略過。
 ## Source
 GitHub repository: https://github.com/hugohe3/ppt-master
 Author: Hugo He

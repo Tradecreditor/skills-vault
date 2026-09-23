@@ -17,8 +17,7 @@ needs_manual_text: false
 ---
 
 ## 摘要
-Taste-Skill - gives AI good taste and prevents generating boring, generic output. Agent skill for improving code and design quality, aesthetic sensibility, and creative output. Integrates with Claude Code and Codex.
-
+Taste Skill 自稱「Anti-Slop」前端框架，專門醫 AI 生成介面嗰種一眼認得出嘅範本味。佢係一批可攜嘅 Agent Skills，喺版面編排、字體、動態同留白四方面落指引，而唔係再俾多啲 boilerplate 你。預設嗰個 `design-taste-frontend` 已經係 v2 重寫版：會讀你份 brief 推斷設計語言，再用 VARIANCE／MOTION／DENSITY 三個旋鈕調校，內置 GSAP 程式碼骨架同硬性禁用 em dash。除咗實作用嘅 skill，仲有一組出參考圖嘅 image-generation skill，畫完再交俾 Codex／Cursor／Claude Code 落手做。
 ## Key facts
 - Language: JavaScript
 - License: MIT
@@ -31,8 +30,7 @@ Taste-Skill - gives AI good taste and prevents generating boring, generic output
 - Active: Recently pushed
 
 ## 點解值得留意
-High-engagement skill (88K stars!) focused on output quality and aesthetics. Recently active development. Demonstrates importance of taste/style as a teachable agent skill. Valuable for understanding aesthetic programming patterns.
-
+同類工具多數俾你元件庫，呢個係俾你品味判斷。針對唔同場景分咗好多變體（GPT／Codex 專用、舊專案重新設計、極簡、粗獷、高階視覺），可以逐個按需安裝，唔使全部食。
 ## Source
 GitHub repository: https://github.com/Leonxlnx/taste-skill
 Author: Leon

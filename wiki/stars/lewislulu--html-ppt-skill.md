@@ -27,7 +27,7 @@ html-ppt-skill 係一個界面畀 AI agent 用嘅 HTML 簡報生成 Skill,一鍵
 - **License**: MIT License
 - **Topics**: N/A
 
-## 點解值得 star
+## 點解值得留意
 
 呢個 skill 對成日要用 AI 快速出簡報、圖文或者小紅書貼文嘅人幾岩,因為佢完全零 build、離線都可以用,又支援中英文雙語排版(內置 Noto Sans/Serif SC)。演講者模式嘅設計(iframe 隔離預覽、無刷新切換頁)值得留意,係一個幾靚嘅工程實踐範例。
 

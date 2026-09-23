@@ -17,8 +17,7 @@ needs_manual_text: false
 ---
 
 ## 摘要
-Deep research framework from LangChain team. Provides infrastructure for conducting comprehensive research tasks with LLMs. NOTE: Repository is archived.
-
+LangChain 出嘅 deep research agent，設計目標係簡單、可配置、完全開源，唔綁死任何一家模型或者搜尋服務。四個階段可以各自指定唔同模型：摘要搜尋結果、驅動搜尋 agent、壓縮研究發現、撰寫最終報告——貴嘅留返俾最後嗰步，平嘅做中間工序。搜尋預設用 Tavily，但完整支援 MCP，亦都用得 Anthropic 同 OpenAI 嘅原生網絡搜尋。喺 Deep Research Bench 排行榜攞過第 6（0.4344）。
 ## Key facts
 - Language: Python
 - License: MIT
@@ -29,8 +28,7 @@ Deep research framework from LangChain team. Provides infrastructure for conduct
 - Status: Archived
 
 ## 點解值得留意
-Reference implementation from LangChain for research agent patterns. Though archived, provides valuable insights into research task decomposition and execution patterns.
-
+同類專案通常整包綁死，呢個逐層都拆得開，啱攞嚟研究一個 deep research agent 實際點運作。官方仲出咗免費課程同一個 from-scratch 版本 repo，想理解原理多過即刻用，跟嗰條路更直接。
 ## Source
 GitHub repository: https://github.com/langchain-ai/open_deep_research
 Author: LangChain
