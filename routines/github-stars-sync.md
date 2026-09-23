@@ -1,5 +1,5 @@
 # Routine: github-stars-sync
-Trigger: Schedule. Cron is evaluated in **UTC**: `0 23 * * *` UTC = 07:00 HKT the next morning.
+Trigger: Schedule, daily. Cron is evaluated in **UTC**. `0 23 * * *` = 07:00 HKT next morning; `0 6 * * *` = 07:00 CET.
 If you use the web form's daily preset instead, the time is read in your BROWSER's timezone, so enter the time that equals 07:00 HKT there. Always confirm against the next-run time the UI shows after saving. Model: **Sonnet**. Haiku runs this correctly but, once it has to read a README per repo, it quietly drops the READMEs and writes English one-liners instead of admitting it ran short. Repo: Tradecreditor/skills-vault. Pushes to main.
 
 ## Prompt (paste verbatim)

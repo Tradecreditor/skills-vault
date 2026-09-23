@@ -1,5 +1,5 @@
 # Routine: weekly-hot-list
-Trigger: Schedule. Cron is evaluated in **UTC**: `0 1 * * 1` UTC = Monday 09:00 HKT.
+Trigger: Schedule, weekly. Cron is evaluated in **UTC**. `0 1 * * 1` = Monday 09:00 HKT; `0 8 * * 1` = Monday 09:00 CET. The last field is the day of week (1 = Monday); leaving it `*` makes this run every day, which has happened.
 A web-form preset is read in your BROWSER's timezone instead. Confirm against the next-run time shown after saving. Model: Opus. Repo: Tradecreditor/skills-vault. Opens a PR (never pushes to main).
 
 ## Prompt (paste verbatim)

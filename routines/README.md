@@ -139,11 +139,22 @@ from the table above. `/schedule list` shows what you have, `/schedule update` e
 Same as Step 1, except **Select a trigger** → **Schedule**. Pick the nearest preset (daily / weekly, entered in your local
 time), then use `/schedule update` from a local session if you want the exact cron:
 
-| Routine | Cron (always UTC) | Equals, in HKT |
-|---|---|---|
-| `github-stars-sync` | `0 23 * * *` | daily 07:00 |
-| `weekly-hot-list` | `0 1 * * 1` | Monday 09:00 |
-| `vault-lint` | `0 2 * * 1` | Monday 10:00 |
+| Routine | Cron for HKT | Cron for CET | Local time both give |
+|---|---|---|---|
+| `github-stars-sync` | `0 23 * * *` | `0 6 * * *` | daily 07:00 |
+| `weekly-hot-list` | `0 1 * * 1` | `0 8 * * 1` | Monday 09:00 |
+| `vault-lint` | `0 2 * * 1` | `0 9 * * 1` | Monday 10:00 |
+
+The last field is the day of the week (`1` = Monday). Leaving it as `*` means *every day*, which is how the weekly
+hot list once ran seven times in a week on Opus before anyone noticed — nothing errors, the reports just pile up.
+
+Times below are given as UTC cron plus the local time that equals in Hong Kong and in Central European Time, because
+a cron expression is always UTC and Josep works from both. Two traps follow from that. The web form's *presets* are
+entered in the browser's timezone and frozen into a fixed UTC cron the moment you save, so they do not follow you when
+you travel - moving between HKT and CET shifts every routine by seven hours until you re-set it. And a fixed UTC cron
+does not observe daylight saving, so a European summer setting drifts an hour in late October. Whichever route you take,
+read the **next run** time the UI shows after saving: that display is the only ground truth.
+
 
 **Timezones, the one thing that silently goes wrong.** A cron expression is always evaluated in UTC; there is no timezone
 picker for it. The web form's *presets* are different: those are entered in your browser's local timezone and converted for
