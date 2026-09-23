@@ -74,6 +74,21 @@ The API URL and token only exist after the routine is saved, so this one cannot 
 
 ---
 
+### Copying a prompt into the Routine UI
+
+A Routine stores its own copy of the prompt. Editing the file in `routines/` changes nothing until you paste the
+new text into claude.ai, so use the script rather than copying by eye:
+
+```powershell
+.\scripts\copy-prompt.ps1 github-stars-sync
+```
+
+Do not substitute a plain `Get-Content -Raw | Set-Clipboard`. Windows PowerShell 5.1 reads files in the system ANSI
+code page unless told otherwise, so the Chinese in these prompts is mangled before it reaches the clipboard. That
+is how the instruction "摘要 and 點解值得留意 are written in 繁體中文" reached a live routine as
+"?? and 暺圾?澆??? are written in 蝜?銝剜?", and the routine wrote English summaries for days without anything
+looking broken. The script reads UTF-8, reads the clipboard back, and refuses to report success unless it matches.
+
 ### Firing it afterwards
 
 The API trigger gives you a URL ending in `/fire` and a token shown exactly once. Together they can start a run on your
