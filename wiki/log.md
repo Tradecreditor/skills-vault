@@ -62,3 +62,4 @@
 ## [2026-09-23] recapture | nolangz/pixel2motion | stars/nolangz--pixel2motion
 ## [2026-09-23] recapture | vercel-labs/skills | stars/vercel-labs--skills
 ## [2026-09-23] capture | promptfoo: LLM Evals & Red Teaming | 20260923-promptfoo
+## [2026-09-25] recapture | promptfoo: LLM Evals & Red Teaming | 20260923-promptfoo
