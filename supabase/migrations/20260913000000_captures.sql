@@ -11,6 +11,10 @@ create table if not exists public.captures (
 );
 alter table public.captures enable row level security;
 -- No policies on purpose: only the service role (used inside the Edge Function) can read/write.
+-- Newer projects no longer grant new tables to service_role automatically; without this the function gets
+-- "permission denied for table captures" and every link comes back as db_error ("Vault: 0 queued").
+grant usage on schema public to service_role;
+grant all on table public.captures to service_role;
 create or replace function public.touch_updated_at() returns trigger language plpgsql as $$
 begin new.updated_at = now(); return new; end $$;
 drop trigger if exists captures_touch on public.captures;
