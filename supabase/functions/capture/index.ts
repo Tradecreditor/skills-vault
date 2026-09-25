@@ -2,7 +2,8 @@
 // Receives a link from the iPhone Shortcut (JSON {url, note}) or a Telegram bot webhook, de-duplicates it in the
 // `captures` table, and fires the Claude Code Routine "capture-link" once with all new URLs.
 // Secrets: CAPTURE_SECRET (Shortcut header), ROUTINE_FIRE_URL, ROUTINE_TOKEN, and for Telegram BOTH
-// TELEGRAM_WEBHOOK_SECRET (mandatory: Telegram-shaped requests are rejected without it) and TELEGRAM_BOT_TOKEN (replies).
+// TELEGRAM_WEBHOOK_SECRET (mandatory: Telegram-shaped requests are rejected without it) and TELEGRAM_BOT_TOKEN (replies),
+// plus TELEGRAM_ALLOWED_USERS (your Telegram user ID; everyone else is refused).
 // Deploy: supabase functions deploy capture --no-verify-jwt
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -12,6 +13,9 @@ const FIRE_URL = Deno.env.get("ROUTINE_FIRE_URL") ?? "";      // https://api.ant
 const ROUTINE_TOKEN = Deno.env.get("ROUTINE_TOKEN") ?? "";
 const TG_SECRET = Deno.env.get("TELEGRAM_WEBHOOK_SECRET") ?? "";
 const TG_BOT_TOKEN = Deno.env.get("TELEGRAM_BOT_TOKEN") ?? "";
+// Comma-separated Telegram user IDs allowed to capture. Empty = nobody: anyone who finds the bot could otherwise spend
+// the Routine's daily runs. A rejected sender is told their own ID, which is how the owner finds the value to set.
+const TG_ALLOWED = new Set((Deno.env.get("TELEGRAM_ALLOWED_USERS") ?? "").split(",").map((s) => s.trim()).filter(Boolean));
 const URL_RE = /https?:\/\/[^\s<>"'`)\]]+/g;
 const GLOBAL_STRIP = /^(utm_.*|fbclid|gclid|igsh|igshid|si)$/i;
 const HOST_STRIP: Record<string, RegExp> = {
@@ -108,6 +112,11 @@ Deno.serve(async (req) => {
     if (!TG_SECRET || req.headers.get("x-telegram-bot-api-secret-token") !== TG_SECRET) return new Response("forbidden", { status: 403 });
     const msg = body.message ?? body.channel_post ?? null;
     if (!msg) return Response.json({ ok: true, ignored: "no message" });       // 200 so Telegram stops retrying
+    const senderId = String(msg.from?.id ?? msg.chat?.id ?? "");
+    if (!TG_ALLOWED.has(senderId)) {
+      if (msg.chat?.id) await tgReply(msg.chat.id, `This bot is private. Your Telegram ID is ${senderId}; the owner adds it to TELEGRAM_ALLOWED_USERS.`);
+      return Response.json({ ok: true, ignored: "sender not allowed" });      // 200 so Telegram stops retrying
+    }
     const t: string = msg.text ?? msg.caption ?? "";
     const ents = (msg.entities ?? msg.caption_entities ?? []) as { type: string; url?: string }[];
     urls = [...extractUrls(t), ...ents.filter((e) => e.type === "text_link" && e.url).map((e) => e.url!)];

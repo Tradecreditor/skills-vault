@@ -12,7 +12,7 @@ supabase db push         # applies migrations/20260913000000_captures.sql
 supabase secrets set CAPTURE_SECRET="$(openssl rand -hex 24)" \
   ROUTINE_FIRE_URL="https://api.anthropic.com/v1/claude_code/routines/<trig_id>/fire" \
   ROUTINE_TOKEN="<token shown once when you added the API trigger>"
-# Telegram (optional): BOTH are required if you set the webhook: TELEGRAM_BOT_TOKEN=<from BotFather> TELEGRAM_WEBHOOK_SECRET="$(openssl rand -hex 16)"
+# Telegram (optional): BOTH are required if you set the webhook: TELEGRAM_BOT_TOKEN=<from BotFather> TELEGRAM_WEBHOOK_SECRET="$(openssl rand -hex 16)" TELEGRAM_ALLOWED_USERS=<your Telegram user ID>
 supabase functions deploy capture --no-verify-jwt   # or set [functions.capture] verify_jwt = false in supabase/config.toml
 
 # test
@@ -21,7 +21,7 @@ curl -sS -X POST "https://<project-ref>.supabase.co/functions/v1/capture" \
   -d '{"url":"https://github.com/kepano/obsidian-skills","note":"test"}'
 ```
 
-Telegram webhook (optional): `curl "https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<project-ref>.supabase.co/functions/v1/capture&secret_token=<TELEGRAM_WEBHOOK_SECRET>&allowed_updates=%5B%22message%22%5D"`. Requests that look like Telegram updates are rejected unless the secret matches, so the webhook secret is mandatory.
+Telegram webhook (optional): `curl "https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<project-ref>.supabase.co/functions/v1/capture&secret_token=<TELEGRAM_WEBHOOK_SECRET>&allowed_updates=%5B%22message%22%5D"`. Requests that look like Telegram updates are rejected unless the secret matches, so the webhook secret is mandatory. Only the user IDs in `TELEGRAM_ALLOWED_USERS` (comma-separated) can capture; anyone else gets "This bot is private" with their own ID, so to find yours, message the bot before setting it.
 
 iPhone Shortcut "Save to Vault": Shortcuts → + → Details: *Show in Share Sheet*, accepts URLs and Text → action **Get Contents of URL**:
 Method POST, URL `https://<project-ref>.supabase.co/functions/v1/capture`, Headers `x-capture-secret: <CAPTURE_SECRET>`,
