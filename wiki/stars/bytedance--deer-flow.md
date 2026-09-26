@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:bytedance/deer-flow"
 engagement: "stars=82755 forks=11432"
 tags: [agent, agentic, ai-agents, deep-research, superagent, multi-agent]
-related: []
+related: [assafelovic--gpt-researcher, langchain-ai--open_deep_research, THU-MAIC--OpenMAIC]
 needs_manual_text: false
 ---
 
@@ -38,3 +38,7 @@ Author: ByteDance
 Captured: 2026-09-20
 
 ## Related
+
+- [[assafelovic--gpt-researcher|gpt-researcher]] — 同屬開源 research/agent 框架，可以比較架構取捨。
+- [[langchain-ai--open_deep_research|open_deep_research]] — 兩者都可拆件配置唔同模型做唔同工序。
+- [[THU-MAIC--OpenMAIC|OpenMAIC]] — 都係將「單一任務」做成通用多 sub-agent 執行引擎。

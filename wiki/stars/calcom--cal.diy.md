@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:calcom/cal.diy"
 engagement: "stars=48578 forks=15179"
 tags: [next-auth, nextjs, open-source, postgresql, prisma, t3-stack, tailwindcss, trpc, turborepo, typescript, zod]
-related: []
+related: [greensock--gsap-skills, OWASP--secure-coding-practices-quick-reference-guide]
 needs_manual_text: false
 ---
 
@@ -39,3 +39,6 @@ Published: 2021-03-22
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[greensock--gsap-skills|gsap-skills]] — 兩者都係因為母公司政策轉變，將原本收費/企業限定功能變晒做免費開源。
+- [[OWASP--secure-coding-practices-quick-reference-guide|secure-coding-practices-quick-reference-guide]] — 自架呢類處理用戶資料嘅系統，正正需要呢份安全編碼清單。

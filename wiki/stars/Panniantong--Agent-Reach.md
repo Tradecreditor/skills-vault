@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:Panniantong/Agent-Reach"
 engagement: "stars=83273 forks=7296"
 tags: ["agent-infrastructure", "ai-agent", "ai-search", "automation", "bilibili", "claude-code", "cli", "cursor", "free-api", "llm-tools", "mcp", "python", "reddit-scraper", "twitter-scraper", "web-scraper", "xiaohongshu", "youtube-transcript"]
-related: []
+related: [LottieFiles--motion-design-skill, MadsLorentzen--ai-job-search, career-ops-hq--career-ops, ScrapeGraphAI--Scrapegraph-ai, jackwener--OpenCLI]
 needs_manual_text: false
 ---
 ## 摘要
@@ -40,3 +40,9 @@ Agent-Reach 係一套「能力層」工具，畀 AI agent 一鍵裝上讀取全�
 - Reader: routine:github-stars-sync
 
 ## Related
+
+- [[LottieFiles--motion-design-skill|motion-design-skill]] — 同屬 Agent Skills 規範嘅能力包裝範例。
+- [[MadsLorentzen--ai-job-search|ai-job-search]] — 求職流程嘅 `/scrape` 步驟同 Agent-Reach 嘅擷取思路一致。
+- [[career-ops-hq--career-ops|career-ops]] — 掃描招聘平台嘅步驟同 Agent-Reach 嘅多平台擷取設計思路相通。
+- [[ScrapeGraphAI--Scrapegraph-ai|Scrapegraph-ai]] — 同屬擷取類工具，ScrapeGraphAI 自己都提到可以同 Agent-Reach 比較。
+- [[jackwener--OpenCLI|OpenCLI]] — 兩者都係將多平台操作包裝做統一 CLI/能力層俾 agent 用。

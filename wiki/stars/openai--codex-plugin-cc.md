@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:openai/codex-plugin-cc"
 engagement: "stars=33429 forks=2321"
 tags: [claude-code-plugin, codex, code-review]
-related: []
+related: [skills/delegating-to-codex, upstash--context7, Fission-AI--OpenSpec, NousResearch--hermes-agent-self-evolution, pages/20260920-fast-jev-compaction]
 needs_manual_text: false
 ---
 
@@ -40,3 +40,9 @@ Published: 2026-03-30
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[../../skills/delegating-to-codex/SKILL|skill: delegating-to-codex]] — 呢個 skill 就係由呢個 repo 直接包裝出嚟。
+- [[upstash--context7|context7]] — 兩者都係幫 coding agent 攞多一層外部資訊/工具嘅官方插件。
+- [[Fission-AI--OpenSpec|OpenSpec]] — 兩個都係喺 coding agent 流程入面加一層審批/規劃步驟。
+- [[NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]] — 都係喺 agent 產出之後加一層自動審查/演化嘅迴路。
+- [[../pages/20260920-fast-jev-compaction|fast-jev-compaction]] — 同屬本週留意緊嘅 Claude Code plugin 生態擴充。

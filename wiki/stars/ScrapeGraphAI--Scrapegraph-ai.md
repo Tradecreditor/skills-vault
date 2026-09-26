@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:ScrapeGraphAI/Scrapegraph-ai"
 engagement: "stars=31107 forks=3137"
 tags: ["ai-crawler", "ai-scraping", "ai-search", "crawler", "data-extraction", "firecrawl-alternative", "large-language-model", "llm", "markdown", "rag", "scraping", "scraping-python", "web-crawler", "web-crawlers", "web-data", "web-data-extraction", "web-scraper", "web-scraping", "web-search", "webscraping"]
-related: []
+related: [Panniantong--Agent-Reach, jackwener--OpenCLI, microsoft--markitdown]
 needs_manual_text: false
 ---
 ## 摘要
@@ -40,3 +40,7 @@ ScrapeGraphAI 係一個用 LLM 加圖(graph)邏輯做網頁/本機文件擷取�
 - Reader: routine:github-stars-sync
 
 ## Related
+
+- [[Panniantong--Agent-Reach|Agent-Reach]] — 呢個 repo 自己嘅筆記提到可以同 Agent-Reach 比較唔同擷取策略。
+- [[jackwener--OpenCLI|OpenCLI]] — 都係將「擷取網頁資料」包裝做俾 agent 用嘅統一介面。
+- [[microsoft--markitdown|markitdown]] — 兩者都係將原始資料轉做 LLM 友善格式嘅工具，一個管擷取一個管轉換。

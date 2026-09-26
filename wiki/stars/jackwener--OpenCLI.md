@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:jackwener/OpenCLI"
 engagement: "stars=29456 forks=2875"
 tags: ["ai-agent", "ai-agents", "ai-tools", "browser-automation", "browser-use", "cli", "playwright"]
-related: []
+related: [Panniantong--Agent-Reach, ScrapeGraphAI--Scrapegraph-ai, microsoft--playwright-mcp]
 needs_manual_text: false
 ---
 ## 摘要
@@ -41,3 +41,7 @@ OpenCLI 將網站、瀏覽器 session、Electron 桌面程式同本機工具全�
 - Reader: routine:github-stars-sync
 
 ## Related
+
+- [[Panniantong--Agent-Reach|Agent-Reach]] — 兩者都係將多平台操作包裝做統一 CLI/能力層俾 agent 用，skill 拆分粒度可以直接比較。
+- [[ScrapeGraphAI--Scrapegraph-ai|Scrapegraph-ai]] — 都係將「擷取資料」包裝做俾 agent 用嘅統一介面。
+- [[microsoft--playwright-mcp|playwright-mcp]] — 兩者都提供瀏覽器自動化能力俾 agent 操作已登入嘅網站。

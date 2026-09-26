@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:hakimel/reveal.js"
 engagement: "stars=72322 forks=17025"
 tags: [presentation, slides, slideshow, html]
-related: []
+related: [slidevjs--slidev, zarazhangrui--frontend-slides, lewislulu--html-ppt-skill, hugohe3--ppt-master]
 needs_manual_text: false
 ---
 
@@ -35,3 +35,8 @@ Author: Hakim El Hattab
 Captured: 2026-09-20
 
 ## Related
+
+- [[slidevjs--slidev|Slidev]] — 同屬 HTML/Markdown 簡報框架，兩者長期被拎嚟比較。
+- [[zarazhangrui--frontend-slides|Frontend Slides]] — 都係用純 HTML 做簡報，方便 agent 直接生成同修改。
+- [[lewislulu--html-ppt-skill|html-ppt-skill]] — 同屬零依賴嘅純 HTML 簡報方案。
+- [[hugohe3--ppt-master|ppt-master]] — 都係簡報生成工具，一個出 HTML 一個出原生 PPTX。

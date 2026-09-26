@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:vercel-labs/skills"
 engagement: "stars=32090 forks=2737"
 tags: [agent-skills, agents, tools]
-related: []
+related: [DietrichGebert--ponytail, Leonxlnx--taste-skill, greensock--gsap-skills, cathrynlavery--diagram-design, upstash--context7]
 needs_manual_text: false
 ---
 
@@ -36,3 +36,9 @@ Author: Vercel Labs
 Captured: 2026-09-20
 
 ## Related
+
+- [[DietrichGebert--ponytail|ponytail]] — Ponytail 眾多安裝方式之一就係用呢個 CLI。
+- [[Leonxlnx--taste-skill|taste-skill]] — 兩者都覆蓋 Claude Code / Codex 等多個平台嘅 skill 分發。
+- [[greensock--gsap-skills|gsap-skills]] — GSAP skills 明言配呢個 CLI 就可以裝落 40 幾種 agent。
+- [[cathrynlavery--diagram-design|diagram-design]] — 用同一套 `npx skills add` CLI 分發。
+- [[upstash--context7|context7]] — 兩者都支援「CLI + Skills」模式，唔一定要用 MCP。

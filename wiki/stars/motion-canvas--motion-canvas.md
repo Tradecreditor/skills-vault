@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:motion-canvas/motion-canvas"
 engagement: "stars=19136 forks=821"
 tags: [animation, presentation, visualization, typescript, video-generation]
-related: []
+related: [slidevjs--slidev, zarazhangrui--frontend-slides, nolangz--pixel2motion, LottieFiles--motion-design-skill]
 needs_manual_text: false
 ---
 
@@ -39,5 +39,7 @@ Motion Canvas 是專業級別的動畫製作工具，結合了代碼的靈活性
 
 ## Related
 
-- [[slidevjs--slidev]]
-- [[zarazhangrui--frontend-slides]]
+- [[slidevjs--slidev|Slidev]] — 同屬開發者向、code-first 嘅簡報/視覺化工具。
+- [[zarazhangrui--frontend-slides|Frontend Slides]] — 都係用程式碼控制視覺輸出嘅簡報/動畫工具。
+- [[nolangz--pixel2motion|pixel2motion]] — 兩者都用程式碼精確控制動畫時序，而唔係拖拉式編輯器。
+- [[LottieFiles--motion-design-skill|motion-design-skill]] — 都強調寫動畫代碼之前要先諗清楚時序同編舞。

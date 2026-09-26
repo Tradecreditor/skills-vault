@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:nolangz/pixel2motion"
 engagement: "stars=2303 forks=192"
 tags: [logo-animation, svg-animation, ai-design-tools, motion-design, claude-skill]
-related: []
+related: [motion-canvas--motion-canvas, greensock--gsap-skills, LottieFiles--motion-design-skill, Forget-C--Jellyfish]
 needs_manual_text: false
 ---
 
@@ -36,3 +36,8 @@ Author: Nolan Z
 Captured: 2026-09-20
 
 ## Related
+
+- [[motion-canvas--motion-canvas|Motion Canvas]] — 兩者都用程式碼精確控制動畫時序。
+- [[greensock--gsap-skills|gsap-skills]] — 都係將動畫設計知識包裝做 agent skill。
+- [[LottieFiles--motion-design-skill|motion-design-skill]] — 都係俾 agent 用嘅動作設計原則同工具包。
+- [[Forget-C--Jellyfish|Jellyfish]] — 都強調將生成資產拆做可獨立管理嘅部件，減少走樣。

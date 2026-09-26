@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:googleanalytics/google-analytics-mcp"
 engagement: "stars=3242 forks=693"
 tags: []
-related: []
+related: [microsoft--playwright-mcp, upstash--context7]
 needs_manual_text: false
 ---
 ## 摘要
@@ -40,3 +40,6 @@ Google 官方直接出嘅 GA MCP server(而唔係第三方包裝),對經常要�
 - Reader: routine:github-stars-sync
 
 ## Related
+
+- [[microsoft--playwright-mcp|playwright-mcp]] — 兩者都係官方出品、用 `claude mcp add` 一鍵裝落 Claude Code 嘅 MCP server。
+- [[upstash--context7|context7]] — 都係將外部資料/文件即時塞入 agent context 嘅官方級工具。

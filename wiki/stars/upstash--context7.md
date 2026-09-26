@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:upstash/context7"
 engagement: "stars=62255 forks=3015"
 tags: [llm, mcp, mcp-server, vibe-coding]
-related: []
+related: [vercel-labs--skills, openai--codex-plugin-cc, Fission-AI--OpenSpec, googleanalytics--google-analytics-mcp, pages/20260921-4-claude-code-plugins]
 needs_manual_text: false
 ---
 
@@ -39,3 +39,9 @@ Published: 2025-03-26
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[vercel-labs--skills|skills]] — 兩者都支援「CLI + Skills」模式，唔一定要用 MCP 先攞到能力。
+- [[openai--codex-plugin-cc|codex-plugin-cc]] — 都係幫 coding agent 攞多一層外部資訊/工具嘅官方插件。
+- [[Fission-AI--OpenSpec|OpenSpec]] — 兩者都係將外部/規格資訊塞入 agent context 嘅工具。
+- [[googleanalytics--google-analytics-mcp|google-analytics-mcp]] — 都係將外部資料/文件即時塞入 agent context 嘅官方級工具。
+- [[../pages/20260921-4-claude-code-plugins|4 Claude Code Plugins]] — 呢篇文章都提到 Context7，話佢同 Graphify 一樣係減少 agent 亂噏/重複讀檔嘅方案。

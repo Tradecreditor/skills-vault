@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:microsoft/playwright-mcp"
 engagement: "stars=37448 forks=3183"
 tags: [mcp, playwright, browser-automation]
-related: []
+related: [skills/automating-browsers-with-playwright, jackwener--OpenCLI, microsoft--markitdown, googleanalytics--google-analytics-mcp]
 needs_manual_text: false
 ---
 
@@ -40,3 +40,8 @@ Published: 2025-03-21
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[../../skills/automating-browsers-with-playwright/SKILL|skill: automating-browsers-with-playwright]] — 呢個 skill 就係由呢個 repo 直接包裝出嚟。
+- [[jackwener--OpenCLI|OpenCLI]] — 兩者都提供瀏覽器自動化能力俾 agent 操作已登入嘅網站。
+- [[microsoft--markitdown|markitdown]] — 同屬微軟官方出品嘅 agent 基建工具。
+- [[googleanalytics--google-analytics-mcp|google-analytics-mcp]] — 兩者都係官方出品、用 `claude mcp add` 一鍵裝落 Claude Code 嘅 MCP server。

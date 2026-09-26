@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:career-ops-hq/career-ops"
 engagement: "stars=72352 forks=13619"
 tags: [ai-agent, job-search, career, claude-code, cli]
-related: []
+related: [MadsLorentzen--ai-job-search, Panniantong--Agent-Reach]
 needs_manual_text: false
 ---
 
@@ -39,4 +39,6 @@ Published: 2026-04-04
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
-[[MadsLorentzen--ai-job-search]] (same vertical, different project)
+
+- [[MadsLorentzen--ai-job-search|ai-job-search]] — 同一個垂直領域(AI 求職自動化)，但社群規模同信任建立手法唔同，值得對比。
+- [[Panniantong--Agent-Reach|Agent-Reach]] — 掃描 Greenhouse/Ashby/Lever 等招聘平台嘅做法同 Agent-Reach 嘅多平台擷取思路相通。

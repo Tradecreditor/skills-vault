@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:m-bain/whisperX"
 engagement: "stars=24120 forks=2429"
 tags: ["asr", "speech", "speech-recognition", "speech-to-text", "whisper"]
-related: []
+related: [microsoft--markitdown, Panniantong--Agent-Reach]
 needs_manual_text: false
 ---
 ## 摘要
@@ -39,3 +39,6 @@ WhisperX 係喺 OpenAI Whisper 基礎上,加入強制音位對齊(phoneme alignm
 - Reader: routine:github-stars-sync
 
 ## Related
+
+- [[microsoft--markitdown|markitdown]] — 兩者都係將非文字資料(音訊/文件)轉做 LLM 友善格式嘅工具。
+- [[Panniantong--Agent-Reach|Agent-Reach]] — Agent-Reach 都有 youtube-transcript 呢類擷取字幕嘅能力，同 WhisperX 嘅轉錄思路相通。

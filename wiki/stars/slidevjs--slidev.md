@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:slidevjs/slidev"
 engagement: "stars=48754 forks=2195"
 tags: [markdown, presentation, slides, vite, vue, developer-tools]
-related: []
+related: [cathrynlavery--diagram-design, motion-canvas--motion-canvas, hakimel--reveal.js, zarazhangrui--frontend-slides, hugohe3--ppt-master]
 needs_manual_text: false
 ---
 
@@ -39,5 +39,8 @@ Slidev 是開發者友善的簡報工具，完全基於 Markdown，支援程式�
 
 ## Related
 
-- [[cathrynlavery--diagram-design]]
-- [[motion-canvas--motion-canvas]]
+- [[cathrynlavery--diagram-design|diagram-design]] — Slidev 簡報入面可以直接用 Mermaid，兩者都係開發者向嘅圖表/簡報工具。
+- [[motion-canvas--motion-canvas|Motion Canvas]] — 同屬開發者向、code-first 嘅簡報/視覺化工具。
+- [[hakimel--reveal.js|reveal.js]] — 同屬 HTML/Markdown 簡報框架，長期被拎嚟比較。
+- [[zarazhangrui--frontend-slides|Frontend Slides]] — 都係俾開發者用純文字/程式碼控制嘅簡報生成方案。
+- [[hugohe3--ppt-master|ppt-master]] — Slidev 都支援匯出做 PPTX，同 ppt-master 喺輸出格式上有重疊。

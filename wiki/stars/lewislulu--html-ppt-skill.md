@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:lewislulu/html-ppt-skill"
 engagement: "stars=8430 forks=722"
 tags: []
-related: []
+related: [hakimel--reveal.js, zarazhangrui--frontend-slides, hugohe3--ppt-master]
 needs_manual_text: false
 ---
 ## 摘要
@@ -39,3 +39,7 @@ html-ppt-skill 係一個界面畀 AI agent 用嘅 HTML 簡報生成 Skill,一鍵
 - Reader: routine:github-stars-sync
 
 ## Related
+
+- [[hakimel--reveal.js|reveal.js]] — 同屬零依賴嘅純 HTML 簡報方案。
+- [[zarazhangrui--frontend-slides|Frontend Slides]] — 兩者都主打俾非設計師用嘅視覺化簡報生成 skill。
+- [[hugohe3--ppt-master|ppt-master]] — 都係簡報生成 skill，可比較純 HTML 同原生 PPTX 兩種取向。

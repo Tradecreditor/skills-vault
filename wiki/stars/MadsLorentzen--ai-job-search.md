@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:MadsLorentzen/ai-job-search"
 engagement: "stars=43470 forks=14927"
 tags: [ai, ai-agents, career, claude-code, cover-letter, cv, interview-preparation, job-application, job-hunting, job-search, latex, resume]
-related: []
+related: [career-ops-hq--career-ops, Panniantong--Agent-Reach]
 needs_manual_text: false
 ---
 
@@ -39,3 +39,6 @@ Published: 2026-03-18
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[career-ops-hq--career-ops|career-ops]] — 同一個垂直領域(AI 求職自動化)，可比較兩者嘅設計差異。
+- [[Panniantong--Agent-Reach|Agent-Reach]] — 求職流程入面嘅 `/scrape` 步驟同 Agent-Reach 嘅多平台擷取能力思路一致。

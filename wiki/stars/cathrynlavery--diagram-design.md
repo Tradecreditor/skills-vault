@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:cathrynlavery/diagram-design"
 engagement: "stars=41245 forks=2637"
 tags: ["agent-skills", "claude-code", "codex", "data-visualization", "diagrams", "drawio", "mermaid", "svg"]
-related: []
+related: [slidevjs--slidev, LottieFiles--motion-design-skill, vercel-labs--skills, VoltAgent--awesome-design-md]
 needs_manual_text: false
 ---
 ## 摘要
@@ -40,3 +40,8 @@ Diagram Design 係一套幫 Claude Code、Codex、Factory Droid、Pi 等 Agent S
 - Reader: routine:github-stars-sync
 
 ## Related
+
+- [[slidevjs--slidev|Slidev]] — Slidev 簡報入面可以直接用 Mermaid，兩者都係開發者向嘅圖表/簡報工具。
+- [[LottieFiles--motion-design-skill|motion-design-skill]] — 兩者都係「先講原則後落手畫」嘅視覺設計 skill。
+- [[vercel-labs--skills|skills]] — 用同一套 `npx skills add` CLI 分發，裝落十幾種 agent。
+- [[VoltAgent--awesome-design-md|awesome-design-md]] — 都用純 markdown/HTML 檔案取代 Figma 嚟教 agent 做視覺嘢。

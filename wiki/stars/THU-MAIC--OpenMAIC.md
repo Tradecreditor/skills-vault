@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:THU-MAIC/OpenMAIC"
 engagement: "stars=38431 forks=6024"
 tags: [ai, ai-agents, education, multi-agent]
-related: []
+related: [assafelovic--gpt-researcher, bytedance--deer-flow, vercel-labs--skills]
 needs_manual_text: false
 ---
 
@@ -40,3 +40,7 @@ Published: 2026-03-11
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[assafelovic--gpt-researcher|gpt-researcher]] — 同屬多 agent 協作嘅開源平台。
+- [[bytedance--deer-flow|deer-flow]] — 都係將單一任務做成多 sub-agent 協調嘅通用引擎。
+- [[vercel-labs--skills|skills]] — 自己隨附一個標準 SKILL.md 包，同 skills-vault 嘅收藏思路直接相關。

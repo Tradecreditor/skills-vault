@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:hugohe3/ppt-master"
 engagement: "stars=55555 forks=4406"
 tags: [powerpoint, ai-agent, presentation, pptx, office]
-related: []
+related: [hakimel--reveal.js, lewislulu--html-ppt-skill, slidevjs--slidev, Forget-C--Jellyfish]
 needs_manual_text: false
 ---
 
@@ -36,3 +36,8 @@ Author: Hugo He
 Captured: 2026-09-20
 
 ## Related
+
+- [[hakimel--reveal.js|reveal.js]] — 同屬簡報生成工具，一個出原生 PPTX 一個出 HTML。
+- [[lewislulu--html-ppt-skill|html-ppt-skill]] — 都係俾 agent 用嘅簡報生成 skill，可比較輸出格式取捨。
+- [[slidevjs--slidev|Slidev]] — Slidev 都支援匯出做 PPTX，兩者喺輸出格式上有重疊。
+- [[Forget-C--Jellyfish|Jellyfish]] — 兩者都將 AI 生成由一次性小工具做成交付得到嘅完整產出。
