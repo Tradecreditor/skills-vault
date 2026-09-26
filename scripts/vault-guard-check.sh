@@ -56,6 +56,11 @@ for f in skills/*/SKILL.md; do
     grab { grab=0 }
     END { print v }' | sed -E "s/^[>|][+-]?[[:space:]]*//; s/^[\"']//; s/[\"'][[:space:]]*$//; s/[[:space:]]+$//")
   [ "$n" = "$d" ] || { echo "::error file=$f::frontmatter name '$n' must equal folder name '$d'"; FAIL=1; }
+  rawdesc=$(printf '%s\n' "$fm" | grep -m1 -E '^description:' | sed -E 's/^description:[[:space:]]*//')
+  case "$rawdesc" in
+    \"*|\'*|\>*|\|*) ;;   # quoted or block scalar: fine
+    *": "*) echo "::error file=$f::description contains ': ' and must be quoted to be valid YAML"; FAIL=1;;
+  esac
   [ -n "$desc" ] || { echo "::error file=$f::missing or empty description"; FAIL=1; }
   [ "${#desc}" -le 300 ] || { echo "::error file=$f::description longer than 300 characters"; FAIL=1; }
   [ -z "$desc" ] || printf '%s' "$desc" | grep -qF 'Use when' || { echo "::error file=$f::description must contain the phrase \"Use when\""; FAIL=1; }

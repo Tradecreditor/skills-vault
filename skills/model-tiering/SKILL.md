@@ -1,6 +1,6 @@
 ---
 name: model-tiering
-description: Picks the Claude model tier and effort level for a task: expensive models (Fable/Opus) plan, advise and review, Sonnet executes. Use when spawning subagents, workflows or cron agents, writing code that calls the Claude API (advisor tool), or weighing cost vs quality of Fable/Opus vs Sonnet.
+description: "Picks the Claude model tier and effort level for a task: expensive models (Fable/Opus) plan, advise and review, Sonnet executes. Use when spawning subagents, workflows or cron agents, writing code that calls the Claude API (advisor tool), or weighing cost vs quality of Fable/Opus vs Sonnet."
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-09-26"
