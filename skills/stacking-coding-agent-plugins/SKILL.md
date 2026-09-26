@@ -1,6 +1,6 @@
 ---
-name: stacking-claude-code-plugins
-description: Installs and configures four complementary Claude Code plugins (Graphify, Agent Skills, Ponytail, OmniRoute) to reduce context burn, enforce a planning workflow, cut generated code size, and prevent quota-based interruptions. Use when setting up Claude Code for a large repo, hitting context or quota limits, or wanting a structured agent engineering workflow.
+name: stacking-coding-agent-plugins
+description: Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) that cut context burn, enforce planning, shrink generated code, and prevent quota interruptions. Use when setting up a coding agent on a large repo, hitting context or quota limits, or wanting a structured workflow.
 metadata:
   source_url: "https://www.instagram.com/reel/DdjkD4xi1ma/"
   source_platform: "instagram"
@@ -11,7 +11,7 @@ metadata:
   vault_status: "draft"
 ---
 
-# stacking-claude-code-plugins
+# stacking-coding-agent-plugins
 
 Set up four plugins that address distinct Claude Code bottlenecks: context saturation, unplanned coding, code verbosity, and quota interruption.
 
