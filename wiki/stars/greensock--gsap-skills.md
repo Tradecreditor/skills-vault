@@ -39,4 +39,4 @@ Captured: 2026-09-20
 - [[vercel-labs--skills|skills]] — 用呢個 CLI 就可以裝落 Cursor、Claude Code、Codex 等 40 幾種 agent。
 - [[nolangz--pixel2motion|pixel2motion]] — 兩者都係將動畫設計知識包裝做 agent skill，一個管動畫庫一個管 logo 動態化。
 - [[LottieFiles--motion-design-skill|motion-design-skill]] — 都係俾 agent 用嘅動作設計原則同工具包。
-- [[calcom--cal.diy|cal.diy]] — 兩者都因為母公司政策轉變，將本身收費功能變晒免費開源。
+- [[calcom--cal.diy|cal.diy]] — 都係商業產品開放出嚟嘅開源版本，但取向相反：GSAP 全部 plugin 免費，Cal.diy 拆走商業功能淨返 MIT 部分。

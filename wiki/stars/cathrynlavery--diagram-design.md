@@ -41,7 +41,7 @@ Diagram Design 係一套幫 Claude Code、Codex、Factory Droid、Pi 等 Agent S
 
 ## Related
 
-- [[slidevjs--slidev|Slidev]] — Slidev 簡報入面可以直接用 Mermaid，兩者都係開發者向嘅圖表/簡報工具。
+- [[slidevjs--slidev|Slidev]] — diagram-design 出嘅自足 HTML+SVG 圖可以直接嵌入 Slidev 呢類 HTML 簡報。
 - [[LottieFiles--motion-design-skill|motion-design-skill]] — 兩者都係「先講原則後落手畫」嘅視覺設計 skill。
-- [[vercel-labs--skills|skills]] — 用同一套 `npx skills add` CLI 分發，裝落十幾種 agent。
+- [[vercel-labs--skills|skills]] — 都係將 skill 分發到多個 agent client 嘅方式：diagram-design 行 plugin marketplace，skills 行 CLI。
 - [[VoltAgent--awesome-design-md|awesome-design-md]] — 都用純 markdown/HTML 檔案取代 Figma 嚟教 agent 做視覺嘢。

@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:DietrichGebert/ponytail"
 engagement: "stars=142274 forks=7629"
 tags: ["agent-skills", "ai-agents", "claude", "claude-code", "claude-code-plugin", "cursor-rules", "developer-tools", "llm", "prompt-engineering", "yagni"]
-related: [zarazhangrui--frontend-slides, LottieFiles--motion-design-skill, pages/20260921-4-claude-code-plugins, Leonxlnx--taste-skill, vercel-labs--skills]
+related: [zarazhangrui--frontend-slides, LottieFiles--motion-design-skill, pages/20260921-4-claude-code-plugins, Leonxlnx--taste-skill]
 needs_manual_text: false
 ---
 ## 摘要
@@ -45,4 +45,3 @@ Ponytail 係一套令 AI agent 寫代碼變得「夠用就好」嘅 skill，靈�
 - [[LottieFiles--motion-design-skill|motion-design-skill]] — 同屬 Agent Skills 規範打包嘅技能，可比較唔同領域點樣寫 skill 文件。
 - [[../pages/20260921-4-claude-code-plugins|4 Claude Code Plugins]] — 呢篇貼文專門介紹咗 Ponytail 嘅 -54% 代碼行數數字。
 - [[Leonxlnx--taste-skill|taste-skill]] — 兩個都係「品味判斷」型 skill，一個管代碼精簡一個管前端美感。
-- [[vercel-labs--skills|skills]] — 呢個 CLI 係 Ponytail 眾多安裝方式之一嘅共同底層。

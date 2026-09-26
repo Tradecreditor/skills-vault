@@ -39,7 +39,7 @@ Slidev 是開發者友善的簡報工具，完全基於 Markdown，支援程式�
 
 ## Related
 
-- [[cathrynlavery--diagram-design|diagram-design]] — Slidev 簡報入面可以直接用 Mermaid，兩者都係開發者向嘅圖表/簡報工具。
+- [[cathrynlavery--diagram-design|diagram-design]] — 佢出嘅自足 HTML+SVG 圖可以直接嵌入 Slidev 簡報。
 - [[motion-canvas--motion-canvas|Motion Canvas]] — 同屬開發者向、code-first 嘅簡報/視覺化工具。
 - [[hakimel--reveal.js|reveal.js]] — 同屬 HTML/Markdown 簡報框架，長期被拎嚟比較。
 - [[zarazhangrui--frontend-slides|Frontend Slides]] — 都係俾開發者用純文字/程式碼控制嘅簡報生成方案。

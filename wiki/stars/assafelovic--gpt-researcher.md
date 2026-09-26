@@ -38,5 +38,5 @@ Captured: 2026-09-20
 ## Related
 
 - [[langchain-ai--open_deep_research|open_deep_research]] — 同屬開源 deep research agent，可以比較 planner/execution 架構設計。
-- [[bytedance--deer-flow|deer-flow]] — 都係由 deep research 工具演化，可睇到唔同團隊點樣做 research agent。
+- [[bytedance--deer-flow|deer-flow]] — deer-flow 由 deep research 起步演化成通用 harness，可對照 gpt-researcher 點樣留喺 research 本業。
 - [[THU-MAIC--OpenMAIC|OpenMAIC]] — 同屬多 agent 協作平台。

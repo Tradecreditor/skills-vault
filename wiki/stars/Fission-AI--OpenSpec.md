@@ -39,4 +39,4 @@ Captured: 2026-09-20
 
 - [[upstash--context7|context7]] — 兩者都係將外部/規格資訊塞入 agent context 嘅工具，一個攞文件一個攞規格。
 - [[openai--codex-plugin-cc|codex-plugin-cc]] — 兩個都係喺 coding agent 流程入面加一層審批/規劃步驟。
-- [[NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]] — 都關注點樣將「唔清晰嘅需求」變成可驗證嘅具體流程。
+- [[NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]] — 都想將「點解會失敗/點解要咁做」講清楚先落手改。

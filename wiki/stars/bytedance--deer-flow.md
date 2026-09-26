@@ -41,4 +41,4 @@ Captured: 2026-09-20
 
 - [[assafelovic--gpt-researcher|gpt-researcher]] — 同屬開源 research/agent 框架，可以比較架構取捨。
 - [[langchain-ai--open_deep_research|open_deep_research]] — 兩者都可拆件配置唔同模型做唔同工序。
-- [[THU-MAIC--OpenMAIC|OpenMAIC]] — 都係將「單一任務」做成通用多 sub-agent 執行引擎。
+- [[THU-MAIC--OpenMAIC|OpenMAIC]] — 都係多 agent 協作平台，deer-flow 係通用 harness，OpenMAIC 專攻教學。

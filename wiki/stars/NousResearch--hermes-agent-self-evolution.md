@@ -40,4 +40,4 @@ Captured: 2026-09-20
 - [[openai--codex-plugin-cc|codex-plugin-cc]] — 兩者都係喺 agent 產出之後加一層自動審查/演化嘅迴路。
 - [[Fission-AI--OpenSpec|OpenSpec]] — 都想將「點解會失敗/點解要咁做」講清楚先落手改。
 - [[../pages/20260923-promptfoo|promptfoo]] — 演化流程要靠評估資料集打分，同 promptfoo 嘅 LLM eval 思路直接對應。
-- [[OWASP--secure-coding-practices-quick-reference-guide|secure-coding-practices-quick-reference-guide]] — 兩者都用「過五關」式嘅檢查清單先俾改動通過。
+- [[OWASP--secure-coding-practices-quick-reference-guide|secure-coding-practices-quick-reference-guide]] — 兩者都用檢查清單式嘅關卡嚟把關改動。

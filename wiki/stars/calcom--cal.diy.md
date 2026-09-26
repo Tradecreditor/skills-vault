@@ -40,5 +40,5 @@ Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
 
-- [[greensock--gsap-skills|gsap-skills]] — 兩者都係因為母公司政策轉變，將原本收費/企業限定功能變晒做免費開源。
+- [[greensock--gsap-skills|gsap-skills]] — 都係商業產品開放出嚟嘅開源版本，但取向相反：GSAP 係全部 plugin 變免費，Cal.diy 係拆走商業功能淨返 MIT 部分。
 - [[OWASP--secure-coding-practices-quick-reference-guide|secure-coding-practices-quick-reference-guide]] — 自架呢類處理用戶資料嘅系統，正正需要呢份安全編碼清單。

@@ -42,5 +42,5 @@ Reader used: raw README via Exa (web_fetch_exa)
 ## Related
 
 - [[assafelovic--gpt-researcher|gpt-researcher]] — 同屬多 agent 協作嘅開源平台。
-- [[bytedance--deer-flow|deer-flow]] — 都係將單一任務做成多 sub-agent 協調嘅通用引擎。
+- [[bytedance--deer-flow|deer-flow]] — 都係多 agent 協作平台，一個係通用 harness，一個專攻教學場景。
 - [[vercel-labs--skills|skills]] — 自己隨附一個標準 SKILL.md 包，同 skills-vault 嘅收藏思路直接相關。

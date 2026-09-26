@@ -44,5 +44,5 @@ README: First 300 lines from official repository
 - [[Panniantong--Agent-Reach|Agent-Reach]] — 同屬 Agent Skills 規範打包嘅能力層工具。
 - [[cathrynlavery--diagram-design|diagram-design]] — 兩者都係「先講原則後落手畫」嘅視覺設計 skill。
 - [[DietrichGebert--ponytail|ponytail]] — 同屬 agent-skills 生態嘅範例。
-- [[motion-canvas--motion-canvas|Motion Canvas]] — 兩者都係喺寫動畫代碼之前，先要求想清楚時序同編舞。
+- [[motion-canvas--motion-canvas|Motion Canvas]] — 呢套時序/緩動原則講明適用任何動畫系統，Motion Canvas 呢類 code-first 動畫庫正正用得着。
 - [[nolangz--pixel2motion|pixel2motion]] — 都係將動作設計原則應用落實際嘅動畫產出。

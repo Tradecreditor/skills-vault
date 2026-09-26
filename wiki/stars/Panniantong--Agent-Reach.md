@@ -44,5 +44,5 @@ Agent-Reach 係一套「能力層」工具，畀 AI agent 一鍵裝上讀取全�
 - [[LottieFiles--motion-design-skill|motion-design-skill]] — 同屬 Agent Skills 規範嘅能力包裝範例。
 - [[MadsLorentzen--ai-job-search|ai-job-search]] — 求職流程嘅 `/scrape` 步驟同 Agent-Reach 嘅擷取思路一致。
 - [[career-ops-hq--career-ops|career-ops]] — 掃描招聘平台嘅步驟同 Agent-Reach 嘅多平台擷取設計思路相通。
-- [[ScrapeGraphAI--Scrapegraph-ai|Scrapegraph-ai]] — 同屬擷取類工具，ScrapeGraphAI 自己都提到可以同 Agent-Reach 比較。
+- [[ScrapeGraphAI--Scrapegraph-ai|Scrapegraph-ai]] — 同屬擷取類工具，ScrapeGraphAI 嗰篇筆記都提到可以同 Agent-Reach 比較。
 - [[jackwener--OpenCLI|OpenCLI]] — 兩者都係將多平台操作包裝做統一 CLI/能力層俾 agent 用。
