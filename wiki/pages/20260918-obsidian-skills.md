@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "github:kepano/obsidian-skills"
 engagement: "commits=46"
 tags: [obsidian, agent-skills, llm-wiki, claude-code, knowledge-management]
-related: []
+related: ["skills/using-obsidian-skills", 20260904-jackywine-obsidian-2026, "stars/vercel-labs--skills", "stars/Leonxlnx--taste-skill"]
 needs_manual_text: false
 ---
 
@@ -62,5 +62,7 @@ needs_manual_text: false
 
 ## Related
 
-- [[../../skills/using-obsidian-skills/SKILL|skill: using-obsidian-skills]]
-- [[20260904-jackywine-obsidian-2026|2026 我的 Obsidian 完整分享]]
+- [[../../skills/using-obsidian-skills/SKILL|skill: using-obsidian-skills]] — 呢個 skill 就係由呢個 repo 抽出嚟，直接安裝落 vault 用嘅版本。
+- [[20260904-jackywine-obsidian-2026|2026 我的 Obsidian 完整分享]] — Jackywine 文中討論嘅 Kepano「乾淨庫 vs. 髒庫」哲學，就係呢個 repo 作者本人嘅立場。
+- [[../stars/vercel-labs--skills|skills]] — 同一個 Agent Skills 生態嘅安裝/分發標準（`npx skills add`），呢個 repo 本身都可以透過佢嚟裝。
+- [[../stars/Leonxlnx--taste-skill|taste-skill]] — 同樣係一套可攜式 Agent Skills 集合，兩者都示範點樣將專門知識包裝成 skill 俾唔同 agent 共用。

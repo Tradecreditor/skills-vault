@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:tamaratran/fast-jev-compaction"
 engagement: "stars=5089 forks=281 x_likes=10686 x_retweets=657 x_views=3693140"
 tags: [hot-list, claude-code, claude-code-plugin, context-management, compaction, typescript, 2026-W38]
-related: []
+related: ["hot-list/2026-W38", 20260921-4-claude-code-plugins, "stars/openai--codex-plugin-cc", "stars/DietrichGebert--ponytail"]
 needs_manual_text: false
 ---
 
@@ -64,4 +64,7 @@ opencodex、codex-security）雖然 star 數更誇張，但今個星期搵唔到
 
 ## Related
 
-- [[../hot-list/2026-W38|hot-list/2026-W38]]
+- [[../hot-list/2026-W38|hot-list/2026-W38]] — 呢篇就係本週熱度榜第一名，呢個報告解釋咗點解佢贏。
+- [[20260921-4-claude-code-plugins|4 Claude Code Plugins That Fix the Real Bottlenecks]] — 同樣講 Claude Code 插件解決真實瓶頸，context 管理係兩篇共通嘅主題。
+- [[../stars/openai--codex-plugin-cc|codex-plugin-cc]] — 都係 Claude Code plugin，處理唔同瓶頸（呢個處理 context compaction，嗰個處理跨 agent code review），可以一齊睇 Claude Code 插件生態點樣分工。
+- [[../stars/DietrichGebert--ponytail|ponytail]] — 同屬 context/token 紀律類 plugin：Ponytail 管代碼精簡，fast-jev-compaction 管歷史記錄逐字保留，兩者互補。
