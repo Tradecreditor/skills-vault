@@ -75,7 +75,7 @@ Create `skills/<gerund-name>/SKILL.md` when the source teaches a repeatable proc
 
 ## 6. Commit
 - Local Claude Code: obsidian-git will sync within 10 minutes; if the user asked to push now, run `git add -A && git commit -m "capture: <slug>" && git pull --rebase origin main && git push origin HEAD:main`.
-- Routine (cloud): always commit and push to `main` as above (the Routine acts as the owner account, which bypasses the main ruleset); set `git config user.name "skills-vault-core"` first.
+- Routine (cloud): always commit and push to `main` as above (the Routine acts as the owner account, which bypasses the main ruleset). Never set a custom git author: keep the identity the environment already configures (a cloud session commits as Claude <noreply@anthropic.com>, your laptop as you). An invented author name makes the "who wrote this" audit useless and, on a branch Claude Code checks, can make later pushes to `main` be refused (see routines/README.md, Things worth knowing).
 - Non-core agent (own token / machine account): commit on branch `agent/<name>/<slug>`, push, `gh pr create --fill`, then `gh pr merge --auto --rebase --delete-branch`; the `guard` check merges it once it passes.
 - Report: files written, reader used, whether a skill was drafted, and anything with `needs_manual_text: true`.
 

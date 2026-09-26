@@ -7,7 +7,7 @@ command -v gh >/dev/null 2>&1 || { echo "gh CLI missing: https://cli.github.com 
 gh auth status >/dev/null 2>&1 || { echo "run: gh auth login"; exit 1; }
 [ -d .git ] || git init -q -b main
 git add -A
-git -c user.name="skills-vault-core" -c user.email="${VAULT_CORE_EMAIL:-skills-vault-core@users.noreply.github.com}" commit -q -m "init: skills vault scaffold" || true
+git commit -q -m "init: skills vault scaffold" || true   # your own git identity; never an invented author
 if gh repo view "$REPO" >/dev/null 2>&1; then
   git remote get-url origin >/dev/null 2>&1 || git remote add origin "https://github.com/$REPO.git"
   if git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
