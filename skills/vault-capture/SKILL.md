@@ -62,7 +62,7 @@ Type rules: `skill` = a reusable procedure/prompt/workflow; `tool` = a product/C
 ## 4. Draft a skill when the content is actionable
 Create `skills/<gerund-name>/SKILL.md` when the source teaches a repeatable procedure an agent could follow (a prompt pattern, a workflow, a tool setup, a coding technique). Do NOT create one for news, opinions or product announcements — the wiki page is enough.
 - Folder name == `name`, lowercase-hyphen, gerund preferred (`reviewing-supabase-rls`), no "claude"/"anthropic" in the name.
-- `description`: third person, `<what it does>. Use when <concrete triggers: tools, file types, symptoms, keywords>.` under 300 characters; front-load the trigger words.
+- `description`: third person, `<what it does>. Use when <concrete triggers: tools, file types, symptoms, keywords>.` at most 300 characters; front-load the trigger words.
 - `metadata` (all strings): `source_url`, `source_platform`, `author`, `captured_at`, `engagement`, `origin_type` (`post|video|repo|article|vault-operations`), `vault_status: "draft"`.
 - Body (English, < 500 lines): When to use · Steps (numbered, exact commands) · Pitfalls · Source. Put long verbatim material in `skills/<name>/references/source.md`.
 - Add `[[../../skills/<name>/SKILL|skill: <name>]]` under `## Related` in the wiki page.
@@ -76,7 +76,7 @@ Create `skills/<gerund-name>/SKILL.md` when the source teaches a repeatable proc
 ## 6. Commit
 - Local Claude Code: obsidian-git will sync within 10 minutes; if the user asked to push now, run `git add -A && git commit -m "capture: <slug>" && git pull --rebase origin main && git push origin HEAD:main`.
 - Routine (cloud): always commit and push to `main` as above (the Routine acts as the owner account, which bypasses the main ruleset). Never set a custom git author: keep the identity the environment already configures (a cloud session commits as Claude <noreply@anthropic.com>, your laptop as you). An invented author name makes the "who wrote this" audit useless, and Claude Code refuses to push a branch not prefixed `claude/` (such as `main`) when it carries commits authored by someone other than you (see routines/README.md, Things worth knowing).
-- Non-core agent (own token / machine account `tradecreditor-ui`): commit on branch `agent/<name>/<slug>`, push, `gh pr create --fill`. The PR needs the `guard` check green AND one approval from Josep before anything merges (`gh pr merge --auto --rebase` is fine: it only waits for both), so stop there and report the PR URL.
+- Non-core agent (own token / machine account `tradecreditor-ui`): commit on branch `agent/<name>/<slug>`, push, `gh pr create --fill`. The PR needs the `guard` check green (once it is added to the ruleset as a required check) AND one approval from Josep before anything merges; auto-merge is disabled on the repo, so do not run `gh pr merge --auto`. Stop there and report the PR URL.
 - Report: files written, reader used, whether a skill was drafted, and anything with `needs_manual_text: true`.
 
 ## Never

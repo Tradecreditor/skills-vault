@@ -113,4 +113,4 @@ New skills are `vault_status: "draft"` until Josep reviews them. Never auto-run 
 - `wiki/hot.md`: keep "最近 20 項" and "本週熱門榜" sections current; trim the list, never the history in `log.md`.
 
 ## Commit messages
-`capture: <slug>` · `stars: +<n>` · `hot-list: YYYY-Www` · `lint: YYYY-Www` · `promote: <slug>` · `deprecate: <slug>` · `docs: <what>` · `scripts: <what>` · `routines: <what>` · `wiki: <what>` · `supabase: <what>` · `chore: <what>` (maintenance commits)
+`capture: <slug>` · `stars: +<n>` · `stars: enrich <n>` · `hot-list: YYYY-Www` · `lint: YYYY-Www` · `promote: <slug>` · `deprecate: <slug>` · `docs: <what>` · `scripts: <what>` · `routines: <what>` · `wiki: <what>` · `supabase: <what>` · `chore: <what>` (maintenance commits)

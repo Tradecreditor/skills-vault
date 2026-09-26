@@ -1,7 +1,8 @@
 name: vault-guard
 # Enforces the vault write rules (scripts/vault-guard-check.sh), judged by the GitHub ACCOUNT acting:
 #   everyone: raw/ add-only, skills valid · non-core accounts: no deletes/renames, no edits to protected paths.
-# Job "guard" runs on pull requests and is the REQUIRED status check in the main ruleset. With "Require a pull request"
+# Job "guard" runs on pull requests and is meant to be the required status check in the main ruleset (it only appears
+# in the ruleset picker after it has run on one PR; add it there after the first machine-account PR). With "Require a pull request"
 # + bypass list = owner only, the owner (Josep's Claude Code, Routines, obsidian-git) can still push straight to main,
 # while any other account (the agents' machine account) can only land changes through a PR that passes this check.
 # Job "audit" re-runs the same rules on whatever reached main and is advisory (never blocks).

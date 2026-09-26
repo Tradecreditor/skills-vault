@@ -83,6 +83,12 @@ new text into claude.ai, so use the script rather than copying by eye:
 .\scripts\copy-prompt.ps1 github-stars-sync
 ```
 
+macOS / Linux:
+
+```bash
+bash scripts/copy-prompt.sh github-stars-sync
+```
+
 Do not substitute a plain `Get-Content -Raw | Set-Clipboard`. Windows PowerShell 5.1 reads files in the system ANSI
 code page unless told otherwise, so the Chinese in these prompts is mangled before it reaches the clipboard. That
 is how the instruction "摘要 and 點解值得留意 are written in 繁體中文" reached a live routine as
@@ -181,8 +187,10 @@ Expected on the first runs:
   (the identity the cloud environment configures), commits from your laptop as your own identity (plus the GitHub-web
   spelling of it on a PR merge); `git log --format='%an <%ae>' origin/main | sort | uniq -c` shows those, and a handful of
   `skills-vault-core` commits. That invented author left the repo's prompts on 2026-09-19, but the live `capture-link`
-  Routine still runs the stored copy of the old prompt (see "Copying a prompt into the Routine UI" above), so re-paste it
-  with `scripts/copy-prompt.ps1 capture-link`. Mixed authorship is expected and has not blocked the routines' pushes to
+  Routine still runs the stored copy of the old prompt (see "Copying a prompt into the Routine UI" above), and
+  skills/vault-capture/SKILL.md (which capture-link reads at run time) kept the same line until f2572c7, so both the
+  re-paste (`scripts/copy-prompt.ps1 capture-link` or `bash scripts/copy-prompt.sh capture-link`) and merging that fix
+  into `main` are needed before the invented author stops appearing. Mixed authorship is expected and has not blocked the routines' pushes to
   `main`. What does break things is inventing an author: it defeats the "who wrote this" audit, and Claude Code refuses
   to push a branch not prefixed `claude/` (such as `main`) when it carries commits authored by someone other than you.
 - Routines belong to your personal claude.ai account, count against a daily run cap, and draw down subscription usage.

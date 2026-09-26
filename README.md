@@ -20,18 +20,20 @@
 
 ## 資料夾地圖
 ```
-inbox/        隨手放（Web Clipper、未處理嘅嘢）
+inbox/        隨手放（Web Clipper、未處理嘅嘢）；inbox/daily/ 係 Obsidian daily notes
 raw/          每次 capture 嘅原文（只加不改；CI 會擋任何修改）
-wiki/         index.md 目錄 · log.md 流水帳 · hot.md 最近 + 本週榜 · pages/ 筆記 · stars/ GitHub stars 筆記 · hot-list/ 每週榜 + _config.yaml 門檻
-skills/       可安裝 skill（Agent Skills 規格）。vault-capture / vault-search 係倉庫自己嘅操作 skill
+wiki/         index.md 目錄 · log.md 流水帳 · hot.md 最近 + 本週榜 · pages/ 筆記 · stars/ GitHub stars 筆記 · github-stars.md star 帳簿 · hot-list/ 每週榜 + _config.yaml 門檻 + _snapshot.json star 快照
+skills/       可安裝 skill（Agent Skills 規格）。vault-capture / vault-search / model-tiering 係倉庫自己嘅操作 skill；skills/README.md 有全表
 agents/       其他 agent 嘅草稿區（核心 agent 先 promote 入 wiki/ 或 skills/）
 outputs/      AI 長文輸出、outputs/health/ 每週健康報告
 routines/     四個 Routine 嘅 prompt（改呢度，唔好喺 Routine 介面改）
 .claude/      SessionStart hook（vault-suggest）；skills 冇用 symlink
 .claude-plugin/   令呢個 repo 根目錄變成 Claude Code plugin 市集（skills/ 就係 plugin 嘅 skills 目錄）
-.github/      vault-guard（刪除保護）+ CODEOWNERS
+.github/      vault-guard（PR 守門：刪檔／raw/ 只准新增／保護路徑／skill 格式）+ CODEOWNERS
 supabase/     手機捷徑代理（Edge Function + migration）
-scripts/      setup-phase1.sh（本機一鍵）· bootstrap-repo.sh（首次推上 GitHub）
+scripts/      setup-phase1（本機一鍵）· bootstrap-repo（首次推上 GitHub）· capture（一句指令 fire capture-link）· copy-prompt（將 routine prompt 完整抄去剪貼簿）· vault-guard-check.sh（本地預演 guard）；每個都有 .sh + .ps1（guard 除外）
+templates/    claude-settings-user*.json（合併入 ~/.claude/settings.json 嘅 hook 設定）
+.obsidian/    Obsidian 設定（daily-notes.json → inbox/daily、obsidian-git plugin）
 ```
 
 ---
@@ -96,7 +98,7 @@ bash scripts/setup-phase1.sh
   ```
   （公開 repo，唔使 token 就裝到）
 - **唔識 SKILL.md 嘅 agent**：`uv tool install skillport-mcp`，`SKILLPORT_SKILLS_DIR=~/skills-vault/skills`，`claude mcp add skillport -- uvx skillport-mcp`（Codex：`codex mcp add …`），提供 `search_skills` / `load_skill`。
-- 其他 agent 寫入：用自己嘅 clone 同自己嘅 token（第 5 步），寫去 `agents/<名>/` 或 `wiki/pages/`，`git pull --rebase` 再 push。
+- 其他 agent 寫入：用自己嘅 clone 同機器帳戶嘅 token（第 5 步），寫去 `agents/<名>/` 或 `wiki/pages/`，push 上 `agent/<名>/<slug>` branch 開 PR，等你 approve；佢直接 push main 會被 ruleset 拒絕。
 
 ## 第 4 步 · 三個定時 Routine（星期日下晝，約 3 小時）
 按 `routines/README.md` 嘅表開 `github-stars-sync`（每日 07:00 HKT，Sonnet）、`weekly-hot-list`（星期一 09:00 HKT，Opus，開 PR）、`vault-lint`（星期一 10:00 HKT，Sonnet）。
@@ -144,6 +146,6 @@ GitHub 嘅權限係跟**帳戶**，唔係跟 token：你自己開幾多個 fine-
 - Routine push 被拒：睇 Routine 嘅 Permissions 有冇開 unrestricted branch pushes；或者 ruleset 嘅 bypass list 冇你自己。
 - 機器帳戶嘅 PR 因為改名被紅叉：改名等於刪舊檔，係設計如此；由你本人帳戶做改名，或者留低舊檔加 `status: deprecated`。
 - guard 因為 skill description 太長或冇 "Use when" 紅叉：上限 300 字元，description 要係第三人稱「做乜」+「Use when <觸發詞>」。
-- Windows 出 `execvpe(/bin/bash) failed`：你用緊 `bash` 跑 `.sh`，但 Windows 嘅 `bash` 指向 WSL。改用同名嘅 `.ps1`（`scripts\bootstrap-repo.ps1`、`scripts\setup-phase1.ps1`、`.claude\hooks\vault-suggest.ps1`、`skills\vault-search\scripts\search.ps1`）。
+- Windows 出 `execvpe(/bin/bash) failed`：你用緊 `bash` 跑 `.sh`，但 Windows 嘅 `bash` 指向 WSL。改用同名嘅 `.ps1`（`scripts\bootstrap-repo.ps1`、`scripts\setup-phase1.ps1`、`scripts\capture.ps1`、`scripts\copy-prompt.ps1`、`.claude\hooks\vault-suggest.ps1`、`skills\vault-search\scripts\search.ps1`）。
 - Supabase 免費 project 停咗：Dashboard 撳 Restore；每週有 capture 就唔會停。
 - 手機分享後冇反應：`supabase functions logs capture`；HTTP 502 = Routine 叫唔醒（token / fire URL 錯，或者當日 Routine 次數用完）；同一條 link 已存在會回 `duplicate`，fire 失敗過嘅 link 可以重新分享。
