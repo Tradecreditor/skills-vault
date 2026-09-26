@@ -27,8 +27,8 @@ skills/       可安裝 skill（Agent Skills 規格）。vault-capture / vault-s
 agents/       其他 agent 嘅草稿區（核心 agent 先 promote 入 wiki/ 或 skills/）
 outputs/      AI 長文輸出、outputs/health/ 每週健康報告
 routines/     四個 Routine 嘅 prompt（改呢度，唔好喺 Routine 介面改）
-.claude/      skills 符號連結 + SessionStart hook
-.claude-plugin/ + plugins/   令呢個 repo 變成 Claude Code plugin 市集
+.claude/      SessionStart hook（vault-suggest）；skills 冇用 symlink
+.claude-plugin/   令呢個 repo 根目錄變成 Claude Code plugin 市集（skills/ 就係 plugin 嘅 skills 目錄）
 .github/      vault-guard（刪除保護）+ CODEOWNERS
 supabase/     手機捷徑代理（Edge Function + migration）
 scripts/      setup-phase1.sh（本機一鍵）· bootstrap-repo.sh（首次推上 GitHub）
@@ -43,7 +43,7 @@ scripts/      setup-phase1.sh（本機一鍵）· bootstrap-repo.sh（首次推�
 ### Windows（PowerShell）
 ```powershell
 cd $HOME\skills-vault
-powershell -ExecutionPolicy Bypass -File scripts\bootstrap-repo.ps1   # 開私人 repo 並推上去
+powershell -ExecutionPolicy Bypass -File scripts\bootstrap-repo.ps1   # 開公開 repo 並推上去
 powershell -ExecutionPolicy Bypass -File scripts\setup-phase1.ps1     # 檢查工具、裝 vault skills
 ```
 唔好用 `bash scripts\*.sh`：Windows 嘅 `bash` 會叫 WSL，冇裝或者壞咗就會出 `execvpe(/bin/bash) failed`。`.sh` 係俾 macOS / Linux 用，`.ps1` 先係 Windows 版。
@@ -88,35 +88,41 @@ bash scripts/setup-phase1.sh
 - **Claude Code（本機任何 project）**：`/plugin marketplace add Tradecreditor/skills-vault` → `/plugin install skills-vault@tradecreditor-vault`（user scope）。呢個 repo 嘅根目錄就係 plugin，`skills/` 就係佢嘅 skills 目錄（冇用 symlink，Windows 一樣得）。
   想某個 repo 一開就自動啟用：嗰個 repo 嘅 `.claude/settings.json` 加
   `{"extraKnownMarketplaces":{"tradecreditor-vault":{"source":{"source":"github","repo":"Tradecreditor/skills-vault"}}},"enabledPlugins":{"skills-vault@tradecreditor-vault":true}}`（本機先有效，因為要用你本機嘅 git 權限）。
-- **Claude Code on the web / Routines 喺其他 repo**：雲端 session 只 clone 到已連結嘅 repo，接觸唔到私人嘅 skills-vault，所以要喺嗰個 session / Routine 加 `Tradecreditor/skills-vault` 做第二個 repository（或者將需要嘅 skill 複製入嗰個 repo）。
+- **Claude Code on the web / Routines 喺其他 repo**：呢個 repo 而家係公開嘅，所以任何雲端 session 都可以直接 `curl` / 讀到內容；但一個 session 淨係對已連結嘅 repo 先有 push 權限，所以想喺另一個 repo 嘅 session / Routine 度**寫入** skills-vault，就要喺嗰度加 `Tradecreditor/skills-vault` 做第二個 repository（或者將需要嘅 skill 複製入嗰個 repo）。
 - **Codex / Gemini CLI / OpenClaw / Cursor**：
   ```bash
   npx skills add Tradecreditor/skills-vault --list
   npx skills add Tradecreditor/skills-vault --skill <name> -a codex -a gemini-cli -a openclaw -a cursor -g -y
   ```
-  （私人 repo 用你本機嘅 git 權限；`gh auth setup-git` 先）
+  （公開 repo，唔使 token 就裝到）
 - **唔識 SKILL.md 嘅 agent**：`uv tool install skillport-mcp`，`SKILLPORT_SKILLS_DIR=~/skills-vault/skills`，`claude mcp add skillport -- uvx skillport-mcp`（Codex：`codex mcp add …`），提供 `search_skills` / `load_skill`。
 - 其他 agent 寫入：用自己嘅 clone 同自己嘅 token（第 5 步），寫去 `agents/<名>/` 或 `wiki/pages/`，`git pull --rebase` 再 push。
 
 ## 第 4 步 · 三個定時 Routine（星期日下晝，約 3 小時）
 按 `routines/README.md` 嘅表開 `github-stars-sync`（每日 07:00 HKT，Sonnet）、`weekly-hot-list`（星期一 09:00 HKT，Opus，開 PR）、`vault-lint`（星期一 10:00 HKT，Sonnet）。
 每個開完先手動 Run 一次，睇 output，再調 `wiki/hot-list/_config.yaml`。
-注意（已實測）：雲端 Routine 入面 `gh api user/starred`、`gh search repos`、`gh repo view --json` 都會被 GitHub proxy 擋（403）。prompt 已寫明後備路線：GitHub connector 嘅 `search_repositories` / `get_file_contents`，同 Exa connector 讀 `https://api.github.com/...` 嘅 JSON（已實測可行）。另外：`Tradecreditor` 帳戶而家公開 star 數係 0，第一次跑 stars Routine 會話「no stars on this account yet」，直到你 star 咗嘢。
+注意（已實測）：雲端 Routine 入面 `gh api user/starred`、`gh search repos`、`gh repo view --json` 都會被 GitHub proxy 擋（403）。prompt 已寫明後備路線：GitHub connector 嘅 `search_repositories` / `get_file_contents`，同 Exa connector 讀 `https://api.github.com/...` 嘅 JSON（已實測可行）。`wiki/stars/` 已同步 34 個 star（2026-09-26）；只有帳戶完全冇 star 時 Routine 先會話「no stars on this account yet」。
 
-## 第 5 步 · 權限鎖定（下星期，約 2 小時）
-GitHub 嘅權限係跟**帳戶**，唔係跟 token：你自己開幾多個 fine-grained token 都係「Tradecreditor」。所以要分開「核心」同「其他 agent」，其他 agent 一定要用另一個 GitHub 帳戶。
-1. **開一個機器帳戶**（GitHub 容許每人一個 machine user），例如 `tradecreditor-agents`；喺 `skills-vault` → Settings → Collaborators 邀請佢做 **Write**。
-   喺呢個帳戶開 fine-grained token（只限 `skills-vault`，Contents 讀寫 + Pull requests 讀寫），分俾 Codex / Gemini CLI / OpenClaw 用。
+## 第 5 步 · 權限鎖定（已落實 2026-09-21）
+GitHub 嘅權限係跟**帳戶**，唔係跟 token：你自己開幾多個 fine-grained token 都係「Tradecreditor」。而家已經開咗機器帳戶分開「核心」同「其他 agent」。
+1. **機器帳戶**：`tradecreditor-ui`，喺 `skills-vault` → Settings → Collaborators 已經係 **Write**。
+   佢用嘅係 classic PAT，scope 淨係 `public_repo`，90 日到期（2026-09-21 開嘅話大約 2026-12-20 到期）；到期就用返呢個帳戶再開一個新 token，分俾 Codex / Gemini CLI / OpenClaw 用。
    你自己嘅 Claude Code、Routines、obsidian-git 繼續用你本人帳戶（核心）。
-2. **Repo 設定**：Settings → General → 勾 **Allow auto-merge**（其他 agent 嘅 PR 過咗檢查會自動合併，唔使你手動 approve）。
+2. **Repo 設定**：repo 而家係 **public**。Auto-merge **冇開**（`allow_auto_merge=false`）。required approvals 定咗做 1 而唔係 0，係因為 0 嘅話機器帳戶開嘅 PR 唔使任何人 approve 就 merge 得，成個安排就得個樣；所以其他 agent 嘅 PR 一定要你本人 approve 先合併得到。
    可選 repo variable `VAULT_CORE_LOGINS`（Settings → Secrets and variables → Actions → Variables）：逗號分隔額外嘅核心帳戶；預設只有 repo owner。
-3. **Ruleset**：Settings → Rules → Rulesets → New branch ruleset → target `main`：
-   **Require a pull request before merging**（required approvals = 0）· **Require status checks to pass** → 揀 `guard`（要 vault-guard 喺一個 PR 度跑過一次先搵到；可以先開一個空 PR 試）·
-   Block force pushes · Restrict deletions · Require linear history · **Bypass list：只有你自己（Tradecreditor）**。
-   效果：你（同 Routines）照樣直接 push main；機器帳戶只能開 PR，PR 如果刪檔、改名、掂 `raw/` 或改保護檔案就會紅叉。
-4. **驗收**：用機器帳戶 clone 一份 → 加一頁 + 開 PR（應該自動合併）→ 改一頁（應該合併）→ `git rm` 一頁開 PR（`guard` 紅叉，合唔到）→ 改 `raw/` 任何一檔（紅叉）→ 直接 push main（被拒）；用你本人帳戶刪同一頁直接 push（通過）。
-   本機預演：`bash scripts/vault-guard-check.sh origin/main HEAD tradecreditor-agents`。
-5. **老實限制**：如果你唔開機器帳戶，所有 agent 都係「核心」，vault-guard 只係事後審計（`audit` job），唔會擋。刪除保護亦只喺 GitHub 層面：喺你部電腦 Obsidian 資料夾入面跑嘅 agent 仍然可以刪本地檔案（git 歷史救得返）。
+3. **Ruleset**：`main-protection`（Settings → Rules → Rulesets）target `main`：
+   **Require a pull request before merging**（required approvals = 1）· Block force pushes · Restrict deletions · **Bypass list：只有你自己（Tradecreditor）**。
+   **Require status checks to pass → `guard`：仍未揀到**（2026-09-26 用 API 睇，ruleset 嘅 `required_status_checks` 係空）。個 check 要喺一個 PR 度跑過一次先會出現喺選單，所以做第 5 點驗收嗰陣記住返去 ruleset 加，未加之前 `guard` 紅叉係唔會擋 merge 嘅。
+   效果：你（同 Routines）照樣直接 push main；機器帳戶只能開 PR，仲要你 approve 先合併得到，PR 如果刪檔、改名、掂 `raw/` 或改保護路徑就會紅叉。
+4. **`guard` 實際擋乜**：
+   - （非核心帳戶嘅 PR）刪檔／改名（改名等於刪舊檔）
+   - （所有帳戶）改／改名／刪 `raw/` 入面任何檔案（加新檔冇問題）
+   - （非核心帳戶嘅 PR）掂保護路徑：`.github/ .claude/ .claude-plugin/ .obsidian/ routines/ scripts/ supabase/ templates/ skills/*/scripts/ CLAUDE.md AGENTS.md`
+   - （所有帳戶）skill 格式唔啱：folder name 要同 frontmatter 嘅 `name` 一致、資料夾名只可以係小寫字母、數字同單個 hyphen、名唔可以含 "claude"／"anthropic"、`description` 要 ≤300 字元並且要有 "Use when"
+   核心帳戶開嘅 PR（例如 weekly-hot-list）刪檔或者掂保護路徑只會被記錄，唔會紅叉。
+5. **驗收（仍未做嘅手動測試）**：用 `tradecreditor-ui` clone 一份 → 加一個新嘅 `raw/` 檔開 PR（應該通過）→ 改一個已有嘅 `raw/` 檔（`guard` 紅叉）→ `git rm` 一頁開 PR（紅叉）→ 掂 `routines/` 或 `.claude/hooks/` 入面任何檔（紅叉）→ 直接 push main（被拒）；用你本人帳戶刪同一頁直接 push main（通過）。跑完第一個 PR 之後，去 ruleset 將 `guard` 加入 **Require status checks to pass**，再開一個會紅叉嘅 PR 確認佢真係 merge 唔到。
+   本機預演：`bash scripts/vault-guard-check.sh origin/main HEAD tradecreditor-ui`。
+6. **老實限制**：如果冇機器帳戶，所有 agent 都係「核心」，冇 PR 就冇 `guard`，`vault-guard` workflow 只剩事後審計嘅 `audit` job，唔會擋。刪除保護亦只喺 GitHub 層面：喺你部電腦 Obsidian 資料夾入面跑嘅 agent 仍然可以刪本地檔案（git 歷史救得返）。另外 `vault-guard` workflow 跑嘅係 **base branch**（即 `main`）嗰份 `scripts/vault-guard-check.sh` 複本，唔係 PR 自己嗰份，所以收緊咗 guard 邏輯之後要先 merge 入 main，先真正對之後嘅 PR 生效。
 
 ---
 
@@ -137,6 +143,7 @@ GitHub 嘅權限係跟**帳戶**，唔係跟 token：你自己開幾多個 fine-
 - Routine 抓唔到 X：Exa connector fetch `https://api.fxtwitter.com/<user>/status/<id>`；仍然唔得就會留 `needs_manual_text: true`，你之後貼文字補。
 - Routine push 被拒：睇 Routine 嘅 Permissions 有冇開 unrestricted branch pushes；或者 ruleset 嘅 bypass list 冇你自己。
 - 機器帳戶嘅 PR 因為改名被紅叉：改名等於刪舊檔，係設計如此；由你本人帳戶做改名，或者留低舊檔加 `status: deprecated`。
+- guard 因為 skill description 太長或冇 "Use when" 紅叉：上限 300 字元，description 要係第三人稱「做乜」+「Use when <觸發詞>」。
 - Windows 出 `execvpe(/bin/bash) failed`：你用緊 `bash` 跑 `.sh`，但 Windows 嘅 `bash` 指向 WSL。改用同名嘅 `.ps1`（`scripts\bootstrap-repo.ps1`、`scripts\setup-phase1.ps1`、`.claude\hooks\vault-suggest.ps1`、`skills\vault-search\scripts\search.ps1`）。
 - Supabase 免費 project 停咗：Dashboard 撳 Restore；每週有 capture 就唔會停。
 - 手機分享後冇反應：`supabase functions logs capture`；HTTP 502 = Routine 叫唔醒（token / fire URL 錯，或者當日 Routine 次數用完）；同一條 link 已存在會回 `duplicate`，fire 失敗過嘅 link 可以重新分享。

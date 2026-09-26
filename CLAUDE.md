@@ -32,9 +32,12 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 The repository is **public**, which is what makes the ruleset free and lets any agent install from it with
 `npx skills add Tradecreditor/skills-vault` without a token. Public means readable, not writable: a stranger
 can fork and open a pull request, and nothing changes here until Josep merges it.
-A `main-protection` ruleset on `main` restricts deletions, blocks force pushes, requires a pull request with
-1 approval, and requires the `guard` check. Josep bypasses it as repository admin, so his own sessions and the
-cloud Routines keep pushing straight to `main`; the machine account does not, so its only route in is a PR.
+A `main-protection` ruleset on `main` restricts deletions, blocks force pushes and requires a pull request with
+1 approval. It is meant to require the `guard` check too, but as of 2026-09-26 its `required_status_checks` list is
+empty: a check only appears in the ruleset picker after it has run on one PR, so add `guard` there after the first
+machine-account PR; until then a red `guard` does not block a merge. Josep bypasses the ruleset as repository admin,
+so his own sessions and the cloud Routines keep pushing straight to `main`; the machine account does not, so its
+only route in is a PR.
 Approvals are set to 1 rather than 0 for one reason: at 0 the machine account could merge its own pull request,
 and the whole arrangement would be decoration.
 
