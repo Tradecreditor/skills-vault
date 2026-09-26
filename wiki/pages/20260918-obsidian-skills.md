@@ -6,7 +6,7 @@ status: draft
 source_url: "https://github.com/kepano/obsidian-skills"
 source_platform: github
 author: "kepano"
-published: "2025-01-01"
+published: "2026-01-02"
 captured_at: "2026-09-18T00:00:00Z"
 captured_by: "routine:capture-link"
 canonical_id: "github:kepano/obsidian-skills"
