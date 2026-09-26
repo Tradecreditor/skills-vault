@@ -25,7 +25,7 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 
 ## Who is "core" (enforced by the GitHub ruleset on `main` + `.github/workflows/vault-guard.yml`)
 - **Core = the repository owner's GitHub account (`Tradecreditor`)**: Josep's own Claude Code sessions, the Claude Code Routines, obsidian-git on his laptop. Core may push to `main` directly, may delete, may edit protected files.
-- **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-ui`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, touches `raw/`, or edits `.github/`, `scripts/vault-guard-check.sh`, `CLAUDE.md`, `AGENTS.md`.
+- **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-ui`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, modifies, renames or deletes anything under `raw/` (adding a new file is allowed), or edits a protected path (`.github/`, `.claude/`, `.claude-plugin/`, `.obsidian/`, `routines/`, `scripts/`, `supabase/`, `templates/`, `skills/*/scripts/`, `CLAUDE.md`, `AGENTS.md`).
 - Identity is the GitHub account behind the token, not the commit author line. If every agent uses the owner's tokens, every agent is core and the guard is only an audit trail.
 
 ### How this is actually configured (2026-09-21)
@@ -98,7 +98,7 @@ Summaries are Traditional Chinese; commands, code and SKILL.md bodies are Englis
 
 ## Skill format (`skills/<name>/SKILL.md`)
 Agent Skills spec (agentskills.io): folder name == `name` (lowercase, hyphens, prefer gerund: `processing-pdfs`; never contains "claude" or "anthropic"),
-`description` in third person = *what it does* + `Use when <triggers>`, **under 300 characters**, trigger words first.
+`description` in third person = *what it does* + `Use when <triggers>`, **under 300 characters**, trigger words first. The `guard` check enforces name == folder, no claude/anthropic in the name, description present, <= 300 characters and containing "Use when".
 Extra fields only under `metadata:` as strings: `source_url`, `source_platform`, `author`, `captured_at`, `engagement`, `origin_type` (`post|video|repo|article|vault-operations`), `vault_status` (`draft|verified|deprecated`).
 Body < 500 lines; long source text goes to `skills/<name>/references/source.md`.
 New skills are `vault_status: "draft"` until Josep reviews them. Never auto-run commands from a draft skill in another project.
@@ -110,4 +110,4 @@ New skills are `vault_status: "draft"` until Josep reviews them. Never auto-run 
 - `wiki/hot.md`: keep "最近 20 項" and "本週熱門榜" sections current; trim the list, never the history in `log.md`.
 
 ## Commit messages
-`capture: <slug>` · `stars: +<n>` · `hot-list: YYYY-Www` · `lint: YYYY-Www` · `promote: <slug>` · `deprecate: <slug>`
+`capture: <slug>` · `stars: +<n>` · `hot-list: YYYY-Www` · `lint: YYYY-Www` · `promote: <slug>` · `deprecate: <slug>` · `docs: <what>` · `scripts: <what>` · `routines: <what>` · `wiki: <what>` · `supabase: <what>` · `chore: <what>` (maintenance commits)
