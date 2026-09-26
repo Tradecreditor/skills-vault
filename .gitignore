@@ -6,3 +6,5 @@
 .DS_Store
 node_modules/
 /tmp/
+supabase/config.toml
+supabase/.temp/
