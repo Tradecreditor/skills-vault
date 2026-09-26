@@ -14,13 +14,17 @@ topics:            # seed queries used on every source; add your own interests
   - "obsidian ai"
   - "llm wiki"
   - "agent memory"
+  - "browser agent"
+  - "ai agent framework"
+  - "coding agent harness"
 
 sources:           # decision 5: Agent-Reach first, Exa as backup. xAI x_search is NOT used.
   github: ["gh search repos locally; in the cloud (gh is proxy-blocked) use the GitHub connector search_repositories tool or Exa fetch of https://api.github.com/search/repositories?q=...", "snapshot delta from _snapshot.json (stars via https://api.github.com/repos/<o>/<r>)"]
-  x: ["agent-reach twitter-cli search (only if TWITTER_AUTH_TOKEN and TWITTER_CT0 are set; burner account)", "exa web_search_exa category=tweet startPublishedDate=window start"]
+  x: ["agent-reach twitter-cli search (only if TWITTER_AUTH_TOKEN and TWITTER_CT0 are set; burner account)", "exa web_search_exa: plain query '<topic> new tool OR skill OR MCP OR repo site:x.com <month(s) the window touches>' (the cloud connector has no category/startPublishedDate params); pre-filter by the tweet-id snowflake timestamp or the result's publishedDate, then every in-window hit is verified via fxtwitter JSON before any number is used"]
   x_verify: "fxtwitter JSON for every candidate post (never trust search-result counts)"
-  threads: ["exa web_search_exa with site:threads.net startPublishedDate=window start", "jina reader to read the post; Scrape Creators (SC_API_KEY) for like/repost counts; Meta oEmbed only with THREADS_APP_TOKEN"]
-  registries: ["skills.sh trending page or GET https://skills.sh/api/v1/skills?view=trending", "GET https://clawhub.ai/api/v1/skills?limit=20&sort=trending&nonSuspiciousOnly=true", "GET https://skillsmp.com/api/v1/skills/search?q=<topic>&sortBy=stars&limit=20"]
+  threads: ["exa web_search_exa: plain query '<topic> site:threads.net <month(s) the window touches>' (no date/category params in the cloud connector; drop out-of-window results by publishedDate); read each post via Jina", "jina reader to read the post; Scrape Creators (SC_API_KEY) for like/repost counts; Meta oEmbed only with THREADS_APP_TOKEN"]
+  registries: ["skills.sh trending: read https://skills.sh/trending (or the home page) via Exa web_fetch_exa with maxCharacters 30000 and a fresh cb param (it is re-read every week); the JSON endpoint /api/v1/skills?view=trending needs a Vercel OIDC token and is not usable", "GET https://clawhub.ai/api/v1/skills?limit=20&sort=trending&nonSuspiciousOnly=true", "GET https://skillsmp.com/api/v1/skills/search?q=<topic>&sortBy=stars&limit=20"]
+  discovery: ["trendshift.io weekly trending page via Exa web_fetch_exa (maxCharacters 30000, cb param) - GitHub discovery aid only, never a scored source; found all three 2026-W39 winners that the seed topics missed"]
 
 gates:             # an item is a candidate if it clears at least one gate on GitHub, X or Threads
   github:
@@ -69,7 +73,7 @@ dedupe:
   note_on_existing_page: "append '- also trending YYYY-Www (numbers)' under ## Notes"
 
 cost_caps_per_run:
-  exa_searches: 12
+  exa_searches: 30   # web_search_exa calls only: 13 topics x (X + Threads) = 26, plus ~4 name-specific corroboration searches; web_fetch_exa is not counted here
   twitter_cli_searches: 10
   fxtwitter_fetches: 40
   github_api_calls: 200

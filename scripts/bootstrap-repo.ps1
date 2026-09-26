@@ -19,7 +19,7 @@ gh auth setup-git | Out-Null
 
 if (-not (Test-Path ".git")) { git init -q -b main }
 git add -A
-git -c user.name="skills-vault-core" -c user.email="skills-vault-core@users.noreply.github.com" commit -q -m "init: skills vault scaffold" 2>$null | Out-Null
+git commit -q -m "init: skills vault scaffold" 2>$null | Out-Null   # your own git identity; never an invented author
 
 gh repo view $Repo 2>$null | Out-Null
 if ($LASTEXITCODE -eq 0) {
@@ -31,7 +31,7 @@ if ($LASTEXITCODE -eq 0) {
   }
   git push -u origin main
 } else {
-  gh repo create $Repo --private --source=. --remote=origin --push --description "Personal agent skills vault: Obsidian vault + LLM wiki + installable Agent Skills"
+  gh repo create $Repo --public --source=. --remote=origin --push --description "Personal agent skills vault: Obsidian vault + LLM wiki + installable Agent Skills"
 }
 Write-Host ""
 Write-Host "Done: https://github.com/$Repo" -ForegroundColor Green

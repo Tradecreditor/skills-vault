@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:VoltAgent/awesome-design-md"
 engagement: "stars=116859 forks=13105"
 tags: [awesome-list, design-md, design-system, design-tokens, figma, google-stitch, landing-page, vibe-coding, vibe-design, vibecoding]
-related: []
+related: [Leonxlnx--taste-skill, cathrynlavery--diagram-design, zarazhangrui--frontend-slides]
 needs_manual_text: false
 ---
 
@@ -39,3 +39,7 @@ Published: 2026-03-31
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[Leonxlnx--taste-skill|taste-skill]] — 兩者都係俾 agent 一份風格參考嚟做出「唔似 AI 生成」嘅介面。
+- [[cathrynlavery--diagram-design|diagram-design]] — 都用純 markdown/HTML 檔案取代 Figma/JSON schema 嚟教 agent 做視覺嘢。
+- [[zarazhangrui--frontend-slides|Frontend Slides]] — DESIGN.md 呢類風格參考啱好可以掉入 Frontend Slides 嘅視覺化選風格流程。

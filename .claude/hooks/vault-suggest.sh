@@ -6,7 +6,7 @@ INPUT=$(cat 2>/dev/null || true)
 CWD=$(printf '%s' "$INPUT" | sed -n 's/.*"cwd"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1)
 [ -z "$CWD" ] && CWD="$PWD"
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-V="$HERE/../.."; [ -f "$V/wiki/index.md" ] || V="${VAULT_DIR:-}"; [ -n "$V" ] && [ -f "$V/wiki/index.md" ] || V="$HOME/Vaults/skills-vault"
+V="$HERE/../.."; [ -f "$V/wiki/index.md" ] || V="${VAULT_DIR:-}"; [ -n "$V" ] && [ -f "$V/wiki/index.md" ] || V="$HOME/skills-vault"
 [ -f "$V/wiki/index.md" ] || exit 0
 V=$(cd "$V" && pwd)
 case "$CWD" in "$V"|"$V"/*) exit 0;; esac                    # inside the vault itself: nothing to suggest

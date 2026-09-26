@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:LottieFiles/motion-design-skill"
 engagement: "stars=1702 forks=99"
 tags: [agent-skills, animation, lottie, motion-design, ui]
-related: []
+related: [Panniantong--Agent-Reach, cathrynlavery--diagram-design, DietrichGebert--ponytail, motion-canvas--motion-canvas, nolangz--pixel2motion]
 needs_manual_text: false
 ---
 
@@ -41,6 +41,8 @@ README: First 300 lines from official repository
 
 ## Related
 
-[[Panniantong--Agent-Reach|Agent infrastructure tools]]
-[[cathrynlavery--diagram-design|Diagram design skills]]
-[[DietrichGebert--ponytail|YAGNI for AI agents]]
+- [[Panniantong--Agent-Reach|Agent-Reach]] — 同屬 Agent Skills 規範打包嘅能力層工具。
+- [[cathrynlavery--diagram-design|diagram-design]] — 兩者都係「先講原則後落手畫」嘅視覺設計 skill。
+- [[DietrichGebert--ponytail|ponytail]] — 同屬 agent-skills 生態嘅範例。
+- [[motion-canvas--motion-canvas|Motion Canvas]] — 呢套時序/緩動原則講明適用任何動畫系統，Motion Canvas 呢類 code-first 動畫庫正正用得着。
+- [[nolangz--pixel2motion|pixel2motion]] — 都係將動作設計原則應用落實際嘅動畫產出。

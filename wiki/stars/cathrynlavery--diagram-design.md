@@ -5,13 +5,14 @@ type: repo
 status: draft
 source_url: "https://github.com/cathrynlavery/diagram-design"
 source_platform: github
+author: "cathrynlavery"
 published: "2026-04-16"
 captured_at: "2026-09-19T11:09:28.035450Z"
 captured_by: "routine:github-stars-sync"
 canonical_id: "github:cathrynlavery/diagram-design"
 engagement: "stars=41245 forks=2637"
 tags: ["agent-skills", "claude-code", "codex", "data-visualization", "diagrams", "drawio", "mermaid", "svg"]
-related: []
+related: [slidevjs--slidev, LottieFiles--motion-design-skill, vercel-labs--skills, VoltAgent--awesome-design-md]
 needs_manual_text: false
 ---
 ## 摘要
@@ -39,3 +40,8 @@ Diagram Design 係一套幫 Claude Code、Codex、Factory Droid、Pi 等 Agent S
 - Reader: routine:github-stars-sync
 
 ## Related
+
+- [[slidevjs--slidev|Slidev]] — diagram-design 出嘅自足 HTML+SVG 圖可以直接嵌入 Slidev 呢類 HTML 簡報。
+- [[LottieFiles--motion-design-skill|motion-design-skill]] — 兩者都係「先講原則後落手畫」嘅視覺設計 skill。
+- [[vercel-labs--skills|skills]] — 都係將 skill 分發到多個 agent client 嘅方式：diagram-design 行 plugin marketplace，skills 行 CLI。
+- [[VoltAgent--awesome-design-md|awesome-design-md]] — 都用純 markdown/HTML 檔案取代 Figma 嚟教 agent 做視覺嘢。

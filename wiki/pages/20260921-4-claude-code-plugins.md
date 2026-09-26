@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DdjkD4xi1ma"
 engagement: ""
 tags: [claude-code, plugins, graphify, ponytail, omniroute, agent-skills, context-management, ai-tools]
-related: []
+related: ["skills/stacking-coding-agent-plugins", "stars/DietrichGebert--ponytail", 20260920-fast-jev-compaction, "stars/upstash--context7"]
 needs_manual_text: false
 ---
 
@@ -43,3 +43,8 @@ needs_manual_text: false
 - Reader: jina (r.jina.ai)
 
 ## Related
+
+- [[../../skills/stacking-coding-agent-plugins/SKILL|skill: stacking-coding-agent-plugins]] — 呢個 skill 就係由呢篇文章草擬出嚟，總結四個插件點樣疊加運作。
+- [[../stars/DietrichGebert--ponytail|ponytail]] — 文中四個插件之一，呢個 star 頁有實測數字（代碼 -54%、成本 -20%）可以互相對照。
+- [[20260920-fast-jev-compaction|fast-jev-compaction — verbatim Jev-scored compaction for Claude Code]] — 同樣係解決 Claude Code context 瓶頸嘅插件，可以同文中嘅 Graphify（context 層）擺埋一齊比較。
+- [[../stars/upstash--context7|context7]] — 另一個攻 context 準確性嘅工具：Graphify 建代碼知識圖譜、Context7 攞最新官方文件，兩者都係減少 agent 亂噏或者重複讀檔嘅方案。

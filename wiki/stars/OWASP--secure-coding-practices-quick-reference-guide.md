@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:OWASP/secure-coding-practices-quick-reference-guide"
 engagement: "stars=50 forks=13"
 tags: [coding, owasp, security]
-related: []
+related: [calcom--cal.diy, NousResearch--hermes-agent-self-evolution]
 needs_manual_text: false
 ---
 
@@ -38,3 +38,6 @@ Published: 2022-12-06
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[calcom--cal.diy|cal.diy]] — 自己攞嚟自架嘅開源系統(例如 Cal.diy)正正需要呢類安全編碼清單。
+- [[NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]] — 兩者都用檢查清單式嘅關卡嚟把關改動。

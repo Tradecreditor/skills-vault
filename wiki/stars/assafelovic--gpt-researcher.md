@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:assafelovic/gpt-researcher"
 engagement: "stars=29542 forks=4018"
 tags: [agent, ai, automation, deepresearch, llms, mcp, research]
-related: []
+related: [langchain-ai--open_deep_research, bytedance--deer-flow, THU-MAIC--OpenMAIC]
 needs_manual_text: false
 ---
 
@@ -36,3 +36,7 @@ Author: Assaf Elovici
 Captured: 2026-09-20
 
 ## Related
+
+- [[langchain-ai--open_deep_research|open_deep_research]] — 同屬開源 deep research agent，可以比較 planner/execution 架構設計。
+- [[bytedance--deer-flow|deer-flow]] — deer-flow 由 deep research 起步演化成通用 harness，可對照 gpt-researcher 點樣留喺 research 本業。
+- [[THU-MAIC--OpenMAIC|OpenMAIC]] — 同屬多 agent 協作平台。

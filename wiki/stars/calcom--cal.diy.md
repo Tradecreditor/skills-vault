@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:calcom/cal.diy"
 engagement: "stars=48578 forks=15179"
 tags: [next-auth, nextjs, open-source, postgresql, prisma, t3-stack, tailwindcss, trpc, turborepo, typescript, zod]
-related: []
+related: [greensock--gsap-skills, OWASP--secure-coding-practices-quick-reference-guide]
 needs_manual_text: false
 ---
 
@@ -39,3 +39,6 @@ Published: 2021-03-22
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[greensock--gsap-skills|gsap-skills]] — 都係商業產品開放出嚟嘅開源版本，但取向相反：GSAP 係全部 plugin 變免費，Cal.diy 係拆走商業功能淨返 MIT 部分。
+- [[OWASP--secure-coding-practices-quick-reference-guide|secure-coding-practices-quick-reference-guide]] — 自架呢類處理用戶資料嘅系統，正正需要呢份安全編碼清單。

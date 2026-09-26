@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:microsoft/markitdown"
 engagement: "stars=185929 forks=13689"
 tags: [autogen, autogen-extension, langchain, markdown, microsoft-office, openai, pdf]
-related: []
+related: [ScrapeGraphAI--Scrapegraph-ai, microsoft--playwright-mcp, m-bain--whisperX]
 needs_manual_text: false
 ---
 
@@ -39,3 +39,7 @@ Published: 2024-11-13
 Reader used: raw README via Exa (web_fetch_exa)
 
 ## Related
+
+- [[ScrapeGraphAI--Scrapegraph-ai|Scrapegraph-ai]] — 兩者都係將原始資料轉做 LLM 友善格式，一個管網頁擷取一個管檔案轉換。
+- [[microsoft--playwright-mcp|playwright-mcp]] — 同屬微軟官方出品嘅 agent 基建工具。
+- [[m-bain--whisperX|whisperX]] — 都係將非文字資料轉做文字俾 LLM 用。

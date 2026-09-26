@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:langchain-ai/open_deep_research"
 engagement: "stars=12686 forks=1839"
 tags: [research, langchain, llm, agents]
-related: []
+related: [assafelovic--gpt-researcher, bytedance--deer-flow]
 needs_manual_text: false
 ---
 
@@ -35,3 +35,6 @@ Author: LangChain
 Captured: 2026-09-20
 
 ## Related
+
+- [[assafelovic--gpt-researcher|gpt-researcher]] — 同屬開源 deep research agent，可比較 planner/execution 拆分方式。
+- [[bytedance--deer-flow|deer-flow]] — 都可以逐層配置唔同模型做唔同工序。

@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:greensock/gsap-skills"
 engagement: "stars=15511 forks=916"
 tags: [animation, gsap, agent-skill, agent-skills]
-related: []
+related: [vercel-labs--skills, nolangz--pixel2motion, LottieFiles--motion-design-skill, calcom--cal.diy]
 needs_manual_text: false
 ---
 
@@ -35,3 +35,8 @@ Author: GreenSock
 Captured: 2026-09-20
 
 ## Related
+
+- [[vercel-labs--skills|skills]] — 用呢個 CLI 就可以裝落 Cursor、Claude Code、Codex 等 40 幾種 agent。
+- [[nolangz--pixel2motion|pixel2motion]] — 兩者都係將動畫設計知識包裝做 agent skill，一個管動畫庫一個管 logo 動態化。
+- [[LottieFiles--motion-design-skill|motion-design-skill]] — 都係俾 agent 用嘅動作設計原則同工具包。
+- [[calcom--cal.diy|cal.diy]] — 都係商業產品開放出嚟嘅開源版本，但取向相反：GSAP 全部 plugin 免費，Cal.diy 拆走商業功能淨返 MIT 部分。

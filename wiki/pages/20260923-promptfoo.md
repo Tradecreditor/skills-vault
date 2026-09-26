@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "github:promptfoo/promptfoo"
 engagement: "stars=24793 forks=2258"
 tags: [llm-eval, llm, red-teaming, pentesting, prompt-testing, evaluation-framework, ci-cd, rag, testing, ai-security]
-related: []
+related: ["skills/evaluating-llms-with-promptfoo", "stars/NousResearch--hermes-agent-self-evolution"]
 needs_manual_text: false
 ---
 
@@ -53,4 +53,5 @@ promptfoo 是一個開源的 CLI 工具與函式庫，專門用於評估和紅�
 
 ## Related
 
-[[../../skills/evaluating-llms-with-promptfoo/SKILL|skill: evaluating-llms-with-promptfoo]]
+- [[../../skills/evaluating-llms-with-promptfoo/SKILL|skill: evaluating-llms-with-promptfoo]] — 呢個 skill 就係由呢篇 promptfoo 頁面草擬出嚟，教點樣用佢做評估同紅隊測試。
+- [[../stars/NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]] — 兩者都圍繞「評分 → 改進」呢個 LLM 品質迴路：promptfoo 提供評估框架，hermes-agent-self-evolution 用評分結果自動演化 agent skill。

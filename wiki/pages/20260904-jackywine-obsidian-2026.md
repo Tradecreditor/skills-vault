@@ -12,7 +12,7 @@ captured_by: "claude-code-local"
 canonical_id: "x:tweet:2095750518941659567"
 engagement: "likes=1070 retweets=244 views=414258 bookmarks=2673"
 tags: [obsidian, llm-wiki, knowledge-management, evergreen-notes, karpathy]
-related: []
+related: [20260918-obsidian-skills, "skills/using-obsidian-skills"]
 needs_manual_text: false
 ---
 
@@ -79,4 +79,5 @@ Lint/CI          →  Health Check (weekly, outputs/health/)
 
 ## Related
 
-（首次入庫，尚無相關頁面）
+- [[20260918-obsidian-skills|obsidian-skills: Agent Skills for Obsidian]] — kepano 出品嘅 Agent Skills 套件，正正回應文中 Kepano「乾淨庫 vs. 髒庫」嘅立場，係將呢篇文章嘅原則落地嘅工具。
+- [[../../skills/using-obsidian-skills/SKILL|skill: using-obsidian-skills]] — 直接安裝呢套技能，等 AI 助理喺呢個 vault 入面正確編輯 Obsidian 格式，實現文中提到嘅 raw→wiki 編譯流程。

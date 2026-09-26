@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:Leonxlnx/taste-skill"
 engagement: "stars=88783 forks=6043"
 tags: [agent-skill, claude-code, codex, design, vibecoding, ai]
-related: []
+related: [DietrichGebert--ponytail, VoltAgent--awesome-design-md, vercel-labs--skills]
 needs_manual_text: false
 ---
 
@@ -37,3 +37,7 @@ Author: Leon
 Captured: 2026-09-20
 
 ## Related
+
+- [[DietrichGebert--ponytail|ponytail]] — 兩個都係「品味判斷」型 skill。
+- [[VoltAgent--awesome-design-md|awesome-design-md]] — 兩者都係俾 agent 一份「風格參考」嚟避免通用 AI 美感。
+- [[vercel-labs--skills|skills]] — 用同一套 skills CLI 分發，兩者都覆蓋 Claude Code / Codex 等多個平台。
