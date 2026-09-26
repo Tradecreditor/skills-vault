@@ -11,7 +11,7 @@ captured_at: "2026-09-20T22:15:03Z"
 captured_by: "routine:weekly-hot-list"
 canonical_id: "github:tamaratran/fast-jev-compaction"
 engagement: "stars=5089 forks=281 x_likes=10686 x_retweets=657 x_views=3693140"
-tags: [hot-list, claude-code, claude-code-plugin, context-management, compaction, typescript]
+tags: [hot-list, claude-code, claude-code-plugin, context-management, compaction, typescript, 2026-W38]
 related: []
 needs_manual_text: false
 ---

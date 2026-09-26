@@ -5,6 +5,7 @@ type: repo
 status: draft
 source_url: "https://github.com/googleanalytics/google-analytics-mcp"
 source_platform: github
+author: "googleanalytics"
 published: "2025-07-16"
 captured_at: "2026-09-19T11:09:28.036193Z"
 captured_by: "routine:github-stars-sync"

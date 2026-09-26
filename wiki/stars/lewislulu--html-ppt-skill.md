@@ -5,6 +5,7 @@ type: repo
 status: draft
 source_url: "https://github.com/lewislulu/html-ppt-skill"
 source_platform: github
+author: "lewislulu"
 published: "2026-04-15"
 captured_at: "2026-09-19T11:09:28.036052Z"
 captured_by: "routine:github-stars-sync"

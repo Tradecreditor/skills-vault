@@ -5,6 +5,7 @@ type: repo
 status: draft
 source_url: "https://github.com/DietrichGebert/ponytail"
 source_platform: github
+author: "DietrichGebert"
 published: "2026-06-12"
 captured_at: "2026-09-19T11:09:28.035525Z"
 captured_by: "routine:github-stars-sync"

@@ -5,6 +5,7 @@ type: repo
 status: draft
 source_url: "https://github.com/ScrapeGraphAI/Scrapegraph-ai"
 source_platform: github
+author: "ScrapeGraphAI"
 published: "2024-01-27"
 captured_at: "2026-09-19T11:09:28.035576Z"
 captured_by: "routine:github-stars-sync"
