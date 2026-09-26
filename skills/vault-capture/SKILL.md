@@ -63,20 +63,20 @@ Type rules: `skill` = a reusable procedure/prompt/workflow; `tool` = a product/C
 Create `skills/<gerund-name>/SKILL.md` when the source teaches a repeatable procedure an agent could follow (a prompt pattern, a workflow, a tool setup, a coding technique). Do NOT create one for news, opinions or product announcements — the wiki page is enough.
 - Folder name == `name`, lowercase-hyphen, gerund preferred (`reviewing-supabase-rls`), no "claude"/"anthropic" in the name.
 - `description`: third person, `<what it does>. Use when <concrete triggers: tools, file types, symptoms, keywords>.` under 300 characters; front-load the trigger words.
-- `metadata` (all strings): `source_url`, `source_platform`, `author`, `captured_at`, `engagement`, `origin_type` (`post|video|repo|article`), `vault_status: "draft"`.
-- Body (English, < 200 lines): When to use · Steps (numbered, exact commands) · Pitfalls · Source. Put long verbatim material in `skills/<name>/references/source.md`.
+- `metadata` (all strings): `source_url`, `source_platform`, `author`, `captured_at`, `engagement`, `origin_type` (`post|video|repo|article|vault-operations`), `vault_status: "draft"`.
+- Body (English, < 500 lines): When to use · Steps (numbered, exact commands) · Pitfalls · Source. Put long verbatim material in `skills/<name>/references/source.md`.
 - Add `[[../../skills/<name>/SKILL|skill: <name>]]` under `## Related` in the wiki page.
 
 ## 5. Update the catalogue (append-only)
 - `wiki/index.md`: add one row `| <slug> | <type> | <title> | <platform> | <YYYY-MM-DD> | draft | <tags> | <canonical_id> |`.
 - `wiki/log.md`: append `## [YYYY-MM-DD] capture | <title> | <slug>`.
 - `wiki/hot.md`: prepend `- YYYY-MM-DD · <type> · [[pages/<slug>|<title>]]` under `## 最近 20 項`; keep at most 20 lines there.
-- If a skill was drafted, also add a row to the table in `skills/README.md` if one exists.
+- If a skill was drafted, also add a row to the table in `skills/README.md` (name · vault_status · origin_type · one line: the description's first clause, at most 90 characters; rows sorted by name).
 
 ## 6. Commit
 - Local Claude Code: obsidian-git will sync within 10 minutes; if the user asked to push now, run `git add -A && git commit -m "capture: <slug>" && git pull --rebase origin main && git push origin HEAD:main`.
-- Routine (cloud): always commit and push to `main` as above (the Routine acts as the owner account, which bypasses the main ruleset). Never set a custom git author: keep the identity the environment already configures (a cloud session commits as Claude <noreply@anthropic.com>, your laptop as you). An invented author name makes the "who wrote this" audit useless and, on a branch Claude Code checks, can make later pushes to `main` be refused (see routines/README.md, Things worth knowing).
-- Non-core agent (own token / machine account): commit on branch `agent/<name>/<slug>`, push, `gh pr create --fill`, then `gh pr merge --auto --rebase --delete-branch`; the `guard` check merges it once it passes.
+- Routine (cloud): always commit and push to `main` as above (the Routine acts as the owner account, which bypasses the main ruleset). Never set a custom git author: keep the identity the environment already configures (a cloud session commits as Claude <noreply@anthropic.com>, your laptop as you). An invented author name makes the "who wrote this" audit useless, and Claude Code refuses to push a branch not prefixed `claude/` (such as `main`) when it carries commits authored by someone other than you (see routines/README.md, Things worth knowing).
+- Non-core agent (own token / machine account `tradecreditor-ui`): commit on branch `agent/<name>/<slug>`, push, `gh pr create --fill`. The PR needs the `guard` check green AND one approval from Josep before anything merges (`gh pr merge --auto --rebase` is fine: it only waits for both), so stop there and report the PR URL.
 - Report: files written, reader used, whether a skill was drafted, and anything with `needs_manual_text: true`.
 
 ## Never
