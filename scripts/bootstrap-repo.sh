@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# First push of this scaffold to GitHub. Creates the private repo with gh if it does not exist yet. Run once from inside this folder.
+# First push of this scaffold to GitHub. Creates the public repo with gh if it does not exist yet. Run once from inside this folder.
 set -euo pipefail
 REPO="${1:-Tradecreditor/skills-vault}"
 [ -f CLAUDE.md ] && [ -f wiki/index.md ] || { echo "run this from the scaffold folder (where CLAUDE.md lives)"; exit 1; }
@@ -16,7 +16,7 @@ if gh repo view "$REPO" >/dev/null 2>&1; then
   fi
   git push -u origin main
 else
-  gh repo create "$REPO" --private --source=. --remote=origin --push --description "Personal agent skills vault: Obsidian vault + LLM wiki + installable Agent Skills"
+  gh repo create "$REPO" --public --source=. --remote=origin --push --description "Personal agent skills vault: Obsidian vault + LLM wiki + installable Agent Skills"
 fi
 echo "done: https://github.com/$REPO"
 echo "next: bash scripts/setup-phase1.sh"

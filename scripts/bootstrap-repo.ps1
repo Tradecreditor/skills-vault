@@ -31,7 +31,7 @@ if ($LASTEXITCODE -eq 0) {
   }
   git push -u origin main
 } else {
-  gh repo create $Repo --private --source=. --remote=origin --push --description "Personal agent skills vault: Obsidian vault + LLM wiki + installable Agent Skills"
+  gh repo create $Repo --public --source=. --remote=origin --push --description "Personal agent skills vault: Obsidian vault + LLM wiki + installable Agent Skills"
 }
 Write-Host ""
 Write-Host "Done: https://github.com/$Repo" -ForegroundColor Green
