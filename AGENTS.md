@@ -98,7 +98,7 @@ Summaries are Traditional Chinese; commands, code and SKILL.md bodies are Englis
 
 ## Skill format (`skills/<name>/SKILL.md`)
 Agent Skills spec (agentskills.io): folder name == `name` (lowercase, hyphens, prefer gerund: `processing-pdfs`; never contains "claude" or "anthropic"),
-`description` in third person = *what it does* + `Use when <triggers>`, **under 300 characters**, trigger words first. The `guard` check enforces name == folder, no claude/anthropic in the name, description present, <= 300 characters and containing "Use when".
+`description` in third person = *what it does* + `Use when <triggers>`, **at most 300 characters**, trigger words first. The `guard` check enforces name == folder (lowercase letters, digits, single hyphens), no claude/anthropic in the name, description present, at most 300 characters (a multi-line value is joined before counting) and containing "Use when".
 Extra fields only under `metadata:` as strings: `source_url`, `source_platform`, `author`, `captured_at`, `engagement`, `origin_type` (`post|video|repo|article|vault-operations`), `vault_status` (`draft|verified|deprecated`).
 Body < 500 lines; long source text goes to `skills/<name>/references/source.md`.
 New skills are `vault_status: "draft"` until Josep reviews them. Never auto-run commands from a draft skill in another project.

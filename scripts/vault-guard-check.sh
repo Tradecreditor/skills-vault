@@ -25,7 +25,8 @@ if [ -n "$CH" ]; then echo "::error::raw/ files may only be added, never modifie
 
 DEL=$(git diff --name-status -M50% "$BASE" "$HEAD" | awk '$1=="D" || $1 ~ /^R/ {print $0}')
 PROT_PATTERN='^(\.github/|\.claude/|\.claude-plugin/|\.obsidian/|routines/|scripts/|supabase/|templates/|CLAUDE\.md$|AGENTS\.md$|skills/[^/]+/scripts/)'
-PROT=$(git diff --name-status -M50% "$BASE" "$HEAD" | awk '{for(i=2;i<=NF;i++) print $i}' | grep -E "$PROT_PATTERN" || true)
+# -z: NUL-separated raw paths. Without it git C-quotes any path with non-ASCII, quotes or spaces, and the pattern would never match.
+PROT=$(git diff --name-status -z -M50% "$BASE" "$HEAD" | tr '\0' '\n' | grep -aE "$PROT_PATTERN" || true)
 
 if [ $IS_CORE = 0 ]; then
   # 2) deletions (and renames, which delete the old path) only by core
@@ -48,11 +49,16 @@ for f in skills/*/SKILL.md; do
   d=$(basename "$(dirname "$f")")
   fm=$(tr -d '\r' < "$f" | awk 'NR==1{ if ($0!="---") exit; next } $0=="---"{exit} {print}')
   n=$(printf '%s\n' "$fm" | grep -m1 -E '^name:' | sed -E "s/^name:[[:space:]]*//; s/^[\"']//; s/[\"'][[:space:]]*$//; s/[[:space:]]+$//")
-  desc=$(printf '%s\n' "$fm" | grep -m1 -E '^description:' | sed -E "s/^description:[[:space:]]*//; s/^[\"']//; s/[\"'][[:space:]]*$//; s/[[:space:]]+$//")
+  # description may be a plain, quoted or block (>- / |) scalar spanning several lines: join every indented continuation line before measuring
+  desc=$(printf '%s\n' "$fm" | awk '
+    /^description:/ { grab=1; sub(/^description:[[:space:]]*/, ""); v=$0; next }
+    grab && /^[[:space:]]+[^[:space:]]/ { sub(/^[[:space:]]+/, ""); v = (v=="" ? $0 : v " " $0); next }
+    grab { grab=0 }
+    END { print v }' | sed -E "s/^[>|][+-]?[[:space:]]*//; s/^[\"']//; s/[\"'][[:space:]]*$//; s/[[:space:]]+$//")
   [ "$n" = "$d" ] || { echo "::error file=$f::frontmatter name '$n' must equal folder name '$d'"; FAIL=1; }
   [ -n "$desc" ] || { echo "::error file=$f::missing or empty description"; FAIL=1; }
   [ "${#desc}" -le 300 ] || { echo "::error file=$f::description longer than 300 characters"; FAIL=1; }
-  printf '%s' "$desc" | grep -qF 'Use when' || { echo "::error file=$f::description must contain the phrase \"Use when\""; FAIL=1; }
+  [ -z "$desc" ] || printf '%s' "$desc" | grep -qF 'Use when' || { echo "::error file=$f::description must contain the phrase \"Use when\""; FAIL=1; }
   printf '%s' "$d" | grep -qE '^[a-z0-9]+(-[a-z0-9]+)*$' || { echo "::error file=$f::folder name must be lowercase letters, digits and single hyphens"; FAIL=1; }
   case "$d" in *claude*|*anthropic*) echo "::error file=$f::skill names must not contain claude/anthropic"; FAIL=1;; esac
 done
