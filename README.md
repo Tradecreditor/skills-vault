@@ -99,7 +99,7 @@ bash scripts/setup-phase1.sh
 - 其他 agent 寫入：用自己嘅 clone 同自己嘅 token（第 5 步），寫去 `agents/<名>/` 或 `wiki/pages/`，`git pull --rebase` 再 push。
 
 ## 第 4 步 · 三個定時 Routine（星期日下晝，約 3 小時）
-按 `routines/README.md` 嘅表開 `github-stars-sync`（每日 07:00 HKT，Haiku）、`weekly-hot-list`（星期一 09:00 HKT，Opus，開 PR）、`vault-lint`（星期一 10:00 HKT，Sonnet）。
+按 `routines/README.md` 嘅表開 `github-stars-sync`（每日 07:00 HKT，Sonnet）、`weekly-hot-list`（星期一 09:00 HKT，Opus，開 PR）、`vault-lint`（星期一 10:00 HKT，Sonnet）。
 每個開完先手動 Run 一次，睇 output，再調 `wiki/hot-list/_config.yaml`。
 注意（已實測）：雲端 Routine 入面 `gh api user/starred`、`gh search repos`、`gh repo view --json` 都會被 GitHub proxy 擋（403）。prompt 已寫明後備路線：GitHub connector 嘅 `search_repositories` / `get_file_contents`，同 Exa connector 讀 `https://api.github.com/...` 嘅 JSON（已實測可行）。另外：`Tradecreditor` 帳戶而家公開 star 數係 0，第一次跑 stars Routine 會話「no stars on this account yet」，直到你 star 咗嘢。
 

@@ -6,7 +6,7 @@ A web-form preset is read in your BROWSER's timezone instead. Confirm against th
 You are the weekly lint routine for Josep's skills vault. The repository Tradecreditor/skills-vault is checked out. Let WEEK be this ISO week (e.g. 2026-W38).
 
 Check, without modifying any content pages:
-1. Catalogue integrity: every wiki/pages/*.md and wiki/stars/*.md has a row in wiki/index.md and vice versa; every row resolves to a file (type repo -> wiki/stars/<slug>.md, everything else -> wiki/pages/<slug>.md); canonical_id column present and unique; frontmatter has all required keys from CLAUDE.md; captured_at parses; status is draft|verified|deprecated.
+1. Catalogue integrity: every wiki/pages/*.md and wiki/stars/*.md has a row in wiki/index.md and vice versa; every row resolves to a file (a slug of the form <owner>--<repo> -> wiki/stars/<slug>.md; a date-prefixed slug <yyyymmdd>-... -> wiki/pages/<slug>.md; type is NOT the discriminator - a repo captured by pasting its link is type: repo and still lives in wiki/pages/, see the folder table in CLAUDE.md); canonical_id column present and unique; frontmatter has all required keys from CLAUDE.md; captured_at parses; status is draft|verified|deprecated.
 2. Raw coverage: every page's slug has a raw/<slug>*.md unless needs_manual_text is true.
 3. Skills: for each skills/*/SKILL.md, name == folder, description present, under 300 chars, contains "Use when"; body under 500 lines; metadata values are strings; vault_status present. (You may run bash scripts/vault-guard-check.sh HEAD~1 HEAD Tradecreditor for the mechanical part.)
 4. Links: broken [[wikilinks]] and relative links; orphan pages (no inbound links and not in hot.md); pages with an empty ## Related.

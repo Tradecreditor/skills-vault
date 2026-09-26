@@ -7,7 +7,7 @@ heading is the routine's prompt. The prompts point at files in this repo, so tun
 | Routine | Trigger | Model | Writes |
 |---|---|---|---|
 | `capture-link` | API (fired by the Supabase `capture` function / iPhone Shortcut / Telegram) | Sonnet | pushes to `main` |
-| `github-stars-sync` | Schedule, daily 07:00 HKT | Haiku (Sonnet if summaries look thin) | pushes to `main` |
+| `github-stars-sync` | Schedule, daily 07:00 HKT | Sonnet (Haiku drops the READMEs and writes English one-liners; see the prompt file) | pushes to `main` |
 | `weekly-hot-list` | Schedule, Monday 09:00 HKT | Opus | opens a PR from `hot-list/YYYY-Www` |
 | `vault-lint` | Schedule, Monday 10:00 HKT | Sonnet | pushes report to `main`; PR if it proposes merges |
 
