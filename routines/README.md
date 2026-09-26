@@ -137,7 +137,16 @@ from the table above. `/schedule list` shows what you have, `/schedule update` e
 ### Option B: the web form
 
 Same as Step 1, except **Select a trigger** → **Schedule**. Pick the nearest preset (daily / weekly, entered in your local
-time), then use `/schedule update` from a local session if you want the exact cron:
+time), then use `/schedule update` from a local session if you want the exact cron (table below).
+
+Timezones are the one thing that silently goes wrong here. A cron expression is always evaluated in UTC; there is no
+timezone picker for it. The web form's *presets* are different: they are entered in your browser's local timezone and
+then frozen into a fixed UTC cron the moment you save, so they do not follow you when you travel — moving between HKT
+and CET shifts every routine by seven hours (six while Europe is on summer time) until you re-set it. A fixed UTC cron also does not observe daylight saving,
+so a European summer setting drifts an hour in late October — the table's CET column below is winter time, so in summer
+`0 6 * * *` is 08:00 local, not the 07:00 the table gives. Minimum interval is one hour, and runs may start a few minutes
+late; the offset is consistent per routine. Whichever
+route you take, after saving read the **next run** time the UI shows: that display is the only ground truth.
 
 | Routine | Cron for HKT | Cron for CET | Local time both give |
 |---|---|---|---|
@@ -147,22 +156,6 @@ time), then use `/schedule update` from a local session if you want the exact cr
 
 The last field is the day of the week (`1` = Monday). Leaving it as `*` means *every day*, which is how the weekly
 hot list once ran seven times in a week on Opus before anyone noticed — nothing errors, the reports just pile up.
-
-Times below are given as UTC cron plus the local time that equals in Hong Kong and in Central European Time, because
-a cron expression is always UTC and Josep works from both. Two traps follow from that. The web form's *presets* are
-entered in the browser's timezone and frozen into a fixed UTC cron the moment you save, so they do not follow you when
-you travel - moving between HKT and CET shifts every routine by seven hours until you re-set it. And a fixed UTC cron
-does not observe daylight saving, so a European summer setting drifts an hour in late October. Whichever route you take,
-read the **next run** time the UI shows after saving: that display is the only ground truth.
-
-
-**Timezones, the one thing that silently goes wrong.** A cron expression is always evaluated in UTC; there is no timezone
-picker for it. The web form's *presets* are different: those are entered in your browser's local timezone and converted for
-you. So if your machine is not on HKT, a "daily 07:00" preset does not mean 07:00 Hong Kong time. Whichever route you take,
-after saving read the **next run** time the UI shows and check it is the wall-clock time you wanted. That display is the
-only ground truth.
-
-Minimum interval is one hour. Runs may start a few minutes late; the offset is consistent per routine.
 
 ---
 
@@ -176,21 +169,26 @@ failures all show up there, not in the status dot.
 
 Expected on the first runs:
 
-- `github-stars-sync` prints `no stars on this account yet` until the `Tradecreditor` account has starred something.
+- `github-stars-sync` adds up to 6 new star notes per run and prints `no new stars` when the ledger is current; it prints
+  `no stars on this account yet` only when the listing comes back empty (empty account, or stars hidden by the profile setting).
 - `weekly-hot-list` may report a quiet week. That is by design: thresholds are never lowered to fill the list.
   Tune `wiki/hot-list/_config.yaml` after two real runs, not before.
 - `vault-lint` will flag the vault as thin while it holds only a handful of notes.
 
 ## Things worth knowing
 
-- **Every commit on `main` must be authored by you.** Claude Code refuses to push to a branch other than a
-  `claude/`-prefixed one when that branch "carries commits authored by someone other than you". One commit with a made-up
-  author is enough to make every routine push to `main` fail silently-ish: the run reports success, but nothing lands.
-  Check with `git log --format='%an <%ae>' origin/main | sort -u` — it should list only your GitHub identity.
+- **Never set a custom git author.** Commits from cloud sessions and Routines land as `Claude <noreply@anthropic.com>`
+  (the identity the cloud environment configures), commits from your laptop as your own identity (plus the GitHub-web
+  spelling of it on a PR merge); `git log --format='%an <%ae>' origin/main | sort | uniq -c` shows those, and a handful of
+  `skills-vault-core` commits. That invented author left the repo's prompts on 2026-09-19, but the live `capture-link`
+  Routine still runs the stored copy of the old prompt (see "Copying a prompt into the Routine UI" above), so re-paste it
+  with `scripts/copy-prompt.ps1 capture-link`. Mixed authorship is expected and has not blocked the routines' pushes to
+  `main`. What does break things is inventing an author: it defeats the "who wrote this" audit, and Claude Code refuses
+  to push a branch not prefixed `claude/` (such as `main`) when it carries commits authored by someone other than you.
 - Routines belong to your personal claude.ai account, count against a daily run cap, and draw down subscription usage.
-  Commits appear under your GitHub user.
-- Pushing to `main` works while `main` is unprotected and carries only your commits. After you add the branch ruleset in
-  README step 5, keep your own account on the ruleset's bypass list or the routines' pushes start failing.
+- The `main-protection` ruleset has existed since 2026-09-21; the routines keep pushing to `main` because the owner
+  account is on its bypass list. If you ever remove yourself from the bypass list, every routine push starts failing
+  (the run reports success, nothing lands) — open the run transcript to see the rejection.
 - Fire text arrives wrapped in a `<routine-fire-payload>` block marked untrusted. `capture-link`'s prompt references it
   explicitly, which is why it acts on the pasted URL; do not remove that wording.
 - The GitHub proxy inside a cloud session returns `403` for `gh api user/starred`, `gh search repos` and GraphQL calls such
