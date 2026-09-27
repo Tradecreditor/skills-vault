@@ -1,18 +1,25 @@
 ---
-title: "2026 我的 Obsidian 完整分享"
+title: 2026 我的 Obsidian 完整分享
 slug: 20260904-jackywine-obsidian-2026
 type: article
-status: draft
-source_url: "https://x.com/Jackywine/status/2095750518941659567"
+status: verified
+source_url: https://x.com/Jackywine/status/2095750518941659567
 source_platform: x
-author: "Jackywine"
-published: "2026-09-04"
-captured_at: "2026-09-13T00:00:00Z"
-captured_by: "claude-code-local"
-canonical_id: "x:tweet:2095750518941659567"
-engagement: "likes=1070 retweets=244 views=414258 bookmarks=2673"
-tags: [obsidian, llm-wiki, knowledge-management, evergreen-notes, karpathy]
-related: [20260918-obsidian-skills, "skills/using-obsidian-skills"]
+author: Jackywine
+published: 2026-09-04
+captured_at: 2026-09-13T00:00:00Z
+captured_by: claude-code-local
+canonical_id: x:tweet:2095750518941659567
+engagement: likes=1070 retweets=244 views=414258 bookmarks=2673
+tags:
+  - obsidian
+  - llm-wiki
+  - knowledge-management
+  - evergreen-notes
+  - karpathy
+related:
+  - 20260918-obsidian-skills
+  - skills/using-obsidian-skills
 needs_manual_text: false
 ---
 

@@ -1,17 +1,24 @@
 ---
-title: "4 Free Design Sites for Vibe-Coded Apps"
+title: 4 Free Design Sites for Vibe-Coded Apps
 slug: 20260924-4-free-design-sites-for-vibe-coders
 type: post
-status: draft
-source_url: "https://instagram.com/p/Ddqj0svm6yq/"
+status: verified
+source_url: https://instagram.com/p/Ddqj0svm6yq/
 source_platform: instagram
-author: "nocodealex"
-published: "2026-09-24"
-captured_at: "2026-09-27T00:00:00Z"
-captured_by: "routine:capture-link"
-canonical_id: "instagram:Ddqj0svm6yq"
+author: nocodealex
+published: 2026-09-24
+captured_at: 2026-09-27T00:00:00Z
+captured_by: routine:capture-link
+canonical_id: instagram:Ddqj0svm6yq
 engagement: ""
-tags: [design, vibe-coding, claude, ui, tools, transitions, slides]
+tags:
+  - design
+  - vibe-coding
+  - claude
+  - ui
+  - tools
+  - transitions
+  - slides
 related: []
 needs_manual_text: false
 ---

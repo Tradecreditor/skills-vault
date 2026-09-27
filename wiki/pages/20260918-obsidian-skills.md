@@ -2,17 +2,26 @@
 title: "obsidian-skills: Agent Skills for Obsidian"
 slug: 20260918-obsidian-skills
 type: repo
-status: draft
-source_url: "https://github.com/kepano/obsidian-skills"
+status: verified
+source_url: https://github.com/kepano/obsidian-skills
 source_platform: github
-author: "kepano"
-published: "2026-01-02"
-captured_at: "2026-09-18T00:00:00Z"
-captured_by: "routine:capture-link"
-canonical_id: "github:kepano/obsidian-skills"
-engagement: "commits=46"
-tags: [obsidian, agent-skills, llm-wiki, claude-code, knowledge-management]
-related: ["skills/using-obsidian-skills", 20260904-jackywine-obsidian-2026, "stars/vercel-labs--skills", "stars/Leonxlnx--taste-skill"]
+author: kepano
+published: 2026-01-02
+captured_at: 2026-09-18T00:00:00Z
+captured_by: routine:capture-link
+canonical_id: github:kepano/obsidian-skills
+engagement: commits=46
+tags:
+  - obsidian
+  - agent-skills
+  - llm-wiki
+  - claude-code
+  - knowledge-management
+related:
+  - skills/using-obsidian-skills
+  - 20260904-jackywine-obsidian-2026
+  - stars/vercel-labs--skills
+  - stars/Leonxlnx--taste-skill
 needs_manual_text: false
 ---
 

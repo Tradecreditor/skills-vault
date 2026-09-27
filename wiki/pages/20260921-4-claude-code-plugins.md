@@ -1,18 +1,30 @@
 ---
-title: "4 Claude Code Plugins That Fix the Real Bottlenecks"
+title: 4 Claude Code Plugins That Fix the Real Bottlenecks
 slug: 20260921-4-claude-code-plugins
 type: post
-status: draft
-source_url: "https://www.instagram.com/reel/DdjkD4xi1ma/"
+status: verified
+source_url: https://www.instagram.com/reel/DdjkD4xi1ma/
 source_platform: instagram
-author: "peterstewiestartup"
-published: "2026-09-21"
-captured_at: "2026-09-26T00:00:00Z"
-captured_by: "routine:capture-link"
-canonical_id: "instagram:DdjkD4xi1ma"
+author: peterstewiestartup
+published: 2026-09-21
+captured_at: 2026-09-26T00:00:00Z
+captured_by: routine:capture-link
+canonical_id: instagram:DdjkD4xi1ma
 engagement: ""
-tags: [claude-code, plugins, graphify, ponytail, omniroute, agent-skills, context-management, ai-tools]
-related: ["skills/stacking-coding-agent-plugins", "stars/DietrichGebert--ponytail", 20260920-fast-jev-compaction, "stars/upstash--context7"]
+tags:
+  - claude-code
+  - plugins
+  - graphify
+  - ponytail
+  - omniroute
+  - agent-skills
+  - context-management
+  - ai-tools
+related:
+  - skills/stacking-coding-agent-plugins
+  - stars/DietrichGebert--ponytail
+  - 20260920-fast-jev-compaction
+  - stars/upstash--context7
 needs_manual_text: false
 ---
 

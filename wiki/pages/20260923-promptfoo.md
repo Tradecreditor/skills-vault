@@ -2,17 +2,29 @@
 title: "promptfoo: LLM Evals & Red Teaming"
 slug: 20260923-promptfoo
 type: tool
-status: draft
-source_url: "https://github.com/promptfoo/promptfoo"
+status: verified
+source_url: https://github.com/promptfoo/promptfoo
 source_platform: github
-author: "promptfoo"
-published: "2023-04-28"
-captured_at: "2026-09-23T00:00:00Z"
-captured_by: "routine:capture-link"
-canonical_id: "github:promptfoo/promptfoo"
-engagement: "stars=24793 forks=2258"
-tags: [llm-eval, llm, red-teaming, pentesting, prompt-testing, evaluation-framework, ci-cd, rag, testing, ai-security]
-related: ["skills/evaluating-llms-with-promptfoo", "stars/NousResearch--hermes-agent-self-evolution"]
+author: promptfoo
+published: 2023-04-28
+captured_at: 2026-09-23T00:00:00Z
+captured_by: routine:capture-link
+canonical_id: github:promptfoo/promptfoo
+engagement: stars=24793 forks=2258
+tags:
+  - llm-eval
+  - llm
+  - red-teaming
+  - pentesting
+  - prompt-testing
+  - evaluation-framework
+  - ci-cd
+  - rag
+  - testing
+  - ai-security
+related:
+  - skills/evaluating-llms-with-promptfoo
+  - stars/NousResearch--hermes-agent-self-evolution
 needs_manual_text: false
 ---
 

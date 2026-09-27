@@ -1,18 +1,29 @@
 ---
-title: "fast-jev-compaction — verbatim Jev-scored compaction for Claude Code"
+title: fast-jev-compaction — verbatim Jev-scored compaction for Claude Code
 slug: 20260920-fast-jev-compaction
 type: repo
-status: draft
-source_url: "https://github.com/tamaratran/fast-jev-compaction"
+status: verified
+source_url: https://github.com/tamaratran/fast-jev-compaction
 source_platform: github
-author: "tamaratran"
-published: "2026-09-17"
-captured_at: "2026-09-20T22:15:03Z"
-captured_by: "routine:weekly-hot-list"
-canonical_id: "github:tamaratran/fast-jev-compaction"
-engagement: "stars=5089 forks=281 x_likes=10686 x_retweets=657 x_views=3693140"
-tags: [hot-list, claude-code, claude-code-plugin, context-management, compaction, typescript, 2026-W38]
-related: ["hot-list/2026-W38", 20260921-4-claude-code-plugins, "stars/openai--codex-plugin-cc", "stars/DietrichGebert--ponytail"]
+author: tamaratran
+published: 2026-09-17
+captured_at: 2026-09-20T22:15:03Z
+captured_by: routine:weekly-hot-list
+canonical_id: github:tamaratran/fast-jev-compaction
+engagement: stars=5089 forks=281 x_likes=10686 x_retweets=657 x_views=3693140
+tags:
+  - hot-list
+  - claude-code
+  - claude-code-plugin
+  - context-management
+  - compaction
+  - typescript
+  - 2026-W38
+related:
+  - hot-list/2026-W38
+  - 20260921-4-claude-code-plugins
+  - stars/openai--codex-plugin-cc
+  - stars/DietrichGebert--ponytail
 needs_manual_text: false
 ---
 
