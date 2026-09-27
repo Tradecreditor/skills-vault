@@ -5,6 +5,7 @@
 
 完整計劃同研究背景：`Tradecreditor/Tradecreditor.github.io` branch `claude/skills-vault-system-opru6q` 嘅 `docs/skills-vault-plan.md`。
 規則（agent 同人都要跟）：`CLAUDE.md`（`AGENTS.md` 係同一份）。
+**第一次用？先睇 `GUIDE.md`**（用家使用指南：做到乜、日常點用）。
 
 ## 已決定（2026-09-13）
 | # | 決定 | 結果 |
