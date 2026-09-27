@@ -9,6 +9,8 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-27 · tool · [[pages/20260828-nvidia-skillspector-skill-security-scanner|NVIDIA SkillSpector: Security Scanner for Agent Skills]]
+- 2026-09-27 · concept · [[pages/20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit-and-fix cost by 90%]]
 - 2026-09-27 · video · [[pages/20260829-higgsfield-hell-grind-ai-film-consistency-workflow|拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧]]
 - 2026-09-27 · tool · [[pages/20260910-clay-ai-b2b-sales-automation|Clay: AI B2B Prospecting and Waterfall Enrichment]]
 - 2026-09-27 · post · [[pages/20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]]
@@ -27,5 +29,3 @@
 - 2026-09-20 · repo · [[stars/VoltAgent--awesome-design-md|awesome-design-md]]
 - 2026-09-20 · repo · [[stars/OWASP--secure-coding-practices-quick-reference-guide|secure-coding-practices-quick-reference-guide]]
 - 2026-09-20 · repo · [[pages/20260920-fast-jev-compaction|fast-jev-compaction]]
-- 2026-09-20 · repo · [[stars/nolangz--pixel2motion|pixel2motion]]
-- 2026-09-20 · repo · [[stars/NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]]

@@ -72,3 +72,5 @@
 ## [2026-09-27] capture | Clay: AI B2B Prospecting and Waterfall Enrichment | 20260910-clay-ai-b2b-sales-automation
 ## [2026-09-27] capture | Ex-Googler's 5 Tech Interview Prep Tools | 20260925-ex-googler-tech-interview-prep-tools
 ## [2026-09-27] capture | 拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧 | 20260829-higgsfield-hell-grind-ai-film-consistency-workflow
+## [2026-09-27] capture | NVIDIA SkillSpector: Security Scanner for Agent Skills | 20260828-nvidia-skillspector-skill-security-scanner
+## [2026-09-27] capture | Jev cuts agent SEO/GEO audit-and-fix cost by 90% | 20260925-jev-seo-geo-audit-cost-down-90
