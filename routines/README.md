@@ -203,3 +203,4 @@ Expected on the first runs:
   as `gh repo view --json`, and for any repo not attached to the session. Every prompt already has a fallback path using
   plain `curl` against public `api.github.com` JSON, the GitHub connector's `search_repositories` / `get_file_contents`,
   and the Exa connector's `web_fetch_exa` on `https://api.github.com/...` URLs (verified working from a cloud session).
+x
