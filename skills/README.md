@@ -16,6 +16,7 @@ Claude Code: `/plugin marketplace add Tradecreditor/skills-vault` then `/plugin 
 | model-tiering | draft | vault-operations | Picks the model tier and effort level: expensive models advise and review, Sonnet executes |
 | providing-design-references | draft | post | Provides Claude with visual design references so it can match real layouts and UI decisions |
 | stacking-coding-agent-plugins | draft | post | Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) |
+| making-product-videos | draft | repo | Creates cinematic product demo videos using Video Shotcraft (Remotion + Agent Skill) |
 | using-obsidian-skills | draft | repo | Installs and applies kepano/obsidian-skills for Obsidian markdown, bases and canvas |
 | vault-capture | verified | vault-operations | Captures a pasted link (X, Threads, Instagram, YouTube, GitHub, any page) into the vault |
 | vault-search | verified | vault-operations | Searches the vault (index, skill descriptions, pages) for tools, skills and notes |
