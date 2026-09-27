@@ -43,3 +43,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | openai--codex-plugin-cc | repo | codex-plugin-cc | github | 2026-09-21 | draft | claude-code-plugin, codex, code-review | github:openai/codex-plugin-cc |
 | 20260923-promptfoo | tool | promptfoo: LLM Evals & Red Teaming | github | 2026-09-23 | draft | llm-eval, llm, red-teaming, pentesting, prompt-testing, evaluation-framework, ci-cd, rag, testing, ai-security | github:promptfoo/promptfoo |
 | 20260921-4-claude-code-plugins | post | 4 Claude Code Plugins That Fix the Real Bottlenecks | instagram | 2026-09-26 | draft | claude-code, plugins, graphify, ponytail, omniroute, agent-skills, context-management, ai-tools | instagram:DdjkD4xi1ma |
+| 20260924-4-free-design-sites-for-vibe-coders | post | 4 Free Design Sites for Vibe-Coded Apps | instagram | 2026-09-24 | draft | design, vibe-coding, claude, ui, tools | instagram:Ddqj0svm6yq |

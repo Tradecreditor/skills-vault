@@ -68,3 +68,4 @@
 ## [2026-09-26] promote | model-tiering | skills/model-tiering
 ## [2026-09-26] lint | 2026-W39 backlog fixes | outputs/health/2026-W39-fixes
 ## [2026-09-26] lint | 2026-W39 | outputs/health/2026-W39
+## [2026-09-27] capture | 4 Free Design Sites for Vibe-Coded Apps | 20260924-4-free-design-sites-for-vibe-coders
