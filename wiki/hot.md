@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-27 · video · [[pages/20260829-higgsfield-hell-grind-ai-film-consistency-workflow|拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧]]
 - 2026-09-27 · tool · [[pages/20260910-clay-ai-b2b-sales-automation|Clay: AI B2B Prospecting and Waterfall Enrichment]]
 - 2026-09-27 · post · [[pages/20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]]
 - 2026-09-27 · post · [[pages/20260924-4-free-design-sites-for-vibe-coders|4 Free Design Sites for Vibe-Coded Apps]]
@@ -28,4 +29,3 @@
 - 2026-09-20 · repo · [[pages/20260920-fast-jev-compaction|fast-jev-compaction]]
 - 2026-09-20 · repo · [[stars/nolangz--pixel2motion|pixel2motion]]
 - 2026-09-20 · repo · [[stars/NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]]
-- 2026-09-20 · repo · [[stars/greensock--gsap-skills|gsap-skills]]

@@ -71,3 +71,4 @@
 ## [2026-09-27] capture | 4 Free Design Sites for Vibe-Coded Apps | 20260924-4-free-design-sites-for-vibe-coders
 ## [2026-09-27] capture | Clay: AI B2B Prospecting and Waterfall Enrichment | 20260910-clay-ai-b2b-sales-automation
 ## [2026-09-27] capture | Ex-Googler's 5 Tech Interview Prep Tools | 20260925-ex-googler-tech-interview-prep-tools
+## [2026-09-27] capture | 拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧 | 20260829-higgsfield-hell-grind-ai-film-consistency-workflow
