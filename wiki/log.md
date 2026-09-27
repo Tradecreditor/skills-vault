@@ -77,3 +77,4 @@
 ## [2026-09-27] capture | Jev cuts agent SEO/GEO audit-and-fix cost by 90% | 20260925-jev-seo-geo-audit-cost-down-90
 ## [2026-09-27] capture | Opus 5.5 One-Prompt Motion-Graphics Showreels | 20260925-opus-5-5-motion-graphics-showreel-prompt
 ## [2026-09-27] recapture | 4 Free Design Sites for Vibe-Coded Apps | 20260924-4-free-design-sites-for-vibe-coders
+## [2026-09-27] capture | AI Agent SEO: Purchase-Intent Keywords for $100k/mo E-com Organic Revenue | 20260927-seo-purchase-intent-ai-agent-ecom

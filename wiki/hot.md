@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-27 · post · [[pages/20260927-seo-purchase-intent-ai-agent-ecom|AI Agent SEO: Purchase-Intent Keywords for $100k/mo E-com Organic Revenue]]
 - 2026-09-27 · post · [[pages/20260925-opus-5-5-motion-graphics-showreel-prompt|Opus 5.5 One-Prompt Motion-Graphics Showreels]]
 - 2026-09-27 · tool · [[pages/20260828-nvidia-skillspector-skill-security-scanner|NVIDIA SkillSpector: Security Scanner for Agent Skills]]
 - 2026-09-27 · concept · [[pages/20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit-and-fix cost by 90%]]
@@ -28,4 +29,3 @@
 - 2026-09-20 · repo · [[stars/MadsLorentzen--ai-job-search|ai-job-search]]
 - 2026-09-20 · repo · [[stars/upstash--context7|context7]]
 - 2026-09-20 · repo · [[stars/calcom--cal.diy|cal.diy]]
-- 2026-09-20 · repo · [[stars/VoltAgent--awesome-design-md|awesome-design-md]]
