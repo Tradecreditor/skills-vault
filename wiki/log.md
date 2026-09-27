@@ -69,6 +69,7 @@
 ## [2026-09-26] lint | 2026-W39 backlog fixes | outputs/health/2026-W39-fixes
 ## [2026-09-26] lint | 2026-W39 | outputs/health/2026-W39
 ## [2026-09-27] capture | 4 Free Design Sites for Vibe-Coded Apps | 20260924-4-free-design-sites-for-vibe-coders
+## [2026-09-27] capture | Video Shotcraft — Cinematic Product Videos with Claude Code & Remotion | 20260924-video-shotcraft
 ## [2026-09-27] capture | Clay: AI B2B Prospecting and Waterfall Enrichment | 20260910-clay-ai-b2b-sales-automation
 ## [2026-09-27] capture | Ex-Googler's 5 Tech Interview Prep Tools | 20260925-ex-googler-tech-interview-prep-tools
 ## [2026-09-27] capture | 拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧 | 20260829-higgsfield-hell-grind-ai-film-consistency-workflow

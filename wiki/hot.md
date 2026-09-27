@@ -15,6 +15,7 @@
 - 2026-09-27 · video · [[pages/20260829-higgsfield-hell-grind-ai-film-consistency-workflow|拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧]]
 - 2026-09-27 · tool · [[pages/20260910-clay-ai-b2b-sales-automation|Clay: AI B2B Prospecting and Waterfall Enrichment]]
 - 2026-09-27 · post · [[pages/20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]]
+- 2026-09-27 · post · [[pages/20260924-video-shotcraft|Video Shotcraft — Cinematic Product Videos with Claude Code & Remotion]]
 - 2026-09-27 · post · [[pages/20260924-4-free-design-sites-for-vibe-coders|4 Free Design Sites for Vibe-Coded Apps]]
 - 2026-09-26 · post · [[pages/20260921-4-claude-code-plugins|4 Claude Code Plugins That Fix the Real Bottlenecks]]
 - 2026-09-23 · tool · [[pages/20260923-promptfoo|promptfoo: LLM Evals & Red Teaming]]
@@ -28,4 +29,3 @@
 - 2026-09-20 · repo · [[stars/upstash--context7|context7]]
 - 2026-09-20 · repo · [[stars/calcom--cal.diy|cal.diy]]
 - 2026-09-20 · repo · [[stars/VoltAgent--awesome-design-md|awesome-design-md]]
-- 2026-09-20 · repo · [[stars/OWASP--secure-coding-practices-quick-reference-guide|secure-coding-practices-quick-reference-guide]]
