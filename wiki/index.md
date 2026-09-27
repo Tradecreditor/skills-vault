@@ -4,9 +4,9 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 
 | slug | type | title | platform | captured | status | tags | canonical_id |
 |---|---|---|---|---|---|---|---|
-| 20260904-jackywine-obsidian-2026 | article | 2026 我的 Obsidian 完整分享 | x | 2026-09-13 | draft | obsidian, llm-wiki, knowledge-management, evergreen-notes, karpathy | x:tweet:2095750518941659567 |
-| 20260918-obsidian-skills | repo | obsidian-skills: Agent Skills for Obsidian | github | 2026-09-18 | draft | obsidian, agent-skills, llm-wiki, claude-code, knowledge-management | github:kepano/obsidian-skills |
-| 20260920-fast-jev-compaction | repo | fast-jev-compaction — verbatim Jev-scored compaction for Claude Code | github | 2026-09-20 | draft | hot-list, claude-code, claude-code-plugin, context-management, compaction, typescript, 2026-W38 | github:tamaratran/fast-jev-compaction |
+| 20260904-jackywine-obsidian-2026 | article | 2026 我的 Obsidian 完整分享 | x | 2026-09-13 | verified | obsidian, llm-wiki, knowledge-management, evergreen-notes, karpathy | x:tweet:2095750518941659567 |
+| 20260918-obsidian-skills | repo | obsidian-skills: Agent Skills for Obsidian | github | 2026-09-18 | verified | obsidian, agent-skills, llm-wiki, claude-code, knowledge-management | github:kepano/obsidian-skills |
+| 20260920-fast-jev-compaction | repo | fast-jev-compaction — verbatim Jev-scored compaction for Claude Code | github | 2026-09-20 | verified | hot-list, claude-code, claude-code-plugin, context-management, compaction, typescript, 2026-W38 | github:tamaratran/fast-jev-compaction |
 | LottieFiles--motion-design-skill | repo | motion-design-skill | github | 2026-09-19 | draft | agent-skills, animation, lottie, motion-design, ui | github:LottieFiles/motion-design-skill |
 | Panniantong--Agent-Reach | repo | Agent-Reach | github | 2026-09-19 | draft | agent-infrastructure, ai-agent, ai-search, automation, bilibili, claude-code, cli, cursor, free-api, llm-tools, mcp, python, reddit-scraper, twitter-scraper, web-scraper, xiaohongshu, youtube-transcript | github:Panniantong/Agent-Reach |
 | cathrynlavery--diagram-design | repo | diagram-design | github | 2026-09-19 | draft | agent-skills, claude-code, codex, data-visualization, diagrams, drawio, mermaid, svg | github:cathrynlavery/diagram-design |
@@ -41,6 +41,6 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | microsoft--playwright-mcp | repo | playwright-mcp | github | 2026-09-21 | draft | mcp, playwright, browser-automation | github:microsoft/playwright-mcp |
 | career-ops-hq--career-ops | repo | career-ops | github | 2026-09-21 | draft | ai-agent, job-search, career, claude-code, cli | github:career-ops-hq/career-ops |
 | openai--codex-plugin-cc | repo | codex-plugin-cc | github | 2026-09-21 | draft | claude-code-plugin, codex, code-review | github:openai/codex-plugin-cc |
-| 20260923-promptfoo | tool | promptfoo: LLM Evals & Red Teaming | github | 2026-09-23 | draft | llm-eval, llm, red-teaming, pentesting, prompt-testing, evaluation-framework, ci-cd, rag, testing, ai-security | github:promptfoo/promptfoo |
-| 20260921-4-claude-code-plugins | post | 4 Claude Code Plugins That Fix the Real Bottlenecks | instagram | 2026-09-26 | draft | claude-code, plugins, graphify, ponytail, omniroute, agent-skills, context-management, ai-tools | instagram:DdjkD4xi1ma |
-| 20260924-4-free-design-sites-for-vibe-coders | post | 4 Free Design Sites for Vibe-Coded Apps | instagram | 2026-09-24 | draft | design, vibe-coding, claude, ui, tools | instagram:Ddqj0svm6yq |
+| 20260923-promptfoo | tool | promptfoo: LLM Evals & Red Teaming | github | 2026-09-23 | verified | llm-eval, llm, red-teaming, pentesting, prompt-testing, evaluation-framework, ci-cd, rag, testing, ai-security | github:promptfoo/promptfoo |
+| 20260921-4-claude-code-plugins | post | 4 Claude Code Plugins That Fix the Real Bottlenecks | instagram | 2026-09-26 | verified | claude-code, plugins, graphify, ponytail, omniroute, agent-skills, context-management, ai-tools | instagram:DdjkD4xi1ma |
+| 20260924-4-free-design-sites-for-vibe-coders | post | 4 Free Design Sites for Vibe-Coded Apps | instagram | 2026-09-24 | verified | design, vibe-coding, claude, ui, tools | instagram:Ddqj0svm6yq |
