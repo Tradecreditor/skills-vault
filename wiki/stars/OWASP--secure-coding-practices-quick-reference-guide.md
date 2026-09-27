@@ -41,3 +41,6 @@ Reader used: raw README via Exa (web_fetch_exa)
 
 - [[calcom--cal.diy|cal.diy]] — 自己攞嚟自架嘅開源系統(例如 Cal.diy)正正需要呢類安全編碼清單。
 - [[NousResearch--hermes-agent-self-evolution|hermes-agent-self-evolution]] — 兩者都用檢查清單式嘅關卡嚟把關改動。
+
+## Notes
+- 2026-09-27: promoted into the draft skill [[skills/reviewing-code-security/SKILL|reviewing-code-security]] (full stable checklist in its `references/source.md`, fetched from the OWASP project page via Jina Reader); installed for this project in `.claude/skills/reviewing-code-security/`.
