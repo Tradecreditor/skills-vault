@@ -8,3 +8,5 @@ node_modules/
 /tmp/
 supabase/config.toml
 supabase/.temp/
+
+.obsidian/graph.json
