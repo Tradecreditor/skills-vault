@@ -70,3 +70,10 @@
 ## [2026-09-26] lint | 2026-W39 | outputs/health/2026-W39
 ## [2026-09-27] capture | 4 Free Design Sites for Vibe-Coded Apps | 20260924-4-free-design-sites-for-vibe-coders
 ## [2026-09-27] capture | Video Shotcraft — Cinematic Product Videos with Claude Code & Remotion | 20260924-video-shotcraft
+## [2026-09-27] capture | Clay: AI B2B Prospecting and Waterfall Enrichment | 20260910-clay-ai-b2b-sales-automation
+## [2026-09-27] capture | Ex-Googler's 5 Tech Interview Prep Tools | 20260925-ex-googler-tech-interview-prep-tools
+## [2026-09-27] capture | 拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧 | 20260829-higgsfield-hell-grind-ai-film-consistency-workflow
+## [2026-09-27] capture | NVIDIA SkillSpector: Security Scanner for Agent Skills | 20260828-nvidia-skillspector-skill-security-scanner
+## [2026-09-27] capture | Jev cuts agent SEO/GEO audit-and-fix cost by 90% | 20260925-jev-seo-geo-audit-cost-down-90
+## [2026-09-27] capture | Opus 5.5 One-Prompt Motion-Graphics Showreels | 20260925-opus-5-5-motion-graphics-showreel-prompt
+## [2026-09-27] recapture | 4 Free Design Sites for Vibe-Coded Apps | 20260924-4-free-design-sites-for-vibe-coders

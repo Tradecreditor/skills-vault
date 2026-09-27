@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "scanning-agent-skills": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "887aacf50af82d21376603b05a96aa0a58c0bd68185fcd00180242532b239e51"
+    }
+  }
+}
