@@ -74,3 +74,5 @@
 ## [2026-09-27] capture | 拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧 | 20260829-higgsfield-hell-grind-ai-film-consistency-workflow
 ## [2026-09-27] capture | NVIDIA SkillSpector: Security Scanner for Agent Skills | 20260828-nvidia-skillspector-skill-security-scanner
 ## [2026-09-27] capture | Jev cuts agent SEO/GEO audit-and-fix cost by 90% | 20260925-jev-seo-geo-audit-cost-down-90
+## [2026-09-27] capture | Opus 5.5 One-Prompt Motion-Graphics Showreels | 20260925-opus-5-5-motion-graphics-showreel-prompt
+## [2026-09-27] recapture | 4 Free Design Sites for Vibe-Coded Apps | 20260924-4-free-design-sites-for-vibe-coders
