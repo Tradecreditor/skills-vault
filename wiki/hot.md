@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-28 · tool · [[pages/20260919-linkedin-skills-for-claude|LinkedIn Skills for Claude: Free LinkedIn Automation Tool]]
 - 2026-09-27 · post · [[pages/20260927-seo-purchase-intent-ai-agent-ecom|AI Agent SEO: Purchase-Intent Keywords for $100k/mo E-com Organic Revenue]]
 - 2026-09-27 · post · [[pages/20260925-opus-5-5-motion-graphics-showreel-prompt|Opus 5.5 One-Prompt Motion-Graphics Showreels]]
 - 2026-09-27 · tool · [[pages/20260828-nvidia-skillspector-skill-security-scanner|NVIDIA SkillSpector: Security Scanner for Agent Skills]]
@@ -28,4 +29,3 @@
 - 2026-09-20 · repo · [[stars/microsoft--markitdown|markitdown]]
 - 2026-09-20 · repo · [[stars/MadsLorentzen--ai-job-search|ai-job-search]]
 - 2026-09-20 · repo · [[stars/upstash--context7|context7]]
-- 2026-09-20 · repo · [[stars/calcom--cal.diy|cal.diy]]
