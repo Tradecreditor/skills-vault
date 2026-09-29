@@ -11,6 +11,7 @@ Claude Code: `/plugin marketplace add Tradecreditor/skills-vault` then `/plugin 
 | name | vault_status | origin_type | what it does |
 |---|---|---|---|
 | automating-browsers-with-playwright | draft | repo | Connects an agent to a real browser via the Playwright MCP server |
+| configuring-fable-advisor-jev-tree | draft | post | Configures Claude Code with Fable 5.1 as advisor and an Opus 5.5 + Jev-routed multi-agent tree |
 | delegating-to-codex | draft | repo | Calls OpenAI Codex from inside Claude Code for a code review or a delegated task |
 | evaluating-llms-with-promptfoo | draft | repo | Evaluates LLM prompts, agents and RAG pipelines with promptfoo, including red teaming |
 | making-product-videos | draft | repo | Creates cinematic product demo videos using Video Shotcraft (Remotion + Agent Skill) |

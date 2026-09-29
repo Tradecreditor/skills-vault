@@ -80,3 +80,4 @@
 ## [2026-09-27] capture | AI Agent SEO: Purchase-Intent Keywords for $100k/mo E-com Organic Revenue | 20260927-seo-purchase-intent-ai-agent-ecom
 ## [2026-09-28] lint | 2026-W40 | outputs/health/2026-W40
 ## [2026-09-28] capture | LinkedIn Skills for Claude: Free LinkedIn Automation Tool | 20260919-linkedin-skills-for-claude
+## [2026-09-29] capture | Claude Code: Fable 5.1 Advisor + Jev Routing Tree | 20260928-claude-code-fable-advisor-jev-tree
