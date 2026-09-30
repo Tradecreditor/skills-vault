@@ -21,6 +21,7 @@ Claude Code: `/plugin marketplace add Tradecreditor/skills-vault` then `/plugin 
 | stacking-coding-agent-plugins | draft | post | Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) |
 | targeting-purchase-intent-keywords | draft | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |
 | using-obsidian-skills | draft | repo | Installs and applies kepano/obsidian-skills for Obsidian markdown, bases and canvas |
+| using-ui-ux-pro-max | draft | repo | Installs and applies the UI UX Pro Max skill for AI design system generation (192 rules, 79 styles) |
 | vault-capture | verified | vault-operations | Captures a pasted link (X, Threads, Instagram, YouTube, GitHub, any page) into the vault |
 | vault-search | verified | vault-operations | Searches the vault (index, skill descriptions, pages) for tools, skills and notes |
 

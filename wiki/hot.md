@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-09-30 · repo · [[pages/20260930-ui-ux-pro-max|UI UX Pro Max: AI Design Intelligence Skill for Coding Agents]]
 - 2026-09-29 · skill · [[pages/20260928-claude-code-fable-advisor-jev-tree|Claude Code: Fable 5.1 Advisor + Jev Routing Tree]]
 - 2026-09-28 · tool · [[pages/20260919-linkedin-skills-for-claude|LinkedIn Skills for Claude: Free LinkedIn Automation Tool]]
 - 2026-09-27 · post · [[pages/20260927-seo-purchase-intent-ai-agent-ecom|AI Agent SEO: Purchase-Intent Keywords for $100k/mo E-com Organic Revenue]]
@@ -28,5 +29,4 @@
 - 2026-09-21 · repo · [[stars/Forget-C--Jellyfish|Jellyfish]]
 - 2026-09-21 · repo · [[stars/THU-MAIC--OpenMAIC|OpenMAIC]]
 - 2026-09-20 · repo · [[stars/microsoft--markitdown|markitdown]]
-- 2026-09-20 · repo · [[stars/MadsLorentzen--ai-job-search|ai-job-search]]
 
