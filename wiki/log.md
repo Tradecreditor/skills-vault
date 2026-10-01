@@ -87,3 +87,4 @@
 ## [2026-10-01] capture | Cloudflare cf: agentic CLI replacing Wrangler (3000+ APIs) | 20260930-cloudflare-cf-agentic-cli-replaces-wrangler
 ## [2026-10-01] capture | OpenAI Agents API: Computer Use to Multi-Agent Guide | 20260929-openai-agents-api-computer-use-guide
 ## [2026-10-01] capture | Newsletter 主題行生成器 (Subject Line Prompt) | 20260929-newsletter-subject-line-generator-prompt
+## [2026-10-01] capture | Sonnet 5.5 vs Opus 5.5: Same 4 Motion-Graphics Prompts, 41% Cheaper | 20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost

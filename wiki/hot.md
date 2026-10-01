@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-10-01 · post · [[pages/20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost|Sonnet 5.5 vs Opus 5.5: Same 4 Motion-Graphics Prompts, 41% Cheaper]]
 - 2026-10-01 · post · [[pages/20260929-newsletter-subject-line-generator-prompt|Newsletter 主題行生成器 (Subject Line Prompt)]]
 - 2026-10-01 · article · [[pages/20260929-openai-agents-api-computer-use-guide|OpenAI Agents API: Computer Use to Multi-Agent Guide]]
 - 2026-10-01 · post · [[pages/20260930-cloudflare-cf-agentic-cli-replaces-wrangler|Cloudflare cf: agentic CLI replacing Wrangler (3000+ APIs)]]
@@ -28,5 +29,4 @@
 - 2026-09-27 · post · [[pages/20260924-4-free-design-sites-for-vibe-coders|4 Free Design Sites for Vibe-Coded Apps]]
 - 2026-09-26 · post · [[pages/20260921-4-claude-code-plugins|4 Claude Code Plugins That Fix the Real Bottlenecks]]
 - 2026-09-23 · tool · [[pages/20260923-promptfoo|promptfoo: LLM Evals & Red Teaming]]
-- 2026-09-21 · repo · [[stars/openai--codex-plugin-cc|codex-plugin-cc]]
 
