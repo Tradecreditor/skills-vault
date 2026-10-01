@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-10-01 · post · [[pages/20260930-cloudflare-cf-agentic-cli-replaces-wrangler|Cloudflare cf: agentic CLI replacing Wrangler (3000+ APIs)]]
 - 2026-10-01 · post · [[pages/20260930-hostinger-vps-cloudflare-tunnel-setup|Hostinger KVM 2 VPS + Cloudflare free tier for a ~US$6.5/mo small SaaS]]
 - 2026-10-01 · post · [[pages/20260930-openseo-open-source-semrush-alternative|OpenSEO: self-hosted open-source Semrush alternative]]
 - 2026-10-01 · post · [[pages/20260929-json-render-generative-ui-component-library|json-render: generative UI constrained to your own component library]]
@@ -28,5 +29,4 @@
 - 2026-09-21 · repo · [[stars/openai--codex-plugin-cc|codex-plugin-cc]]
 - 2026-09-21 · repo · [[stars/career-ops-hq--career-ops|career-ops]]
 - 2026-09-21 · repo · [[stars/microsoft--playwright-mcp|playwright-mcp]]
-- 2026-09-21 · repo · [[stars/Forget-C--Jellyfish|Jellyfish]]
 
