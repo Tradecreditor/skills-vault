@@ -64,7 +64,8 @@ everything appears to work without it, right up until the agent pushes to `main`
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools
-(twitter-cli / yt-dlp / gh / Jina Reader) first, Exa as backup, then per-platform fallbacks.
+(twitter-cli / yt-dlp / gh / Jina Reader) first, Exa as backup, then per-platform fallbacks. Readers are no-login by design (no cookies,
+no logged-in browsers); the only paid-tier key, `SUPADATA_KEY`, is used solely for Instagram and Facebook video audio.
 Every capture produces `raw/<slug>.md` (verbatim), `wiki/pages/<slug>.md` (compiled), optionally `skills/<name>/SKILL.md`
 (gerund name, see "Skill format"), plus rows in `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`.
 
@@ -85,12 +86,12 @@ slug: <yyyymmdd>-<kebab-slug>            # stars: <owner>--<repo>
 type: skill | tool | concept | repo | post | video | article
 status: draft | verified | deprecated
 source_url: "<canonical url>"
-source_platform: x | threads | instagram | youtube | github | web
+source_platform: x | threads | instagram | facebook | youtube | github | web
 author: "<handle or name>"
 published: "YYYY-MM-DD"
 captured_at: "YYYY-MM-DDTHH:MM:SSZ"
 captured_by: "claude-code-local | claude-code-cloud | routine:capture-link | routine:github-stars-sync | routine:weekly-hot-list | codex | gemini-cli | openclaw | <agent>"
-canonical_id: "x:tweet:<id> | youtube:<videoId> | github:<owner>/<repo> | threads:<id> | instagram:<shortcode> | url:<sha1>"
+canonical_id: "x:tweet:<id> | youtube:<videoId> | github:<owner>/<repo> | threads:<id> | instagram:<shortcode> | facebook:<id> | url:<sha1>"
 engagement: "likes=1069 reposts=243 views=409450"   # whatever the platform gave; one string
 tags: [topic/knowledge-mgmt, obsidian, llm-wiki]   # post/video/article: first tag is one topic/* from the list below
 related: []
