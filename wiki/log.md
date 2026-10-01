@@ -85,3 +85,4 @@
 ## [2026-10-01] capture | OpenSEO: self-hosted open-source Semrush alternative | 20260930-openseo-open-source-semrush-alternative
 ## [2026-10-01] capture | Hostinger KVM 2 VPS + Cloudflare free tier for a ~US$6.5/mo small SaaS | 20260930-hostinger-vps-cloudflare-tunnel-setup
 ## [2026-10-01] capture | Cloudflare cf: agentic CLI replacing Wrangler (3000+ APIs) | 20260930-cloudflare-cf-agentic-cli-replaces-wrangler
+## [2026-10-01] capture | OpenAI Agents API: Computer Use to Multi-Agent Guide | 20260929-openai-agents-api-computer-use-guide
