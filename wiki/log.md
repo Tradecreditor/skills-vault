@@ -82,3 +82,4 @@
 ## [2026-09-28] capture | LinkedIn Skills for Claude: Free LinkedIn Automation Tool | 20260919-linkedin-skills-for-claude
 ## [2026-09-29] capture | Claude Code: Fable 5.1 Advisor + Jev Routing Tree | 20260928-claude-code-fable-advisor-jev-tree
 ## [2026-10-01] capture | json-render: generative UI constrained to your own component library | 20260929-json-render-generative-ui-component-library
+## [2026-10-01] capture | OpenSEO: self-hosted open-source Semrush alternative | 20260930-openseo-open-source-semrush-alternative

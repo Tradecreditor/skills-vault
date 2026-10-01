@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-10-01 · post · [[pages/20260930-openseo-open-source-semrush-alternative|OpenSEO: self-hosted open-source Semrush alternative]]
 - 2026-10-01 · post · [[pages/20260929-json-render-generative-ui-component-library|json-render: generative UI constrained to your own component library]]
 - 2026-09-29 · skill · [[pages/20260928-claude-code-fable-advisor-jev-tree|Claude Code: Fable 5.1 Advisor + Jev Routing Tree]]
 - 2026-09-28 · tool · [[pages/20260919-linkedin-skills-for-claude|LinkedIn Skills for Claude: Free LinkedIn Automation Tool]]
@@ -28,5 +29,4 @@
 - 2026-09-21 · repo · [[stars/microsoft--playwright-mcp|playwright-mcp]]
 - 2026-09-21 · repo · [[stars/Forget-C--Jellyfish|Jellyfish]]
 - 2026-09-21 · repo · [[stars/THU-MAIC--OpenMAIC|OpenMAIC]]
-- 2026-09-20 · repo · [[stars/microsoft--markitdown|markitdown]]
 
