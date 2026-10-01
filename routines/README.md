@@ -37,13 +37,25 @@ Every routine inherits its network policy from its cloud environment, so do this
    www.youtube.com
    x.com
    www.threads.net
+   www.threads.com
+   www.facebook.com
    www.instagram.com
    ```
 
-5. Optional keys, only if you have them: add `SUPADATA_KEY` (YouTube / Reel transcripts), `SC_API_KEY` (Threads counts),
-   `THREADS_APP_TOKEN`, `TWITTER_AUTH_TOKEN` + `TWITTER_CT0` (burner account, X search for the weekly list).
+5. Optional keys, only if you have them:
+   | Key | Where | What it unlocks | Cost |
+   |---|---|---|---|
+   | `SUPADATA_KEY` | dash.supadata.ai → API key | **Instagram and Facebook only**: reel / carousel / video transcripts and counts. The skill never spends it on X or YouTube | free 100 credits/month (1 per existing transcript, 2 per AI-generated minute ≈ 30 min of video); paid from $5/month, no rollover |
+   | `JINA_API_KEY` | jina.ai → API key | higher r.jina.ai rate limit; reported to bypass the anonymous per-domain blocks | free |
+   | `SC_API_KEY`, `THREADS_APP_TOKEN` | scrapecreators.com, Meta app | Threads like/repost counts, Threads oEmbed | optional, not required |
+   | `TWITTER_AUTH_TOKEN` + `TWITTER_CT0` | Cookie-Editor export from a **burner** X account | X search for the weekly list only (a single post needs no cookie) | free, account risk |
    On Pro/Max prefer **API credentials** over plain environment variables: environment variables are visible to anyone
    using the environment.
+   Instagram reels/carousels and Facebook videos: Jina returns only the caption/text; the spoken audio is reachable only through
+   Supadata (`SUPADATA_KEY`), so without that key a video whose substance is in the voice-over lands caption-only with
+   `needs_manual_text: true`. YouTube in the cloud lands metadata-only (`needs_manual_text: true`) because YouTube blocks yt-dlp from
+   datacenter IPs; capture YouTube links from a local Claude Code session when the subtitles matter.
+   Threads: `threads.net` now 301s to `threads.com`, so both hosts must be allowed or the redirect is denied.
 6. **Save changes.** The policy applies from the next run.
 
 Without this, requests to the reader hosts fail with `403` and `x-deny-reason: host_not_allowed`, and every capture lands with
@@ -203,3 +215,10 @@ Expected on the first runs:
   as `gh repo view --json`, and for any repo not attached to the session. Every prompt already has a fallback path using
   plain `curl` against public `api.github.com` JSON, the GitHub connector's `search_repositories` / `get_file_contents`,
   and the Exa connector's `web_fetch_exa` on `https://api.github.com/...` URLs (verified working from a cloud session).
+- Logged-in reading (exported cookies, Playwright storageState, OpenCLI with your Chrome, Browser Use / Browserbase profiles,
+  Claude in Chrome) was evaluated on 2026-10-01 and not adopted: it breaches the platforms' terms, risks the account, and
+  Agent-Reach's Facebook/Instagram path needs a desktop Chrome, which a cloud Routine does not have. Details and the
+  alternatives considered: `outputs/20261001-social-media-readers-for-agents.md`.
+- Exa is a metered connector. When its credits run out `web_fetch_exa` returns HTTP 402 and the run's status still shows green;
+  the capture skill tells the routine to fall through to Jina / per-platform readers, so a sudden rise in `needs_manual_text: true`
+  captures is the symptom to check.

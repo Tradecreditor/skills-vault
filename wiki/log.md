@@ -82,3 +82,12 @@
 ## [2026-09-28] capture | LinkedIn Skills for Claude: Free LinkedIn Automation Tool | 20260919-linkedin-skills-for-claude
 ## [2026-09-29] capture | Claude Code: Fable 5.1 Advisor + Jev Routing Tree | 20260928-claude-code-fable-advisor-jev-tree
 ## [2026-09-30] capture | UI UX Pro Max: AI Design Intelligence Skill for Coding Agents | 20260930-ui-ux-pro-max
+## [2026-10-01] capture | json-render: generative UI constrained to your own component library | 20260929-json-render-generative-ui-component-library
+## [2026-10-01] capture | OpenSEO: self-hosted open-source Semrush alternative | 20260930-openseo-open-source-semrush-alternative
+## [2026-10-01] capture | Hostinger KVM 2 VPS + Cloudflare free tier for a ~US$6.5/mo small SaaS | 20260930-hostinger-vps-cloudflare-tunnel-setup
+## [2026-10-01] capture | Cloudflare cf: agentic CLI replacing Wrangler (3000+ APIs) | 20260930-cloudflare-cf-agentic-cli-replaces-wrangler
+## [2026-10-01] capture | OpenAI Agents API: Computer Use to Multi-Agent Guide | 20260929-openai-agents-api-computer-use-guide
+## [2026-10-01] capture | Newsletter 主題行生成器 (Subject Line Prompt) | 20260929-newsletter-subject-line-generator-prompt
+## [2026-10-01] capture | Sonnet 5.5 vs Opus 5.5: Same 4 Motion-Graphics Prompts, 41% Cheaper | 20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost
+## [2026-10-01] capture | 5 GitHub Repos That Gained ~43k Stars in a Week | 20260925-5-github-repos-43k-stars-week
+## [2026-10-01] lint | social reader options | outputs/20261001-social-media-readers-for-agents

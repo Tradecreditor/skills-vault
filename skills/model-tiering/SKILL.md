@@ -76,3 +76,7 @@ Default pairings for my projects:
 | Enabling advisor `caching` on short tasks | Break-even is ~3 advisor calls/conversation; off below that |
 | Dropping the advisor tool from `tools` mid-conversation | 400 error — also strip all `advisor_tool_result` blocks from history |
 | Adding the advisor-call nudge to Opus executors | Measured to lower Opus pass rates; Sonnet +7pp, Sonnet neutral |
+
+## Evidence
+
+- 2026-09-29 — Charlie Hills ran the same 4 motion-graphics prompts in Claude Code on Sonnet 5.5 vs Opus 5.5, first try, no fixes: $4.95 vs $8.44 (41% less), 19.5 vs 34.7 min; Opus still leads 7 of 8 of Anthropic's benchmarks by 2–3 pts → "Sonnet for daily work, Opus for the hard, open-ended stuff" ([[../../wiki/pages/20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost|20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost]]). One run, small sample.
