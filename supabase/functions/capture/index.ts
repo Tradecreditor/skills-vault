@@ -24,6 +24,7 @@ const HOST_STRIP: Record<string, RegExp> = {
   "threads.net": /^(xmt|hl|source_surface|slof)$/i,
   "threads.com": /^(xmt|hl|source_surface|slof)$/i,
   "instagram.com": /^(img_index|hl|stkn)$/i,
+  "facebook.com": /^(mibextid|rdid|share_url|__cft__.*|__tn__|ref)$/i,
 };
 const SHORTENERS = new Set(["t.co", "bit.ly", "lnkd.in", "vt.tiktok.com", "vm.tiktok.com", "youtu.be"]);
 // Share links that redirect to the canonical post (Threads /share/<code>, Facebook /share/<p|v|r>/<code>); followed like shorteners.
@@ -57,7 +58,7 @@ function normalise(raw: string): string {
   try {
     const u = new URL(raw.trim());
     u.hash = "";
-    let host = u.hostname.toLowerCase().replace(/^(www|m|mobile)\./, "");
+    let host = u.hostname.toLowerCase().replace(/^(www|m|mobile|web)\./, "");
     if (host === "twitter.com" || host === "fxtwitter.com" || host === "vxtwitter.com") host = "x.com";
     if (host === "threads.net") host = "threads.com";                 // threads.net 301s to threads.com since 2026-09
     if (host === "youtu.be") { u.searchParams.set("v", u.pathname.split("/")[1] ?? ""); u.pathname = "/watch"; host = "youtube.com"; }
