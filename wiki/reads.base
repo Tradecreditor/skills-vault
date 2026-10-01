@@ -1,0 +1,57 @@
+# wiki/reads.base — live view of everything captured as a read (type post / video / article).
+# Nothing to maintain: a page shows up by living in wiki/pages with one of those types and a topic/* first tag.
+filters:
+  and:
+    - 'file.inFolder("wiki/pages")'
+    - or:
+        - 'type == "post"'
+        - 'type == "video"'
+        - 'type == "article"'
+formulas:
+  topic: 'tags.filter(value.startsWith("topic/")).join(", ")'
+properties:
+  title:
+    displayName: Title
+  type:
+    displayName: Type
+  formula.topic:
+    displayName: Topic
+  author:
+    displayName: Author
+  source_platform:
+    displayName: Platform
+  published:
+    displayName: Published
+  captured_at:
+    displayName: Captured
+views:
+  - type: table
+    name: All reads
+    order:
+      - file.name
+      - title
+      - type
+      - formula.topic
+      - author
+      - source_platform
+      - published
+    sort:
+      - property: published
+        direction: DESC
+      - property: captured_at
+        direction: DESC
+  - type: table
+    name: By topic
+    groupBy:
+      property: formula.topic
+      direction: ASC
+    order:
+      - file.name
+      - title
+      - type
+      - author
+      - source_platform
+      - published
+    sort:
+      - property: published
+        direction: DESC
