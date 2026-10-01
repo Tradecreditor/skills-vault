@@ -17,6 +17,7 @@
 - 2026-10-01 · post · [[pages/20260930-hostinger-vps-cloudflare-tunnel-setup|Hostinger KVM 2 VPS + Cloudflare free tier for a ~US$6.5/mo small SaaS]]
 - 2026-10-01 · post · [[pages/20260930-openseo-open-source-semrush-alternative|OpenSEO: self-hosted open-source Semrush alternative]]
 - 2026-10-01 · post · [[pages/20260929-json-render-generative-ui-component-library|json-render: generative UI constrained to your own component library]]
+- 2026-09-30 · repo · [[pages/20260930-ui-ux-pro-max|UI UX Pro Max: AI Design Intelligence Skill for Coding Agents]]
 - 2026-09-29 · skill · [[pages/20260928-claude-code-fable-advisor-jev-tree|Claude Code: Fable 5.1 Advisor + Jev Routing Tree]]
 - 2026-09-28 · tool · [[pages/20260919-linkedin-skills-for-claude|LinkedIn Skills for Claude: Free LinkedIn Automation Tool]]
 - 2026-09-27 · post · [[pages/20260927-seo-purchase-intent-ai-agent-ecom|AI Agent SEO: Purchase-Intent Keywords for $100k/mo E-com Organic Revenue]]
@@ -28,5 +29,4 @@
 - 2026-09-27 · post · [[pages/20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]]
 - 2026-09-27 · post · [[pages/20260924-video-shotcraft|Video Shotcraft — Cinematic Product Videos with Claude Code & Remotion]]
 - 2026-09-27 · post · [[pages/20260924-4-free-design-sites-for-vibe-coders|4 Free Design Sites for Vibe-Coded Apps]]
-- 2026-09-26 · post · [[pages/20260921-4-claude-code-plugins|4 Claude Code Plugins That Fix the Real Bottlenecks]]
 
