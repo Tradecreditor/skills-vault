@@ -21,10 +21,13 @@ const GLOBAL_STRIP = /^(utm_.*|fbclid|gclid|igsh|igshid|si)$/i;
 const HOST_STRIP: Record<string, RegExp> = {
   "x.com": /^(s|t|ref_src|ref_url)$/i,
   "youtube.com": /^(t|feature|list|index|pp)$/i,
-  "threads.net": /^(xmt|hl)$/i,
-  "instagram.com": /^(img_index|hl)$/i,
+  "threads.net": /^(xmt|hl|source_surface|slof)$/i,
+  "threads.com": /^(xmt|hl|source_surface|slof)$/i,
+  "instagram.com": /^(img_index|hl|stkn)$/i,
 };
 const SHORTENERS = new Set(["t.co", "bit.ly", "lnkd.in", "vt.tiktok.com", "vm.tiktok.com", "youtu.be"]);
+// Share links that redirect to the canonical post (Threads /share/<code>, Facebook /share/<p|v|r>/<code>); followed like shorteners.
+const SHARE_PATH: Record<string, RegExp> = { "threads.com": /^\/share\//, "threads.net": /^\/share\//, "facebook.com": /^\/share\// };
 const RETRY_STATUSES = new Set(["fire_failed"]);
 const STALE_QUEUED_MS = 10 * 60 * 1000;
 
@@ -35,9 +38,11 @@ function extractUrls(text: string): string[] {
 async function expand(raw: string): Promise<string> {
   let u = raw;
   for (let hop = 0; hop < 3; hop++) {
-    let host = "";
-    try { host = new URL(u).hostname.toLowerCase().replace(/^www\./, ""); } catch { return u; }
-    if (!SHORTENERS.has(host) || host === "youtu.be") break;
+    let host = "", path = "";
+    try { const p = new URL(u); host = p.hostname.toLowerCase().replace(/^www\./, ""); path = p.pathname; } catch { return u; }
+    const isShortener = SHORTENERS.has(host) && host !== "youtu.be";
+    const isShare = SHARE_PATH[host]?.test(path) ?? false;
+    if (!isShortener && !isShare) break;
     try {
       const r = await fetch(u, { method: "HEAD", redirect: "manual", signal: AbortSignal.timeout(5000) });
       const loc = r.headers.get("location");
@@ -54,7 +59,7 @@ function normalise(raw: string): string {
     u.hash = "";
     let host = u.hostname.toLowerCase().replace(/^(www|m|mobile)\./, "");
     if (host === "twitter.com" || host === "fxtwitter.com" || host === "vxtwitter.com") host = "x.com";
-    if (host === "threads.com") host = "threads.net";
+    if (host === "threads.net") host = "threads.com";                 // threads.net 301s to threads.com since 2026-09
     if (host === "youtu.be") { u.searchParams.set("v", u.pathname.split("/")[1] ?? ""); u.pathname = "/watch"; host = "youtube.com"; }
     u.hostname = host;
     if (host === "x.com") {                                            // /<handle>/status/<id>[/photo/1] -> /<handle>/status/<id>
