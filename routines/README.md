@@ -37,6 +37,7 @@ Every routine inherits its network policy from its cloud environment, so do this
    www.youtube.com
    x.com
    www.threads.net
+   www.threads.com
    www.instagram.com
    ```
 
@@ -44,6 +45,9 @@ Every routine inherits its network policy from its cloud environment, so do this
    `THREADS_APP_TOKEN`, `TWITTER_AUTH_TOKEN` + `TWITTER_CT0` (burner account, X search for the weekly list).
    On Pro/Max prefer **API credentials** over plain environment variables: environment variables are visible to anyone
    using the environment.
+   Instagram reels/carousels: Jina returns only the caption; the spoken audio is reachable only through Supadata (`SUPADATA_KEY`),
+   so without that key a reel whose substance is in the voice-over lands caption-only with `needs_manual_text: true`.
+   Threads: `threads.net` now 301s to `threads.com`, so both hosts must be allowed or the redirect is denied.
 6. **Save changes.** The policy applies from the next run.
 
 Without this, requests to the reader hosts fail with `403` and `x-deny-reason: host_not_allowed`, and every capture lands with
@@ -203,3 +207,6 @@ Expected on the first runs:
   as `gh repo view --json`, and for any repo not attached to the session. Every prompt already has a fallback path using
   plain `curl` against public `api.github.com` JSON, the GitHub connector's `search_repositories` / `get_file_contents`,
   and the Exa connector's `web_fetch_exa` on `https://api.github.com/...` URLs (verified working from a cloud session).
+- Exa is a metered connector. When its credits run out `web_fetch_exa` returns HTTP 402 and the run's status still shows green;
+  the capture skill tells the routine to fall through to Jina / per-platform readers, so a sudden rise in `needs_manual_text: true`
+  captures is the symptom to check.

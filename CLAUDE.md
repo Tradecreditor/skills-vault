@@ -18,6 +18,7 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 | `wiki/stars/` | github-stars-sync routine | one note per starred GitHub repo; for these the slug **is** `<owner>--<repo>` and the file is `wiki/stars/<slug>.md`. This folder is defined by *who wrote it*, not by `type`: a repo you captured yourself by pasting its link stays in `wiki/pages/` with a date-slug, even though it is also `type: repo`. Do not move pages between the two. |
 | `wiki/hot-list/` | weekly-hot-list routine | `YYYY-Www.md` weekly reports, `_config.yaml` thresholds, `_snapshot.json` star snapshots |
 | `wiki/index.md`, `wiki/log.md`, `wiki/hot.md` | agents (append/update rows) | catalogue, append-only log, recent context |
+| `wiki/reads.base` | core (rarely) | Obsidian Bases view of every `post` / `video` / `article` page, grouped by `topic/*` tag. A live query over `wiki/pages`: nothing to append, a page appears by having the right `type` and a topic tag |
 | `skills/<name>/` | agents (drafts) / core (verified) | Agent-Skills spec folders installable in any agent; folder name == `name` (gerund, e.g. `reviewing-supabase-rls`) |
 | `agents/<agent-name>/` | that agent | scratch area for non-core agents; the core agent promotes good material into `wiki/` or `skills/` |
 | `outputs/` | agents | long-form answers and `outputs/health/` lint reports. AI long-form output goes here, never into `wiki/pages/` |
@@ -74,6 +75,7 @@ explicitly: 30000 for an API listing, 50000+ for a page whose full text goes int
 mid-object, it was cut: raise the limit or fetch a smaller page, never write the truncated version to `raw/`.
 Exa also **caches by exact URL**. For anything you poll or re-run (a starred list, a weekly search, an engagement count),
 append a changing `&cb=<YYYYMMDDHHMM>` — the APIs ignore it, and without it you will score a stale response as fresh.
+A 402 from Exa means the credits are exhausted: skip the Exa tier for the rest of the run instead of retrying.
 
 ## Note format (`wiki/pages/<slug>.md` and `wiki/stars/<slug>.md`)
 ```yaml
@@ -87,10 +89,10 @@ source_platform: x | threads | instagram | youtube | github | web
 author: "<handle or name>"
 published: "YYYY-MM-DD"
 captured_at: "YYYY-MM-DDTHH:MM:SSZ"
-captured_by: "claude-code-local | routine:capture-link | routine:github-stars-sync | routine:weekly-hot-list | codex | gemini-cli | openclaw | <agent>"
+captured_by: "claude-code-local | claude-code-cloud | routine:capture-link | routine:github-stars-sync | routine:weekly-hot-list | codex | gemini-cli | openclaw | <agent>"
 canonical_id: "x:tweet:<id> | youtube:<videoId> | github:<owner>/<repo> | threads:<id> | instagram:<shortcode> | url:<sha1>"
 engagement: "likes=1069 reposts=243 views=409450"   # whatever the platform gave; one string
-tags: [obsidian, llm-wiki]
+tags: [topic/knowledge-mgmt, obsidian, llm-wiki]   # post/video/article: first tag is one topic/* from the list below
 related: []
 needs_manual_text: false
 ---
@@ -98,6 +100,10 @@ needs_manual_text: false
 `captured_at` is strict ISO-8601 UTC: `YYYY-MM-DDTHH:MM:SSZ` (fractional seconds allowed). Exactly one zone marker - `+00:00Z` carries both and parses nowhere.
 Body sections, in this order: **摘要**（繁體中文，3–6 句）· **Key facts**（English bullets: what it is, how to install/use, numbers）· **點解值得留意** · **Source**（link + author + date + reader used）· **Related**（wikilinks）.
 Summaries are Traditional Chinese; commands, code and SKILL.md bodies are English.
+
+Topic vocabulary (fixed; `tags[0]` of every `post` / `video` / `article`, prefix `topic/` so Obsidian nests them and `wiki/reads.base` can group on them):
+`topic/model-comparison` · `topic/agent-platforms` · `topic/agent-tooling` · `topic/repo-picks` · `topic/seo-geo` · `topic/marketing-content` · `topic/video-gen` · `topic/infra-devops` · `topic/knowledge-mgmt` · `topic/sales-ops` · `topic/ai-news`.
+Free-form tags follow the topic. Adding a topic is a `docs:` edit to this list (and AGENTS.md), never an ad-hoc tag.
 
 ## Skill format (`skills/<name>/SKILL.md`)
 Agent Skills spec (agentskills.io): folder name == `name` (lowercase, hyphens, prefer gerund: `processing-pdfs`; never contains "claude" or "anthropic"),
