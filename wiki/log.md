@@ -95,3 +95,4 @@
 ## [2026-10-02] capture | What Is Jev? The AI Model That Doesn't Generate Text | 20261002-what-is-jev-system-one-ai-model
 ## [2026-10-02] lint | Jev in the vault routines | outputs/20261002-jev-in-vault-routines
 ## [2026-10-02] promote | judging-with-jev | skills/judging-with-jev
+## [2026-10-02] capture | Jev 爆紅後 Strands Decider、Clef 接連登場，決策模型正走出哪些不同路線？ | 20261002-jev-strands-decider-clef-decision-models
