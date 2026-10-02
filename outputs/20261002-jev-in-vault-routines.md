@@ -38,7 +38,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 
 | # | 步驟（prompt 原句）| 今日 | Jev 問題 | state | 門檻 → fallback | 結論 |
 |---|---|---|---|---|---|---|
-| H1 | 1b/1c：「only then fxtwitter-verify the in-window hits (the fxtwitter cap is 40, so never spend it on out-of-window posts)」；Threads「read each post via Jina」 | Opus 讀 13 topic × 25 個 X 結果 + Threads 結果嘅 snippet，自己揀邊 40 個去驗證 | `in_scope` score 1–5：呢個帖幾大程度係講 `_config.yaml` `scope:` 範圍內嘅新工具 / skill / MCP / repo | title + snippet + author + publishedDate（約 300 tokens）| ≥ 3.5 入驗證名單，按分排序取前 40；2.5–3.5 Opus 睇一眼；< 2.5 跳過，數目寫入 ## 方法 | **採用（試點 1）** |
+| H1 | 1b/1c：「only then fxtwitter-verify the in-window hits (the fxtwitter cap is 40, so never spend it on out-of-window posts)」；Threads「read each post via Jina」 | Opus 讀 13 topic × 25 個 X 結果 + Threads 結果嘅 snippet，自己揀邊 40 個去驗證 | `in_scope` score（五級，0–4）：呢個帖幾大程度係講 `_config.yaml` `scope:` 範圍內嘅新工具 / skill / MCP / repo | title + snippet + author + publishedDate（約 300 tokens）| ≥ 2.5 入驗證名單，按分排序取前 40；1.5–2.5 Opus 睇一眼；< 1.5 跳過，數目寫入 ## 方法 | **採用（試點 1）** |
 | H2 | 1a：`min_stars_gained_7d_if_topical` gate 嘅 topical 判斷（「README/topics mention agent, skill, MCP, Claude Code, Codex, OpenClaw」）| Opus 逐個 repo 睇 description / topics / README 決定用 1,500 定 3,000 門檻 | `topical` noul：呢個 repo 係唔係 agent / agent skill / MCP server / coding-agent 工具 | name + description + topics + README 頭 60 行（約 1,500 tokens）| ≥ 0.80 topical；0.50–0.80 Opus 決定；< 0.50 用一般門檻 | **採用（試點 1）** |
 | H3 | 1 末段：「Group candidates by item (canonical GitHub repo when one exists, otherwise normalised product name)」| Opus 憑名稱同描述配對 X 帖同 GitHub repo | `same_item` noul：呢個帖同呢個 repo 係唔係同一個產品 | 帖文 + repo name / description（約 600 tokens）| ≥ 0.80 合併；0.50–0.80 Opus 決定；< 0.50 分開 | 採用（試點 1，H1/H2 跑穩之後）|
 | H4 | 3：「draft skills/<name>/SKILL.md only if it is an installable skill or a repeatable procedure」| Opus 寫報告時順手判斷 | `installable_skill` noul | 贏家嘅 README / 帖文頭 2k tokens | ≥ 0.80 draft；否則唔 draft，Opus 唔再諗 | 之後（每週只有 2–3 個贏家，慳得少）|
@@ -58,7 +58,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 | # | 步驟（prompt 原句）| 今日 | Jev 問題 | state | 門檻 → fallback | 結論 |
 |---|---|---|---|---|---|---|
 | L1 | 5：「near-duplicate titles」| Sonnet 逐週重新目測（W40 報告又再列 OpenSpec / OpenMAIC / OpenCLI 呢類表面相似）| `near_duplicate` noul：兩個條目係唔係同一樣工具 / 同一個來源 | 兩個條目嘅 title + type + source_url + 摘要 頭兩句（約 200 tokens）| 只對 token 重疊預篩出嘅配對問（約 20 對）；≥ 0.80 寫入 ## Suggested fixes；0.50–0.80 Sonnet 睇；< 0.50 唔提 | **採用（試點 3）** |
-| L2 | 6：「draft entries older than 30 days (list them for Josep to review)」| 只列清單；而家 42 個 draft，9 月 19 日嗰批好快過 30 日 | `review_priority` score 1–5：呢篇值唔值得 Josep 先 verify（內容完整、有 Related、有 raw、同近期 capture 有關）| frontmatter + 摘要（約 800 tokens）| 用分數排清單，唔刪任何項 | 之後 |
+| L2 | 6：「draft entries older than 30 days (list them for Josep to review)」| 只列清單；而家 42 個 draft，9 月 19 日嗰批好快過 30 日 | `review_priority` score（五級，0–4）：呢篇值唔值得 Josep 先 verify（內容完整、有 Related、有 raw、同近期 capture 有關）| frontmatter + 摘要（約 800 tokens）| 用分數排清單，唔刪任何項 | 之後 |
 | L3 | 1–4、7 嘅機械檢查 | 腳本 | — | — | — | **唔用 Jev**：確定性檢查 |
 
 ### capture-link（Sonnet，每條 URL 一次 run）— 排最後
@@ -69,7 +69,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 | C2 | §3 Topic tag：「the first entry of tags is exactly one value from the fixed vocabulary」| Sonnet 揀 | `topic` choice，11 個 `topic/*`，只喺 type ∈ post / video / article 時問 | 同上 | 同上 | 之後 |
 | C3 | §4：「Create skills/<gerund-name>/SKILL.md when the source teaches a repeatable procedure an agent could follow」| Sonnet 決定 | `actionable` noul | 同上 | ≥ 0.80 draft；0.50–0.80 Sonnet；< 0.50 唔 draft | 之後 |
 | C4 | §1 Instagram / Facebook：「if the caption carries the substance set needs_manual_text: false; if it is only a teaser … set true」| Sonnet 決定 | `substance_in_caption` noul | caption + 帖文 metadata | ≥ 0.80 false；< 0.50 true；中間 Sonnet | 之後 |
-| C5 | §3 Related：「wikilinks to existing pages found by vault-search」| Sonnet 讀 search 結果揀 | `related_relevance` score 1–5，每個 hit 一問 | 新頁 title + 摘要；候選頁 title + tags + 摘要 頭句 | 取前 3 個 ≥ 3 | 之後 |
+| C5 | §3 Related：「wikilinks to existing pages found by vault-search」| Sonnet 讀 search 結果揀 | `related_relevance` score（五級，0–4），每個 hit 一問 | 新頁 title + 摘要；候選頁 title + tags + 摘要 頭句 | 取前 3 個 ≥ 2 | 之後 |
 
 點解排最後：一次 run 只有一條 URL，Sonnet 一定要讀全文先寫得出 摘要，Jev 五條問題加埋大約 2k tokens、不足 US$0.001，慳嘅係一致性而唔係錢。等 hot-list 試點證明咗 fallback 同 log 格式先一次過加入。
 
@@ -117,13 +117,13 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 - 三種問題類型、批量、`Idempotency-Key`：jevmodel.org/api 原文。
 - 推出日期、作者、宣稱倍數：madewithjev.com launch post（經 Exa）。
 - 環境 API credential 係 proxy 注入：本 session 嘅 `SUPADATA_KEY` 喺 `env` 入面完全唔存在，但 system prompt 列明 proxy 會為 `api.supadata.ai` 注入；其他 credential 只係佔位值。所以「有冇 key」只能用請求嘅 401 / 403 判斷。
+- API reference（jevwiki.ai 鏡像 TypeSafe 嘅 OpenAPI，2026-10-02 經 Exa 讀）：`Authorization: Bearer`、response `{model, answers, usage}`、score `criteria` 係有序陣列而且分數由 0 起（五級 = 0–4）、每 request 64k tokens（state + 最長問題 32k）、`GET /v1/models` 免費列出可用模型；**TypeSafe 2026-09-24 起停收新註冊**，冇帳戶要用 gateway（OpenRouter `https://openrouter.ai/api`、Vercel AI Gateway `https://ai-gateway.vercel.sh/typesafe`）嘅 base URL 同 model id。
 - 2026-10-02 加 domain 同 credential 之後，本 session 已經連到 `api.typesafe.ai`（GET 回 405），但 POST 回 403 `{"detail":{"error_type":"authentication_error","message":"Must supply an API key!"}}`：credential header 未有注入呢個已開始嘅 session（新 session / Routine run 先載入 credential，或者 Allowed websites 填法未對）。
 - 本 sandbox：冇 `TYPESAFE_API_KEY`；`api.typesafe.ai` curl 回 proxy 403；madewithjev.com、jevmodel.org、datacamp.com、langchain.com、firecrawl.dev、hyperstack.cloud、marktechpost.com、apimodels.app 全部 egress 封鎖（WebFetch），只有 Exa 中繼讀到 jevmodel.org 同 madewithjev.com 首頁。
 
 **未驗證**
 - 每 1M input token 嘅價錢（只見搜尋結果標題）。
-- Response JSON 欄位名（skill 嘅 `parse_jev` 寫成寬鬆解析，第一次 live 呼叫要核實）。
-- 現行模型嘅 request 上限（32k 來自 2026-09-17 嘅 README）。
+- 文件話冇 key 應該回 401，實測係 403 `authentication_error`；兩種都當「冇 key」處理。
 - `jev-1.13.0` 鎖版本寫法（jevmodel.org 係第三方站，自稱 `jevmodel.org/v1/systemone` endpoint 同自己嘅 key；**唔要用佢**，用 `api.typesafe.ai`）。
 - Routine 環境加 allowed domain 之後 curl 係否真正通到 TypeSafe（要 Run now 一次先知）。
 

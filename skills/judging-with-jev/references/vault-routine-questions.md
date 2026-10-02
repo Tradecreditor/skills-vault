@@ -2,7 +2,7 @@
 
 Copy-paste material for the pilots described in `outputs/20261002-jev-in-vault-routines.md`. Each block gives the state fields to send, the exact `questions` map, the thresholds, the fallback and the line of the routine prompt it attaches to. Label meanings in `choice` criteria are copied verbatim from `CLAUDE.md` / `skills/vault-capture/SKILL.md` so Jev and the lint share one definition; when those change, change them here too.
 
-Field names inside `score` questions (`criteria` as an ordered level map) follow the pattern shown on jevmodel.org/api and are **unverified against the official docs** — confirm one score question in the TypeSafe Playground before the first live run.
+Shapes follow TypeSafe's API reference (OpenAPI spec mirrored on jevwiki.ai, read 2026-10-02): `noul` returns `answers.<id>.noul` (0–1); `choice` takes `criteria` as a map label → description and returns `choice` plus `probabilities`; `score` takes `criteria` as an **ordered array** of level descriptions and returns `score`, a float that counts from 0 (five levels → 0–4) plus `legend` and `probabilities`. The thresholds below are on that 0-based scale.
 
 Common state header for every request:
 
@@ -25,19 +25,19 @@ State: header + `{"platform": "x|threads", "title": "...", "snippet": "...", "au
 {
   "in_scope": {
     "type": "score",
-    "instructions": "How strongly is this post about a new or trending item inside vault_scope: an AI agent, agent skill, MCP server, coding-agent tool or plugin, LLM knowledge tool, or a repository of one of these? Rate on the 1-5 scale.",
-    "criteria": {
-      "1": "unrelated to vault_scope (general news, lifestyle, finance, unrelated software)",
-      "2": "mentions AI or developers but no specific tool, skill, server or repo",
-      "3": "about a specific tool in an adjacent area (general LLM app, no-code automation, generic SaaS)",
-      "4": "about a specific agent / skill / MCP / coding-agent item but as commentary or a list",
-      "5": "announces, reviews or benchmarks a specific agent / skill / MCP / coding-agent item, likely with a link or install command"
-    }
+    "instructions": "How strongly is this post about a new or trending item inside vault_scope: an AI agent, agent skill, MCP server, coding-agent tool or plugin, LLM knowledge tool, or a repository of one of these? Rate on the five levels below.",
+    "criteria": [
+      "unrelated to vault_scope (general news, lifestyle, finance, unrelated software)",
+      "mentions AI or developers but no specific tool, skill, server or repo",
+      "about a specific tool in an adjacent area (general LLM app, no-code automation, generic SaaS)",
+      "about a specific agent / skill / MCP / coding-agent item but as commentary or a list",
+      "announces, reviews or benchmarks a specific agent / skill / MCP / coding-agent item, likely with a link or install command"
+    ]
   }
 }
 ```
 
-Thresholds: `≥ 3.5` → verification list, sorted by score, top 40 get fxtwitter; `2.5–3.5` → Opus looks at the snippet and decides; `< 2.5` → skipped, counted. Fallback: Opus reads every snippet as today. Cap: 600 decisions per run for this question.
+Thresholds (0–4 scale): `≥ 2.5` → verification list, sorted by score, top 40 get fxtwitter; `1.5–2.5` → Opus looks at the snippet and decides; `< 1.5` → skipped, counted. Fallback: Opus reads every snippet as today. Cap: 600 decisions per run for this question.
 
 ### H2 `topical` — the `min_stars_gained_7d_if_topical` gate
 Attaches to step 1a and `_config.yaml` → `gates.github.min_stars_gained_7d_if_topical` ("README/topics mention agent, skill, MCP, Claude Code, Codex, OpenClaw"). One request per GitHub candidate; batch H4 into the same request for winners.
@@ -152,14 +152,14 @@ State: header + `{"slug": "...", "type": "...", "title": "...", "captured_at": "
 {
   "review_priority": {
     "type": "score",
-    "instructions": "How much is this draft worth Josep's review time now? Rate 1-5.",
-    "criteria": {
-      "1": "thin or placeholder summary, no raw text, no related links; likely to be deprecated",
-      "2": "complete but off the vault's current interests and not referenced by other pages",
-      "3": "complete and on-topic, no urgency",
-      "4": "complete, on-topic and related to items captured in the last two weeks",
-      "5": "complete, on-topic, referenced by other pages or a skill, and about a tool Josep is actively using"
-    }
+    "instructions": "How much is this draft worth Josep's review time now? Rate on the five levels below.",
+    "criteria": [
+      "thin or placeholder summary, no raw text, no related links; likely to be deprecated",
+      "complete but off the vault's current interests and not referenced by other pages",
+      "complete and on-topic, no urgency",
+      "complete, on-topic and related to items captured in the last two weeks",
+      "complete, on-topic, referenced by other pages or a skill, and about a tool Josep is actively using"
+    ]
   }
 }
 ```
@@ -228,16 +228,16 @@ State: header + `{"new": {"title": "...", "summary": "<## 摘要>"}, "candidate"
 {
   "related_relevance": {
     "type": "score",
-    "instructions": "How useful is it for a reader of the new page to follow a link to the candidate page? Rate 1-5.",
-    "criteria": {
-      "1": "no meaningful connection beyond a shared generic word",
-      "2": "same broad area, different tool and different question",
-      "3": "same area and overlapping audience; a reader might browse to it",
-      "4": "same tool family, same problem or a direct comparison",
-      "5": "the same tool, the same source, a prerequisite or a direct follow-up"
-    }
+    "instructions": "How useful is it for a reader of the new page to follow a link to the candidate page? Rate on the five levels below.",
+    "criteria": [
+      "no meaningful connection beyond a shared generic word",
+      "same broad area, different tool and different question",
+      "same area and overlapping audience; a reader might browse to it",
+      "same tool family, same problem or a direct comparison",
+      "the same tool, the same source, a prerequisite or a direct follow-up"
+    ]
   }
 }
 ```
 
-Take the top three with score `≥ 3`, write the one-line reason yourself (Jev gives the score, not the sentence).
+Take the top three with score `≥ 2` (0–4 scale), write the one-line reason yourself (Jev gives the score, not the sentence).

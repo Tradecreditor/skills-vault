@@ -84,9 +84,10 @@ jev:               # pilot 1 (2026-10-02): TypeSafe's Jev prefilters candidates;
                    # Without it TypeSafe answers 403 authentication_error on the first call, every step below runs today's path and the ## 方法 line says so.
   enabled: true
   model: "jev-latest"                 # pin a fixed version once the thresholds below have been tuned on two real runs
-  in_scope:                           # H1: score 1-5 for every in-window X / Threads search hit BEFORE any fxtwitter or Jina fetch
-    act_min: 3.5                      # >= act_min: verify (sorted by score; the top 40 get fxtwitter, Threads hits are read via Jina)
-    defer_min: 2.5                    # [defer_min, act_min): read the snippet yourself and decide, as today; below defer_min: skip and count
+  probe_url: "https://api.typesafe.ai/v1/models"   # free GET; 200 = the key reached TypeSafe, Jev is on for the run; 401/403 = off
+  in_scope:                           # H1: five-level score (TypeSafe scores count from 0, so the scale is 0-4) for every in-window X / Threads search hit BEFORE any fxtwitter or Jina fetch
+    act_min: 2.5                      # >= act_min: verify (sorted by score; the top 40 get fxtwitter, Threads hits are read via Jina)
+    defer_min: 1.5                    # [defer_min, act_min): read the snippet yourself and decide, as today; below defer_min: skip and count
     max_decisions: 600
   topical:                            # H2: noul on every GitHub candidate; decides which gate applies (min_stars_gained_7d_if_topical vs min_stars_gained_7d)
     act_min: 0.80                     # >= act_min: topical gate

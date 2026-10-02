@@ -17,7 +17,7 @@ Jev is TypeSafe AI's "System One" decision model (launched 2026-09-15). It does 
 |---|---|---|
 | `noul` | probability (0–1) that a stated proposition is true | gates: draft a skill or not, topical or not, same item or not |
 | `choice` | one probability per label you define | pick one: `type`, `topic/*` tag, which reader worked |
-| `score` | fractional position on an ordered 2–10 level rubric you describe | rank: relevance to scope, review priority |
+| `score` | fractional position on an ordered 2–10 level rubric you describe; levels count from 0 | rank: relevance to scope, review priority |
 
 Jev is trained with RLCD (reinforcement learning for calibrated decisions), so a 0.8 is right about 80% of the time — that is what makes a threshold meaningful. Several questions in one request share the state's token cost and are answered together. Only input tokens are billed; the published median is about US$0.000068 per decision. In the vault's tiering this sits **below Sonnet**: Jev judges, Sonnet executes, Opus/Fable plans and reviews (see [[../model-tiering/SKILL|model-tiering]], Part C). Where it pays in this vault and where it does not: `outputs/20261002-jev-in-vault-routines.md`.
 
@@ -25,7 +25,7 @@ Jev is trained with RLCD (reinforcement learning for calibrated decisions), so a
 
 - A TypeSafe API key. Laptop: `TYPESAFE_API_KEY` in your shell profile, sent as `Authorization: Bearer`. Cloud Routines and sessions: an **API credential** on the environment (Add credential → Name `TYPESAFE_API_KEY`, type Bearer, Allowed websites `api.typesafe.ai`, header `Authorization: Bearer <key>`). There the proxy injects the header on every request to that host and the variable is usually not visible in the shell (the vault's `SUPADATA_KEY` behaves the same), so code must not require it: send the header when the variable is set, otherwise send none, and read a 401, or a 403 whose JSON body says `authentication_error` (what TypeSafe actually returns when no key reached it, verified 2026-10-02), as "no credential". Never in the repo, never in `raw/` or a page.
 - The host `api.typesafe.ai` must be reachable. Saving the API credential auto-creates the allow rule for it; listing it in the environment's allowed domains as well (routines/README.md, Step 0) is belt and braces; a Claude Code cloud sandbox without it answers `CONNECT tunnel failed, response 403` and every call falls back silently, so always count fallbacks in the final message.
-- Text-only state, about 32k tokens per request. Trim: README first 100 lines, post text plus metadata, not a whole `raw/` file.
+- Text-only state; 64k tokens per request in total, 32k for the state plus the longest question (API reference). Trim: README first 100 lines, post text plus metadata, not a whole `raw/` file.
 - Do not use third-party mirrors such as `jevmodel.org/v1/systemone`; the official endpoint is `https://api.typesafe.ai/v1/systemone`.
 
 ## Request shape
@@ -48,6 +48,8 @@ curl -sS https://api.typesafe.ai/v1/systemone \
     }
   }'
 ```
+
+Free auth probe before a run: `curl -sS https://api.typesafe.ai/v1/models` → `200` with a model list means the key reached TypeSafe; `401`, or `403` with an `authentication_error` body, means it did not.
 
 Python, no dependencies, with a sandbox switch (`JEV_FAKE=<path.json>` returns canned answers so the surrounding logic can be tested with no key and no network — `references/jev-fake.example.json` is a starting fixture):
 
@@ -80,12 +82,13 @@ def ask_jev(state, questions, model="jev-latest", timeout=10):
     except urllib.error.URLError as e:                                                # proxy CONNECT 403: host not in the network policy
         raise RuntimeError(f"jev off: cannot reach api.typesafe.ai ({e.reason})") from e
     out = {}
-    answers = resp.get("answers") or resp.get("questions") or resp      # field name unverified: confirm in the Playground once
-    for name, q in questions.items():
-        a = answers[name]
-        if isinstance(a, dict):
-            a = a.get("probability", a.get("score", a.get("probabilities", a)))
-        out[name] = a
+    for name, a in resp["answers"].items():               # documented shape: {model, answers: {id: {type, ...}}, usage}
+        if a["type"] == "noul":
+            out[name] = a["noul"]                           # 0-1
+        elif a["type"] == "choice":
+            out[name] = a["probabilities"]                  # label -> 0-1; a["choice"] is the argmax, a["confidence"] 0-1
+        elif a["type"] == "score":
+            out[name] = a["score"]                          # levels count from 0; a["legend"] maps level -> its text
     sha = hashlib.sha1(json.dumps(state, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:8]
     for name, a in out.items():
         print(f"jev {name} p={a if not isinstance(a, dict) else max(a, key=a.get)} model={resp.get('model', model)} state_sha={sha}")
@@ -96,13 +99,13 @@ def band(p, act=0.80, defer=0.50):
     return "act" if p >= act else "defer" if p >= defer else "no"
 ```
 
-The response field names above are a best guess from secondary sources (official docs were unreachable when this skill was written). Before the first live run, send one noul, one choice and one score in the TypeSafe Playground and fix the `answers` line to match.
+Response shape per the API reference (OpenAPI spec mirrored on jevwiki.ai, read 2026-10-02): `{model, answers, usage}`; `model` is the resolved version (e.g. `jev-1.13.0`), score answers also carry `legend` and `probabilities`, choice and score carry `confidence`, `usage.input_tokens` is what you pay for.
 
 ## Question design rules
 
 1. **One proposition per noul.** "This repo is an MCP server" — not "this repo is an MCP server or a plugin and worth a skill".
 2. **Choice criteria are the vault's own definitions.** Copy the label meanings from `CLAUDE.md` (type rules, topic vocabulary) so Jev and the lint agree; `references/vault-routine-questions.md` holds them verbatim.
-3. **Score = a named, ordered rubric**, 2–10 levels, each level one sentence. Threshold the fractional result in code.
+3. **Score = an ordered array of 2–10 level descriptions** (`"criteria": ["…", "…"]`); the answer is a float from 0 to levels-1, so five levels give a 0–4 scale. Threshold the fractional result in code. Choice `criteria` is a map label → description (`null` allowed, max 255 options); noul may add `criteria.true` / `criteria.false`.
 4. **Batch what shares a state.** `type`, `topic`, `actionable` for one captured item go in one request; one request per candidate, never one per question.
 5. **Put the goal in the state** (`"goal": "..."`) and only the fields the question needs. README head, not the file; snippet plus date, not the whole search page.
 6. **Jev never writes.** 摘要, Key facts, 點解值得留意, SKILL.md bodies and reports stay with Sonnet/Opus.
@@ -118,7 +121,7 @@ The response field names above are a best guess from secondary sources (official
 | first call: 401, or 403 with an `authentication_error` body, or the proxy's CONNECT 403 | Jev is off for the whole run (no key reached TypeSafe / host not allowed); say so once in the jev line |
 | 402, 5xx, timeout, malformed answer | today's path for that item, unchanged; count it |
 
-IBM Technology's worked example uses `> 0.9` auto, `0.1–0.9` human review, `< 0.1` ignore; raise the act threshold as the cost of a wrong automatic decision rises. For `score 1–5` rubrics use `≥ 3.5` act, `2.5–3.5` defer, `< 2.5` no. Tune per question after two real runs, then pin `model` to a fixed version instead of `jev-latest`.
+IBM Technology's worked example uses `> 0.9` auto, `0.1–0.9` human review, `< 0.1` ignore; raise the act threshold as the cost of a wrong automatic decision rises. For five-level score rubrics (scale 0–4) use `≥ 2.5` act, `1.5–2.5` defer, `< 1.5` no. Tune per question after two real runs, then pin `model` to a fixed version instead of `jev-latest`.
 
 Every run ends with one line in the final message: `jev: <asked> asked, <acted> acted, <deferred> deferred, <fallbacks> fell back (<reason>)`. Each decision is logged in the transcript as `jev <question> p=<prob> model=<version> state_sha=<8 hex>` so a wrong call can be traced to its input.
 
@@ -126,14 +129,14 @@ Every run ends with one line in the final message: `jev: <asked> asked, <acted> 
 
 | routine | step | question | type | act / defer | fallback | status |
 |---|---|---|---|---|---|---|
-| weekly-hot-list | which X / Threads hits get the 40 fxtwitter verifications and the Jina reads | `in_scope` | score 1–5 | ≥ 3.5 / 2.5–3.5 | Opus reads the snippet | pilot 1 |
+| weekly-hot-list | which X / Threads hits get the 40 fxtwitter verifications and the Jina reads | `in_scope` | score 0–4 | ≥ 2.5 / 1.5–2.5 | Opus reads the snippet | pilot 1 |
 | weekly-hot-list | `min_stars_gained_7d_if_topical` gate | `topical` | noul | ≥ 0.80 / 0.50–0.80 | Opus reads README | pilot 1 |
 | weekly-hot-list | group an X post with its GitHub repo | `same_item` | noul | ≥ 0.80 / 0.50–0.80 | Opus pairs by eye | pilot 1 (after the two above) |
 | weekly-hot-list | draft SKILL.md for a winner | `installable_skill` | noul | ≥ 0.80 / 0.50–0.80 | Opus decides | later |
 | github-stars-sync | pick backfill candidates whose 摘要 merely rewords the description | `summary_from_readme` | noul | < 0.50 = candidate / 0.50–0.80 | Sonnet reads | pilot 2 |
 | github-stars-sync | draft SKILL.md for a starred repo | `is_agent_asset` | noul | ≥ 0.80 / 0.50–0.80 | Sonnet decides | later |
 | vault-lint | near-duplicate titles | `near_duplicate` | noul | ≥ 0.80 / 0.50–0.80 | Sonnet compares | pilot 3 |
-| vault-lint | order the stale-draft list for Josep | `review_priority` | score 1–5 | ordering only | unordered list | later |
+| vault-lint | order the stale-draft list for Josep | `review_priority` | score 0–4 | ordering only | unordered list | later |
 | capture-link | `type`, `topic`, `actionable`, `substance_in_caption`, `related_relevance` | choice / noul / score | see reference | Sonnet decides | later (consistency, not cost) |
 
 Exact JSON for every row, with the state fields and the prompt line it attaches to: `references/vault-routine-questions.md`. weekly-hot-list reads its thresholds and caps from `wiki/hot-list/_config.yaml` → `jev:` (edit numbers there, never in the routine prompt); the other routines get the same block when their pilots start.
@@ -153,6 +156,7 @@ Exact JSON for every row, with the state fields and the prompt line it attaches 
 ## Evidence
 
 - 2026-10-02 — Fit of Jev against the vault's four Routines: biggest saving is weekly-hot-list prefiltering (~1,250 decisions a week, about US$0.09 at the published median); capture-link saves almost nothing because Sonnet reads the full text anyway (`outputs/20261002-jev-in-vault-routines.md`).
+- 2026-10-02 — API reference (OpenAPI spec mirrored on jevwiki.ai): Bearer auth on `Authorization`; response `{model, answers, usage}`; score `criteria` is an ordered array and scores count from 0; 64k tokens per request, 32k for state plus the longest question; `GET /v1/models` lists the models a key may use; direct signups closed since 2026-09-24, so keys from a gateway (OpenRouter `https://openrouter.ai/api` model `~typesafe/jev-latest`, Vercel AI Gateway `https://ai-gateway.vercel.sh/typesafe` model `typesafe-ai/jev`) need that gateway's base URL.
 - 2026-10-02 — IBM Technology explainer: noul / choice / score, every question answered in one request, RLCD calibration, text-only, weak at math, susceptible to prompt injection in the state ([[../../wiki/pages/20261002-what-is-jev-system-one-ai-model|20261002-what-is-jev-system-one-ai-model]]).
 - 2026-09-20 — fast-jev-compaction: two noul questions per tool call, `keepThreshold` 0.5, full state resent per request under a 30k-token ceiling, failures thrown to the caller ([[../../wiki/pages/20260920-fast-jev-compaction|20260920-fast-jev-compaction]]).
 - 2026-09-27 — Ryze AI's SEO/GEO audits: rubric questions per URL at a median US$0.000068 per decision, 20-point rubric × 1,000 URLs ≈ US$1.36 ([[../../wiki/pages/20260925-jev-seo-geo-audit-cost-down-90|20260925-jev-seo-geo-audit-cost-down-90]]).
@@ -160,6 +164,7 @@ Exact JSON for every row, with the state fields and the prompt line it attaches 
 
 ## Source
 
+- jevwiki.ai/wiki/reference/http-api.md and /wiki/guides/quickstart.md — mirror of TypeSafe's OpenAPI spec and quickstart (read 2026-10-02 via Exa): auth, request and answer schemas, limits, status codes, gateways.
 - jevmodel.org/api — "Jev API Examples: Choice, Score, and Noul Requests" (read 2026-10-02 via Exa; third-party site, used for the request shape only).
 - `raw/20260920-fast-jev-compaction.md` — README of tamaratran/fast-jev-compaction (endpoint, model alias, 32k request limit, keep/drop pattern).
 - `raw/20261002-what-is-jev-system-one-ai-model.md` — transcript of IBM Technology, "What Is Jev? The AI Model That Doesn't Generate Text" (captured 2026-10-02).
