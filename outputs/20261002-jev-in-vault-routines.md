@@ -95,8 +95,8 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 
 ## 前置條件
 
-1. **`TYPESAFE_API_KEY`** — 用 Routine 嘅 API credentials 存放，唔用普通 environment variable（同 `routines/README.md` key 表嘅提醒一樣：環境變量任何用該環境嘅人都見到）。本機 shell 就放 `~/.zshrc` / PowerShell profile，永不入 repo。
-2. **Allowed domain** — Routine 環境（Step 0 嗰張表）加 `api.typesafe.ai`。唔加嘅話每個呼叫靜靜 403，fallback 會遮住問題；所以 routine 最後訊息要數 fallback 次數。呢一步係之後一個 `docs:` 改動去 `routines/README.md`。
+1. **`TYPESAFE_API_KEY`** — 喺 Routine 環境用 **Add credential** 加：Name `TYPESAFE_API_KEY`、type Bearer、Allowed websites `api.typesafe.ai`、header `Authorization: Bearer <key>`。呢種 credential 係 proxy 注入：proxy 自己加 header，變數本身喺 run 入面通常見唔到（`SUPADATA_KEY` 一樣），所以 routine 同 skill 唔可以靠 `env` 判斷有冇 key，要用第一個請求嘅 401 判斷。本機 shell 就放 `~/.zshrc` / PowerShell profile，永不入 repo。
+2. **Allowed domain** — 儲存 credential 時 Allowed websites 填 `api.typesafe.ai` 會自動建立 allow rule；Step 0 嗰張表再手動加一次係雙重保險。冇 allow 嘅話第一個呼叫 403，routine 整個 run 關 Jev 並喺 ## 方法 講明。
 3. **固定 fallback 規則**（寫入 skill）：冇 key、402、5xx、timeout、或機率喺 0.50–0.80 → 照今日做法由 routine 本身嘅模型決定；最後訊息一行「jev: N asked, M fell back (reason)」。
 4. **Log 格式**（run transcript）：`jev <question> p=0.93 model=jev-1.x state_sha=ab12cd34`，方便事後對照同調門檻。
 5. **State 當作不可信資料**：captured 內容可能藏有指令（IBM 片明言 Jev 會被 input 入面嘅指令誤導），所以 `instructions` 寫死喺 code，`state` 只放資料欄位，Jev 嘅答案只用嚟揀分支，永遠唔直接執行；數字（stars、日期差）自己計，唔問 Jev。
@@ -116,6 +116,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 - Endpoint、auth header、model alias、request 形狀：`raw/20260920-fast-jev-compaction.md` README 同 jevmodel.org/api 一致。
 - 三種問題類型、批量、`Idempotency-Key`：jevmodel.org/api 原文。
 - 推出日期、作者、宣稱倍數：madewithjev.com launch post（經 Exa）。
+- 環境 API credential 係 proxy 注入：本 session 嘅 `SUPADATA_KEY` 喺 `env` 入面完全唔存在，但 system prompt 列明 proxy 會為 `api.supadata.ai` 注入；其他 credential 只係佔位值。所以「有冇 key」只能用請求嘅 401 / 403 判斷。
 - 本 sandbox：冇 `TYPESAFE_API_KEY`；`api.typesafe.ai` curl 回 proxy 403；madewithjev.com、jevmodel.org、datacamp.com、langchain.com、firecrawl.dev、hyperstack.cloud、marktechpost.com、apimodels.app 全部 egress 封鎖（WebFetch），只有 Exa 中繼讀到 jevmodel.org 同 madewithjev.com 首頁。
 
 **未驗證**

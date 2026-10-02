@@ -80,7 +80,8 @@ cost_caps_per_run:
 
 jev:               # pilot 1 (2026-10-02): TypeSafe's Jev prefilters candidates; it never changes a star number, a gate or the heat formula.
                    # Procedure: skills/judging-with-jev/SKILL.md - exact questions and state fields: skills/judging-with-jev/references/vault-routine-questions.md (H1-H3).
-                   # Needs TYPESAFE_API_KEY and api.typesafe.ai in the environment's allowed domains; without them every step below falls back to today's path and the ## 方法 line says so.
+                   # Needs the TYPESAFE_API_KEY API credential on the environment (proxy-injected Bearer header, allowed website api.typesafe.ai; the variable is not visible in a run).
+                   # Without it the first call answers 401/403, every step below runs today's path and the ## 方法 line says so.
   enabled: true
   model: "jev-latest"                 # pin a fixed version once the thresholds below have been tuned on two real runs
   in_scope:                           # H1: score 1-5 for every in-window X / Threads search hit BEFORE any fxtwitter or Jina fetch
