@@ -27,6 +27,7 @@ Current pricing per MTok (in/out): Fable 5 $10/$50 · Opus 4.8 $5/$25 · Sonnet 
 | Planning, design, ambiguity resolution, final review | Main loop (Fable/Opus) — do NOT delegate |
 | Bulk mechanical coding, broad codebase search, multi-file sweeps | `Agent` tool with `model: "sonnet"` |
 | Trivial classification, extraction, formatting, one-fact lookups | `Agent` tool with `model: "sonnet"` |
+| Typed yes/no, pick-one or score judgments over many items (classify, gate, rank, dedupe) | Jev via the `judging-with-jev` skill (Part C); Sonnet only for the 0.50–0.80 band |
 | Workflow stages that are mechanical (fan-out readers, transforms) | `agent(..., {model: "sonnet", effort: "low"})` |
 | Workflow stages that judge (verify, adversarial refute, synthesize) | omit `model` (inherit main-loop model), effort `high`+ |
 | First draft of a client-facing proposal (tender / ballpark / quotation) or a slide deck | `Agent` with `model: "opus"` — user rule 2026-09-22; reviewer is a separate Opus agent |
@@ -66,6 +67,12 @@ Default pairings for my projects:
 
 **Before writing any advisor-tool code, read [references/advisor-tool.md](references/advisor-tool.md)** — it has the valid model-pair table, multi-turn round-trip rules (removing the tool mid-conversation 400s unless you also strip result blocks), pause_turn resumption, caching break-even, the measured system-prompt blocks for coding tasks, and per-executor nudge guidance (helps Sonnet, neutral on Sonnet, hurts Opus).
 
+## Part C — Below Sonnet: Jev for judgments
+
+TypeSafe's Jev is a decision model, not a writer: it answers typed yes/no (`noul`), pick-one (`choice`) and rubric (`score`) questions with calibrated probabilities, billed on input tokens only (published median ≈ US$0.000068 per decision). When a step is a judgment over many items rather than a rewrite — is this candidate in scope, is this repo an agent skill, are these two titles the same thing, which 40 of these 450 hits deserve a fetch — ask Jev first and let Sonnet/Opus read only what survives.
+
+Rules: never ask Jev for prose; threshold the probability (`≥ 0.80` act, `0.50–0.80` hand to the routine's own model, `< 0.50` negative branch); never let it override a deterministic gate or regex; keep today's path as the fallback when the key is missing or the call fails, and count the fallbacks; log question, probability and model version. Procedure, request shape and the per-routine question sets: [[../judging-with-jev/SKILL|judging-with-jev]]. Where it pays in this vault and where it does not: `outputs/20261002-jev-in-vault-routines.md`.
+
 ## Common mistakes
 
 | Mistake | Fix |
@@ -80,3 +87,4 @@ Default pairings for my projects:
 ## Evidence
 
 - 2026-09-29 — Charlie Hills ran the same 4 motion-graphics prompts in Claude Code on Sonnet 5.5 vs Opus 5.5, first try, no fixes: $4.95 vs $8.44 (41% less), 19.5 vs 34.7 min; Opus still leads 7 of 8 of Anthropic's benchmarks by 2–3 pts → "Sonnet for daily work, Opus for the hard, open-ended stuff" ([[../../wiki/pages/20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost|20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost]]). One run, small sample.
+- 2026-10-02 — Jev against the vault's four Routines: the saving is in weekly-hot-list prefiltering (~1,250 decisions a week ≈ US$0.09 at the published median, replacing Opus reads of ~450 snippets and ~390 repo objects); capture-link saves almost nothing because Sonnet reads the full text anyway (`outputs/20261002-jev-in-vault-routines.md`).

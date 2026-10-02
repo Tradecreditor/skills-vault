@@ -59,3 +59,4 @@ needs_manual_text: false
 - [[../../skills/configuring-fable-advisor-jev-tree/SKILL|skill: configuring-fable-advisor-jev-tree]]
 - [[20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit-and-fix cost by 90%]]
 - [[20260920-fast-jev-compaction|fast-jev-compaction]]
+- [[../../skills/judging-with-jev/SKILL|skill: judging-with-jev]] — how to ask Jev typed questions and where the vault's four Routines can route judgments to it.

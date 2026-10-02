@@ -1,0 +1,16 @@
+{
+  "_comment": "Canned answers for JEV_FAKE=<this file>: lets the surrounding routine logic be exercised with no key and no network. Keys are question names; noul and score give a number, choice gives label -> probability.",
+  "in_scope": 4.2,
+  "topical": 0.91,
+  "same_item": 0.62,
+  "installable_skill": 0.35,
+  "summary_from_readme": 0.22,
+  "is_agent_asset": 0.88,
+  "near_duplicate": 0.07,
+  "review_priority": 3.6,
+  "type": {"skill": 0.11, "tool": 0.06, "repo": 0.74, "concept": 0.03, "post": 0.04, "video": 0.01, "article": 0.01},
+  "topic": {"topic/agent-tooling": 0.71, "topic/repo-picks": 0.14, "topic/agent-platforms": 0.09, "topic/knowledge-mgmt": 0.03, "topic/ai-news": 0.03},
+  "actionable": 0.83,
+  "substance_in_caption": 0.41,
+  "related_relevance": 4.0
+}
