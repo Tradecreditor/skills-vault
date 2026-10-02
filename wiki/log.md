@@ -95,3 +95,7 @@
 ## [2026-10-02] capture | What Is Jev? The AI Model That Doesn't Generate Text | 20261002-what-is-jev-system-one-ai-model
 ## [2026-10-02] lint | Jev in the vault routines | outputs/20261002-jev-in-vault-routines
 ## [2026-10-02] promote | judging-with-jev | skills/judging-with-jev
+## [2026-10-02] capture | zai-org/ZCode | 20261002-zcode-zai-harness
+## [2026-10-02] capture | yetone/magpie | 20261002-magpie-agent-model-switcher
+## [2026-10-02] capture | Louis-CFM/coucou | 20261002-coucou-notch-agent-companion
+## [2026-10-02] hot-list | 2026-W39 | hot-list/2026-W39
