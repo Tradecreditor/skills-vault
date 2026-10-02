@@ -128,7 +128,7 @@ Every run ends with one line in the final message: `jev: <asked> asked, <acted> 
 | vault-lint | order the stale-draft list for Josep | `review_priority` | score 1–5 | ordering only | unordered list | later |
 | capture-link | `type`, `topic`, `actionable`, `substance_in_caption`, `related_relevance` | choice / noul / score | see reference | Sonnet decides | later (consistency, not cost) |
 
-Exact JSON for every row, with the state fields and the prompt line it attaches to: `references/vault-routine-questions.md`.
+Exact JSON for every row, with the state fields and the prompt line it attaches to: `references/vault-routine-questions.md`. weekly-hot-list reads its thresholds and caps from `wiki/hot-list/_config.yaml` → `jev:` (edit numbers there, never in the routine prompt); the other routines get the same block when their pilots start.
 
 ## Pitfalls
 

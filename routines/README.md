@@ -40,6 +40,7 @@ Every routine inherits its network policy from its cloud environment, so do this
    www.threads.com
    www.facebook.com
    www.instagram.com
+   api.typesafe.ai
    ```
 
 5. Optional keys, only if you have them:
@@ -49,6 +50,7 @@ Every routine inherits its network policy from its cloud environment, so do this
    | `JINA_API_KEY` | jina.ai → API key | higher r.jina.ai rate limit; reported to bypass the anonymous per-domain blocks | free |
    | `SC_API_KEY`, `THREADS_APP_TOKEN` | scrapecreators.com, Meta app | Threads like/repost counts, Threads oEmbed | optional, not required |
    | `TWITTER_AUTH_TOKEN` + `TWITTER_CT0` | Cookie-Editor export from a **burner** X account | X search for the weekly list only (a single post needs no cookie) | free, account risk |
+| `TYPESAFE_API_KEY` | TypeSafe dashboard (the Jev System One API) | **weekly-hot-list only (pilot 1, 2026-10-02)**: Jev prefilters X / Threads hits before the fxtwitter cap is spent and decides the topical gate; thresholds live in `wiki/hot-list/_config.yaml` → `jev:`. Without it the routine judges everything itself as before and prints `jev: off` under ## 方法 | metered, input tokens only; published median ≈ US$0.000068 per decision, under US$0.10 a week at the pilot's caps |
    On Pro/Max prefer **API credentials** over plain environment variables: environment variables are visible to anyone
    using the environment.
    Instagram reels/carousels and Facebook videos: Jina returns only the caption/text; the spoken audio is reachable only through
@@ -222,3 +224,4 @@ Expected on the first runs:
 - Exa is a metered connector. When its credits run out `web_fetch_exa` returns HTTP 402 and the run's status still shows green;
   the capture skill tells the routine to fall through to Jina / per-platform readers, so a sudden rise in `needs_manual_text: true`
   captures is the symptom to check.
+- **Jev (pilot 1, `weekly-hot-list` only)** needs both the `TYPESAFE_API_KEY` credential and `api.typesafe.ai` in the allowed domains above. The run never fails without them: it prints `jev: off (no key)` or `fallbacks N (403)` under `## 方法` and does every judgment itself, so that line is the thing to read after the first run. A `403` there means the domain is missing, not a bad key. Turn Jev off with `jev.enabled: false` in `wiki/hot-list/_config.yaml`; the prompt needs no re-paste for that, but the prompt itself (`routines/weekly-hot-list.md`) did change for the pilot, so re-paste it once with `scripts/copy-prompt.sh weekly-hot-list`.
