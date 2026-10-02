@@ -54,3 +54,4 @@ Keith 嘅結論係：對接 case 嘅 AI builder 嚟講，呢個唔係慳工具�
 ## Related
 
 - [[20260920-fast-jev-compaction|fast-jev-compaction — verbatim Jev-scored compaction for Claude Code]] — same Jev "System One" model, used there for keep/drop decisions on Claude Code context; background on what Jev is and how it is priced.
+- [[../../skills/judging-with-jev/SKILL|skill: judging-with-jev]] — the vault's own procedure for asking Jev typed questions, with the per-routine question sets where this cost pattern applies to the vault itself.

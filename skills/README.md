@@ -5,7 +5,7 @@ Installable Agent-Skills folders (agentskills.io). Install anywhere:
     npx skills add Tradecreditor/skills-vault --skill <name> -a claude-code -a codex -a gemini-cli -a openclaw -a cursor -g -y
 
 Claude Code: `/plugin marketplace add Tradecreditor/skills-vault` then `/plugin install skills-vault@tradecreditor-vault`.
-`vault-capture`, `vault-search` and `model-tiering` are the vault's own operating skills; everything else was captured from the web.
+`vault-capture`, `vault-search`, `model-tiering` and `judging-with-jev` are the vault's own operating skills; everything else was captured from the web.
 
 ## Skills in this vault
 | name | vault_status | origin_type | what it does |
@@ -14,6 +14,7 @@ Claude Code: `/plugin marketplace add Tradecreditor/skills-vault` then `/plugin 
 | configuring-fable-advisor-jev-tree | draft | post | Configures Claude Code with Fable 5.1 as advisor and an Opus 5.5 + Jev-routed multi-agent tree |
 | delegating-to-codex | draft | repo | Calls OpenAI Codex from inside Claude Code for a code review or a delegated task |
 | evaluating-llms-with-promptfoo | draft | repo | Evaluates LLM prompts, agents and RAG pipelines with promptfoo, including red teaming |
+| judging-with-jev | draft | vault-operations | Asks TypeSafe's Jev typed yes/no, choice or score questions to classify, gate or dedupe |
 | making-product-videos | draft | repo | Creates cinematic product demo videos using Video Shotcraft (Remotion + Agent Skill) |
 | model-tiering | draft | vault-operations | Picks the model tier and effort level: expensive models advise and review, Sonnet executes |
 | providing-design-references | draft | post | Provides Claude with visual design references so it can match real layouts and UI decisions |
