@@ -61,6 +61,7 @@ everything appears to work without it, right up until the agent pushes to `main`
 - `git pull --rebase` before every push. Core captures push straight to `main`; the weekly hot list opens a PR (branch `hot-list/YYYY-Www`); non-core agents always open a PR (`gh pr create`, then `gh pr merge --auto --rebase` if allowed).
 - Non-core agents work in their own clone with their own token; never run inside Josep's Obsidian folder.
 - Never commit secrets or cookies. API keys live in environment variables (Routine secrets, Supabase secrets, local shell).
+- **Development changes are tested now, not on the schedule.** When a routine's prompt, `_config.yaml` or environment changes, fire the routine immediately (Run now, or `fire_trigger` with a note that it is a development run) and read the transcript; never wait for the next scheduled firing to find out. A development run of `weekly-hot-list` uses the in-progress week and lands on its disposable `hot-list/<week>` branch, which the scheduled run overwrites, so it costs nothing to run early (decision 2026-10-02).
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools

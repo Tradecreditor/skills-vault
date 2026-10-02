@@ -182,6 +182,7 @@ hot list once ran seven times in a week on Opus before anyone noticed — nothin
 ## Step 5 — first run and tuning
 
 Open each routine and click **Run now** once, then read the transcript.
+Do the same after every later change to a prompt, to `wiki/hot-list/_config.yaml` or to the environment: a development change is tested the moment it lands, never by waiting for the next scheduled firing. For `weekly-hot-list` a development run can be fired with a note to use the in-progress week; it lands on the disposable `hot-list/<week>` branch and the scheduled run overwrites it.
 
 A green status only means the session started and exited without an infrastructure error. It does **not** mean the task
 succeeded. Open the run and check what Claude actually did: blocked network requests, missing connector tools and task
