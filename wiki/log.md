@@ -95,3 +95,4 @@
 ## [2026-10-02] capture | What Is Jev? The AI Model That Doesn't Generate Text | 20261002-what-is-jev-system-one-ai-model
 ## [2026-10-02] lint | Jev in the vault routines | outputs/20261002-jev-in-vault-routines
 ## [2026-10-02] promote | judging-with-jev | skills/judging-with-jev
+## [2026-10-02] capture | Claude Mods Overview：Function Hooks、Plugin 與 State 架構 | 20261002-claude-mods-overview-hooks-state
