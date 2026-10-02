@@ -10,3 +10,5 @@ supabase/config.toml
 supabase/.temp/
 
 .obsidian/graph.json
+__pycache__/
+*.pyc
