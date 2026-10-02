@@ -1,13 +1,16 @@
 # Hot — read me first
 
 ## 本週熱門榜
-`2026-W39`，完整報告見 [[hot-list/2026-W39|hot-list/2026-W39]]（注意：run 喺 2026-10-02 執行，stars 為當日數字）：
+`2026-W40`（**開發測試 run**，2026-10-02 星期五執行，窗口只到星期五；星期一正式 run 會覆寫），完整報告見 [[hot-list/2026-W40|hot-list/2026-W40]]：
 
-- **[[pages/20261002-zcode-zai-harness|ZCode]]**（zai-org）— Z.ai 開源 coding agent harness，被揭背景上傳 workspace 後道歉並開源。GitHub 7,325 stars + X 三個作者過 gate（官方帖 2,862 likes / 64 萬 views），heat 0.94。
-- **[[pages/20261002-magpie-agent-model-switcher|magpie]]**（yetone）— menu bar + 本地 gateway，Codex 行 DeepSeek、Claude Code 行 Kimi。GitHub 4,232 stars，單平台 heat 0.80。
-- **[[pages/20261002-coucou-notch-agent-companion|Coucou]]**（Louis-CFM）— notch 小角色監察 Claude Code / Codex / Cursor session，可喺 notch 批准 permission。GitHub 2,820 stars，單平台 heat 0.75。
+- **[[pages/20261002-grok-build-xai-terminal-coding-agent|Grok Build]]**（xai-org）— SpaceXAI 開源終端 coding agent（Rust TUI、ACP、headless）。GitHub 27,197 stars、建立 80 日，new-repo gate 單平台 heat 0.80（7 日增長未知）。
+- **[[pages/20261002-opendots-copilotkit-ai-coworkers|OpenDots]]**（CopilotKit）— 自架版 OpenAI dots：長駐 AI coworker 有自己電腦、Slack、語音。X 三作者過 gate（@ataiiam 4,548 likes / 78.7 萬 views），GitHub 1,429 差 71 過線，單平台 heat 0.70。
+- **[[pages/20261002-dots-feder-cr-stealth-browser-agent|dots]]**（feder-cr）— 改過 Firefox 引擎、唔會被封嘅開源 web agent，經 MCP 可接 Claude Code。GitHub 2,465 stars（3 日），單平台 heat 0.66。
 
 ## 最近 20 項
+- 2026-10-02 · repo · [[pages/20261002-grok-build-xai-terminal-coding-agent|Grok Build — SpaceXAI's open-source terminal coding agent (Rust TUI, ACP, headless)]]
+- 2026-10-02 · repo · [[pages/20261002-opendots-copilotkit-ai-coworkers|OpenDots — CopilotKit's self-hostable always-on AI coworkers (open-source OpenAI Dots)]]
+- 2026-10-02 · repo · [[pages/20261002-dots-feder-cr-stealth-browser-agent|dots — open-source web agent on a patched Firefox that does not get blocked]]
 - 2026-10-02 · repo · [[pages/20261002-zcode-zai-harness|ZCode — Z.ai open-source coding agent harness (desktop + web + CLI)]]
 - 2026-10-02 · repo · [[pages/20261002-magpie-agent-model-switcher|magpie — one menu-bar panel and local gateway for every coding agent's model]]
 - 2026-10-02 · repo · [[pages/20261002-coucou-notch-agent-companion|Coucou — notch companion that watches Claude Code, Codex, Cursor and Gemini CLI sessions]]
@@ -25,6 +28,3 @@
 - 2026-09-29 · skill · [[pages/20260928-claude-code-fable-advisor-jev-tree|Claude Code: Fable 5.1 Advisor + Jev Routing Tree]]
 - 2026-09-28 · tool · [[pages/20260919-linkedin-skills-for-claude|LinkedIn Skills for Claude: Free LinkedIn Automation Tool]]
 - 2026-09-27 · post · [[pages/20260927-seo-purchase-intent-ai-agent-ecom|AI Agent SEO: Purchase-Intent Keywords for $100k/mo E-com Organic Revenue]]
-- 2026-09-27 · post · [[pages/20260925-opus-5-5-motion-graphics-showreel-prompt|Opus 5.5 One-Prompt Motion-Graphics Showreels]]
-- 2026-09-27 · tool · [[pages/20260828-nvidia-skillspector-skill-security-scanner|NVIDIA SkillSpector: Security Scanner for Agent Skills]]
-- 2026-09-27 · concept · [[pages/20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit-and-fix cost by 90%]]

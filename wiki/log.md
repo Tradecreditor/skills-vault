@@ -99,3 +99,7 @@
 ## [2026-10-02] capture | yetone/magpie | 20261002-magpie-agent-model-switcher
 ## [2026-10-02] capture | Louis-CFM/coucou | 20261002-coucou-notch-agent-companion
 ## [2026-10-02] hot-list | 2026-W39 | hot-list/2026-W39
+## [2026-10-02] capture | xai-org/grok-build | 20261002-grok-build-xai-terminal-coding-agent
+## [2026-10-02] capture | CopilotKit/OpenDots | 20261002-opendots-copilotkit-ai-coworkers
+## [2026-10-02] capture | feder-cr/dots | 20261002-dots-feder-cr-stealth-browser-agent
+## [2026-10-02] hot-list | 2026-W40 | hot-list/2026-W40
