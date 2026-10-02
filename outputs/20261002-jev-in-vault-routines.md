@@ -95,7 +95,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 
 ## 前置條件
 
-1. **`TYPESAFE_API_KEY`** — 喺 Routine 環境用 **Add credential** 加：Name `TYPESAFE_API_KEY`、type Bearer、Allowed websites `api.typesafe.ai`、header `Authorization: Bearer <key>`。呢種 credential 係 proxy 注入：proxy 自己加 header，變數本身喺 run 入面通常見唔到（`SUPADATA_KEY` 一樣），所以 routine 同 skill 唔可以靠 `env` 判斷有冇 key，要用第一個請求嘅 401 判斷。本機 shell 就放 `~/.zshrc` / PowerShell profile，永不入 repo。
+1. **`TYPESAFE_API_KEY`** — 喺 Routine 環境用 **Add credential** 加：Name `TYPESAFE_API_KEY`、type Bearer、Allowed websites `api.typesafe.ai`、header `Authorization: Bearer <key>`。呢種 credential 係 proxy 注入：proxy 自己加 header，變數本身喺 run 入面通常見唔到（`SUPADATA_KEY` 一樣），所以 routine 同 skill 唔可以靠 `env` 判斷有冇 key，要用第一個請求判斷：TypeSafe 冇收到 key 會回 403 加 `authentication_error` JSON（2026-10-02 實測），proxy 封 host 就係 CONNECT 403 冇 body。本機 shell 就放 `~/.zshrc` / PowerShell profile，永不入 repo。
 2. **Allowed domain** — 儲存 credential 時 Allowed websites 填 `api.typesafe.ai` 會自動建立 allow rule；Step 0 嗰張表再手動加一次係雙重保險。冇 allow 嘅話第一個呼叫 403，routine 整個 run 關 Jev 並喺 ## 方法 講明。
 3. **固定 fallback 規則**（寫入 skill）：冇 key、402、5xx、timeout、或機率喺 0.50–0.80 → 照今日做法由 routine 本身嘅模型決定；最後訊息一行「jev: N asked, M fell back (reason)」。
 4. **Log 格式**（run transcript）：`jev <question> p=0.93 model=jev-1.x state_sha=ab12cd34`，方便事後對照同調門檻。
@@ -117,6 +117,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 - 三種問題類型、批量、`Idempotency-Key`：jevmodel.org/api 原文。
 - 推出日期、作者、宣稱倍數：madewithjev.com launch post（經 Exa）。
 - 環境 API credential 係 proxy 注入：本 session 嘅 `SUPADATA_KEY` 喺 `env` 入面完全唔存在，但 system prompt 列明 proxy 會為 `api.supadata.ai` 注入；其他 credential 只係佔位值。所以「有冇 key」只能用請求嘅 401 / 403 判斷。
+- 2026-10-02 加 domain 同 credential 之後，本 session 已經連到 `api.typesafe.ai`（GET 回 405），但 POST 回 403 `{"detail":{"error_type":"authentication_error","message":"Must supply an API key!"}}`：credential header 未有注入呢個已開始嘅 session（新 session / Routine run 先載入 credential，或者 Allowed websites 填法未對）。
 - 本 sandbox：冇 `TYPESAFE_API_KEY`；`api.typesafe.ai` curl 回 proxy 403；madewithjev.com、jevmodel.org、datacamp.com、langchain.com、firecrawl.dev、hyperstack.cloud、marktechpost.com、apimodels.app 全部 egress 封鎖（WebFetch），只有 Exa 中繼讀到 jevmodel.org 同 madewithjev.com 首頁。
 
 **未驗證**
