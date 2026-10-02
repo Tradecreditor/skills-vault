@@ -91,3 +91,4 @@
 ## [2026-10-01] capture | Sonnet 5.5 vs Opus 5.5: Same 4 Motion-Graphics Prompts, 41% Cheaper | 20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost
 ## [2026-10-01] capture | 5 GitHub Repos That Gained ~43k Stars in a Week | 20260925-5-github-repos-43k-stars-week
 ## [2026-10-01] lint | social reader options | outputs/20261001-social-media-readers-for-agents
+## [2026-10-02] capture | 5 Git & GitHub Command Pairs Explained | 20260928-5-git-github-command-pairs
