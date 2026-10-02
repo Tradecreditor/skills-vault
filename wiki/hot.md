@@ -9,6 +9,7 @@
   貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
 
 ## 最近 20 項
+- 2026-10-02 · video · [[pages/20261002-what-is-jev-system-one-ai-model|What Is Jev? The AI Model That Doesn't Generate Text]]
 - 2026-10-02 · video · [[pages/20260928-5-git-github-command-pairs|5 Git & GitHub Command Pairs Explained (Merge vs Rebase, Fetch vs Pull, etc.)]]
 - 2026-10-01 · post · [[pages/20260925-5-github-repos-43k-stars-week|5 GitHub Repos That Gained ~43k Stars in a Week]]
 - 2026-10-01 · post · [[pages/20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost|Sonnet 5.5 vs Opus 5.5: Same 4 Motion-Graphics Prompts, 41% Cheaper]]
@@ -28,5 +29,4 @@
 - 2026-09-27 · video · [[pages/20260829-higgsfield-hell-grind-ai-film-consistency-workflow|拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧]]
 - 2026-09-27 · tool · [[pages/20260910-clay-ai-b2b-sales-automation|Clay: AI B2B Prospecting and Waterfall Enrichment]]
 - 2026-09-27 · post · [[pages/20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]]
-- 2026-09-27 · post · [[pages/20260924-video-shotcraft|Video Shotcraft — Cinematic Product Videos with Claude Code & Remotion]]
 

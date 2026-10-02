@@ -92,3 +92,4 @@
 ## [2026-10-01] capture | 5 GitHub Repos That Gained ~43k Stars in a Week | 20260925-5-github-repos-43k-stars-week
 ## [2026-10-01] lint | social reader options | outputs/20261001-social-media-readers-for-agents
 ## [2026-10-02] capture | 5 Git & GitHub Command Pairs Explained | 20260928-5-git-github-command-pairs
+## [2026-10-02] capture | What Is Jev? The AI Model That Doesn't Generate Text | 20261002-what-is-jev-system-one-ai-model
