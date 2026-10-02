@@ -1,14 +1,16 @@
 # Hot — read me first
 
 ## 本週熱門榜
-`2026-W38`（quiet week — 只有 1 個項目兩個平台都過 gate，冇夾硬砌夠 2 個），完整報告見
-[[hot-list/2026-W38|hot-list/2026-W38]]：
+`2026-W39`，完整報告見 [[hot-list/2026-W39|hot-list/2026-W39]]（注意：run 喺 2026-10-02 執行，stars 為當日數字）：
 
-- **[[pages/20260920-fast-jev-compaction|fast-jev-compaction]]**（tamaratran）— Claude Code plugin，
-  用 Jev 逐個 tool call 判斷留/截/刪嚟做逐字 context compaction。GitHub 3 日 5,089 stars + X 創作者
-  貼文 1 萬幾 like / 369 萬 views，雙平台過 gate，heat 0.94。
+- **[[pages/20261002-zcode-zai-harness|ZCode]]**（zai-org）— Z.ai 開源 coding agent harness，被揭背景上傳 workspace 後道歉並開源。GitHub 7,325 stars + X 三個作者過 gate（官方帖 2,862 likes / 64 萬 views），heat 0.94。
+- **[[pages/20261002-magpie-agent-model-switcher|magpie]]**（yetone）— menu bar + 本地 gateway，Codex 行 DeepSeek、Claude Code 行 Kimi。GitHub 4,232 stars，單平台 heat 0.80。
+- **[[pages/20261002-coucou-notch-agent-companion|Coucou]]**（Louis-CFM）— notch 小角色監察 Claude Code / Codex / Cursor session，可喺 notch 批准 permission。GitHub 2,820 stars，單平台 heat 0.75。
 
 ## 最近 20 項
+- 2026-10-02 · repo · [[pages/20261002-zcode-zai-harness|ZCode — Z.ai open-source coding agent harness (desktop + web + CLI)]]
+- 2026-10-02 · repo · [[pages/20261002-magpie-agent-model-switcher|magpie — one menu-bar panel and local gateway for every coding agent's model]]
+- 2026-10-02 · repo · [[pages/20261002-coucou-notch-agent-companion|Coucou — notch companion that watches Claude Code, Codex, Cursor and Gemini CLI sessions]]
 - 2026-10-02 · video · [[pages/20261002-what-is-jev-system-one-ai-model|What Is Jev? The AI Model That Doesn't Generate Text]]
 - 2026-10-02 · video · [[pages/20260928-5-git-github-command-pairs|5 Git & GitHub Command Pairs Explained (Merge vs Rebase, Fetch vs Pull, etc.)]]
 - 2026-10-01 · post · [[pages/20260925-5-github-repos-43k-stars-week|5 GitHub Repos That Gained ~43k Stars in a Week]]
@@ -26,7 +28,3 @@
 - 2026-09-27 · post · [[pages/20260925-opus-5-5-motion-graphics-showreel-prompt|Opus 5.5 One-Prompt Motion-Graphics Showreels]]
 - 2026-09-27 · tool · [[pages/20260828-nvidia-skillspector-skill-security-scanner|NVIDIA SkillSpector: Security Scanner for Agent Skills]]
 - 2026-09-27 · concept · [[pages/20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit-and-fix cost by 90%]]
-- 2026-09-27 · video · [[pages/20260829-higgsfield-hell-grind-ai-film-consistency-workflow|拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧]]
-- 2026-09-27 · tool · [[pages/20260910-clay-ai-b2b-sales-automation|Clay: AI B2B Prospecting and Waterfall Enrichment]]
-- 2026-09-27 · post · [[pages/20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]]
-
