@@ -83,8 +83,9 @@ jev:               # pilot 1 (2026-10-02): TypeSafe's Jev prefilters candidates;
                    # Needs the TYPESAFE_API_KEY API credential on the environment (proxy-injected Bearer header, allowed website api.typesafe.ai; the variable is not visible in a run).
                    # Without it TypeSafe answers 403 authentication_error on the first call, every step below runs today's path and the ## 方法 line says so.
   enabled: true
-  model: "jev-latest"                 # pin a fixed version once the thresholds below have been tuned on two real runs
-  probe_url: "https://api.typesafe.ai/v1/models"   # free GET; 200 = the key reached TypeSafe, Jev is on for the run; 401/403 = off
+  base_url: "https://api.typesafe.ai"   # TypeSafe direct. Same protocol on gateways: Vercel AI Gateway "https://ai-gateway.vercel.sh/typesafe" (model "typesafe-ai/jev", AI Gateway key), OpenRouter "https://openrouter.ai/api" (model "~typesafe/jev-latest", OpenRouter key). The credential's Allowed websites must name this host; a key only works on the host that issued it.
+  model: "jev-latest"                 # pin a fixed version once the thresholds below have been tuned on two real runs; gateways use their own ids (see base_url)
+  probe: "POST <base_url>/v1/systemone, state \"probe\", one noul question"   # the run's on/off test, about one token of cost: 200 with answers = on; 401, or 403 with an authentication_error body = off (no accepted key reached the host); CONNECT 403 = host not allowed
   in_scope:                           # H1: five-level score (TypeSafe scores count from 0, so the scale is 0-4) for every in-window X / Threads search hit BEFORE any fxtwitter or Jina fetch
     act_min: 2.5                      # >= act_min: verify (sorted by score; the top 40 get fxtwitter, Threads hits are read via Jina)
     defer_min: 1.5                    # [defer_min, act_min): read the snippet yourself and decide, as today; below defer_min: skip and count

@@ -26,7 +26,7 @@ Jev is trained with RLCD (reinforcement learning for calibrated decisions), so a
 - A TypeSafe API key. Laptop: `TYPESAFE_API_KEY` in your shell profile, sent as `Authorization: Bearer`. Cloud Routines and sessions: an **API credential** on the environment (Add credential → Name `TYPESAFE_API_KEY`, type Bearer, Allowed websites `api.typesafe.ai`, header `Authorization: Bearer <key>`). There the proxy injects the header on every request to that host and the variable is usually not visible in the shell (the vault's `SUPADATA_KEY` behaves the same), so code must not require it: send the header when the variable is set, otherwise send none, and read a 401, or a 403 whose JSON body says `authentication_error` (what TypeSafe actually returns when no key reached it, verified 2026-10-02), as "no credential". Never in the repo, never in `raw/` or a page.
 - The host `api.typesafe.ai` must be reachable. Saving the API credential auto-creates the allow rule for it; listing it in the environment's allowed domains as well (routines/README.md, Step 0) is belt and braces; a Claude Code cloud sandbox without it answers `CONNECT tunnel failed, response 403` and every call falls back silently, so always count fallbacks in the final message.
 - Text-only state; 64k tokens per request in total, 32k for the state plus the longest question (API reference). Trim: README first 100 lines, post text plus metadata, not a whole `raw/` file.
-- Do not use third-party mirrors such as `jevmodel.org/v1/systemone`; the official endpoint is `https://api.typesafe.ai/v1/systemone`.
+- Provider, base URL, key and model id are one set. TypeSafe direct: `https://api.typesafe.ai`, model `jev-latest`, console key. Vercel AI Gateway: `https://ai-gateway.vercel.sh/typesafe`, model `typesafe-ai/jev`, AI Gateway key. OpenRouter: `https://openrouter.ai/api`, model `~typesafe/jev-latest`, OpenRouter key. All three speak the same `/v1/systemone` protocol. A key only works on the host that issued it, and TypeSafe answers 403 `authentication_error` to a foreign or invalid key exactly as to no key. Avoid look-alike resellers (jevmodel.org, jev-ai.pro, jevtypesafeai.com and the many `.pro` clones): their own keys, 3–11× list price, and your state passes through their operator.
 
 ## Request shape
 
@@ -49,14 +49,14 @@ curl -sS https://api.typesafe.ai/v1/systemone \
   }'
 ```
 
-Free auth probe before a run: `curl -sS https://api.typesafe.ai/v1/models` → `200` with a model list means the key reached TypeSafe; `401`, or `403` with an `authentication_error` body, means it did not.
+Auth probe before a run: one tiny POST (state `"probe"`, one noul) to `<base_url>/v1/systemone` → `200` with `answers` means the key is accepted; `401`, or `403` with an `authentication_error` body, means no accepted key reached the host. `GET /v1/models` is a free alternative on TypeSafe direct and Vercel, but OpenRouter's model list is public, so the POST is the probe everywhere.
 
 Python, no dependencies, with a sandbox switch (`JEV_FAKE=<path.json>` returns canned answers so the surrounding logic can be tested with no key and no network — `references/jev-fake.example.json` is a starting fixture):
 
 ```python
 import hashlib, json, os, urllib.error, urllib.request, uuid
 
-JEV_URL = os.environ.get("JEV_URL", "https://api.typesafe.ai/v1/systemone")
+JEV_URL = os.environ.get("JEV_URL", "https://api.typesafe.ai/v1/systemone")   # a gateway: "<its base url>/v1/systemone"
 
 def ask_jev(state, questions, model="jev-latest", timeout=10):
     """Return {name: float | {label: float}} — noul/score give a float, choice gives label -> probability.
@@ -150,7 +150,7 @@ Exact JSON for every row, with the state fields and the prompt line it attaches 
 - Sending secrets, cookies or whole `raw/` files in the state. State is logged by hash only, but it still leaves the machine.
 - A blocked host plus a silent fallback looks like "Jev never fires". Count fallbacks and print the reason.
 - Unbounded call counts. Cap decisions per run (hot list: 1,500) and batch per candidate.
-- Mixing endpoints. `api.typesafe.ai` with `TYPESAFE_API_KEY`; nothing else.
+- Mixing providers. Key, base URL and model id come as one set (TypeSafe direct, Vercel AI Gateway or OpenRouter); a key from one host sent to another gets the same 403 as no key.
 - Pinning `jev-latest` forever: calibration can move between versions; pin after tuning, re-tune when you bump.
 
 ## Evidence
