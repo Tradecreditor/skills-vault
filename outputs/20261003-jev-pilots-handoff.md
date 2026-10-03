@@ -33,7 +33,7 @@
 
 目的：5b backfill 嘅候選排序由「CJK 字數 < 20」擴展到「摘要有冇 README 先有嘅事實」。只改排序，唔改寫法。
 
-1. 分支 → 改 `routines/github-stars-sync.md` step 5b：CJK filter 保留；之後「if `python3 skills/judging-with-jev/scripts/jev_ask.py probe` exits 0, for every `wiki/stars/*.md`（或者只係 CJK filter 冇標嘅）build the S2 state（reference §S2：full_name、description、`## 摘要` body、README 頭 100 行）and run `jev_ask.py ask --state <f> --act-min 0.80 --defer-min 0.50`；`band == no`（p < 0.50）嘅最低三個做 backfill 候選，`defer` 由 Sonnet 讀兩邊決定，`act` 跳過」。Fallback（exit 2 / denial）= 今日 CJK-only。最後訊息加一行 `jev: summary_from_readme <asked>/<act>/<defer>/<no>; fallbacks <n>`。
+1. 分支 → 改 `routines/github-stars-sync.md` step 5b：CJK filter 保留；之後「if `python3 skills/judging-with-jev/scripts/jev_ask.py probe` exits 0, for every `wiki/stars/*.md`（或者只係 CJK filter 冇標嘅）build the S2 state（reference §S2：full_name、description、`## 摘要` body、README 頭 100 行）and run `jev_ask.py ask --state <f> --act-min 0.80 --defer-min 0.50`；`band == no`（p < 0.50）嘅最低三個做 backfill 候選，`defer` 由 Sonnet 讀兩邊決定，`act` 跳過」。Fallback（exit 2 / denial）= 今日 CJK-only。最後訊息加一行 `jev: summary_from_readme <asked>/<act>/<defer>/<no>; fallbacks <n>`，**同一行亦要放喺 commit message body 最後一行**（title 照舊 `stars: +<N>` / `stars: enrich <n>`）：`vault-lint` check 8 係由 `git log origin/main` 嘅 commit body 讀呢行嚟做 Jev 健康檢查（2026-10-03 加），淨係放喺最後訊息冇人會睇到。
 2. 門檻放邊：stars-sync 冇 config file。最簡單係寫死喺 prompt 並註明「reference 嘅預設」；如果想同 hot-list 一致，可以新增 `wiki/github-stars.base.yaml`？——唔建議，多一個檔。寫入 prompt 即可。
 3. 測試（即時，唔等 06:00 UTC）：Routine → Run now（係 schedule routine，但 prompt 冇「今日係星期一先跑」嘅 guard，所以任何時間都會真跑）；讀 transcript：見到 `jev_ask.py probe` + 多次 `ask`、最後訊息有 jev 行；對照佢揀嘅三個 backfill 同 CJK filter 嘅名單。成本：34 個 star 筆記 × ≈1,200 tokens ≈ 4 萬 tokens（≈ US$0.002）。
 4. 驗收：連續兩次 run 嘅 backfill 候選合理（人手抽查 3 個 p < 0.50 嘅 摘要 確實只係改寫 description）→ 再做 S1（step 4 draft SKILL.md 判斷，reference §S1，`≥ 0.80` draft）。
@@ -41,7 +41,7 @@
 
 ## 5. 試點 3 — `vault-lint`：L1 `near_duplicate`（之後 L2 `review_priority`）
 
-1. 改 `routines/vault-lint.md` check 5：先確定性預篩配對（標題共享 ≥ 4 字元嘅小寫 token、或同 `author`、或 `source_url` 同 host），每對一次 `jev_ask.py ask`（reference §L1 state：兩頁嘅 slug / title / type / source_url / 摘要 頭兩句），`≥ 0.80` 列入 `## Suggested fixes`（建議合併，唔自動合併），`0.50–0.80` Sonnet 自己讀，`< 0.50` 唔理。`outputs/health/WEEK.md` 加一行 jev 統計。預計每週 ≈ 20 對、≈ 4,000 tokens。
+1. 改 `routines/vault-lint.md` check 5：先確定性預篩配對（標題共享 ≥ 4 字元嘅小寫 token、或同 `author`、或 `source_url` 同 host），每對一次 `jev_ask.py ask`（reference §L1 state：兩頁嘅 slug / title / type / source_url / 摘要 頭兩句），`≥ 0.80` 列入 `## Suggested fixes`（建議合併，唔自動合併），`0.50–0.80` Sonnet 自己讀，`< 0.50` 唔理。`outputs/health/WEEK.md` 加一行 jev 統計，同埋 `lint: WEEK` commit body 最後一行放同一句（check 8 讀 commit body，見 §4）。預計每週 ≈ 20 對、≈ 4,000 tokens。
 2. 測試：Run now（lint prompt 用「this ISO week」，冇星期一 guard，任何日都真跑，但會寫 `outputs/health/WEEK.md` 同 commit 到 main——呢個係 lint 本身嘅行為，可接受）。
 3. 之後 L2：check 6 嘅 stale-draft 名單用 `review_priority`（score，五級，reference §L2）排序，只排序唔刪。
 

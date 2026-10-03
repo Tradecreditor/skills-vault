@@ -89,6 +89,8 @@ IBM Technology's worked example uses `> 0.9` auto, `0.1–0.9` human review, `< 
 
 Every run ends with one line in the final message: `jev: <asked> asked, <acted> acted, <deferred> deferred, <fallbacks> fell back (<reason>)`. Each decision is logged in the transcript as `jev <question> p=<prob> model=<version> state_sha=<8 hex>` so a wrong call can be traced to its input.
 
+Put the same jev line somewhere in the repo, not only in the final message: the hot list writes it under `## 方法` of its report, the other routines put it as the last line of their commit message body. `vault-lint` check 8 reads those every Monday and flags ⚠️ in `outputs/health/` when the line is missing, says `off` while `jev.enabled` is true, or fallbacks exceed `jev.health.fallback_max_ratio` (`wiki/hot-list/_config.yaml`). A transcript nobody opens is not monitoring.
+
 ## Vault recipes
 
 | routine | step | question | type | act / defer | fallback | status |

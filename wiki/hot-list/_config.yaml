@@ -102,6 +102,8 @@ jev:               # pilot 1 (2026-10-02): TypeSafe's Jev prefilters candidates;
     defer_min: 0.50
     max_decisions: 100
   max_decisions_per_run: 1500         # hard cap across all Jev questions; past it, finish the run without Jev and say so
+  health:                             # read by vault-lint check 8 (routines/vault-lint.md), which reads this week's jev line and flags it in outputs/health/; a file edit, no prompt re-paste
+    fallback_max_ratio: 0.10          # fallbacks / sum of <asked> above this is ⚠️ in the health report; "jev: off" while enabled above is always ⚠️
   report_line: "jev: in_scope <asked>/<acted>/<deferred>/<skipped>; topical <asked>/<topical>/<deferred>/<general>; same_item <asked>/<merged>; fallbacks <n> (<reason>)"   # one line under ## 方法, always present; reads 'jev: off (<reason>)' when nothing was asked
 
 output:
