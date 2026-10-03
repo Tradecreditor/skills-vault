@@ -19,7 +19,7 @@ Jev is TypeSafe AI's "System One" decision model (launched 2026-09-15). It does 
 | `choice` | one probability per label you define | pick one: `type`, `topic/*` tag, which reader worked |
 | `score` | fractional position on an ordered 2–10 level rubric you describe; levels count from 0 | rank: relevance to scope, review priority |
 
-Jev is trained with RLCD (reinforcement learning for calibrated decisions), so a 0.8 is right about 80% of the time — that is what makes a threshold meaningful. Several questions in one request share the state's token cost and are answered together. Only input tokens are billed; the published median is about US$0.000068 per decision. In the vault's tiering this sits **below Sonnet**: Jev judges, Sonnet executes, Opus/Fable plans and reviews (see [[../model-tiering/SKILL|model-tiering]], Part C). Where it pays in this vault and where it does not: `outputs/20261002-jev-in-vault-routines.md`.
+Jev is trained with RLCD (reinforcement learning for calibrated decisions), so a 0.8 is right about 80% of the time — that is what makes a threshold meaningful. Several questions in one request share the state's token cost and are answered together. Only input tokens are billed; the published median is about US$0.000068 per decision. In the vault's tiering this sits **below Sonnet**: Jev judges, Sonnet executes, Opus/Fable plans and reviews (see [[../model-tiering/SKILL|model-tiering]], Part C). Where it pays in this vault and where it does not: `outputs/20261002-jev-in-vault-routines.md`. Current pilot status, what the next pilots need and the pitfalls met so far: `outputs/20261003-jev-pilots-handoff.md`.
 
 ## Prerequisites
 
