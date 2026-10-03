@@ -101,3 +101,4 @@
 ## [2026-10-02] hot-list | 2026-W39 | hot-list/2026-W39
 ## [2026-10-03] lint | Jev pilots handoff | outputs/20261003-jev-pilots-handoff
 ## [2026-10-03] promote | keeping-handoff-docs | skills/keeping-handoff-docs
+## [2026-10-03] lint | 2026-W40 | outputs/health/2026-W40
