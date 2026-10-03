@@ -4,9 +4,10 @@ This repository is Josep's personal **agent skills vault**: an Obsidian vault, a
 and an installable library of Agent-Skills folders. AGENTS.md is an identical copy of this file.
 
 ## Read this first, in this order
-1. `wiki/hot.md` — what changed recently and this week's hot list.
-2. `wiki/index.md` — one row per entry (slug, type, title, platform, captured, status, tags, canonical_id).
-3. The page you need: `wiki/pages/<slug>.md`, `wiki/stars/<slug>.md`, or `skills/<name>/SKILL.md`.
+1. `handoff.md` — where the project stands, what is in flight, what to do next (one per project; SOP in `skills/keeping-handoff-docs/SKILL.md`).
+2. `wiki/hot.md` — what changed recently and this week's hot list.
+3. `wiki/index.md` — one row per entry (slug, type, title, platform, captured, status, tags, canonical_id).
+4. The page you need: `wiki/pages/<slug>.md`, `wiki/stars/<slug>.md`, or `skills/<name>/SKILL.md`.
 Do not grep the whole repo before reading the index; the index exists so you do not have to.
 
 ## Folder roles
@@ -61,6 +62,7 @@ everything appears to work without it, right up until the agent pushes to `main`
 - `git pull --rebase` before every push. Core captures push straight to `main`; the weekly hot list opens a PR (branch `hot-list/YYYY-Www`); non-core agents always open a PR (`gh pr create`, then `gh pr merge --auto --rebase` if allowed).
 - Non-core agents work in their own clone with their own token; never run inside Josep's Obsidian folder.
 - Never commit secrets or cookies. API keys live in environment variables (Routine secrets, Supabase secrets, local shell).
+- **Keep `handoff.md` current.** Any session or agent that changes code, prompts, config, skills, data or the plan updates it before ending and appends one line to its Session log, in the same commit or PR. Routines read it and never edit it; their output goes to `wiki/log.md`, `wiki/hot.md` and `outputs/health/`.
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools
