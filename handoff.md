@@ -2,7 +2,7 @@
 
 One file, one project. Any session or agent that changes code, prompts, config, skills, data or the plan updates this file before it ends (SOP: `skills/keeping-handoff-docs/SKILL.md`). Cloud Routines read it and never edit it. Keep it under ~150 lines; long detail goes to `outputs/` and is linked from here.
 
-Last updated: 2026-10-03 11:50 UTC by Claude Code cloud (Fable 5.1, session 018ZbUMaCg8HwBtjhZjMPHVB).
+Last updated: 2026-10-03 13:30 UTC by Claude Code cloud (Fable 5.1, session 016Po43wctJLFNs4b3MhJuPW).
 
 ## Snapshot
 - Josep's personal agent skills vault: an Obsidian vault, a Karpathy-style LLM wiki and an installable Agent-Skills library. Rules: `CLAUDE.md` (`AGENTS.md` is an identical copy). Folder roles, note format, skill format and commit vocabulary are all there.
@@ -17,6 +17,7 @@ Last updated: 2026-10-03 11:50 UTC by Claude Code cloud (Fable 5.1, session 018Z
 | Jev pilots 2–4 (`github-stars-sync` S2, `vault-lint` L1, `capture-link` C1–C5) | Not started; question sets and thresholds written | Pilot 2 first: `summary_from_readme` in `routines/github-stars-sync.md` step 5b, test with Run now | `outputs/20261003-jev-pilots-handoff.md` §4–6; `skills/judging-with-jev/references/vault-routine-questions.md` |
 | Hot list 2026-W40 | Development report on branch `hot-list/2026-W40`, PR #19 open — **do not merge** | Monday's scheduled run force-pushes the branch and updates the PR with the full week; Josep reviews that version | `wiki/hot-list/2026-W40.md` |
 | DEV trigger "weekly-hot-list DEV run (Jev pilot 1, 2026-10-02)" | Enabled, fire-only (no cron), no Exa, no repo binding | Disable or delete when no longer wanted (Josep, Routines UI) | trigger `trig_01AFdkexceR6xHxAsNiRmquo` |
+| Jev health check — `vault-lint` check 8 | PR #22 open (branch `claude/hopeful-maxwell-zqojwl`); reads the hot list's `jev:` line from `hot-list/WEEK` + `jev:` lines in commit bodies on `main`, ⚠️ on missing / off-while-enabled / fallbacks > `jev.health.fallback_max_ratio` (0.10, `_config.yaml`) | Josep merges, `copy-prompt vault-lint` re-paste, Run now once (writes `outputs/health/2026-W40.md` again — fine); first scheduled read is Mon 2026-10-05 09:00 UTC, one hour after the hot list | `routines/vault-lint.md` check 8; `routines/README.md` Jev bullet |
 
 ## Open loops
 - `main-protection` ruleset: the `guard` check is not yet in `required_status_checks` (a check appears in the picker only after it has run on one PR from the machine account) — `CLAUDE.md` "How this is actually configured".
@@ -25,6 +26,7 @@ Last updated: 2026-10-03 11:50 UTC by Claude Code cloud (Fable 5.1, session 018Z
 - Snapshot refresh gap in the hot list: runs so far refreshed only repos a search returned; tracked repos outside the searches are not re-fetched — `outputs/20261003-jev-pilots-handoff.md` §3.4.
 
 ## Recently done (last 7 days)
+- 2026-10-03 (later): Jev review for Josep (verdict: pilot 1 + 2a worth doing, 3a wait until the vault is bigger, 4 skip); `vault-lint` check 8 Jev health + `jev.health` config, pilots 2–3 now also put their `jev:` line in the commit body (branch `claude/hopeful-maxwell-zqojwl`).
 - 2026-10-03: PR #20 Jev pilots handoff doc; PR #18 `jev_ask.py` client + `jev.client` config + prompt; live `weekly-hot-list` prompt re-pasted (Josep). `handoff.md` and `keeping-handoff-docs` created (this change).
 - 2026-10-02: PR #13 hot-list 2026-W39 (first report with winners); PR #15 Jev report + `judging-with-jev` skill; PR #16 Jev API shape, configurable provider, env-var key; PR #17 "test routine changes immediately" practice (`routines/README.md` Step 5); W40 development run (PR #19).
 
@@ -44,3 +46,4 @@ Last updated: 2026-10-03 11:50 UTC by Claude Code cloud (Fable 5.1, session 018Z
 ## Session log (append-only; newest last)
 - 2026-10-02 · Claude Code cloud, Fable 5.1, session 018ZbUMaCg8HwBtjhZjMPHVB · Jev report + `judging-with-jev` skill (PR #15), pilot 1 wiring and API fixes (PR #16), test-now practice (PR #17), key / credential debugging, `jev_ask.py` (PR #18), W40 development run (PR #19) · next: Monday acceptance of pilot 1.
 - 2026-10-03 · same session · PR #18 and #20 merged; live prompt re-pasted by Josep; `handoff.md` + `keeping-handoff-docs` SOP added · next: Monday acceptance, then pilot 2 (see In flight).
+- 2026-10-03 · Claude Code cloud, Fable 5.1, session 016Po43wctJLFNs4b3MhJuPW · Jev plan review for Josep; `vault-lint` check 8 Jev health + `jev.health.fallback_max_ratio`; pilots 2–3 told to put the jev line in the commit body (PR #22) · next: Josep merges + re-pastes `vault-lint`, Run now; Monday acceptance of pilot 1 unchanged.
