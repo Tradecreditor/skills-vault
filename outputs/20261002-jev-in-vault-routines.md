@@ -105,11 +105,13 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 
 ## 下一步（Josep 批准後，每個一個 PR）
 
-1. **hot-list 試點**：`wiki/hot-list/_config.yaml` 加 `jev:` 區塊（`enabled`、`in_scope_min: 3.5`、`topical_min: 0.80`、`defer_band: [0.50, 0.80]`、`max_decisions_per_run: 1500`）；`routines/weekly-hot-list.md` 1a–1c 各加一句「if jev.enabled and TYPESAFE_API_KEY is set, ask Jev first per skills/judging-with-jev」；## 方法 多一行 Jev 統計。跑兩個星期，對照 Watch 名單有冇被 Jev 跳過嘅項目。
-2. **stars-sync 試點**：5b 嘅 Python 篩選器之後加 `summary_from_readme`，只係改候選排序，唔改寫法。
-3. **lint 試點**：5 近似重複改成 token-overlap 預篩 + `near_duplicate`。
+試點 1 已於 2026-10-03 合併上線（PR #15–#18），等 2026-10-05 星期一正式 run 驗收。試點 2–4 嘅逐步指引、驗收標準、每個試點都要行嘅步驟同 2026-10-02/03 實測嘅陷阱，全部喺交接文件 **`outputs/20261003-jev-pilots-handoff.md`**；下面只留次序：
+
+1. **hot-list 試點（完成，待驗收）**：`wiki/hot-list/_config.yaml` 嘅 `jev:` 區塊（`in_scope` 2.5 / 1.5、`topical` 0.80 / 0.50、`same_item` 關住、`max_decisions_per_run: 1500`）+ `routines/weekly-hot-list.md` step 0 經 `jev_ask.py` 問 Jev。星期一後決定 `in_scope.act_min` 要唔要升到 3.0；兩個乾淨星期後開 `same_item` 同釘 `model`。
+2. **stars-sync 試點**：5b 嘅 Python CJK 篩選器之後加 `summary_from_readme`，只改候選排序，唔改寫法。
+3. **lint 試點**：check 5 近似重複改成確定性預篩 + `near_duplicate`。
 4. 三個試點穩定後，`capture-link` 一次過加 C1–C5，同時 `vault-capture` §3 / §4 加一句「Jev 建議 + Sonnet 覆核」。
-5. 每一步都要：`bash scripts/vault-guard-check.sh`、routine 跑一次 Run now、讀 transcript 核實 Jev 行有出現。
+5. 每一步都要：`bash scripts/vault-guard-check.sh`、merge 後 `copy-prompt` 重貼、routine 即時 Run now、讀 transcript 核實 jev 行有數字。
 
 ## 試點 1 開發測試結果（2026-10-02，H2 `topical`）
 
