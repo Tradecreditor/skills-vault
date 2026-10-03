@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:Forget-C/Jellyfish"
 engagement: "stars=6466 forks=1121"
 tags: [ai, short-drama, video-generation]
-related: [hugohe3--ppt-master, nolangz--pixel2motion]
+related: [hugohe3--ppt-master, nolangz--pixel2motion, 20260829-higgsfield-hell-grind-ai-film-consistency-workflow]
 needs_manual_text: false
 ---
 
@@ -42,3 +42,4 @@ Reader used: raw README via Exa (web_fetch_exa)
 
 - [[hugohe3--ppt-master|ppt-master]] — 兩者都將 AI 生成由一次性小工具做成有完整交付流程嘅工作台。
 - [[nolangz--pixel2motion|pixel2motion]] — 都強調將生成資產拆做可獨立管理嘅部件，減少跨鏡頭/跨畫面走樣。
+- [[20260829-higgsfield-hell-grind-ai-film-consistency-workflow|拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧]] — 講解點解要將人物、聲音、場景拆做獨立資產，正係 Jellyfish 自動化嘅嗰套做法。

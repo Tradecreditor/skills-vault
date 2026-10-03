@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "url:9795257bfad1798ff19bc2bb95b3b1e93a18f9b2"
 engagement: "views=1K reactions=711 comments=647 shares=288"
 tags: [ai-video, ai-film, higgsfield, seedance, character-consistency, prompt-engineering, short-form-content]
-related: [Forget-C--Jellyfish]
+related: [Forget-C--Jellyfish, 20260924-video-shotcraft]
 needs_manual_text: false
 ---
 
@@ -46,3 +46,4 @@ needs_manual_text: false
 
 ## Related
 - [[../stars/Forget-C--Jellyfish|Jellyfish]]: an AI short-drama production workbench that manages character, scene, prop and costume consistency as shared assets. It automates the same "separate reusable assets per shot" idea as technique 1.
+- [[20260924-video-shotcraft|Video Shotcraft — Cinematic Product Videos with Claude Code & Remotion]]: the product-video counterpart; the same shot-planning discipline applied to brand clips rather than a long film.

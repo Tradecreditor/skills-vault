@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "url:e14ea4c61b6c92d7ea867765b3445de350d9d62f"
 engagement: "likes=34 comments=2 shares=27"
 tags: [video-generation, remotion, agent-skills, claude-code, codex, cinematic, product-video, typescript]
-related: []
+related: [20260829-higgsfield-hell-grind-ai-film-consistency-workflow]
 needs_manual_text: false
 ---
 
@@ -64,3 +64,4 @@ Video Shotcraft 是建立在 Remotion 上的 Agent Skill，讓 Claude Code 和 C
 ## Related
 
 - [[../../skills/making-product-videos/SKILL|skill: making-product-videos]]
+- [[20260829-higgsfield-hell-grind-ai-film-consistency-workflow|拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧]] — AI 影片嘅角色同場景一致性技巧，產品片同短劇都用得著。

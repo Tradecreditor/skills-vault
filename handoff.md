@@ -2,7 +2,7 @@
 
 One file, one project. Any session or agent that changes code, prompts, config, skills, data or the plan updates this file before it ends (SOP: `skills/keeping-handoff-docs/SKILL.md`). Cloud Routines read it and never edit it. Keep it under ~150 lines; long detail goes to `outputs/` and is linked from here.
 
-Last updated: 2026-10-03 14:10 UTC by Claude Code cloud (Fable 5.1, session 016Po43wctJLFNs4b3MhJuPW).
+Last updated: 2026-10-03 14:40 UTC by Claude Code cloud (Fable 5.1, session 016Po43wctJLFNs4b3MhJuPW).
 
 ## Snapshot
 - Josep's personal agent skills vault: an Obsidian vault, a Karpathy-style LLM wiki and an installable Agent-Skills library. Rules: `CLAUDE.md` (`AGENTS.md` is an identical copy). Folder roles, note format, skill format and commit vocabulary are all there.
@@ -48,3 +48,4 @@ Last updated: 2026-10-03 14:10 UTC by Claude Code cloud (Fable 5.1, session 016P
 - 2026-10-03 · same session · PR #18 and #20 merged; live prompt re-pasted by Josep; `handoff.md` + `keeping-handoff-docs` SOP added · next: Monday acceptance, then pilot 2 (see In flight).
 - 2026-10-03 · Claude Code cloud, Fable 5.1, session 016Po43wctJLFNs4b3MhJuPW · Jev plan review for Josep; `vault-lint` check 8 Jev health + `jev.health.fallback_max_ratio`; pilots 2–3 told to put the jev line in the commit body (PR #22) · next: Josep merges + re-pastes `vault-lint`, Run now; Monday acceptance of pilot 1 unchanged.
 - 2026-10-03 · same session · PR #22 merged, `vault-lint` re-pasted and Run now by Josep: check 8 ✅ first time (`1b28a6d`); handoff row updated · next: Monday 2026-10-05 — hot list 08:00 UTC (pilot 1 acceptance), lint 09:00 UTC (check 8 on the real run), then pilot 2a.
+- 2026-10-03 · same session · `wiki:` filled `## Related` on the 5 pages lint W40 flagged (3 orphans now have inbound links, 2 empty sections filled; 10 files, frontmatter `related:` kept in sync) · next: unchanged (Monday runs, then pilot 2a).

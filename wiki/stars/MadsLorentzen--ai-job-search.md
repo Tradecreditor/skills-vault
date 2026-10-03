@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:MadsLorentzen/ai-job-search"
 engagement: "stars=43470 forks=14927"
 tags: [ai, ai-agents, career, claude-code, cover-letter, cv, interview-preparation, job-application, job-hunting, job-search, latex, resume]
-related: [career-ops-hq--career-ops, Panniantong--Agent-Reach]
+related: [career-ops-hq--career-ops, Panniantong--Agent-Reach, 20260925-ex-googler-tech-interview-prep-tools]
 needs_manual_text: false
 ---
 
@@ -42,3 +42,4 @@ Reader used: raw README via Exa (web_fetch_exa)
 
 - [[career-ops-hq--career-ops|career-ops]] — 同一個垂直領域(AI 求職自動化)，可比較兩者嘅設計差異。
 - [[Panniantong--Agent-Reach|Agent-Reach]] — 求職流程入面嘅 `/scrape` 步驟同 Agent-Reach 嘅多平台擷取能力思路一致。
+- [[20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]] — 一個真人求職者嘅面試準備工具清單，同呢個 repo 嘅 interview-prep 步驟可以互補。

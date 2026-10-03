@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:Dd1QUCrirJg"
 engagement: "likes=2520 comments=6"
 tags: [topic/infra-devops, git, github, merge-vs-rebase, fetch-vs-pull, reset-vs-revert, fork-vs-clone, squash-merge, frontenddeveloper]
-related: []
+related: [20260930-hostinger-vps-cloudflare-tunnel-setup, 20260930-cloudflare-cf-agentic-cli-replaces-wrangler]
 needs_manual_text: false
 ---
 
@@ -57,3 +57,6 @@ needs_manual_text: false
 - **Reader**: supadata (transcript + metadata)
 
 ## Related
+
+- [[20260930-hostinger-vps-cloudflare-tunnel-setup|Hostinger KVM 2 VPS + Cloudflare free tier]] — 同屬 topic/infra-devops；部署到 VPS 之前先搞清楚 fetch/pull 同 merge/rebase。
+- [[20260930-cloudflare-cf-agentic-cli-replaces-wrangler|Cloudflare cf: agentic CLI replacing Wrangler]] — 同屬 topic/infra-devops，由 git 基礎去到 agent 操作雲端平台嘅 CLI。
