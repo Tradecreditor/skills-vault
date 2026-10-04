@@ -42,4 +42,4 @@ Reader used: raw README via Exa (web_fetch_exa)
 
 - [[career-ops-hq--career-ops|career-ops]] — 同一個垂直領域(AI 求職自動化)，可比較兩者嘅設計差異。
 - [[Panniantong--Agent-Reach|Agent-Reach]] — 求職流程入面嘅 `/scrape` 步驟同 Agent-Reach 嘅多平台擷取能力思路一致。
-- [[20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]] — 一個真人求職者嘅面試準備工具清單，同呢個 repo 嘅 interview-prep 步驟可以互補。
+- [[../pages/20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]] — 一個真人求職者嘅面試準備工具清單，同呢個 repo 嘅 interview-prep 步驟可以互補。

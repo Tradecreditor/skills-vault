@@ -1,5 +1,6 @@
 {
   "_comment": "Canned answers for JEV_FAKE=<this file>: lets the surrounding routine logic be exercised with no key and no network. Keys are question names; noul gives 0-1, score gives a float that counts from 0 (five levels = 0-4), choice gives label -> probability.",
+  "probe": 0.5,
   "in_scope": 3.2,
   "topical": 0.91,
   "same_item": 0.62,
