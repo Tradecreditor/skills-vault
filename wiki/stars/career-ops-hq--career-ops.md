@@ -42,4 +42,4 @@ Reader used: raw README via Exa (web_fetch_exa)
 
 - [[MadsLorentzen--ai-job-search|ai-job-search]] — 同一個垂直領域(AI 求職自動化)，但社群規模同信任建立手法唔同，值得對比。
 - [[Panniantong--Agent-Reach|Agent-Reach]] — 掃描 Greenhouse/Ashby/Lever 等招聘平台嘅做法同 Agent-Reach 嘅多平台擷取思路相通。
-- [[20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]] — 人手版面試準備（Hello Interview、Excalidraw、LeetCode），同 career-ops 嘅自動化流程對照。
+- [[../pages/20260925-ex-googler-tech-interview-prep-tools|Ex-Googler's 5 Tech Interview Prep Tools]] — 人手版面試準備（Hello Interview、Excalidraw、LeetCode），同 career-ops 嘅自動化流程對照。
