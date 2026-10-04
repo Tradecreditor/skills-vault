@@ -71,8 +71,12 @@ if all three pass. The audit reads files; it never runs, sources, imports or ins
 ## Limits
 - The static rules are regular expressions: they miss novel obfuscation, text inside images, and non-English instructions.
   The security review exists to catch what they miss; read non-English passages and image alt text yourself.
+- Shell globs, string concatenation and variables can spell a path or host the regexes do not see (`~/.ss[h]`); judge
+  what a command would actually touch, not only what the scan matched.
 - Content changes after a review invalidate it: `static_scan.py --hash skills/<name>` must equal the skill's
-  `metadata.review_hash`, or the approval no longer describes the files on disk.
+  `metadata.review_hash`, or the approval no longer describes the files on disk. The hash leaves out only the review
+  record itself (`vault_status`, `reviewed_at`, `reviewed_by`, `review_hash`, `review_report` directly under `metadata:`), and
+  only while each value has its exact format; any other text on those lines is hashed like the rest of the file.
 
 ## Source
 - Static rule categories follow NVIDIA SkillSpector, Cisco AI Defense `skill-scanner` and `dkleptsov/skill-security-review`;

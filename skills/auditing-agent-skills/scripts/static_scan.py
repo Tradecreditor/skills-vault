@@ -23,15 +23,20 @@ import os
 import re
 import sys
 
-VERSION = "static_scan.py 3"
+VERSION = "static_scan.py 4"
 MAX_TEXT_BYTES = 2_000_000
 IMAGE_EXT = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".bmp"}
 EXEC_EXT = {".sh", ".bash", ".zsh", ".ps1", ".psm1", ".bat", ".cmd", ".py", ".js", ".mjs", ".cjs", ".ts",
             ".rb", ".pl", ".php", ".go", ".rs", ".lua", ".exe", ".dll", ".so", ".dylib", ".jar", ".bin", ".wasm"}
 # Review bookkeeping written by the skill-review routine; excluded from the hash so recording a verdict
 # does not change the hash it records.
-# Only direct children of the frontmatter's top-level metadata: block (two-space indent) are excluded.
-REVIEW_KEYS = re.compile(r"^  (vault_status|reviewed_at|reviewed_by|review_hash|review_report|review_scope):")
+# Only direct children of the frontmatter's top-level metadata: block, and only when the value has its exact format,
+# so these lines cannot carry unhashed text.
+REVIEW_KEYS = re.compile(r'^  (vault_status: "(draft|reviewer-approved|verified|deprecated)"'
+                         r'|reviewed_at: "\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ"'
+                         r'|reviewed_by: "(routine:skill-review|claude-code-cloud:vault-skill-reviewer)"'
+                         r'|review_hash: "[0-9a-f]{64}"'
+                         r'|review_report: "outputs/skill-reviews/\d{4}-\d\d-\d\d-[a-z0-9]+(-[a-z0-9]+)*\.md")$')
 B64_LINE = re.compile(r"^[A-Za-z0-9+/]{40,}={0,2}$")
 
 # Invisible or direction-changing characters, Unicode tag characters and variation selectors (the usual carriers of
@@ -128,7 +133,7 @@ def normalized_bytes(rel, data):
             in_fm = in_meta = False
         elif in_fm and not ln.startswith((" ", "\t")):
             in_meta = ln.rstrip() == "metadata:"
-        elif in_meta and REVIEW_KEYS.match(ln):
+        elif in_meta and REVIEW_KEYS.match(ln.rstrip("\r")):
             continue
         out.append(ln)
     return "\n".join(out).encode("utf-8")
