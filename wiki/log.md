@@ -104,3 +104,4 @@
 ## [2026-10-03] lint | 2026-W40 | outputs/health/2026-W40
 ## [2026-10-04] capture | Cloudflare 開源 AI security audit skill（vibe-coded app 安全審查） | 20261004-cloudflare-open-source-ai-security-audit-skill
 ## [2026-10-04] capture | WhatsApp MCP Server — 讓 Claude 搜尋 WhatsApp 對話並代發訊息 | 20261004-whatsapp-mcp-server-claude
+## [2026-10-04] capture | okaashish: Claude skills link list (comment-bait teaser) | 20261004-okaashish-claude-skills-links-teaser
