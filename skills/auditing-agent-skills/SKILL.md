@@ -4,7 +4,11 @@ description: Audits an Agent-Skills folder for safety and quality with a determi
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-04"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-04T15:48:02Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "edb646dbdb46d4050b1afadf73f1431fa544d82a9ecd03523d725385d884f1a8"
+  review_report: "outputs/skill-reviews/2026-10-04-auditing-agent-skills.md"
 ---
 
 # auditing-agent-skills

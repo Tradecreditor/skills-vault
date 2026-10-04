@@ -14,7 +14,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 ## Skills in this vault
 | name | vault_status | origin_type | what it does |
 |---|---|---|---|
-| auditing-agent-skills | draft | vault-operations | Audits a skill folder for safety and quality and returns a PASS/FAIL verdict |
+| auditing-agent-skills | reviewer-approved | vault-operations | Audits a skill folder for safety and quality and returns a PASS/FAIL verdict |
 | automating-browsers-with-playwright | reviewer-approved | repo | Connects an agent to a real browser via the Playwright MCP server |
 | configuring-fable-advisor-jev-tree | draft | post | Configures Claude Code with Fable 5.1 as advisor and an Opus 5.5 + Jev-routed multi-agent tree |
 | delegating-to-codex | reviewer-approved | repo | Calls OpenAI Codex from inside Claude Code for a code review or a delegated task |
