@@ -8,6 +8,7 @@
 - **[[pages/20261002-coucou-notch-agent-companion|Coucou]]**（Louis-CFM）— notch 小角色監察 Claude Code / Codex / Cursor session，可喺 notch 批准 permission。GitHub 2,820 stars，單平台 heat 0.75。
 
 ## 最近 20 項
+- 2026-10-04 · post · [[pages/20261004-cloudflare-open-source-ai-security-audit-skill|Cloudflare 開源 AI security audit skill（vibe-coded app 安全審查）]]
 - 2026-10-02 · repo · [[pages/20261002-zcode-zai-harness|ZCode — Z.ai open-source coding agent harness (desktop + web + CLI)]]
 - 2026-10-02 · repo · [[pages/20261002-magpie-agent-model-switcher|magpie — one menu-bar panel and local gateway for every coding agent's model]]
 - 2026-10-02 · repo · [[pages/20261002-coucou-notch-agent-companion|Coucou — notch companion that watches Claude Code, Codex, Cursor and Gemini CLI sessions]]
@@ -27,4 +28,3 @@
 - 2026-09-27 · post · [[pages/20260927-seo-purchase-intent-ai-agent-ecom|AI Agent SEO: Purchase-Intent Keywords for $100k/mo E-com Organic Revenue]]
 - 2026-09-27 · post · [[pages/20260925-opus-5-5-motion-graphics-showreel-prompt|Opus 5.5 One-Prompt Motion-Graphics Showreels]]
 - 2026-09-27 · tool · [[pages/20260828-nvidia-skillspector-skill-security-scanner|NVIDIA SkillSpector: Security Scanner for Agent Skills]]
-- 2026-09-27 · concept · [[pages/20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit-and-fix cost by 90%]]
