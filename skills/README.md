@@ -29,6 +29,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | scanning-agent-skills | reviewer-approved | post | Scans third-party agent skills, plugins and MCP servers with NVIDIA SkillSpector before install |
 | stacking-coding-agent-plugins | draft | post | Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) |
 | targeting-purchase-intent-keywords | reviewer-approved | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |
+| tracking-tasks-with-backlog-md | draft | repo | Tracks agent and human work as Markdown task files with Backlog.md |
 | using-obsidian-skills | draft | repo | Installs and applies kepano/obsidian-skills for Obsidian markdown, bases and canvas |
 | using-ui-ux-pro-max | reviewer-approved | repo | Installs and applies the UI UX Pro Max skill for AI design system generation (192 rules, 79 styles) |
 | vault-capture | verified | vault-operations | Captures a pasted link (X, Threads, Instagram, YouTube, GitHub, any page) into the vault |

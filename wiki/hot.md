@@ -8,6 +8,7 @@
 - **[[pages/20261002-coucou-notch-agent-companion|Coucou]]**（Louis-CFM）— notch 小角色監察 Claude Code / Codex / Cursor session，可喺 notch 批准 permission。GitHub 2,820 stars，單平台 heat 0.75。
 
 ## 最近 20 項
+- 2026-10-04 · repo · [[pages/20261004-backlog-md-markdown-kanban-for-agents|Backlog.md: Markdown-native Task Manager and Kanban for AI Agents]]
 - 2026-10-04 · video · [[pages/20260921-laya-pip-install-comment-fast-teaser|Albert Olgaard: Laya via pip install (comment 'Fast' teaser)]]
 - 2026-10-04 · video · [[pages/20260920-jev-in-60-seconds-nate-herk-teaser|Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser)]]
 - 2026-10-04 · video · [[pages/20260930-laya-free-local-jev-alternative-30ms-vs-200ms|Laya: free open-source local Jev alternative (~30 ms vs ~200 ms)]]
@@ -27,4 +28,3 @@
 - 2026-10-04 · post · [[pages/20261003-backup-agent-workflows-as-skill-zips|Back up agent workflows as Skill-format zips (Grokbot / Claude)]]
 - 2026-10-04 · post · [[pages/20261003-matt-pocock-skills-repo-agent-skills|Matt Pocock open-sources his agent skills (mattpocock/skills)]]
 - 2026-10-04 · post · [[pages/20261003-andrew-ng-ai-engineering-skills-map|Andrew Ng's AI Engineering Skills Map: four top-level skills]]
-- 2026-10-04 · post · [[pages/20261004-crawlie-open-source-seo-geo-crawler-mcp|crawlie: open-source local SEO + GEO crawler with CLI and MCP]]
