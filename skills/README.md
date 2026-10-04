@@ -15,6 +15,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | name | vault_status | origin_type | what it does |
 |---|---|---|---|
 | auditing-agent-skills | reviewer-approved | vault-operations | Audits a skill folder for safety and quality and returns a PASS/FAIL verdict |
+| auditing-seo-with-crawlie | draft | post | Runs crawlie, an open-source local SEO + GEO crawler with CLI and MCP server |
 | automating-browsers-with-playwright | reviewer-approved | repo | Connects an agent to a real browser via the Playwright MCP server |
 | configuring-fable-advisor-jev-tree | draft | post | Configures Claude Code with Fable 5.1 as advisor and an Opus 5.5 + Jev-routed multi-agent tree |
 | delegating-to-codex | reviewer-approved | repo | Calls OpenAI Codex from inside Claude Code for a code review or a delegated task |
@@ -24,6 +25,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | making-product-videos | draft | repo | Creates cinematic product demo videos using Video Shotcraft (Remotion + Agent Skill) |
 | model-tiering | draft | vault-operations | Picks the model tier and effort level: expensive models advise and review, Sonnet executes |
 | providing-design-references | draft | post | Provides Claude with visual design references so it can match real layouts and UI decisions |
+| researching-competitor-landing-pages | draft | post | Compares competitor landing pages on five fields with a ready agent prompt |
 | scanning-agent-skills | reviewer-approved | post | Scans third-party agent skills, plugins and MCP servers with NVIDIA SkillSpector before install |
 | stacking-coding-agent-plugins | draft | post | Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) |
 | targeting-purchase-intent-keywords | reviewer-approved | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |

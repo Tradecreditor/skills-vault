@@ -120,3 +120,13 @@
 ## [2026-10-04] review | using-obsidian-skills rejected | outputs/skill-reviews/2026-10-04-using-obsidian-skills
 ## [2026-10-04] review | using-ui-ux-pro-max approved | outputs/skill-reviews/2026-10-04-using-ui-ux-pro-max
 ## [2026-10-04] review | auditing-agent-skills approved | outputs/skill-reviews/2026-10-04-auditing-agent-skills
+## [2026-10-04] capture | Claude Opus 5.5 tutorial-animation prompt (research, compare, build, deliver) | 20260928-claude-opus-5-5-tutorial-animation-prompt
+## [2026-10-04] capture | HyperFrames camera-3d-captions: agent-installable 3D-camera caption skill | 20260927-hyperframes-camera-3d-captions-skill
+## [2026-10-04] capture | 9 agent patterns: Andrew Ng's 4 + Anthropic's 5 workflows | 20260928-agent-patterns-andrew-ng-4-anthropic-5-workflows
+## [2026-10-04] capture | melies.co: 424 Cinematic Techniques with Ready AI Video Prompts | 20261001-melies-cinematic-techniques-for-ai-video
+## [2026-10-04] capture | Competitor Landing Page Research: 5-Field Table + Agent Prompt | 20261002-competitor-landing-page-five-field-table-prompt
+## [2026-10-04] capture | Claude HTML+SVG animation: 3 practice cases and a 5-part prompt | 20261002-claude-html-svg-animation-5-part-prompt
+## [2026-10-04] capture | Back up agent workflows as Skill-format zips (Grokbot / Claude) | 20261003-backup-agent-workflows-as-skill-zips
+## [2026-10-04] capture | Matt Pocock open-sources his agent skills (mattpocock/skills) | 20261003-matt-pocock-skills-repo-agent-skills
+## [2026-10-04] capture | Andrew Ng's AI Engineering Skills Map: four top-level skills | 20261003-andrew-ng-ai-engineering-skills-map
+## [2026-10-04] capture | crawlie: open-source local SEO + GEO crawler with CLI and MCP | 20261004-crawlie-open-source-seo-geo-crawler-mcp
