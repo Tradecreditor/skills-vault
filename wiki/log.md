@@ -102,6 +102,9 @@
 ## [2026-10-03] lint | Jev pilots handoff | outputs/20261003-jev-pilots-handoff
 ## [2026-10-03] promote | keeping-handoff-docs | skills/keeping-handoff-docs
 ## [2026-10-03] lint | 2026-W40 | outputs/health/2026-W40
+## [2026-10-04] capture | Cloudflare 開源 AI security audit skill（vibe-coded app 安全審查） | 20261004-cloudflare-open-source-ai-security-audit-skill
+## [2026-10-04] capture | WhatsApp MCP Server — 讓 Claude 搜尋 WhatsApp 對話並代發訊息 | 20261004-whatsapp-mcp-server-claude
+## [2026-10-04] capture | okaashish: Claude skills link list (comment-bait teaser) | 20261004-okaashish-claude-skills-links-teaser
 ## [2026-10-04] review | automating-browsers-with-playwright approved | outputs/skill-reviews/2026-10-04-automating-browsers-with-playwright
 ## [2026-10-04] review | configuring-fable-advisor-jev-tree rejected | outputs/skill-reviews/2026-10-04-configuring-fable-advisor-jev-tree
 ## [2026-10-04] review | delegating-to-codex approved | outputs/skill-reviews/2026-10-04-delegating-to-codex
