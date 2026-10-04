@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/handoff-check.sh\" --hook",
+            "timeout": 15,
+            "statusMessage": "Checking handoff.md"
+          }
+        ]
+      }
+    ]
+  }
+}
