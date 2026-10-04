@@ -37,6 +37,23 @@ jobs:
           BASE=$(git merge-base "$BASE_SHA" "$HEAD_SHA" || echo "$BASE_SHA")
           bash /tmp/vault-guard-check.sh "$BASE" "$HEAD_SHA" "$PR_AUTHOR"
 
+  handoff:
+    # Red when a PR changes project state (routines, scripts, skills, config, docs) without touching handoff.md.
+    # Kept out of "guard" so it never becomes a required check: a reminder for every agent, Codex and Gemini included.
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: handoff.md updated with the change (scripts/handoff-check.sh)
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          BASE=$(git merge-base "$BASE_SHA" "$HEAD_SHA" || echo "$BASE_SHA")
+          bash scripts/handoff-check.sh "$BASE" "$HEAD_SHA"
+
   audit:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest

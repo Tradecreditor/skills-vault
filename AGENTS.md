@@ -62,7 +62,7 @@ everything appears to work without it, right up until the agent pushes to `main`
 - `git pull --rebase` before every push. Core captures push straight to `main`; the weekly hot list opens a PR (branch `hot-list/YYYY-Www`); non-core agents always open a PR (`gh pr create`, then `gh pr merge --auto --rebase` if allowed).
 - Non-core agents work in their own clone with their own token; never run inside Josep's Obsidian folder.
 - Never commit secrets or cookies. API keys live in environment variables (Routine secrets, Supabase secrets, local shell).
-- **Keep `handoff.md` current.** Any session or agent that changes code, prompts, config, skills, data or the plan updates it before ending and appends one line to its Session log, in the same commit or PR. Routines read it and never edit it; their output goes to `wiki/log.md`, `wiki/hot.md` and `outputs/health/`.
+- **Keep `handoff.md` current.** Any session or agent that changes code, prompts, config, skills, data or the plan updates it before ending and appends one line to its Session log, in the same commit or PR. Routines read it and never edit it; their output goes to `wiki/log.md`, `wiki/hot.md` and `outputs/health/`. Enforced by `scripts/handoff-check.sh`: a Claude Code Stop hook (`.claude/settings.json`) will not let a session end while its branch changed state without touching `handoff.md`, and the PR check `handoff` turns red for any agent that skips it. Captures and Routine output (`raw/`, `wiki/pages/`, `wiki/stars/`, index / log / hot, hot-list reports, `outputs/health/`) are exempt.
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools
