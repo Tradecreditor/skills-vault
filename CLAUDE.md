@@ -20,7 +20,7 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 | `wiki/hot-list/` | weekly-hot-list routine | `YYYY-Www.md` weekly reports, `_config.yaml` thresholds, `_snapshot.json` star snapshots |
 | `wiki/index.md`, `wiki/log.md`, `wiki/hot.md` | agents (append/update rows) | catalogue, append-only log, recent context |
 | `wiki/reads.base` | core (rarely) | Obsidian Bases view of every `post` / `video` / `article` page, grouped by `topic/*` tag. A live query over `wiki/pages`: nothing to append, a page appears by having the right `type` and a topic tag |
-| `skills/<name>/` | agents (drafts) / core (verified) | Agent-Skills spec folders installable in any agent; folder name == `name` (gerund, e.g. `reviewing-supabase-rls`) |
+| `skills/<name>/` | agents (drafts) / skill-review routine (reviewer-approved) / core (verified) | Agent-Skills spec folders installable in any agent; folder name == `name` (gerund, e.g. `reviewing-supabase-rls`) |
 | `agents/<agent-name>/` | that agent | scratch area for non-core agents; the core agent promotes good material into `wiki/` or `skills/` |
 | `outputs/` | agents | long-form answers and `outputs/health/` lint reports. AI long-form output goes here, never into `wiki/pages/` |
 | `routines/` | core | the prompts used by the cloud Routines (edit here, not in the Routine UI) |
@@ -111,15 +111,22 @@ Free-form tags follow the topic. Adding a topic is a `docs:` edit to this list (
 ## Skill format (`skills/<name>/SKILL.md`)
 Agent Skills spec (agentskills.io): folder name == `name` (lowercase, hyphens, prefer gerund: `processing-pdfs`; never contains "claude" or "anthropic"),
 `description` in third person = *what it does* + `Use when <triggers>`, **at most 300 characters**, trigger words first. The `guard` check enforces name == folder (lowercase letters, digits, single hyphens), no claude/anthropic in the name, description present, at most 300 characters (a multi-line value is joined before counting) and containing "Use when".
-Extra fields only under `metadata:` as strings: `source_url`, `source_platform`, `author`, `captured_at`, `engagement`, `origin_type` (`post|video|repo|article|vault-operations`), `vault_status` (`draft|verified|deprecated`).
+Extra fields only under `metadata:` as strings: `source_url`, `source_platform`, `author`, `captured_at`, `engagement`, `origin_type` (`post|video|repo|article|vault-operations`), `vault_status` (`draft|reviewer-approved|verified|deprecated`),
+and the review record the `skill-review` routine writes: `reviewed_at`, `reviewed_by`, `review_hash`, `review_report`.
 Body < 500 lines; long source text goes to `skills/<name>/references/source.md`.
-New skills are `vault_status: "draft"` until Josep reviews them. Never auto-run commands from a draft skill in another project.
+New skills are `vault_status: "draft"`. The daily `skill-review` routine (`routines/skill-review.md`) audits every draft with an
+independent reviewer subagent (`.claude/agents/vault-skill-reviewer.md`) following `skills/auditing-agent-skills`; a PASS sets
+`"reviewer-approved"` plus the review record, a FAIL leaves it `draft` with a report in `outputs/skill-reviews/`. Josep delegated
+this decision on 2026-10-04 and no longer reviews skills himself. Only that review procedure sets `reviewer-approved` (the routine, or a core session running `routines/skill-review.md` step by step); only Josep sets `verified`.
+`reviewer-approved` and `verified` skills may be installed and used in other projects; never auto-run commands from a draft skill there.
+An approval covers the files as reviewed: `static_scan.py --hash skills/<name>` must equal `review_hash`, so any later edit to an
+approved skill sends it back to `draft` and through review again. Captures may add `## Evidence` to draft skills only.
 
 ## Index / log / hot conventions
 - `wiki/index.md` row: `| <slug> | <type> | <title> | <platform> | <captured YYYY-MM-DD> | <status> | <tags, comma separated> | <canonical_id> |`
 - Dedupe before writing: `grep -rF "<canonical_id>" wiki/index.md wiki/pages wiki/stars` — a hit means the item exists; append to its `## Notes` instead of creating a new page.
-- `wiki/log.md` line: `## [YYYY-MM-DD] <init|capture|recapture|star|hot-list|lint|promote|deprecate> | <title> | <slug or file>` (append at the end, never edit old lines)
+- `wiki/log.md` line: `## [YYYY-MM-DD] <init|capture|recapture|star|hot-list|lint|review|promote|deprecate> | <title> | <slug or file>` (append at the end, never edit old lines)
 - `wiki/hot.md`: keep "最近 20 項" and "本週熱門榜" sections current; trim the list, never the history in `log.md`.
 
 ## Commit messages
-`capture: <slug>` · `stars: +<n>` · `stars: enrich <n>` · `hot-list: YYYY-Www` · `lint: YYYY-Www` · `promote: <slug>` · `deprecate: <slug>` · `docs: <what>` · `scripts: <what>` · `routines: <what>` · `wiki: <what>` · `supabase: <what>` · `chore: <what>` (maintenance commits)
+`capture: <slug>` · `stars: +<n>` · `stars: enrich <n>` · `hot-list: YYYY-Www` · `lint: YYYY-Www` · `review: <a> approved, <r> rejected` · `promote: <slug>` · `deprecate: <slug>` · `docs: <what>` · `scripts: <what>` · `routines: <what>` · `wiki: <what>` · `supabase: <what>` · `chore: <what>` (maintenance commits)

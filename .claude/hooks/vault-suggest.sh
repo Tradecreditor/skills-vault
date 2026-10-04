@@ -23,7 +23,9 @@ PAT=$(printf '%s\n' "$KW" | sed -E 's/[][\\.*^$+?(){}|\/]/\\&/g' | paste -sd'|' 
 MATCHES=$( {
   grep -E '^\| ' "$V/wiki/index.md" | grep -vE '^\| slug |^\|-' \
     | awk -F'|' -v pat="$PAT" 'BEGIN{IGNORECASE=1} { t=$4; g=$8; gsub(/^ +| +$/,"",t); gsub(/^ +| +$/,"",g); s=$2; gsub(/^ +| +$/,"",s); if (tolower(t" "g) ~ pat) print t" ("s")" }' ;
-  grep -ilE "^description:.*($PAT)" "$V"/skills/*/SKILL.md 2>/dev/null | sed 's#.*/skills/\([^/]*\)/SKILL.md#skill: \1#' ;
+  grep -ilE "^description:.*($PAT)" "$V"/skills/*/SKILL.md 2>/dev/null \
+    | while IFS= read -r f; do grep -qE '^[[:space:]]+vault_status:[[:space:]]*"?(reviewer-approved|verified)"?[[:space:]]*$' "$f" && printf '%s\n' "$f"; done \
+    | sed 's#.*/skills/\([^/]*\)/SKILL.md#skill: \1#' ;   # only skills cleared for other projects (CLAUDE.md "Skill format")
 } | sort -u | head -6 )
 [ -z "$MATCHES" ] && exit 0
 CTX=$(printf 'Skills vault (Tradecreditor/skills-vault) entries that look relevant to this project:\n%s\nInstall a skill: npx skills add Tradecreditor/skills-vault --skill <name>  (Claude Code: /plugin install skills-vault@tradecreditor-vault). For more, read %s/wiki/hot.md then wiki/index.md, or run the vault-search skill.' "$(printf '%s\n' "$MATCHES" | sed 's/^/- /')" "$V")

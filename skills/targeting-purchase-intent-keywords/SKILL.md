@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-09-27"
   engagement: "likes=14 reposts=2 views=253"
   origin_type: "post"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "e50c9de8dbfc2ad110f73f26ff4ee59d0236f37ed6b987dd61cd3a565a6cef29"
+  review_report: "outputs/skill-reviews/2026-10-04-targeting-purchase-intent-keywords.md"
 ---
 
 # targeting-purchase-intent-keywords

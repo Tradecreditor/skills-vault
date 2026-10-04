@@ -105,3 +105,18 @@
 ## [2026-10-04] capture | Cloudflare 開源 AI security audit skill（vibe-coded app 安全審查） | 20261004-cloudflare-open-source-ai-security-audit-skill
 ## [2026-10-04] capture | WhatsApp MCP Server — 讓 Claude 搜尋 WhatsApp 對話並代發訊息 | 20261004-whatsapp-mcp-server-claude
 ## [2026-10-04] capture | okaashish: Claude skills link list (comment-bait teaser) | 20261004-okaashish-claude-skills-links-teaser
+## [2026-10-04] review | automating-browsers-with-playwright approved | outputs/skill-reviews/2026-10-04-automating-browsers-with-playwright
+## [2026-10-04] review | configuring-fable-advisor-jev-tree rejected | outputs/skill-reviews/2026-10-04-configuring-fable-advisor-jev-tree
+## [2026-10-04] review | delegating-to-codex approved | outputs/skill-reviews/2026-10-04-delegating-to-codex
+## [2026-10-04] review | evaluating-llms-with-promptfoo rejected | outputs/skill-reviews/2026-10-04-evaluating-llms-with-promptfoo
+## [2026-10-04] review | judging-with-jev approved | outputs/skill-reviews/2026-10-04-judging-with-jev
+## [2026-10-04] review | keeping-handoff-docs rejected | outputs/skill-reviews/2026-10-04-keeping-handoff-docs
+## [2026-10-04] review | making-product-videos rejected | outputs/skill-reviews/2026-10-04-making-product-videos
+## [2026-10-04] review | model-tiering rejected | outputs/skill-reviews/2026-10-04-model-tiering
+## [2026-10-04] review | providing-design-references rejected | outputs/skill-reviews/2026-10-04-providing-design-references
+## [2026-10-04] review | scanning-agent-skills approved | outputs/skill-reviews/2026-10-04-scanning-agent-skills
+## [2026-10-04] review | stacking-coding-agent-plugins rejected | outputs/skill-reviews/2026-10-04-stacking-coding-agent-plugins
+## [2026-10-04] review | targeting-purchase-intent-keywords approved | outputs/skill-reviews/2026-10-04-targeting-purchase-intent-keywords
+## [2026-10-04] review | using-obsidian-skills rejected | outputs/skill-reviews/2026-10-04-using-obsidian-skills
+## [2026-10-04] review | using-ui-ux-pro-max approved | outputs/skill-reviews/2026-10-04-using-ui-ux-pro-max
+## [2026-10-04] review | auditing-agent-skills approved | outputs/skill-reviews/2026-10-04-auditing-agent-skills

@@ -9,6 +9,10 @@ metadata:
   engagement: "likes=1902 retweets=151 views=446089 bookmarks=3708"
   origin_type: "post"
   vault_status: "draft"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "5636bb9d2f04edcccada9855c9d38ef40bde74f258cea59987cbb5eda121c1a5"
+  review_report: "outputs/skill-reviews/2026-10-04-configuring-fable-advisor-jev-tree.md"
 ---
 
 # configuring-fable-advisor-jev-tree

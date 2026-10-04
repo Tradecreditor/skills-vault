@@ -5,6 +5,10 @@ metadata:
   origin_type: "vault-operations"
   captured_at: "2026-09-26"
   vault_status: "draft"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "83e5bb68182b63012b777f0ed9af13a35fb49398313b02190443bc19bf905b7d"
+  review_report: "outputs/skill-reviews/2026-10-04-model-tiering.md"
 ---
 
 # Model Tiering SOP — expensive models advise, cheap models execute

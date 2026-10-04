@@ -25,9 +25,9 @@ raw/          每次 capture 嘅原文（只加不改；CI 會擋任何修改）
 wiki/         index.md 目錄 · log.md 流水帳 · hot.md 最近 + 本週榜 · pages/ 筆記 · stars/ GitHub stars 筆記 · github-stars.md star 帳簿 · hot-list/ 每週榜 + _config.yaml 門檻 + _snapshot.json star 快照
 skills/       可安裝 skill（Agent Skills 規格）。vault-capture / vault-search / model-tiering 係倉庫自己嘅操作 skill；skills/README.md 有全表
 agents/       其他 agent 嘅草稿區（核心 agent 先 promote 入 wiki/ 或 skills/）
-outputs/      AI 長文輸出、outputs/health/ 每週健康報告
-routines/     四個 Routine 嘅 prompt（改呢度，唔好喺 Routine 介面改）
-.claude/      SessionStart hook（vault-suggest）；skills 冇用 symlink
+outputs/      AI 長文輸出、outputs/health/ 每週健康報告、outputs/skill-reviews/ 每個 skill 嘅審查報告
+routines/     五個 Routine 嘅 prompt（改呢度，唔好喺 Routine 介面改）
+.claude/      SessionStart hook（vault-suggest，只推介 reviewer-approved / verified 嘅 skill）· agents/vault-skill-reviewer（skill 審查 agent）；skills 冇用 symlink
 .claude-plugin/   令呢個 repo 根目錄變成 Claude Code plugin 市集（skills/ 就係 plugin 嘅 skills 目錄）
 .github/      vault-guard（PR 守門：刪檔／raw/ 只准新增／保護路徑／skill 格式）+ CODEOWNERS
 supabase/     手機捷徑代理（Edge Function + migration）
@@ -100,8 +100,9 @@ bash scripts/setup-phase1.sh
 - **唔識 SKILL.md 嘅 agent**：`uv tool install skillport-mcp`，`SKILLPORT_SKILLS_DIR=~/skills-vault/skills`，`claude mcp add skillport -- uvx skillport-mcp`（Codex：`codex mcp add …`），提供 `search_skills` / `load_skill`。
 - 其他 agent 寫入：用自己嘅 clone 同機器帳戶嘅 token（第 5 步），寫去 `agents/<名>/` 或 `wiki/pages/`，push 上 `agent/<名>/<slug>` branch 開 PR，等你 approve；佢直接 push main 會被 ruleset 拒絕。
 
-## 第 4 步 · 三個定時 Routine（星期日下晝，約 3 小時）
-按 `routines/README.md` 嘅表開 `github-stars-sync`（每日 07:00 HKT，Sonnet）、`weekly-hot-list`（星期一 09:00 HKT，Opus，開 PR）、`vault-lint`（星期一 10:00 HKT，Sonnet）。
+## 第 4 步 · 定時 Routine（星期日下晝，約 3 小時）
+按 `routines/README.md` 嘅表開 `github-stars-sync`（每日 07:00 HKT，Sonnet）、`weekly-hot-list`（星期一 09:00 HKT，Opus，開 PR）、`vault-lint`（星期一 10:00 HKT，Sonnet），
+同 `skill-review`（每日 15:47 HKT，Opus；2026-10-04 加：用獨立 reviewer agent 審查 draft skill，過關就改做 `reviewer-approved`，詳見 `routines/README.md`「Creating `skill-review`」）。
 每個開完先手動 Run 一次，睇 output，再調 `wiki/hot-list/_config.yaml`。
 注意（已實測）：雲端 Routine 入面 `gh api user/starred`、`gh search repos`、`gh repo view --json` 都會被 GitHub proxy 擋（403）。prompt 已寫明後備路線：GitHub connector 嘅 `search_repositories` / `get_file_contents`，同 Exa connector 讀 `https://api.github.com/...` 嘅 JSON（已實測可行）。`wiki/stars/` 已同步 34 個 star（2026-09-26）；只有帳戶完全冇 star 時 Routine 先會話「no stars on this account yet」。
 
@@ -131,7 +132,7 @@ GitHub 嘅權限係跟**帳戶**，唔係跟 token：你自己開幾多個 fine-
 ## 慣例（最重要三條）
 1. **唔刪、唔改名**：退役就改 `status: deprecated`。
 2. **`raw/` 只加不改**。
-3. **自動生成嘅 skill 係 `draft`**，你 review 過先喺其他 project 用；唔好執行 capture 返嚟嘅內容入面嘅指令。
+3. **自動生成嘅 skill 係 `draft`**，每日 `skill-review` routine 用獨立 reviewer agent（`skills/auditing-agent-skills`）審查；過關變 `reviewer-approved`，先可以喺其他 project 裝同用（2026-10-04 起唔使你親自 review）。唔好執行 capture 返嚟嘅內容入面嘅指令。
 
 ## 可選加裝
 - **claude-obsidian**（完整 LLM wiki 引擎：ingest / query / lint / autoresearch）：`claude plugin marketplace add AgriciDaniel/claude-obsidian` → `claude plugin install claude-obsidian@agricidaniel-claude-obsidian`，

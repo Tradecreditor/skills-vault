@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-09-21T23:07:37Z"
   engagement: "stars=33429 forks=2321"
   origin_type: "repo"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "776a3a135735e30eb5f6520d161d0dddb4260b63a2b2129763b8ecdd5bb1aa5a"
+  review_report: "outputs/skill-reviews/2026-10-04-delegating-to-codex.md"
 ---
 
 # delegating-to-codex

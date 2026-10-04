@@ -9,6 +9,10 @@ metadata:
   engagement: ""
   origin_type: "post"
   vault_status: "draft"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "bab69aaf73e46a980b3da6991cb169d0e631b9e8736d509fad4f0bb454fd5463"
+  review_report: "outputs/skill-reviews/2026-10-04-providing-design-references.md"
 ---
 
 # providing-design-references

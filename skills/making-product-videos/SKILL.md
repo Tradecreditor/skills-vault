@@ -9,6 +9,10 @@ metadata:
   engagement: "stars=9308 forks=847"
   origin_type: "repo"
   vault_status: "draft"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "81807eda3689d6b4f682b4c2c964c6c5ae5a7851e36f1c2893813ec5c319186b"
+  review_report: "outputs/skill-reviews/2026-10-04-making-product-videos.md"
 ---
 
 # making-product-videos
