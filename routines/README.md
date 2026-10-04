@@ -1,6 +1,6 @@
 # routines/
 
-Prompts for the four Claude Code cloud Routines. Each file has a `## Prompt (paste verbatim)` heading; everything below that
+Prompts for the five Claude Code cloud Routines. Each file has a `## Prompt (paste verbatim)` heading; everything below that
 heading is the routine's prompt. The prompts point at files in this repo, so tuning thresholds or rules later means editing
 `wiki/hot-list/_config.yaml` or `CLAUDE.md`, never the routine itself.
 
@@ -10,10 +10,11 @@ heading is the routine's prompt. The prompts point at files in this repo, so tun
 | `github-stars-sync` | Schedule, daily 07:00 HKT | Sonnet (Haiku drops the READMEs and writes English one-liners; see the prompt file) | pushes to `main` |
 | `weekly-hot-list` | Schedule, Monday 09:00 HKT | Opus | opens a PR from `hot-list/YYYY-Www` |
 | `vault-lint` | Schedule, Monday 10:00 HKT | Sonnet | pushes report to `main`; PR if it proposes merges |
+| `skill-review` | Schedule, daily 15:47 HKT (`47 7 * * *` UTC) | Opus | pushes to `main`: sets draft skills to `reviewer-approved` or leaves them `draft`, reports in `outputs/skill-reviews/` |
 
 ---
 
-## Step 0 — configure the environment once (shared by all four)
+## Step 0 — configure the environment once (shared by all of them)
 
 Every routine inherits its network policy from its cloud environment, so do this once before creating any routine.
 
@@ -184,7 +185,7 @@ hot list once ran seven times in a week on Opus before anyone noticed — nothin
 A Routine stores its own copy of the prompt, and agents cannot edit Routines created in the UI (`update_trigger` answers
 "created via http_api, not by an agent"), so every change to `routines/<name>.md` used to need a re-paste. A stub ends that:
 the Routine's Instructions box holds only the text below (with `<name>` replaced by `capture-link`, `github-stars-sync`,
-`weekly-hot-list` or `vault-lint`), and each run reads the current prompt from `main`. After pasting the stubs, a merged
+`weekly-hot-list`, `vault-lint` or `skill-review`), and each run reads the current prompt from `main`. After pasting the stubs, a merged
 change to `routines/<name>.md` is live on the next run; trigger, schedule, model, connectors and environment still live in the UI.
 
 ```text
@@ -194,6 +195,16 @@ Your instructions live in the repository so that they can change without re-past
 Trade-off: whatever is on `main` runs, so review a prompt change before merging it. Only the core account can push to
 `main`, and `guard` rejects a non-core PR that touches `routines/`. `scripts/copy-prompt.*` still works for a full paste
 (for example, to pin a Routine to a known version while debugging).
+
+### Creating `skill-review` (added 2026-10-04)
+
+The fifth Routine has to be created once in the UI, like the others: **New routine** → Instructions = the stub above with
+`<name>` = `skill-review` · Repository `Tradecreditor/skills-vault` · Environment **Skills Management** (it needs no extra
+domains: it reads only the repo) · Model **Opus** · Trigger **Schedule**, cron `47 7 * * *` (UTC, 15:47 HKT) · Permissions:
+**Allow unrestricted branch pushes** · connectors can all be removed. Then click **Run now** once and read the transcript: the
+first run reviews up to 8 draft skills, writes `outputs/skill-reviews/`, and pushes `review: <a> approved, <r> rejected`.
+It does not install any scanner. To add NVIDIA SkillSpector as a second scanner, install it in the environment's setup script
+yourself (`uv tool install git+https://github.com/NVIDIA/skillspector.git`); the review uses it only when it is already on PATH.
 
 ## Step 5 — first run and tuning
 

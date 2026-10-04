@@ -5,6 +5,10 @@ metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-03"
   vault_status: "draft"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "36d0139cf19663afaf5c0fbdff4e123d2ef9b3c337c16db41cd2b340c79f4fec"
+  review_report: "outputs/skill-reviews/2026-10-04-keeping-handoff-docs.md"
 ---
 
 # keeping-handoff-docs — one handoff.md per project

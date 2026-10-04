@@ -72,6 +72,8 @@ foreach ($line in (Get-Content (Join-Path $vault "wiki/index.md") -Encoding UTF8
 foreach ($sk in (Get-ChildItem (Join-Path $vault "skills") -Directory -ErrorAction SilentlyContinue)) {
   $sm = Join-Path $sk.FullName "SKILL.md"
   if (-not (Test-Path $sm)) { continue }
+  # only skills cleared for other projects (CLAUDE.md "Skill format")
+  if (-not (Select-String -Path $sm -Pattern '^\s+vault_status:\s*"?(reviewer-approved|verified)"?\s*$' -Encoding UTF8 -Quiet -ErrorAction SilentlyContinue)) { continue }
   $desc = (Select-String -Path $sm -Pattern '^description:' -Encoding UTF8 -ErrorAction SilentlyContinue | Select-Object -First 1).Line
   if ($desc -and $desc -imatch $pat) { $hits += "skill: $($sk.Name)" }
 }

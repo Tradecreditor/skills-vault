@@ -9,6 +9,10 @@ metadata:
   engagement: ""
   origin_type: "post"
   vault_status: "draft"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "c02d9e0be86915af7e3c52b0bc846c9f4e17ceb7d0db4a1e44f543b699f8831a"
+  review_report: "outputs/skill-reviews/2026-10-04-stacking-coding-agent-plugins.md"
 ---
 
 # stacking-coding-agent-plugins

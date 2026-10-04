@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-09-21T23:07:37Z"
   engagement: "stars=37448 forks=3183"
   origin_type: "repo"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "18133d1e406323cbde15765b6cffe52405ab41ae9fb9350b2edcf040e0649d22"
+  review_report: "outputs/skill-reviews/2026-10-04-automating-browsers-with-playwright.md"
 ---
 
 # automating-browsers-with-playwright

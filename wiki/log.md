@@ -102,3 +102,17 @@
 ## [2026-10-03] lint | Jev pilots handoff | outputs/20261003-jev-pilots-handoff
 ## [2026-10-03] promote | keeping-handoff-docs | skills/keeping-handoff-docs
 ## [2026-10-03] lint | 2026-W40 | outputs/health/2026-W40
+## [2026-10-04] review | automating-browsers-with-playwright approved | outputs/skill-reviews/2026-10-04-automating-browsers-with-playwright
+## [2026-10-04] review | configuring-fable-advisor-jev-tree rejected | outputs/skill-reviews/2026-10-04-configuring-fable-advisor-jev-tree
+## [2026-10-04] review | delegating-to-codex approved | outputs/skill-reviews/2026-10-04-delegating-to-codex
+## [2026-10-04] review | evaluating-llms-with-promptfoo rejected | outputs/skill-reviews/2026-10-04-evaluating-llms-with-promptfoo
+## [2026-10-04] review | judging-with-jev approved | outputs/skill-reviews/2026-10-04-judging-with-jev
+## [2026-10-04] review | keeping-handoff-docs rejected | outputs/skill-reviews/2026-10-04-keeping-handoff-docs
+## [2026-10-04] review | making-product-videos rejected | outputs/skill-reviews/2026-10-04-making-product-videos
+## [2026-10-04] review | model-tiering rejected | outputs/skill-reviews/2026-10-04-model-tiering
+## [2026-10-04] review | providing-design-references rejected | outputs/skill-reviews/2026-10-04-providing-design-references
+## [2026-10-04] review | scanning-agent-skills approved | outputs/skill-reviews/2026-10-04-scanning-agent-skills
+## [2026-10-04] review | stacking-coding-agent-plugins rejected | outputs/skill-reviews/2026-10-04-stacking-coding-agent-plugins
+## [2026-10-04] review | targeting-purchase-intent-keywords approved | outputs/skill-reviews/2026-10-04-targeting-purchase-intent-keywords
+## [2026-10-04] review | using-obsidian-skills rejected | outputs/skill-reviews/2026-10-04-using-obsidian-skills
+## [2026-10-04] review | using-ui-ux-pro-max approved | outputs/skill-reviews/2026-10-04-using-ui-ux-pro-max

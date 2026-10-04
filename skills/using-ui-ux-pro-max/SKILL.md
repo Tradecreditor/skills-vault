@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-09-30T20:26:00Z"
   engagement: "stars=unknown"
   origin_type: "repo"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "109de2680a9877a779a01971e273020007b6d2a686098fdde4ac858f067f54bd"
+  review_report: "outputs/skill-reviews/2026-10-04-using-ui-ux-pro-max.md"
 ---
 
 # using-ui-ux-pro-max

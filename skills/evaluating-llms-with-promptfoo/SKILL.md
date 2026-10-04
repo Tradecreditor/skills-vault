@@ -9,6 +9,10 @@ metadata:
   engagement: "stars=24793 forks=2258"
   origin_type: "repo"
   vault_status: "draft"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "26c39aef27c8158448e486953fafcbaa64d9cd19a1b587dc6bc551315f5f3794"
+  review_report: "outputs/skill-reviews/2026-10-04-evaluating-llms-with-promptfoo.md"
 ---
 
 # evaluating-llms-with-promptfoo

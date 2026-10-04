@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-09-27"
   engagement: "likes=3.9K comments=3.3K"
   origin_type: "post"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "5b7900c8b36740e78972c56233b8df937972549235962cfc4fb274cf63e52bd9"
+  review_report: "outputs/skill-reviews/2026-10-04-scanning-agent-skills.md"
 ---
 
 # scanning-agent-skills
