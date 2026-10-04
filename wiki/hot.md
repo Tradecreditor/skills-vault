@@ -8,6 +8,11 @@
 - **[[pages/20261002-coucou-notch-agent-companion|Coucou]]**（Louis-CFM）— notch 小角色監察 Claude Code / Codex / Cursor session，可喺 notch 批准 permission。GitHub 2,820 stars，單平台 heat 0.75。
 
 ## 最近 20 項
+- 2026-10-04 · video · [[pages/20260921-laya-pip-install-comment-fast-teaser|Albert Olgaard: Laya via pip install (comment 'Fast' teaser)]]
+- 2026-10-04 · video · [[pages/20260920-jev-in-60-seconds-nate-herk-teaser|Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser)]]
+- 2026-10-04 · video · [[pages/20260930-laya-free-local-jev-alternative-30ms-vs-200ms|Laya: free open-source local Jev alternative (~30 ms vs ~200 ms)]]
+- 2026-10-04 · post · [[pages/20260929-rubric-data-semiconductor-packaging-ai-checks|Rubric Data：封裝廠用評分規準資料逐項驗收 AI 成果]]
+- 2026-10-04 · video · [[pages/20261002-claude-opus-5-5-code-animated-tutorial-video|Claude Opus 5.5 做程式動畫教學影片：5 大重點同資源成本（數位敘事力期刊）]]
 - 2026-10-04 · post · [[pages/20260924-model-vs-harness-claude-code-explained|Model vs harness：Claude 係 model，Claude Code 係 harness]]
 - 2026-10-04 · post · [[pages/20260921-gemini-autonomously-hacked-three-firms-irregular|Google 稱 Gemini 測試期間自主入侵三家公司（tagline HK 轉述 WSJ/BBC）]]
 - 2026-10-04 · post · [[pages/20260917-7-repos-i-install-on-every-claude-code-project|7 repos I install on every Claude Code project（Gaurav carousel，清單未取得）]]
@@ -23,8 +28,3 @@
 - 2026-10-04 · post · [[pages/20261003-matt-pocock-skills-repo-agent-skills|Matt Pocock open-sources his agent skills (mattpocock/skills)]]
 - 2026-10-04 · post · [[pages/20261003-andrew-ng-ai-engineering-skills-map|Andrew Ng's AI Engineering Skills Map: four top-level skills]]
 - 2026-10-04 · post · [[pages/20261004-crawlie-open-source-seo-geo-crawler-mcp|crawlie: open-source local SEO + GEO crawler with CLI and MCP]]
-- 2026-10-04 · post · [[pages/20261004-okaashish-claude-skills-links-teaser|okaashish: Claude skills link list (comment-bait teaser)]]
-- 2026-10-04 · post · [[pages/20261004-whatsapp-mcp-server-claude|WhatsApp MCP Server — 讓 Claude 搜尋 WhatsApp 對話並代發訊息]]
-- 2026-10-04 · post · [[pages/20261004-cloudflare-open-source-ai-security-audit-skill|Cloudflare 開源 AI security audit skill（vibe-coded app 安全審查）]]
-- 2026-10-02 · repo · [[pages/20261002-zcode-zai-harness|ZCode — Z.ai open-source coding agent harness (desktop + web + CLI)]]
-- 2026-10-02 · repo · [[pages/20261002-magpie-agent-model-switcher|magpie — one menu-bar panel and local gateway for every coding agent's model]]

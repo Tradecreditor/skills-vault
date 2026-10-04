@@ -135,3 +135,8 @@
 ## [2026-10-04] capture | 7 repos I install on every Claude Code project（Gaurav carousel，清單未取得） | 20260917-7-repos-i-install-on-every-claude-code-project
 ## [2026-10-04] capture | Loops and Graphs for Agents: X Post Claims an Andrew Ng Course (Unverified) | 20260927-loops-graphs-agent-layers-ng-course-claim
 ## [2026-10-04] capture | Decision Models After Jev: Strands Decider, Clef and Other Routes | 20261002-decision-models-strands-decider-clef-jev
+## [2026-10-04] capture | Albert Olgaard: Laya via pip install (comment 'Fast' teaser) | 20260921-laya-pip-install-comment-fast-teaser
+## [2026-10-04] capture | Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser) | 20260920-jev-in-60-seconds-nate-herk-teaser
+## [2026-10-04] capture | Laya: free open-source local Jev alternative (~30 ms vs ~200 ms) | 20260930-laya-free-local-jev-alternative-30ms-vs-200ms
+## [2026-10-04] capture | Rubric Data：封裝廠用評分規準資料逐項驗收 AI 成果 | 20260929-rubric-data-semiconductor-packaging-ai-checks
+## [2026-10-04] capture | Claude Opus 5.5 做程式動畫教學影片：5 大重點同資源成本（數位敘事力期刊） | 20261002-claude-opus-5-5-code-animated-tutorial-video
