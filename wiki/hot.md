@@ -8,6 +8,7 @@
 - **[[pages/20261002-coucou-notch-agent-companion|Coucou]]**（Louis-CFM）— notch 小角色監察 Claude Code / Codex / Cursor session，可喺 notch 批准 permission。GitHub 2,820 stars，單平台 heat 0.75。
 
 ## 最近 20 項
+- 2026-10-04 · post · [[pages/20261004-whatsapp-mcp-server-claude|WhatsApp MCP Server — 讓 Claude 搜尋 WhatsApp 對話並代發訊息]]
 - 2026-10-04 · post · [[pages/20261004-cloudflare-open-source-ai-security-audit-skill|Cloudflare 開源 AI security audit skill（vibe-coded app 安全審查）]]
 - 2026-10-02 · repo · [[pages/20261002-zcode-zai-harness|ZCode — Z.ai open-source coding agent harness (desktop + web + CLI)]]
 - 2026-10-02 · repo · [[pages/20261002-magpie-agent-model-switcher|magpie — one menu-bar panel and local gateway for every coding agent's model]]
