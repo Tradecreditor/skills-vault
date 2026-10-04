@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DddtYxAqhOD"
 engagement: ""
 tags: [linkedin, ai-automation, claude, open-source, linkedin-skills, free-tool, agent-skills]
-related: []
+related: [20260910-clay-ai-b2b-sales-automation, 20260929-newsletter-subject-line-generator-prompt, 20260927-seo-purchase-intent-ai-agent-ecom]
 needs_manual_text: false
 ---
 
@@ -50,3 +50,7 @@ LinkedIn Skills for Claude 係一個免費開源工具，擁有超過 2,000 個 
 - **Reader:** jina (r.jina.ai)
 
 ## Related
+
+- [[20260910-clay-ai-b2b-sales-automation|Clay: AI B2B Prospecting and Waterfall Enrichment]] — 同樣係 B2B 銷售自動化：Clay 負責搵潛在客同補數據，呢個工具負責 LinkedIn 嗰邊嘅內容同互動。
+- [[20260929-newsletter-subject-line-generator-prompt|Newsletter 主題行生成器]] — 另一個寫 marketing 文案嘅 prompt，可以同 LinkedIn hook 技能配對用。
+- [[20260927-seo-purchase-intent-ai-agent-ecom|AI Agent SEO: Purchase-Intent Keywords]] — 都係用 AI 幫中小企做低成本行銷嘅工作流程。

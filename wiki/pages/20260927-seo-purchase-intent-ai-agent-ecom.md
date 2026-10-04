@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "threads:DduzlRvGaDf"
 engagement: "likes=14 reposts=2 views=253"
 tags: [seo, purchase-intent, ai-agent, ecom, organic-revenue, content-strategy, internal-linking]
-related: []
+related: [20260925-jev-seo-geo-audit-cost-down-90, 20260910-clay-ai-b2b-sales-automation]
 needs_manual_text: false
 ---
 
@@ -51,3 +51,4 @@ Keith Rumjahn（@krumjahn）分享一個 SEO 案例：靠著精準鎖定有購�
 
 - [[pages/20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit cost by 90%]]
 - [[../../skills/targeting-purchase-intent-keywords/SKILL|skill: targeting-purchase-intent-keywords]]
+- [[pages/20260910-clay-ai-b2b-sales-automation|Clay: AI B2B Prospecting and Waterfall Enrichment]] — the B2B outbound counterpart: SEO brings buyers in, Clay finds and enriches them.

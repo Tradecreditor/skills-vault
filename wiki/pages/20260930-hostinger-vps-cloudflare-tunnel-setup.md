@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "threads:Dd59aV9meXX"
 engagement: "likes=27 replies=9 reposts=2 shares=30 views=4.9K"
 tags: [topic/infra-devops, vps, hostinger, cloudflare, cloudflare-tunnel, r2-backup, small-saas, self-hosting]
-related: [20260930-cloudflare-cf-agentic-cli-replaces-wrangler]
+related: [20260930-cloudflare-cf-agentic-cli-replaces-wrangler, 20260928-5-git-github-command-pairs]
 needs_manual_text: false
 ---
 
@@ -50,3 +50,4 @@ needs_manual_text: false
 ## Related
 
 - [[pages/20260930-cloudflare-cf-agentic-cli-replaces-wrangler|Cloudflare cf: agentic CLI replacing Wrangler (3000+ APIs)]] — Cloudflare tooling captured in the same batch; no earlier infra pages exist in the vault
+- [[pages/20260928-5-git-github-command-pairs|5 Git & GitHub Command Pairs Explained]] — same topic/infra-devops; the git basics behind deploying to this VPS

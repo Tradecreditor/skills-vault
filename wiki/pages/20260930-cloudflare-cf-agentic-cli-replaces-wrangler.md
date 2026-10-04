@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "threads:Dd492CHk_1O"
 engagement: "likes=92 replies=2 reposts=11 shares=32 views=9.9K"
 tags: [topic/agent-tooling, cloudflare, cf-cli, wrangler, agentic-cli, ai-agent, cli]
-related: [20260930-hostinger-vps-cloudflare-tunnel-setup]
+related: [20260930-hostinger-vps-cloudflare-tunnel-setup, 20260928-5-git-github-command-pairs]
 needs_manual_text: false
 ---
 
@@ -50,3 +50,4 @@ needs_manual_text: false
 ## Related
 
 - [[pages/20260930-hostinger-vps-cloudflare-tunnel-setup|Hostinger KVM 2 VPS + Cloudflare free tier for a ~US$6.5/mo small SaaS]] — Cloudflare-based low-cost deployment, same batch
+- [[pages/20260928-5-git-github-command-pairs|5 Git & GitHub Command Pairs Explained]] — same topic/infra-devops; the earlier git-basics video in the vault
