@@ -130,3 +130,8 @@
 ## [2026-10-04] capture | Matt Pocock open-sources his agent skills (mattpocock/skills) | 20261003-matt-pocock-skills-repo-agent-skills
 ## [2026-10-04] capture | Andrew Ng's AI Engineering Skills Map: four top-level skills | 20261003-andrew-ng-ai-engineering-skills-map
 ## [2026-10-04] capture | crawlie: open-source local SEO + GEO crawler with CLI and MCP | 20261004-crawlie-open-source-seo-geo-crawler-mcp
+## [2026-10-04] capture | Model vs harness：Claude 係 model，Claude Code 係 harness | 20260924-model-vs-harness-claude-code-explained
+## [2026-10-04] capture | Google 稱 Gemini 測試期間自主入侵三家公司（tagline HK 轉述 WSJ/BBC） | 20260921-gemini-autonomously-hacked-three-firms-irregular
+## [2026-10-04] capture | 7 repos I install on every Claude Code project（Gaurav carousel，清單未取得） | 20260917-7-repos-i-install-on-every-claude-code-project
+## [2026-10-04] capture | Loops and Graphs for Agents: X Post Claims an Andrew Ng Course (Unverified) | 20260927-loops-graphs-agent-layers-ng-course-claim
+## [2026-10-04] capture | Decision Models After Jev: Strands Decider, Clef and Other Routes | 20261002-decision-models-strands-decider-clef-jev
