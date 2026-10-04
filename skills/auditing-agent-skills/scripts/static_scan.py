@@ -23,14 +23,16 @@ import os
 import re
 import sys
 
-VERSION = "static_scan.py 2"
+VERSION = "static_scan.py 3"
 MAX_TEXT_BYTES = 2_000_000
 IMAGE_EXT = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".bmp"}
 EXEC_EXT = {".sh", ".bash", ".zsh", ".ps1", ".psm1", ".bat", ".cmd", ".py", ".js", ".mjs", ".cjs", ".ts",
             ".rb", ".pl", ".php", ".go", ".rs", ".lua", ".exe", ".dll", ".so", ".dylib", ".jar", ".bin", ".wasm"}
 # Review bookkeeping written by the skill-review routine; excluded from the hash so recording a verdict
 # does not change the hash it records.
-REVIEW_KEYS = re.compile(r"^\s+(vault_status|reviewed_at|reviewed_by|review_hash|review_report|review_scope):")
+# Only direct children of the frontmatter's top-level metadata: block (two-space indent) are excluded.
+REVIEW_KEYS = re.compile(r"^  (vault_status|reviewed_at|reviewed_by|review_hash|review_report|review_scope):")
+B64_LINE = re.compile(r"^[A-Za-z0-9+/]{40,}={0,2}$")
 
 # Invisible or direction-changing characters, Unicode tag characters and variation selectors (the usual carriers of
 # invisible instructions). U+FE0E / U+FE0F are allowed only singly, right after a non-ASCII character (emoji presentation).
@@ -118,13 +120,15 @@ def normalized_bytes(rel, data):
     except UnicodeDecodeError:
         return data
     lines = text.replace("\r\n", "\n").split("\n")
-    out, in_fm = [], False
+    out, in_fm, in_meta = [], False, False
     for i, ln in enumerate(lines):
         if i == 0 and ln == "---":
             in_fm = True
         elif in_fm and ln == "---":
-            in_fm = False
-        elif in_fm and REVIEW_KEYS.match(ln):
+            in_fm = in_meta = False
+        elif in_fm and not ln.startswith((" ", "\t")):
+            in_meta = ln.rstrip() == "metadata:"
+        elif in_meta and REVIEW_KEYS.match(ln):
             continue
         out.append(ln)
     return "\n".join(out).encode("utf-8")
@@ -132,8 +136,11 @@ def normalized_bytes(rel, data):
 
 def walk(skill_dir):
     """Every entry under the folder, hidden and ignored ones included; symlinks are listed, never followed."""
+    def unreadable(err):
+        raise err  # fail closed: a folder that cannot be listed cannot be reviewed
+
     files = []
-    for root, dirs, names in os.walk(skill_dir, followlinks=False):
+    for root, dirs, names in os.walk(skill_dir, followlinks=False, onerror=unreadable):
         dirs.sort()
         for n in sorted(names) + [d for d in dirs if os.path.islink(os.path.join(root, d))]:
             p = os.path.join(root, n)
@@ -190,6 +197,17 @@ def scan(skill_dir):
         if executable:
             report["review"].append({"rule": "R11", "title": REVIEW_RULES[10][1], "file": rel, "line": 0,
                                      "excerpt": "%s, %d lines" % (ext or "no extension", text.count("\n") + 1)})
+        run_start, run_chars, run_lines = 0, 0, 0
+        for no, line in enumerate(text.splitlines() + [""], 1):
+            if B64_LINE.match(line.strip()):
+                if not run_lines:
+                    run_start = no
+                run_chars, run_lines = run_chars + len(line.strip()), run_lines + 1
+                continue
+            if run_lines >= 3 and run_chars >= 200:
+                report["block"].append({"rule": "B2", "title": BLOCK_RULES[1][1], "file": rel, "line": run_start,
+                                        "excerpt": "%d lines of base64-like text, %d characters" % (run_lines, run_chars)})
+            run_chars, run_lines = 0, 0
         for no, line in enumerate(text.splitlines(), 1):
             if hidden(line, first_line=(no == 1)):
                 report["block"].append({"rule": "B1", "title": BLOCK_RULES[0][1], "file": rel, "line": no,
