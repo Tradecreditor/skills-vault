@@ -144,3 +144,7 @@
 ## [2026-10-05] review | researching-competitor-landing-pages approved | outputs/skill-reviews/2026-10-05-researching-competitor-landing-pages
 ## [2026-10-05] review | auditing-seo-with-crawlie approved | outputs/skill-reviews/2026-10-05-auditing-seo-with-crawlie
 ## [2026-10-05] review | tracking-tasks-with-backlog-md approved | outputs/skill-reviews/2026-10-05-tracking-tasks-with-backlog-md
+## [2026-10-05] capture | universal-modder — skills, um CLI and fal MCP that let coding agents mod almost any PC game | 20261005-universal-modder-claude-code-game-modding
+## [2026-10-05] capture | OpenDots — CopilotKit's open-source, self-hosted template for always-on AI coworkers | 20261005-opendots-copilotkit-ai-coworkers
+## [2026-10-05] capture | cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents | 20261005-cloudflare-security-audit-skill
+## [2026-10-05] hot-list | 2026-W40 | hot-list/2026-W40
