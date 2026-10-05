@@ -146,3 +146,4 @@
 ## [2026-10-05] review | tracking-tasks-with-backlog-md approved | outputs/skill-reviews/2026-10-05-tracking-tasks-with-backlog-md
 ## [2026-10-05] lint | 2026-W41 | outputs/health/2026-W41
 ## [2026-10-05] capture | Nick Saraev: 11 free Claude plugins for job roles | 20261005-nick-saraev-11-claude-plugins-job-roles
+## [2026-10-05] capture | OpenRig: persistent Claude Code + Codex agent team | 20261005-openrig-persistent-claude-code-codex-agent-team
