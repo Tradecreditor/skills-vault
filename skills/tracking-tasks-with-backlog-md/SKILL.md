@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-10-04T21:22:27Z"
   engagement: "stars=6.9k forks=441"
   origin_type: "repo"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-05T07:49:32Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "a98f330fffff99307a3f4662875a8cec2b2ba19f3e41a3b817c9196810ebf3b9"
+  review_report: "outputs/skill-reviews/2026-10-05-tracking-tasks-with-backlog-md.md"
 ---
 
 # tracking-tasks-with-backlog-md

@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-10-04"
   engagement: "likes=9 replies=6 reposts=0 shares=11"
   origin_type: "post"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-05T07:49:32Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "45ca274a6d7486238ac74810c336dc7f1dc3ed052a942f9a4723ff68f1eb48ae"
+  review_report: "outputs/skill-reviews/2026-10-05-researching-competitor-landing-pages.md"
 ---
 
 # researching-competitor-landing-pages

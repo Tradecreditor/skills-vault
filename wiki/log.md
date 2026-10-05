@@ -141,3 +141,6 @@
 ## [2026-10-04] capture | Rubric Data：封裝廠用評分規準資料逐項驗收 AI 成果 | 20260929-rubric-data-semiconductor-packaging-ai-checks
 ## [2026-10-04] capture | Claude Opus 5.5 做程式動畫教學影片：5 大重點同資源成本（數位敘事力期刊） | 20261002-claude-opus-5-5-code-animated-tutorial-video
 ## [2026-10-04] capture | Backlog.md: Markdown-native Task Manager and Kanban for AI Agents | 20261004-backlog-md-markdown-kanban-for-agents
+## [2026-10-05] review | researching-competitor-landing-pages approved | outputs/skill-reviews/2026-10-05-researching-competitor-landing-pages
+## [2026-10-05] review | auditing-seo-with-crawlie approved | outputs/skill-reviews/2026-10-05-auditing-seo-with-crawlie
+## [2026-10-05] review | tracking-tasks-with-backlog-md approved | outputs/skill-reviews/2026-10-05-tracking-tasks-with-backlog-md

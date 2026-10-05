@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-10-04T21:09:15Z"
   engagement: "likes=4 replies=0 reposts=0 shares=7 views=434"
   origin_type: "post"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-05T07:49:32Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "805a8a9a19bf69e94903ca2b58631bc416cc9db7a2c4b67291fbf6b53e440be3"
+  review_report: "outputs/skill-reviews/2026-10-05-auditing-seo-with-crawlie.md"
 ---
 
 # auditing-seo-with-crawlie
