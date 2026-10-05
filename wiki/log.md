@@ -144,3 +144,4 @@
 ## [2026-10-05] review | researching-competitor-landing-pages approved | outputs/skill-reviews/2026-10-05-researching-competitor-landing-pages
 ## [2026-10-05] review | auditing-seo-with-crawlie approved | outputs/skill-reviews/2026-10-05-auditing-seo-with-crawlie
 ## [2026-10-05] review | tracking-tasks-with-backlog-md approved | outputs/skill-reviews/2026-10-05-tracking-tasks-with-backlog-md
+## [2026-10-05] lint | 2026-W41 | outputs/health/2026-W41
