@@ -5,6 +5,7 @@ and an installable library of Agent-Skills folders. AGENTS.md is an identical co
 
 ## Read this first, in this order
 1. `handoff.md` — where the project stands, what is in flight, what to do next (one per project; SOP in `skills/keeping-handoff-docs/SKILL.md`).
+   Its "In flight" rows are this repo's cards on Josep's cross-project kanban (Projects HQ, see that section below).
 2. `wiki/hot.md` — what changed recently and this week's hot list.
 3. `wiki/index.md` — one row per entry (slug, type, title, platform, captured, status, tags, canonical_id).
 4. The page you need: `wiki/pages/<slug>.md`, `wiki/stars/<slug>.md`, or `skills/<name>/SKILL.md`.
@@ -63,6 +64,30 @@ everything appears to work without it, right up until the agent pushes to `main`
 - Non-core agents work in their own clone with their own token; never run inside Josep's Obsidian folder.
 - Never commit secrets or cookies. API keys live in environment variables (Routine secrets, Supabase secrets, local shell).
 - **Keep `handoff.md` current.** Any session or agent that changes code, prompts, config, skills, data or the plan updates it before ending and appends one line to its Session log, in the same commit or PR. Routines read it and never edit it; their output goes to `wiki/log.md`, `wiki/hot.md` and `outputs/health/`. Enforced by `scripts/handoff-check.sh`: a Claude Code Stop hook (`.claude/settings.json`) will not let a session end while its branch changed state without touching `handoff.md`, and the PR check `handoff` turns red for any agent that skips it. Captures and Routine output (`raw/`, `wiki/pages/`, `wiki/stars/`, index / log / hot, hot-list reports, `outputs/health/`) are exempt.
+
+## Projects HQ — the kanban for every project (all agents, every session)
+Josep runs ALL his projects (this vault, his other repos, non-repo work) on one board: private Notion page **Projects HQ**,
+database **Project Status**, Board view by Status. The working agreement is `skills/tracking-projects-in-notion/references/board-policy.md`
+(card definition, fields, column entry rules, Definition of Done, P0–P3, WIP limits, cadence); the mechanics are in
+`skills/tracking-projects-in-notion/SKILL.md`. Rules every session follows:
+- **Columns**: Backlog → In progress → Waiting on Josep → Blocked → Done, plus Dropped. One card = one workstream with an
+  observable outcome (2–6 weeks), title stable for life. Priority P0 (urgent, this week, Target date required) · P1 (current focus)
+  · P2 (default) · P3 (someday). WIP limit In progress: Josep 3, Claude Code 5.
+- **Start**: after `handoff.md`, read this project's cards (Area) when you have the Notion connector. Work only on something that
+  has a card; open one first. Say so if you must exceed the WIP limit.
+- **Open**: repo work → add a row to `handoff.md` "In flight" (`| Workstream | Status | Priority | Owner | State | Next step | Detail |`)
+  in the same commit as the first piece of work; non-repo work → a `manual` card in Notion with every required field.
+- **Move**: change the row's Status / Owner / Next step in the same commit as the work that caused it. Waiting on Josep → Next step
+  starts `Josep:` and names the decision; Blocked → names the blocker and what unblocks it. Every move updates Next step and Last update.
+- **Close**: Status `Done` only when the Definition of Done holds (merged to `main` and live / shipped / decided, checked, Detail =
+  the evidence: PR, commit, report); `Dropped` with `Dropped: <reason>` when abandoned. Move the row to "Recently done" in a later
+  update. Never delete a card; follow-up work is a new card.
+- **End**: update the rows you touched; your final message names the cards you opened, moved or closed.
+- Never edit a card whose Source is a `handoff.md` in Notion (the sync overwrites it); edit the handoff. Never copy a `manual`
+  card's title or details into this public repo. Only Josep changes columns, priorities, Owners, Areas or the policy.
+- Machinery: `scripts/notion-sync.py` mirrors In flight to the board (daily, `github-stars-sync` step 7; any session may run it on
+  `main` when `NOTION_TOKEN` is set); `--audit` checks the policy weekly (`vault-lint` check 9). Another repo joins by copying the
+  script and the "Projects HQ" lines from `skills/tracking-projects-in-notion/SKILL.md` into its own CLAUDE.md / AGENTS.md.
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools

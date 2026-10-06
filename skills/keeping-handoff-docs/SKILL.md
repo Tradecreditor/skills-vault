@@ -31,7 +31,7 @@ Work on a project is spread over many sessions and several agents (Claude Code c
 |---|---|---|
 | header | purpose line, "last updated" with UTC time and who | one paragraph |
 | **Snapshot** | what the project is, where the rules live, who may push where, what runs on a schedule | 3–6 bullets, stable for weeks |
-| **In flight** | a table: workstream · state · next concrete step · link to the detailed doc | one row per open workstream; this is the part the next agent acts on |
+| **In flight** | a table: workstream · status · priority · owner · state · next concrete step · link to the detailed doc | one row per open workstream; this is the part the next agent acts on. Each row is a card on Josep's Projects HQ board (`tracking-projects-in-notion`): Status, Priority and Owner follow its board policy |
 | **Open loops** | known unfinished items that are nobody's current task (expiring tokens, settings to flip, reviews pending) | each with where it is documented |
 | **Recently done** | last ~7 days, PR numbers and dates | prune older lines when you add new ones |
 | **Environment facts that bite** | things that cost a session an hour and will again | one line each + link to the long form |
@@ -59,7 +59,7 @@ Work on a project is spread over many sessions and several agents (Claude Code c
 
 **During**: when you make a decision that a later agent would otherwise re-litigate (a threshold, a rejected approach, a platform limit you hit), note it in the detailed doc or the Environment facts section while it is fresh.
 
-**End**: update Snapshot if anything structural changed, the In flight rows you touched (state + next step), Recently done, Environment facts; append your Session log line; include the file in the commit / PR that carries the change. If the session ends without changing state, do not touch the file.
+**End**: update Snapshot if anything structural changed, the In flight rows you touched (status, owner, state + next step), Recently done, Environment facts; append your Session log line; include the file in the commit / PR that carries the change. If the session ends without changing state, do not touch the file.
 
 ## Installing the SOP in another project
 

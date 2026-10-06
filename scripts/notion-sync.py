@@ -1,24 +1,44 @@
 #!/usr/bin/env python3
-"""notion-sync.py - one-way mirror of handoff.md "## In flight" into the Notion data source "Project Status".
+"""notion-sync.py - one-way mirror of handoff.md "## In flight" into the Notion data source "Project Status", plus a read-only
+board-policy audit (--audit).
 
     notion-sync.py [--handoff PATH] [--source LABEL] [--area LABEL] [--repo-url URL]
                    [--data-source ID] [--dry-run] [--json] [--today YYYY-MM-DD]
+    notion-sync.py --audit [--json] [--today YYYY-MM-DD] [--source LABEL] [--data-source ID]
 
-Each In flight row becomes (or updates) one Notion row keyed by its Project title and tagged with the Source label; rows that
-left the table are set to Done. Rows of another Source are never touched, nothing is deleted or archived, the schema is never
-changed (a Status / Owner / Area / Source option the plan needs must already exist). A create is never blindly retried: after a
-timeout / 409 / 5xx the data source is queried first, so a page that did land is not created twice. Extra copies of one card
-(same Source and Project) are set to Done, pointing at the oldest one. stdout: one summary line (or one JSON object with --json);
-details go to stderr.
+Sync: each In flight row becomes (or updates) one Notion row keyed by its Project title and tagged with the Source label; rows
+that left the table are set to Done (a row already Done or Dropped is left alone, and a Done / Dropped card is never moved back
+out of its column: a row that says otherwise only warns on stderr; rename the Workstream to open a new card). Rows of another
+Source are never touched,
+nothing is deleted or archived, the schema is never changed (a Status / Priority / Owner / Area / Source option the plan needs
+must already exist). A create is never blindly retried: after a timeout / 409 / 5xx the data source is queried first, so a page
+that did land is not created twice. Extra copies of one card (same Source and Project) are set to Done, pointing at the oldest
+one (copies already Done or Dropped are skipped). stdout: one summary line (or one JSON object with --json); details go to stderr.
+
+In flight columns: Workstream (required); State, Next step, Detail; and optionally Status, Priority, Owner (header names are
+case-insensitive, order is free). Status: Backlog | In progress | Waiting on Josep (or Waiting) | Blocked | Done | Dropped. Owner:
+Josep | Claude Code | Routine. Priority: P0..P3. A valid Status / Owner overrides the rules derived from State and Next step; an
+empty one uses the rules; an unknown one warns on stderr and uses the rules. An empty or unknown Priority is not written on an
+update (the value in Notion is left alone) and is created as P2, the board-policy default. A status change also sets Last update
+to the handoff date (Last update only moves forward). A Dropped row gets Next step "Dropped: <first sentence of State>" and a
+warning when it has no reason. Target date (optional Notion property) is never written by the sync.
+
+--audit (needs NOTION_TOKEN; never parses handoff.md, never writes): reads every card of the data source and checks the board
+policy (skills/tracking-projects-in-notion/references/board-policy.md): wip, p0, missing, stale, waiting, blocked, target,
+overdue, evidence (Done with no Link, with only the handoff.md fallback Link, or closed by leaving In flight), dropped, dup;
+`missing` covers Owner, Next step, Priority, Area, Status (empty or not a policy column), Project and Last update. Output is public-safe: titles are printed only for cards whose Source equals this run's source
+label; every other card appears as a count. Violations are reported, not failures: exit 0 whenever the audit ran.
 
 Exit codes (the routine branches on these, never on the message text):
-    0  ok (also: dry-run ok)
+    0  ok (also: dry-run ok, audit ran)
     1  partial: some writes failed after retries, the others are done
     2  sync OFF for this run: NOTION_TOKEN missing (not --dry-run) or malformed, 401/403 (also on a write: the run stops at
-       once), data source not found or not shared, ambiguous search (set NOTION_PROJECTS_DS), schema missing a property, a
-       wrong type or a needed select option, host unreachable, any failed read, an unexpected internal error
+       once), data source not found or not shared, ambiguous search (set NOTION_PROJECTS_DS), schema missing a property (Priority
+       is required, Target date is not), a wrong type or a needed select option, host unreachable, any failed read, an
+       unexpected internal error
     3  handoff parse error: file missing, no "## In flight" section, no table, no Workstream column
-    4  refused locally: bad NOTION_API_BASE override, bad NOTION_VERSION, bad --today, bad command line
+    4  refused locally: bad NOTION_API_BASE override, bad NOTION_VERSION, bad --today, bad command line (also --audit with
+       --dry-run)
 
 Credentials: NOTION_TOKEN (Bearer header to the API base only, never printed). NOTION_API_BASE may only be
 http://127.0.0.1:<port> or http://localhost:<port> (tests). Optional: NOTION_VERSION (YYYY-MM-DD), NOTION_PROJECTS_DS (data source id). Python 3.9+, stdlib only.
@@ -47,14 +67,27 @@ BACKOFF = (1, 2, 4)                 # retry delays; also the retry count
 RETRY_AFTER_MAX = 30
 TIMEOUT = 30
 DS_TITLE = "Project Status"
-SCHEMA = {"Project": "title", "Status": "select", "Area": "select", "Next step": "rich_text",
+SCHEMA = {"Project": "title", "Status": "select", "Priority": "select", "Area": "select", "Next step": "rich_text",
           "Owner": "select", "Link": "url", "Last update": "date", "Source": "select"}
+TARGET_DATE = "Target date"         # optional date property: read by --audit, never required, never written
+STATUSES = ("Backlog", "In progress", "Waiting on Josep", "Blocked", "Done", "Dropped")
+OWNERS = ("Josep", "Claude Code", "Routine")
+PRIORITIES = ("P0", "P1", "P2", "P3")
+DEFAULT_PRIORITY = "P2"             # board policy section 2: a new card without a Priority gets P2 (never applied to an update)
+CLOSED = ("Done", "Dropped")
+STATUS_WORDS = dict({s.lower(): s for s in STATUSES}, waiting="Waiting on Josep")
+OWNER_WORDS = {o.lower(): o for o in OWNERS}
+PRIORITY_WORDS = {p.lower(): p for p in PRIORITIES}
+WIP_LIMITS = {"Josep": 3, "Claude Code": 5}                                         # board policy section 5
+STALE_DAYS = {"In progress": 14, "Blocked": 14, "Waiting on Josep": 7}              # board policy section 5
+RULES = ("wip", "p0", "missing", "stale", "waiting", "blocked", "target", "overdue", "evidence", "dropped", "dup")
 NO_NEXT = {"none", "—", "-", "n/a", "nothing"}
 PATH_EXT = (".md", ".yaml", ".yml", ".py", ".json", ".sh")
 DATE_RE = re.compile(r"(?<!\d)\d{4}-\d{2}-\d{2}(?!\d)")
 VERSION_BEFORE = re.compile(r"(?<![A-Za-z])(?:version|v)[ -]?$", re.I)     # "Notion-Version 2026-03-11", "v2026-03-11"
 TOKEN_RE = re.compile(r"[\x21-\x7e]+")
 VERSION_RE = re.compile(r"\d{4}-\d{2}-\d{2}", re.A)
+HANDOFF_LINK = re.compile(r"/blob/[^/?#]+/handoff\.md(?:[?#].*)?$", re.I)     # link_of's last-resort fallback: not evidence
 URL_STOP = re.compile(r"[\s)>\]`<*\"'|]")
 MAX_URL = 2000
 _last_request = [0.0]
@@ -89,7 +122,19 @@ def scrub(text):
 
 
 def log(msg):
-    print("notion-sync: " + scrub(msg), file=sys.stderr)
+    emit("notion-sync: " + scrub(msg) + "\n", sys.stderr)
+
+
+def emit(text, stream=None):
+    """Write text in one piece, never raising on a stream whose encoding cannot hold a character (a card title, an em dash):
+    such characters come out as \\uXXXX instead of crashing a half-printed report."""
+    stream = stream or sys.stdout
+    enc = getattr(stream, "encoding", None) or "utf-8"
+    try:
+        text = text.encode(enc, "backslashreplace").decode(enc)
+    except (LookupError, UnicodeError):
+        text = text.encode("ascii", "backslashreplace").decode("ascii")
+    stream.write(text)
 
 
 # ---------------------------------------------------------------- parsing handoff.md
@@ -167,12 +212,23 @@ def owner_of(nxt):
 
 
 def next_step_of(status, state, nxt):
-    if status == "Done" and (not nxt or nxt.lower() in NO_NEXT):
+    if status in CLOSED and (not nxt or nxt.lower() in NO_NEXT):
         first = re.split(r"(?<=[.!?])\s", state, maxsplit=1)[0] if state else ""
-        text = "Done — " + first if first else "Done"
+        text = (f"{status}: {first}" if status == "Dropped" else f"{status} — {first}") if first else status
     else:
         text = nxt
     return text if len(text) <= 1900 else text[:1899] + "…"
+
+
+def explicit(project, column, raw, words, fallback):
+    """The canonical value of an explicit handoff cell, or None when it is empty or unknown (unknown warns)."""
+    value = clean(raw)
+    if not value:
+        return None
+    found = words.get(value.lower())
+    if not found:
+        log(f"warn: row '{project}': unknown {column} '{value[:80]}'; {fallback}")
+    return found
 
 
 def valid_dates(text, skip_versions=False):
@@ -262,7 +318,8 @@ def parse_handoff(text, today, repo_url):
     header = [clean(c).lower() for c in split_row(table[0])]
     if "workstream" not in header:
         raise Stop(3, "the In flight table has no Workstream column")
-    idx = {n: header.index(n) for n in ("workstream", "state", "next step", "detail") if n in header}
+    idx = {n: header.index(n) for n in ("workstream", "status", "priority", "owner", "state", "next step", "detail")
+           if n in header}
     rows, seen = [], set()
     for line in table[1:]:
         cells = split_row(line)
@@ -280,10 +337,16 @@ def parse_handoff(text, today, repo_url):
             continue
         seen.add(project)
         state, nxt = clean(cell("state")), clean(cell("next step"))
-        status = classify(state, nxt)
+        status = explicit(project, "Status", cell("status"), STATUS_WORDS, "using the rule-based status") \
+            or classify(state, nxt)
+        owner = explicit(project, "Owner", cell("owner"), OWNER_WORDS, "using the rule-based owner") or owner_of(nxt)
+        priority = explicit(project, "Priority", cell("priority"), PRIORITY_WORDS, "leaving Priority unset")
         dates = [d for d in valid_dates(line, True) if d <= handoff_date]
-        rows.append({"project": project, "status": status, "owner": owner_of(nxt),
-                     "next_step": next_step_of(status, state, nxt),
+        next_step = next_step_of(status, state, nxt)
+        if status == "Dropped" and not re.match(r"dropped:\s*\S", next_step, re.I):
+            log(f"warn: row '{project}': Dropped without a reason; put 'Dropped: <reason>' in Next step or a sentence in State")
+        rows.append({"project": project, "status": status, "priority": priority, "owner": owner,
+                     "next_step": next_step,
                      "last_update": max(dates) if dates else handoff_date,
                      "link": link_of(cell("detail"), line, repo_url)})
     return handoff_date, rows
@@ -383,19 +446,20 @@ def find_data_source(cfg):
 
 
 def check_schema(cfg, ds):
-    """Verify property names and types; return {select property: set of its existing option names}."""
+    """Verify property names and types. Returns ({select property: set of its option names}, has Target date property)."""
     props = call(cfg, "GET", "/v1/data_sources/" + urllib.parse.quote(ds, safe="")).get("properties") or {}
     bad = [f"{n} ({t})" for n, t in SCHEMA.items() if (props.get(n) or {}).get("type") != t]
     if bad:
         raise Stop(2, "schema is missing or has the wrong type for: " + ", ".join(bad))
-    return {n: {o.get("name") for o in ((props[n].get("select") or {}).get("options") or []) if isinstance(o, dict)}
-            for n, t in SCHEMA.items() if t == "select"}
+    options = {n: {o.get("name") for o in ((props[n].get("select") or {}).get("options") or []) if isinstance(o, dict)}
+               for n, t in SCHEMA.items() if t == "select"}
+    return options, (props.get(TARGET_DATE) or {}).get("type") == "date"
 
 
 def check_options(options, plan):
     """The schema is never changed: every select value the plan writes must already be an option."""
     missing = []
-    for prop in ("Status", "Owner", "Area", "Source"):
+    for prop in ("Status", "Priority", "Owner", "Area", "Source"):
         for kind in ("create", "update", "close", "dup"):
             for e in plan[kind]:
                 v = e["values"].get(prop)
@@ -426,10 +490,12 @@ def flatten(page):
     def sel(name):
         return ((p.get(name) or {}).get("select") or {}).get("name")
     start = ((p.get("Last update") or {}).get("date") or {}).get("start")
+    target = ((p.get(TARGET_DATE) or {}).get("date") or {}).get("start")
     return {"id": page["id"], "created": page.get("created_time") or "", "url": page.get("url") or
             "https://www.notion.so/" + page["id"].replace("-", ""),
             "project": rich((p.get("Project") or {}).get("title")), "Status": sel("Status"),
-            "Area": sel("Area"), "Owner": sel("Owner"), "Source": sel("Source"),
+            "Area": sel("Area"), "Owner": sel("Owner"), "Source": sel("Source"), "Priority": sel("Priority"),
+            "Target date": target[:10] if target else None,
             "Next step": rich((p.get("Next step") or {}).get("rich_text")),
             "Link": (p.get("Link") or {}).get("url"), "Last update": start[:10] if start else None}
 
@@ -467,7 +533,7 @@ def to_prop(name, v):
         return {"url": v}
     if name == "Last update":
         return {"date": {"start": v}}
-    return {"select": {"name": v}}                     # Status, Area, Owner, Source
+    return {"select": {"name": v}}                     # Status, Priority, Area, Owner, Source
 
 
 def make_plan(rows, existing, area, handoff_date, source):
@@ -475,11 +541,23 @@ def make_plan(rows, existing, area, handoff_date, source):
     for r in rows:
         want = {"Status": r["status"], "Area": area, "Next step": r["next_step"], "Owner": r["owner"],
                 "Link": r["link"], "Last update": r["last_update"]}
+        if r.get("priority"):
+            want["Priority"] = r["priority"]                # empty: Notion's value is left alone on an update
         cur = (existing.get(r["project"]) or [None])[0]
         if cur is None:
-            plan["create"].append({"project": r["project"], "values": dict(want, Source=source)})
+            plan["create"].append({"project": r["project"], "values": dict(want, Source=source,
+                                                                           Priority=want.get("Priority", DEFAULT_PRIORITY))})
             continue
+        if cur["Status"] in CLOSED and r["status"] != cur["Status"]:
+            log(f"warn: card '{r['project']}' is {cur['Status']} in Notion but its row says {r['status']}; not reopened "
+                "(a closed card never leaves its column): rename the Workstream to open a new card")
+            plan["unchanged"].append({"project": r["project"]})
+            continue
+        if cur["Status"] != r["status"]:                    # a move updates Last update, even if the row's own dates are older
+            want["Last update"] = max(r["last_update"], handoff_date)
         changed = {k: v for k, v in want.items() if cur[k] != v}
+        if "Last update" in changed and cur["Last update"] and cur["Last update"] >= want["Last update"]:
+            del changed["Last update"]                      # Last update only moves forward: a bump is not undone by the row's date
         if changed:
             plan["update"].append({"project": r["project"], "id": cur["id"], "values": changed})
         else:
@@ -487,13 +565,14 @@ def make_plan(rows, existing, area, handoff_date, source):
     keys = {r["project"] for r in rows}
     for key, pages in existing.items():
         cur = pages[0]
-        if key not in keys and cur["Status"] != "Done":
+        if key not in keys and cur["Status"] not in CLOSED:
             vals = {"Status": "Done", "Next step": f"Left {source} In flight; last seen {handoff_date}.",
                     "Last update": handoff_date}
             plan["close"].append({"project": key, "id": cur["id"], "values": vals})
         for extra in pages[1:]:
-            if extra["Status"] != "Done":
-                vals = {"Status": "Done", "Next step": f"Duplicate card; the live card is {cur['url']}. Safe to delete by hand."}
+            if extra["Status"] not in CLOSED:
+                vals = {"Status": "Done", "Next step": f"Duplicate card; the live card is {cur['url']}.",
+                        "Last update": handoff_date}
                 plan["dup"].append({"project": key, "id": extra["id"], "values": vals})
     return plan
 
@@ -559,6 +638,132 @@ def execute(cfg, ds, plan):
     return counts
 
 
+# ---------------------------------------------------------------- audit (read-only)
+
+def fetch_all(cfg, ds):
+    """Every live card of the data source (no filter), following next_cursor."""
+    cards, cursor = [], None
+    while True:
+        body = {"page_size": 100}
+        if cursor:
+            body["start_cursor"] = cursor
+        res = call(cfg, "POST", f"/v1/data_sources/{urllib.parse.quote(ds, safe='')}/query", body)
+        cards += [flatten(pg) for pg in res.get("results", []) if not (pg.get("in_trash") or pg.get("archived"))]
+        cursor = res.get("next_cursor")
+        if not res.get("has_more") or not cursor:
+            return cards
+
+
+def audit_cards(cards, today, source, has_target):
+    """Board-policy violations as [{"rule", "card", "detail", "mine"}]. card is None for the per-Owner rules (wip, p0), which
+    name only an Owner; otherwise "mine" is True only for a card whose Source is this run's source (the only ones that may be
+    named in output)."""
+    today_d = datetime.date.fromisoformat(today)
+    open_cards = [c for c in cards if c["Status"] not in CLOSED]
+    out = []
+
+    def add(rule, card, detail):
+        out.append({"rule": rule, "card": (card["project"] or "(untitled)") if card else None, "detail": detail,
+                    "mine": card is None or card["Source"] == source})
+
+    for owner, limit in WIP_LIMITS.items():
+        n = len([c for c in cards if c["Status"] == "In progress" and c["Owner"] == owner])
+        if n > limit:
+            add("wip", None, f"{owner}: {n} In progress > {limit}")
+    for owner in sorted({c["Owner"] for c in open_cards if c["Owner"]}):
+        n = len([c for c in open_cards if c["Owner"] == owner and c["Priority"] == "P0"])
+        if n > 1:
+            add("p0", None, f"{owner}: {n} open P0 > 1")
+    for c in open_cards:
+        lacking = [name for name, v in (("Owner", c["Owner"]), ("Next step", c["Next step"]), ("Priority", c["Priority"]),
+                                        ("Area", c["Area"]), ("Status", c["Status"] in STATUSES),
+                                        ("Project", c["project"]),
+                                        # a missing Last update on a card the stale rule watches is reported there, once
+                                        ("Last update", c["Last update"] or c["Status"] in STALE_DAYS)) if not v]
+        if lacking:
+            add("missing", c, "missing " + ", ".join(lacking))
+    for c in cards:
+        limit = STALE_DAYS.get(c["Status"])
+        if limit is None:
+            continue
+        try:
+            age = (today_d - datetime.date.fromisoformat(c["Last update"] or "")).days
+        except ValueError:
+            add("stale", c, f"{c['Status']}, no last update")
+            continue
+        if age > limit:
+            add("stale", c, f"{c['Status']}, last update {c['Last update']} ({age} days)")
+    for c in cards:
+        if c["Status"] == "Waiting on Josep" and not re.match(r"josep:\s*\S", c["Next step"], re.I):
+            add("waiting", c, "Waiting on Josep but Next step is not 'Josep: <what is needed>'")
+    for c in cards:
+        if c["Status"] == "Blocked" and not c["Next step"]:
+            add("blocked", c, "Blocked without a Next step")
+    if has_target:
+        for c in open_cards:
+            if c["Priority"] == "P0" and not c["Target date"]:
+                add("target", c, f"{c['Priority']} without a Target date")
+        for c in open_cards:
+            if c["Target date"] and c["Target date"] < today:
+                add("overdue", c, f"Target date {c['Target date']} has passed")
+    for c in cards:
+        if c["Status"] == "Done":
+            if not c["Link"]:
+                add("evidence", c, "Done without a Link")
+            elif HANDOFF_LINK.search(c["Link"]):
+                add("evidence", c, "Done, but the Link is only the handoff.md fallback, not evidence")
+            elif c["Source"] and c["Next step"].startswith(f"Left {c['Source']} In flight"):
+                add("evidence", c, "Done by leaving In flight: no evidence recorded")
+    for c in cards:
+        if c["Status"] == "Dropped" and not re.match(r"dropped:\s*\S", c["Next step"], re.I):
+            add("dropped", c, "Dropped but Next step is not 'Dropped: <reason>'")
+    groups = {}
+    for c in open_cards:
+        groups.setdefault((c["Source"], c["project"]), []).append(c)
+    for group in groups.values():
+        for extra in sorted(group, key=lambda c: c["created"] or "\uffff")[1:]:
+            add("dup", extra, "duplicate of an older open card")
+    order = {r: i for i, r in enumerate(RULES)}
+    out.sort(key=lambda v: order[v["rule"]])                  # stable: API order inside a rule
+    return out, len(cards), len(open_cards)
+
+
+def run_audit(args):
+    if args.dry_run:
+        raise Stop(4, "--audit and --dry-run cannot be combined")
+    today = check_today(args)
+    cfg, override = connection(args)
+    source = args.source or f"{repo_identity()[1]}/handoff.md"
+    try:
+        ds, _, has_target = resolve(cfg, args)
+        cards = fetch_all(cfg, ds)
+    except ApiError as e:
+        raise Stop(2, str(e) + (NOT_FOUND_HINT if e.status == 404 else ""))
+    except Unreachable as e:
+        raise Stop(2, str(e))
+    violations, n_cards, n_open = audit_cards(cards, today, source, has_target)
+    counts = {"cards": n_cards, "open": n_open, "violations": len(violations)}
+    for rule in RULES:
+        counts[rule] = None if rule in ("target", "overdue") and not has_target else \
+            len([v for v in violations if v["rule"] == rule])
+    shown = [{"rule": v["rule"], "card": v["card"], "detail": v["detail"]} for v in violations if v["mine"]]
+    return {"ok": True, "audit": True, "counts": counts, "violations": shown,
+            "other_source_violations": len([v for v in violations if not v["mine"]]), "data_source": ds.replace("-", "")[:8]}, 0
+
+
+def render_audit(res, as_json):
+    if as_json:
+        emit(json.dumps(res, ensure_ascii=False) + "\n")
+        return
+    c = res["counts"]
+    lines = ["notion-audit: " + " ".join(f"{k}={'n/a' if c[k] is None else c[k]}" for k in c)]
+    lines += [f"- [{v['rule']}] {v['card'] + ' — ' if v['card'] else ''}{v['detail']}" for v in res["violations"]]
+    k = res["other_source_violations"]
+    if k:
+        lines.append(f"- {k} more violation(s) on cards from other sources; details only in Notion (this repository is public).")
+    emit("\n".join(lines) + "\n")                    # one write: the report is never half-printed
+
+
 # ---------------------------------------------------------------- command line
 
 def repo_identity():
@@ -573,16 +778,62 @@ def repo_identity():
     return None, ROOT.name
 
 
-def run(args):
+NOT_FOUND_HINT = " (not found: share the page with the integration, or use the data source id, not the database id)"
+
+
+def check_today(args):
     today = args.today or datetime.datetime.now(datetime.timezone.utc).date().isoformat()
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", today) or not valid_dates(today):
         raise Stop(4, f"bad --today '{today}' (want YYYY-MM-DD)")
+    return today
+
+
+def api_settings():
+    """(base override, Notion-Version), refusing a foreign base or a malformed version."""
     override = os.environ.get("NOTION_API_BASE", "").strip()
     if override and not LOCAL_BASE.match(override):
         raise Stop(4, "NOTION_API_BASE may only point at http://127.0.0.1:<port> or http://localhost:<port>")
     version = os.environ.get("NOTION_VERSION", "").strip() or DEFAULT_VERSION
     if not VERSION_RE.fullmatch(version):
         raise Stop(4, "NOTION_VERSION must look like YYYY-MM-DD")
+    return override, version
+
+
+def connection(args):
+    """The request config, or Stop(2) when there is no usable token. (Only a dry run may go on without one: see run().)"""
+    override, version = api_settings()
+    token = os.environ.get("NOTION_TOKEN", "").strip()
+    if not token:
+        raise Stop(2, "NOTION_TOKEN not set")
+    return token_config(token, version, override), override
+
+
+def token_config(token, version, override):
+    if not TOKEN_RE.fullmatch(token):
+        raise Stop(2, "NOTION_TOKEN contains invalid characters")
+    return {"token": token, "version": version, "opener": urllib.request.build_opener(NoRedirect),
+            "base": (override or DEFAULT_BASE).rstrip("/")}
+
+
+def resolve(cfg, args):
+    """(data source id, select options, has Target date): find the data source and check its schema."""
+    given = args.data_source or os.environ.get("NOTION_PROJECTS_DS")
+    ds = given or find_data_source(cfg)
+    try:
+        options, has_target = check_schema(cfg, ds)
+    except ApiError as e:
+        if e.status != 404 or not given:
+            raise
+        ds = database_data_source(cfg, given, e)
+        options, has_target = check_schema(cfg, ds)
+    return ds, options, has_target
+
+
+def run(args):
+    if args.audit:
+        return run_audit(args)
+    today = check_today(args)
+    override, version = api_settings()
     path = args.handoff or str(ROOT / "handoff.md")
     try:
         with open(path, encoding="utf-8") as f:
@@ -600,26 +851,13 @@ def run(args):
         if args.dry_run:
             return res, 0
         raise Stop(2, "NOTION_TOKEN not set")
-    if not TOKEN_RE.fullmatch(token):
-        raise Stop(2, "NOTION_TOKEN contains invalid characters")
-    opener = urllib.request.build_opener(NoRedirect)
-    cfg = {"token": token, "version": version, "opener": opener, "base": (override or DEFAULT_BASE).rstrip("/")}
+    cfg = token_config(token, version, override)
     try:
-        given = args.data_source or os.environ.get("NOTION_PROJECTS_DS")
-        ds = given or find_data_source(cfg)
-        try:
-            options = check_schema(cfg, ds)
-        except ApiError as e:
-            if e.status != 404 or not given:
-                raise
-            ds = database_data_source(cfg, given, e)
-            options = check_schema(cfg, ds)
+        ds, options, _ = resolve(cfg, args)
         res["data_source"] = ds
         existing = fetch_existing(cfg, ds, source)
     except ApiError as e:
-        hint = " (not found: share the page with the integration, or use the data source id, not the database id)" \
-            if e.status == 404 else ""
-        raise Stop(2, str(e) + hint)
+        raise Stop(2, str(e) + (NOT_FOUND_HINT if e.status == 404 else ""))
     except Unreachable as e:
         raise Stop(2, str(e))
     plan = res["plan"] = make_plan(rows, existing, area, handoff_date, source)
@@ -636,24 +874,26 @@ def run(args):
 
 
 def render(res, as_json):
+    if res.get("audit"):
+        return render_audit(res, as_json)
     if as_json:
         plan = res["plan"] and {"create": [e["project"] for e in res["plan"]["create"]],
                                 "update": [{"project": e["project"], "changed": sorted(e["values"])} for e in res["plan"]["update"]],
                                 "close": [e["project"] for e in res["plan"]["close"]],
                                 "unchanged": [e["project"] for e in res["plan"]["unchanged"]]}
-        print(json.dumps(dict(res, plan=plan), ensure_ascii=False))
+        emit(json.dumps(dict(res, plan=plan), ensure_ascii=False) + "\n")
         return
     c, ds8 = res["counts"], (res["data_source"] or "").replace("-", "")[:8]
     if res["dry_run"]:
         for r in res["rows"]:
-            log(f"row {r['status']} | {r['owner']} | {r['last_update']} | {r['project']}")
+            log(f"row {r['status']} | {r['priority'] or '-'} | {r['owner']} | {r['last_update']} | {r['project']}")
     if c is None:
-        print(f"notion-sync: dry-run rows={len(res['rows'])} source={res['source']}")
+        emit(f"notion-sync: dry-run rows={len(res['rows'])} source={res['source']}\n")
         return
     head = "dry-run rows=%d " % len(res["rows"]) if res["dry_run"] else ""
     dups = f" duplicates={c['duplicates']}" if c.get("duplicates") else ""
-    print(f"notion-sync: {head}created={c['created']} updated={c['updated']} closed={c['closed']} "
-          f"unchanged={c['unchanged']} failed={c['failed']}{dups} source={res['source']} data_source={ds8}")
+    emit(f"notion-sync: {head}created={c['created']} updated={c['updated']} closed={c['closed']} "
+         f"unchanged={c['unchanged']} failed={c['failed']}{dups} source={res['source']} data_source={ds8}\n")
 
 
 def main(argv=None):
@@ -665,6 +905,7 @@ def main(argv=None):
     p.add_argument("--data-source", help="data source id (default: NOTION_PROJECTS_DS, else search)")
     p.add_argument("--dry-run", action="store_true", help="parse and plan; never write")
     p.add_argument("--json", action="store_true", help="print one JSON object instead of the summary line")
+    p.add_argument("--audit", action="store_true", help="read-only board-policy check of every card; see the docstring")
     p.add_argument("--today", help="override today's date, YYYY-MM-DD (tests)")
     try:
         args = p.parse_args(argv)
@@ -672,7 +913,7 @@ def main(argv=None):
         return 4 if e.code else 0                      # argparse's own exit 2 would read as "sync off"
     try:
         res, code = run(args)
-        res["ok"] = not (res["counts"] and res["counts"]["failed"])
+        res["ok"] = res.get("audit", False) or not (res["counts"] and res["counts"]["failed"])
         res["exit"] = code
         render(res, args.json)
         return code
@@ -681,11 +922,11 @@ def main(argv=None):
     except Exception as e:                              # never a traceback: it could carry the token or a request body
         code, reason = 2, scrub(" ".join(f"internal error: {e.__class__.__name__}: {e}".split()))[:300]
     if args.json:
-        print(json.dumps({"ok": False, "off": code == 2, "exit": code, "reason": reason}, ensure_ascii=False))
+        emit(json.dumps({"ok": False, "off": code == 2, "exit": code, "reason": reason}, ensure_ascii=False) + "\n")
     elif code == 2:
-        print(f"notion-sync: off ({reason})")
+        emit(f"notion-sync: off ({reason})\n")
     else:
-        print(f"notion-sync: error ({reason})", file=sys.stderr)
+        emit(f"notion-sync: error ({reason})\n", sys.stderr)
     return code
 
 

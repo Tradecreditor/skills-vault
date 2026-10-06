@@ -30,8 +30,12 @@ REPO_URL = "https://github.com/o/r"
 TODAY = "2026-10-06"
 
 
+HEADER7 = "| Workstream | Status | Priority | Owner | State | Next step | Detail |"
+
+
 def table(rows, header="| Workstream | State | Next step | Detail |"):
-    lines = ["# handoff", "", "Last updated: 2026-10-05 08:27 UTC by someone.", "", "## In flight", header, "|---|---|---|---|"]
+    sep = "|" + "---|" * (header.count("|") - 1)
+    lines = ["# handoff", "", "Last updated: 2026-10-05 08:27 UTC by someone.", "", "## In flight", header, sep]
     lines += ["| " + " | ".join(r) + " |" for r in rows]
     return "\n".join(lines + ["", "## Open loops", "| not | a | table |"]) + "\n"
 
@@ -185,6 +189,71 @@ class ParseTests(unittest.TestCase):
                 ns.parse_handoff(text, TODAY, None)
             self.assertEqual(cm.exception.code, 3)
 
+    # ---- v2: explicit Status / Priority / Owner columns
+
+    def parse7(self, rows):
+        return ns.parse_handoff(table(rows, HEADER7), TODAY, REPO_URL)[1]
+
+    def test_explicit_columns_are_parsed_and_override_the_rules(self):
+        rows = self.parse7([("A", "in PROGRESS", "p1", "routine", "Live", "Josep merges PR #7", ""),
+                            ("B", "Waiting", "P0", "Claude Code", "Live", "Run it", ""),
+                            ("C", "Backlog", "p3", "Josep", "Live", "none", ""),
+                            ("D", "Done", "P2", "Claude Code", "All good. More.", "—", ""),
+                            ("E", "Dropped", "P3", "Josep", "Not wanted. Later.", "none", ""),
+                            ("F", "Blocked", "", "", "Live", "Run it", ""),
+                            ("G", "", "P1", "", "Live", "Josep merges it", "")])
+        got = [(r["status"], r["priority"], r["owner"]) for r in rows]
+        self.assertEqual(got, [("In progress", "P1", "Routine"), ("Waiting on Josep", "P0", "Claude Code"),
+                               ("Backlog", "P3", "Josep"), ("Done", "P2", "Claude Code"), ("Dropped", "P3", "Josep"),
+                               ("Blocked", None, "Claude Code"), ("Waiting on Josep", "P1", "Josep")])
+        self.assertEqual(rows[3]["next_step"], "Done — All good.")
+        self.assertEqual(rows[4]["next_step"], "Dropped: Not wanted.")      # policy: Dropped: <reason>
+        self.assertEqual(rows[2]["next_step"], "none")                  # a Backlog row keeps its Next step as written
+
+    def test_invalid_explicit_values_warn_and_fall_back(self):
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            rows = self.parse7([("A", "Doing", "P9", "Bob", "Live", "Josep merges it", "")])
+        self.assertEqual((rows[0]["status"], rows[0]["priority"], rows[0]["owner"]), ("Waiting on Josep", None, "Josep"))
+        for text in ("warn: row 'A': unknown Status 'Doing'; using the rule-based status",
+                     "warn: row 'A': unknown Owner 'Bob'; using the rule-based owner",
+                     "warn: row 'A': unknown Priority 'P9'"):
+            self.assertIn(text, err.getvalue())
+
+    def test_old_four_column_format_parses_identically(self):
+        old = [("Alpha (first)", "Live", "Run the thing", "`scripts/a.py`"), ("Beta", "Waiting", "Josep merges PR #7", "—"),
+               ("Gamma", "Done and merged", "none", "`docs/`")]
+        new = [(w, "", "", "", st, nx, d) for w, st, nx, d in old]
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            rows7 = self.parse7(new)
+        rows4 = parse(old)
+        self.assertEqual(err.getvalue(), "")
+        self.assertEqual([dict(r, priority=None) for r in rows4], rows7)
+        self.assertTrue(all("priority" in r and r["priority"] is None for r in rows4))
+
+    def test_real_handoff_has_explicit_status_priority_owner_on_every_row(self):
+        path = SCRIPT.parent.parent / "handoff.md"
+        text = path.read_text(encoding="utf-8")
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            _, rows = ns.parse_handoff(text, TODAY, REPO_URL)
+        self.assertEqual(err.getvalue(), "")                            # no warning: every explicit value is valid
+        start = text.index("## In flight")
+        lines = [ln for ln in text[start:].split("\n\n")[0].splitlines()[1:] if ln.startswith("|")]
+        header = [ns.clean(c).lower() for c in ns.split_row(lines[0])]
+        for col in ("status", "priority", "owner"):
+            self.assertIn(col, header)
+        body = [ns.split_row(ln) for ln in lines[2:]]
+        self.assertEqual(len(body), len(rows))
+        for cells, r in zip(body, rows):
+            for col, key, allowed in (("status", "status", ns.STATUSES), ("priority", "priority", ns.PRIORITIES),
+                                      ("owner", "owner", ns.OWNERS)):
+                raw = ns.clean(cells[header.index(col)])
+                self.assertTrue(raw, (col, r["project"]))
+                self.assertIn(r[key], allowed)
+                self.assertEqual(r[key], {"status": ns.STATUS_WORDS, "priority": ns.PRIORITY_WORDS, "owner": ns.OWNER_WORDS}[col][raw.lower()])
+
 
 # ---------------------------------------------------------------- fake Notion
 
@@ -199,15 +268,15 @@ def normalise(props):
     return out
 
 
-OPTIONS = {"Status": ["Backlog", "In progress", "Waiting on Josep", "Blocked", "Done"],
-           "Owner": ["Josep", "Claude Code", "Routine"], "Area": ["test"], "Source": ["test/handoff.md"]}
+OPTIONS = {"Status": ["Backlog", "In progress", "Waiting on Josep", "Blocked", "Done", "Dropped"],
+           "Priority": ["P0", "P1", "P2", "P3"], "Owner": ["Josep", "Claude Code", "Routine"], "Area": ["test"], "Source": ["test/handoff.md"]}
 
 
 class FakeNotion:
-    def __init__(self, token=TOKEN, page_size=100, schema=None, options=None):
+    def __init__(self, token=TOKEN, page_size=100, schema=None, options=None, target_date=True):
         self.token, self.page_size, self.inject, self.requests = token, page_size, [], []
         self.pages, self.reject_titles, self.ignore_filter = {}, set(), False
-        self.schema = schema or dict(ns.SCHEMA)
+        self.schema = schema or dict(ns.SCHEMA, **({"Target date": "date"} if target_date else {}))
         self.options = OPTIONS if options is None else options
         self.databases = {}                 # database id -> [data source ids]
         self.after_commit = []              # (status or None, delay): a create lands, then the answer is lost / delayed
@@ -227,12 +296,13 @@ class FakeNotion:
         self.clock += 1
         return "2026-01-01T%02d:%02d:%02d.000Z" % (self.clock // 3600, self.clock // 60 % 60, self.clock % 60)
 
-    def seed(self, project, source, status="In progress", created=None):
+    def seed(self, project, source, status="In progress", created=None, props=None):
         pid = "page-%d" % (len(self.pages) + 1)
         self.pages[pid] = {"id": pid, "url": "https://www.notion.so/" + pid, "created_time": created or self.stamp(),
-                           "properties": normalise({
+                           "properties": normalise(dict({
             "Project": {"title": [{"type": "text", "text": {"content": project}}]}, "Source": {"select": {"name": source}},
-            "Status": {"select": {"name": status}}, "Next step": {"rich_text": [{"type": "text", "text": {"content": "manual"}}]}})}
+            "Status": {"select": {"name": status}}, "Next step": {"rich_text": [{"type": "text", "text": {"content": "manual"}}]}},
+            **(props or {})))}
         return pid
 
     def writes(self):
@@ -258,7 +328,8 @@ class FakeNotion:
         if method == "GET" and m and m.group(1) in self.databases:
             return 200, {"object": "database", "id": m.group(1), "data_sources": [{"id": d, "name": "Project Status"} for d in self.databases[m.group(1)]]}
         if method == "POST" and path == "/v1/data_sources/%s/query" % DS:
-            parts = body["filter"].get("and") or [body["filter"]]
+            flt = body.get("filter")
+            parts = (flt.get("and") or [flt]) if flt else []
             rows = [p for p in self.pages.values() if self.ignore_filter or all(self.matches(p, f) for f in parts)]
             off = int(body.get("start_cursor") or 0)
             more = off + self.page_size < len(rows)
@@ -603,7 +674,8 @@ class SyncTests(unittest.TestCase):
         props = self.fake.pages[copy1]["properties"]
         self.assertEqual(props["Status"], {"select": {"name": "Done"}})
         self.assertEqual(props["Next step"]["rich_text"][0]["text"]["content"],
-                         "Duplicate card; the live card is https://www.notion.so/%s. Safe to delete by hand." % old)
+                         "Duplicate card; the live card is https://www.notion.so/%s." % old)
+        self.assertEqual(props["Last update"], {"date": {"start": "2026-10-05"}})            # a move updates Last update
         self.assertEqual(self.fake.pages[old]["properties"]["Status"], {"select": {"name": "In progress"}})   # the live card stays
         self.assertEqual(snapshot, json.dumps({k: self.fake.pages[k] for k in (copy2, foreign)}, sort_keys=True))
         patched = [r[1].rsplit("/", 1)[1] for r in self.fake.writes() if r[0] == "PATCH"]
@@ -779,6 +851,437 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIn("not the database id", out)
         self.assertEqual(self.fake.writes(), [])
+
+    # ---- v2: Priority, Dropped, Target date
+
+    def sync7(self, rows, *extra, **kw):
+        Path(self.handoff).write_text(table(rows, HEADER7), encoding="utf-8")
+        return self.sync(*extra, **kw)
+
+    def props(self, project, fake=None):
+        return next(p["properties"] for p in (fake or self.fake).pages.values()
+                    if p["properties"]["Project"]["title"][0]["plain_text"] == project)
+
+    def test_priority_is_written_on_create_compared_on_update_and_omitted_when_empty(self):
+        rows = [("Alpha", "In progress", "P1", "Claude Code", "Live", "Run it", ""), ("Beta", "In progress", "", "Claude Code", "Live", "Run it", "")]
+        code, out, _ = self.sync7(rows)
+        self.assertEqual(code, 0)
+        self.summary(out, created=2)
+        self.assertEqual(self.props("Alpha")["Priority"], {"select": {"name": "P1"}})
+        creates = {r[2]["properties"]["Project"]["title"][0]["text"]["content"]: r[2] for r in self.fake.requests if r[1] == "/v1/pages"}
+        self.assertEqual(creates["Beta"]["properties"]["Priority"], {"select": {"name": "P2"}})    # policy default, on create only
+        self.assertEqual(self.sync7(rows)[1].split("unchanged=")[1][:1], "2")            # second run: nothing to do
+        rows[0] = ("Alpha", "In progress", "p0", "Claude Code", "Live", "Run it", "")    # only Priority changes
+        before = len(self.fake.writes())
+        code, out, _ = self.sync7(rows)
+        self.summary(out, updated=1, unchanged=1)
+        (method, path, body, _), = self.fake.writes()[before:]
+        self.assertEqual((method, list(body["properties"])), ("PATCH", ["Priority"]))
+        self.assertEqual(body["properties"]["Priority"], {"select": {"name": "P0"}})
+        self.assertEqual(self.props("Beta")["Priority"], {"select": {"name": "P2"}})
+        self.fake.pages[next(k for k, pg in self.fake.pages.items() if pg["properties"]["Project"]["title"][0]["plain_text"] == "Beta")][
+            "properties"]["Priority"] = {"select": {"name": "P3"}}
+        before = len(self.fake.writes())
+        self.summary(self.sync7(rows)[1], unchanged=2)                                   # empty Priority: Notion's value stays
+        self.assertEqual(len(self.fake.writes()), before)
+        self.assertEqual(self.props("Beta")["Priority"], {"select": {"name": "P3"}})
+
+    def test_priority_option_must_exist(self):
+        options = dict(OPTIONS, Priority=["P2"])
+        fake = FakeNotion(options=options)
+        self.addCleanup(fake.close)
+        code, out, _ = self.sync7([("A", "In progress", "P1", "Claude Code", "Live", "Run it", "")], fake=fake)
+        self.assertEqual(code, 2)
+        self.assertIn("Priority option 'P1' missing in Notion", out)
+        self.assertEqual(fake.writes(), [])
+
+    def test_missing_priority_property_is_off_but_missing_target_date_is_fine(self):
+        schema = dict(ns.SCHEMA)
+        del schema["Priority"]
+        fake = FakeNotion(schema=schema)
+        self.addCleanup(fake.close)
+        code, out, _ = self.sync(fake=fake)
+        self.assertEqual(code, 2)
+        self.assertIn("Priority (select)", out)
+        self.assertEqual(fake.writes(), [])
+        schema = dict(ns.SCHEMA, Priority="rich_text")
+        fake = FakeNotion(schema=schema)
+        self.addCleanup(fake.close)
+        self.assertEqual(self.sync(fake=fake)[0], 2)
+        for target_date in (False, True):
+            fake = FakeNotion(target_date=target_date)
+            self.addCleanup(fake.close)
+            self.assertEqual(self.sync(fake=fake)[0], 0)
+            self.assertEqual(len(fake.pages), 3)
+            self.assertTrue(all("Target date" not in pg["properties"] for pg in fake.pages.values()))   # never written
+
+    def test_dropped_row_is_synced_and_dropped_cards_are_left_alone(self):
+        rows = [("Gone", "Dropped", "P3", "Josep", "No longer wanted. Really.", "none", ""),
+                ("Kept", "In progress", "P2", "Claude Code", "Live", "Run it", "")]
+        self.assertEqual(self.sync7(rows)[0], 0)
+        props = self.props("Gone")
+        self.assertEqual(props["Status"], {"select": {"name": "Dropped"}})
+        self.assertEqual(props["Next step"]["rich_text"][0]["plain_text"], "Dropped: No longer wanted.")
+        self.assertEqual(props["Priority"], {"select": {"name": "P3"}})
+        before = len(self.fake.writes())
+        self.assertEqual(self.sync7(rows)[0], 0)
+        self.assertEqual(len(self.fake.writes()), before)
+        # a Dropped card whose row left In flight is not closed; a Dropped extra is not re-closed
+        dropped = self.fake.seed("Old idea", "test/handoff.md", status="Dropped")
+        extra_dropped = self.fake.seed("Kept", "test/handoff.md", status="Dropped", created="2032-01-01T00:00:00.000Z")
+        snapshot = json.dumps({k: self.fake.pages[k] for k in (dropped, extra_dropped)}, sort_keys=True)
+        code, out, _ = self.sync7(rows, "--json")
+        res = json.loads(out)
+        self.assertEqual((code, res["counts"]["closed"], res["counts"]["duplicates"], res["counts"]["failed"]), (0, 0, 0, 0))
+        self.assertEqual(len(self.fake.writes()), before)
+        self.assertEqual(snapshot, json.dumps({k: self.fake.pages[k] for k in (dropped, extra_dropped)}, sort_keys=True))
+
+    def test_dropped_option_must_exist(self):
+        fake = FakeNotion(options=dict(OPTIONS, Status=[o for o in OPTIONS["Status"] if o != "Dropped"]))
+        self.addCleanup(fake.close)
+        code, out, _ = self.sync7([("A", "Dropped", "P3", "Josep", "x", "none", "")], fake=fake)
+        self.assertEqual(code, 2)
+        self.assertIn("Status option 'Dropped' missing in Notion", out)
+
+    def test_old_format_rows_create_cards_with_the_policy_default_priority(self):
+        self.assertEqual(self.sync("--json")[0], 0)                       # the 4-column ROWS carry no Priority at all
+        for p in self.fake.pages.values():
+            self.assertEqual(p["properties"]["Priority"], {"select": {"name": "P2"}})
+        before = len(self.fake.writes())
+        self.summary(self.sync()[1], unchanged=3)
+        self.assertEqual(len(self.fake.writes()), before)
+
+    def test_status_change_updates_last_update_even_when_the_row_date_is_older(self):
+        pid = self.fake.seed("Z", "test/handoff.md", status="Backlog", props={
+            "Area": {"select": {"name": "test"}}, "Owner": {"select": {"name": "Claude Code"}}, "Priority": {"select": {"name": "P2"}},
+            "Link": {"url": REPO_URL + "/blob/main/handoff.md"}, "Last update": {"date": {"start": "2026-09-01"}}})
+        self.fake.pages[pid]["properties"]["Next step"] = {"rich_text": [{"type": "text", "text": {"content": "Run it"}, "plain_text": "Run it"}]}
+        rows = [("Z", "In progress", "P2", "Claude Code", "PR merged 2026-09-01", "Run it", "")]
+        before = len(self.fake.writes())
+        self.summary(self.sync7(rows)[1], updated=1)
+        (method, path, body, _), = self.fake.writes()[before:]
+        self.assertEqual(sorted(body["properties"]), ["Last update", "Status"])
+        self.assertEqual(body["properties"]["Last update"], {"date": {"start": "2026-10-05"}})   # the handoff's date
+        self.summary(self.sync7(rows)[1], unchanged=1)                     # and the row's older date does not undo it
+        self.assertEqual(len(self.fake.writes()), before + 1)
+
+    def test_a_closed_card_is_not_reopened_but_same_status_updates_still_apply(self):
+        done = self.fake.seed("Re", "test/handoff.md", status="Done", props={"Link": {"url": "https://x/pr/1"}})
+        dropped = self.fake.seed("Dr", "test/handoff.md", status="Dropped")
+        snapshot = json.dumps({k: self.fake.pages[k] for k in (done, dropped)}, sort_keys=True)
+        rows = [("Re", "In progress", "P2", "Claude Code", "Live", "Run it", ""), ("Dr", "Backlog", "P2", "Josep", "Live", "Start", "")]
+        code, out, err = self.sync7(rows, "--json")
+        self.assertEqual((code, json.loads(out)["counts"]["updated"], json.loads(out)["counts"]["created"]), (0, 0, 0))
+        self.assertIn("card 'Re' is Done in Notion but its row says In progress; not reopened", err)
+        self.assertIn("card 'Dr' is Dropped in Notion but its row says Backlog; not reopened", err)
+        self.assertEqual(snapshot, json.dumps({k: self.fake.pages[k] for k in (done, dropped)}, sort_keys=True))
+        self.assertEqual(self.fake.writes(), [])
+        rows = [("Re", "Done", "P2", "Claude Code", "Shipped 2026-10-05", "none", "https://x/pr/2")]   # still Done: the Link may improve
+        self.sync7(rows)
+        self.assertEqual(self.fake.pages[done]["properties"]["Link"], {"url": "https://x/pr/2"})
+        self.assertEqual(self.fake.pages[done]["properties"]["Status"], {"select": {"name": "Done"}})
+
+    def test_dropped_without_a_reason_warns(self):
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            rows = ns.parse_handoff(table([("A", "Dropped", "P3", "Josep", "", "", ""), ("B", "Dropped", "P3", "Josep", "Why not. Ok.", "", ""),
+                                           ("C", "Dropped", "P3", "Josep", "x", "Dropped: because", "")], HEADER7), TODAY, REPO_URL)[1]
+        self.assertEqual([r["next_step"] for r in rows], ["Dropped", "Dropped: Why not.", "Dropped: because"])
+        self.assertIn("warn: row 'A': Dropped without a reason", err.getvalue())
+        self.assertEqual(err.getvalue().count("Dropped without a reason"), 1)         # only row A
+
+    # ---- v2: --audit
+
+    def card(self, project="Card", source="test/handoff.md", status="In progress", owner="Claude Code", priority="P2", area="test",
+             nxt="Run it", link="https://x.example/e", last="2026-10-05", target=None, fake=None, created=None):
+        def sel(v):
+            return {"select": {"name": v}} if v else {"select": None}
+        props = {"Owner": sel(owner), "Priority": sel(priority), "Area": sel(area),
+                 "Next step": {"rich_text": [{"type": "text", "text": {"content": nxt}}] if nxt else []},
+                 "Link": {"url": link or None}, "Last update": {"date": {"start": last} if last else None}}
+        if target:
+            props["Target date"] = {"date": {"start": target}}
+        return (fake or self.fake).seed(project, source, status=status, props=props, created=created)
+
+    def audit(self, *extra, fake=None, env=None):
+        code, out, err = self.sync("--audit", *extra, fake=fake, env=env)
+        self.assertEqual(code, 0, out + err)
+        return out, err
+
+    def counts_of(self, out):
+        line = out.splitlines()[0]
+        self.assertTrue(line.startswith("notion-audit: "), line)
+        return dict(kv.split("=") for kv in line[len("notion-audit: "):].split())
+
+    def rule_count(self, rule, make, **fake_kw):
+        fake = FakeNotion(**fake_kw)
+        self.addCleanup(fake.close)
+        make(fake)
+        out, _ = self.audit("--json", fake=fake)
+        res = json.loads(out)
+        return res["counts"][rule], res
+
+    def test_audit_compliant_card_has_no_violation_and_output_shape(self):
+        self.card("Fine")
+        out, err = self.audit()
+        self.assertEqual(err, "")
+        self.assertEqual(out, "notion-audit: cards=1 open=1 violations=0 wip=0 p0=0 missing=0 stale=0 waiting=0 blocked=0 "
+                              "target=0 overdue=0 evidence=0 dropped=0 dup=0\n")
+        res = json.loads(self.audit("--json")[0])
+        self.assertEqual(res, {"ok": True, "audit": True, "counts": res["counts"], "violations": [], "other_source_violations": 0,
+                               "data_source": "11111111", "exit": 0})
+
+    def test_audit_wip_is_per_owner(self):
+        def make(owner, n):
+            return lambda f: [self.card("c%d" % i, owner=owner, fake=f) for i in range(n)]
+        for owner, n, want in (("Josep", 3, 0), ("Josep", 4, 1), ("Claude Code", 5, 0), ("Claude Code", 6, 1), ("Routine", 20, 0)):
+            with self.subTest(owner=owner, n=n):
+                self.assertEqual(self.rule_count("wip", make(owner, n))[0], want)
+
+        def both(f):
+            for i in range(4):
+                self.card("j%d" % i, owner="Josep", fake=f)
+            for i in range(5):
+                self.card("c%d" % i, owner="Claude Code", fake=f)
+        count, res = self.rule_count("wip", both)
+        self.assertEqual((count, [v["detail"] for v in res["violations"]]), (1, ["Josep: 4 In progress > 3"]))
+        self.assertIsNone(res["violations"][0]["card"])
+
+    def test_audit_p0_one_open_per_owner(self):
+        cases = [("two for one owner", lambda f: [self.card("a", priority="P0", owner="Josep", status="Backlog", fake=f),
+                                                  self.card("b", priority="P0", owner="Josep", status="Backlog", fake=f)], 1),
+                 ("one each", lambda f: [self.card("a", priority="P0", owner="Josep", fake=f),
+                                         self.card("b", priority="P0", owner="Claude Code", fake=f)], 0),
+                 ("second is Done", lambda f: [self.card("a", priority="P0", owner="Josep", fake=f),
+                                               self.card("b", priority="P0", owner="Josep", status="Done", fake=f)], 0)]
+        for name, make, want in cases:
+            with self.subTest(name):
+                self.assertEqual(self.rule_count("p0", make)[0], want)
+        res = self.rule_count("p0", cases[0][1])[1]
+        self.assertEqual(res["violations"][0]["detail"], "Josep: 2 open P0 > 1")
+
+    def test_audit_missing_fields_on_open_cards_only(self):
+        count, res = self.rule_count("missing", lambda f: [
+            self.card("bad", owner=None, nxt="", priority=None, area=None, fake=f),
+            self.card("bad2", nxt="", fake=f), self.card("fine", fake=f),
+            self.card("done", status="Done", owner=None, nxt="", priority=None, area=None, fake=f),
+            self.card("dropped", status="Dropped", owner=None, nxt="Dropped: x", fake=f)])
+        self.assertEqual(count, 2)
+        self.assertEqual([(v["card"], v["detail"]) for v in res["violations"]],
+                         [("bad", "missing Owner, Next step, Priority, Area"), ("bad2", "missing Next step")])
+
+    def test_audit_stale(self):
+        cases = [("In progress", "2026-09-22", 0), ("In progress", "2026-09-21", 1), ("Blocked", "2026-09-21", 1),
+                 ("Blocked", "2026-09-22", 0), ("Waiting on Josep", "2026-09-29", 0), ("Waiting on Josep", "2026-09-28", 1),
+                 ("In progress", None, 1), ("Backlog", "2026-01-01", 0), ("Done", "2026-01-01", 0)]
+        for status, last, want in cases:
+            with self.subTest(status=status, last=last):
+                nxt = "Josep: decide" if status == "Waiting on Josep" else "Run it"
+                count, res = self.rule_count("stale", lambda f: self.card("s", status=status, last=last, nxt=nxt, fake=f))
+                self.assertEqual(count, want)
+        res = self.rule_count("stale", lambda f: self.card("Old", last="2026-09-01", fake=f))[1]
+        self.assertEqual(res["violations"], [{"rule": "stale", "card": "Old", "detail": "In progress, last update 2026-09-01 (35 days)"}])
+
+    def test_audit_waiting_blocked_evidence_dropped(self):
+        cases = [("waiting", lambda f: self.card("w", status="Waiting on Josep", nxt="Merge it", fake=f), 1),
+                 ("waiting", lambda f: self.card("w", status="Waiting on Josep", nxt="JOSEP: merge it", fake=f), 0),
+                 ("blocked", lambda f: self.card("b", status="Blocked", nxt="", fake=f), 1),
+                 ("blocked", lambda f: self.card("b", status="Blocked", nxt="Vendor ships on 2026-11-01", fake=f), 0),
+                 ("evidence", lambda f: self.card("d", status="Done", link=None, fake=f), 1),
+                 ("evidence", lambda f: self.card("d", status="Done", fake=f), 0),
+                 ("evidence", lambda f: self.card("d", status="In progress", link=None, fake=f), 0),
+                 ("dropped", lambda f: self.card("x", status="Dropped", nxt="Not wanted", fake=f), 1),
+                 ("dropped", lambda f: self.card("x", status="Dropped", nxt="Dropped: not wanted", fake=f), 0)]
+        for rule, make, want in cases:
+            with self.subTest(rule=rule, want=want):
+                self.assertEqual(self.rule_count(rule, make)[0], want)
+
+    def test_audit_evidence_rejects_the_handoff_fallback_and_cards_closed_by_leaving(self):
+        cases = [("no link", dict(link=None), 1),
+                 ("fallback link", dict(link=REPO_URL + "/blob/main/handoff.md"), 1),
+                 ("fallback with anchor", dict(link=REPO_URL + "/blob/main/handoff.md#x"), 1),
+                 ("left in flight", dict(nxt="Left test/handoff.md In flight; last seen 2026-10-05."), 1),
+                 ("pull request", dict(link=REPO_URL + "/pull/5"), 0),
+                 ("a file", dict(link=REPO_URL + "/blob/main/outputs/health/x.md"), 0),
+                 ("other handoff file", dict(link=REPO_URL + "/blob/main/docs/handoff.md.bak"), 0)]
+        for name, kw, want in cases:
+            with self.subTest(name):
+                count, res = self.rule_count("evidence", lambda f: self.card("d", status="Done", **dict({"fake": f}, **kw)))
+                self.assertEqual(count, want)
+
+    def test_audit_missing_covers_status_project_and_last_update(self):
+        count, res = self.rule_count("missing", lambda f: [
+            self.card("odd status", status="Not started", fake=f), self.card("", fake=f),
+            self.card("no date", status="Backlog", last=None, fake=f),
+            self.card("stale only", status="In progress", last=None, fake=f),       # reported once, by the stale rule
+            self.card("fine", fake=f)])
+        self.assertEqual(sorted((v["card"], v["detail"]) for v in res["violations"] if v["rule"] == "missing"),
+                         [("(untitled)", "missing Project"), ("no date", "missing Last update"), ("odd status", "missing Status")])
+        self.assertEqual(count, 3)
+        self.assertEqual(res["counts"]["stale"], 1)
+        fake = FakeNotion()
+        self.addCleanup(fake.close)
+        self.card("x", status=None, fake=fake)                                      # an empty Status is open and not a policy column
+        self.assertEqual(json.loads(self.audit("--json", fake=fake)[0])["counts"]["missing"], 1)
+
+    def test_audit_waiting_and_dropped_need_the_prefix_with_a_colon_and_text(self):
+        for rule, status, nxt, want in (("waiting", "Waiting on Josep", "Josephine sends the file", 1),
+                                        ("waiting", "Waiting on Josep", "Josep merges PR #7", 1),
+                                        ("waiting", "Waiting on Josep", "Josep:", 1),
+                                        ("waiting", "Waiting on Josep", "josep: merge PR #7", 0),
+                                        ("dropped", "Dropped", "dropped it, lol", 1),
+                                        ("dropped", "Dropped", "Dropped", 1),
+                                        ("dropped", "Dropped", "Dropped:   ", 1),
+                                        ("dropped", "Dropped", "Dropped: no longer wanted", 0)):
+            with self.subTest(status=status, nxt=nxt):
+                self.assertEqual(self.rule_count(rule, lambda f: self.card("c", status=status, nxt=nxt, fake=f))[0], want)
+
+    def test_audit_text_survives_a_stdout_that_cannot_encode_the_em_dash(self):
+        self.card("Mine stale", last="2026-08-01")
+        environ = {k: v for k, v in os.environ.items() if not k.startswith("NOTION_")}
+        environ.update({"NOTION_TOKEN": TOKEN, "NOTION_API_BASE": self.fake.base, "PYTHONIOENCODING": "ascii"})
+        for extra in ([], ["--json"]):
+            r = subprocess.run([sys.executable, str(SCRIPT), "--audit", "--source", "test/handoff.md", "--today", TODAY, *extra],
+                               env=environ, capture_output=True, timeout=60)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertNotIn(b"internal error", r.stdout + r.stderr)
+            out = r.stdout.decode("ascii")                                          # everything is ASCII, nothing half-printed
+            if not extra:
+                self.assertEqual(len(out.splitlines()), 2)
+                self.assertIn("[stale] Mine stale \\u2014 In progress, last update 2026-08-01", out)
+            else:
+                self.assertEqual(json.loads(out)["counts"]["stale"], 1)
+
+    def test_emit_never_raises_on_a_narrow_stream(self):
+        raw = io.BytesIO()
+        stream = io.TextIOWrapper(raw, encoding="ascii")
+        ns.emit("a \u2014 b \u00e9\n", stream)
+        stream.flush()
+        self.assertEqual(raw.getvalue(), b"a \\u2014 b \\xe9\n")
+        out = io.StringIO()
+        ns.emit("a \u2014 b\n", out)
+        self.assertEqual(out.getvalue(), "a \u2014 b\n")                              # a capable stream is untouched
+
+    def test_audit_target_and_overdue(self):
+        def make(f):
+            self.card("p1 no target", priority="P1", fake=f)
+            self.card("p0 no target", priority="P0", status="Backlog", fake=f)
+            self.card("p2 no target", priority="P2", fake=f)
+            self.card("p1 with target", priority="P1", target="2026-11-01", fake=f)
+            self.card("overdue", priority="P2", target="2026-10-05", fake=f)
+            self.card("due today", priority="P2", target="2026-10-06", fake=f)
+            self.card("done and late", priority="P1", status="Done", target="2026-01-01", fake=f)
+        count, res = self.rule_count("target", make)        # policy: Target date is required for P0 only
+        self.assertEqual(count, 1)
+        self.assertEqual(res["counts"]["overdue"], 1)
+        self.assertEqual({v["card"] for v in res["violations"] if v["rule"] == "target"}, {"p0 no target"})
+
+    def test_audit_target_and_overdue_are_na_without_the_property(self):
+        fake = FakeNotion(target_date=False)
+        self.addCleanup(fake.close)
+        self.card("p1", priority="P1", fake=fake)
+        out, _ = self.audit(fake=fake)
+        self.assertIn(" target=n/a overdue=n/a ", out)
+        self.assertEqual(self.counts_of(out)["violations"], "0")
+        res = json.loads(self.audit("--json", fake=fake)[0])
+        self.assertEqual((res["counts"]["target"], res["counts"]["overdue"]), (None, None))
+        self.assertEqual(res["violations"], [])
+
+    def test_audit_duplicates_count_once_per_extra_open_card(self):
+        def make(f):
+            self.card("Twin", created="2026-01-01T00:00:00.000Z", fake=f)
+            self.card("Twin", created="2026-01-02T00:00:00.000Z", fake=f)
+            self.card("Twin", created="2026-01-03T00:00:00.000Z", status="Backlog", fake=f)
+            self.card("Twin", created="2026-01-04T00:00:00.000Z", status="Done", fake=f)
+            self.card("Twin", source="manual", fake=f)                 # another Source: not a duplicate
+            self.card("Solo", fake=f)
+        count, res = self.rule_count("dup", make)
+        self.assertEqual(count, 2)
+        self.assertEqual([v["card"] for v in res["violations"]], ["Twin", "Twin"])
+
+    def test_audit_paginates_skips_trash_and_never_writes(self):
+        self.fake.page_size = 2
+        for i in range(5):
+            self.card("c%d" % i, owner="Routine")
+        trashed = self.card("trashed", owner="Routine")
+        self.fake.pages[trashed]["in_trash"] = True
+        out, _ = self.audit()
+        self.assertEqual(self.counts_of(out)["cards"], "5")
+        queries = [r for r in self.fake.requests if r[1].endswith("/query")]
+        self.assertEqual(len(queries), 3)                                # 5 live + 1 trashed = 6 rows = 3 pages of 2
+        self.assertEqual([q[2].get("start_cursor") for q in queries], [None, "2", "4"])
+        for q in queries:
+            self.assertNotIn("filter", q[2])
+            self.assertEqual(q[2]["page_size"], 100)
+        self.assertEqual(self.fake.writes(), [])
+        self.assertEqual({(m, p.split("?")[0]) for m, p, _, _ in self.fake.requests if m != "GET"},
+                         {("POST", "/v1/search"), ("POST", "/v1/data_sources/%s/query" % DS)})
+        self.assertEqual(self.fake.count("PATCH", ""), 0)
+
+    def test_audit_never_prints_titles_or_details_of_other_sources(self):
+        secret = self.card("SECRET-PROJECT-XYZ", source="manual", status="Waiting on Josep", owner="Josep", priority="P0",
+                           area="SECRET-AREA", nxt="SECRET-NEXT", link=None, last=None, target="2026-01-01",
+                           created="2026-01-01T00:00:00.000Z")
+        self.card("SECRET-PROJECT-XYZ", source="manual", status="Backlog", priority="P3", area="SECRET-AREA", nxt="SECRET-NEXT",
+                  link="https://secret.example/SECRET-LINK", created="2026-01-02T00:00:00.000Z")
+        self.card("Mine stale", last="2026-08-01")
+        self.card("Mine P0", owner="Josep", priority="P0", target="2026-12-01")
+        for _ in range(2):
+            for extra in ([], ["--json"]):
+                out, err = self.audit(*extra)
+                self.assertNotRegex(out + err, r"SECRET|secret")
+        out, err = self.audit()
+        lines = out.splitlines()
+        self.assertEqual(err, "")
+        # secret card: waiting + stale + overdue (3); its twin: dup (1); p0 fires on Josep (2 open P0) and names only the owner
+        self.assertIn("- 4 more violation(s) on cards from other sources; details only in Notion (this repository is public).", lines)
+        self.assertIn("- [p0] Josep: 2 open P0 > 1", lines)
+        self.assertTrue(any(ln.startswith("- [stale] Mine stale — In progress, last update 2026-08-01") for ln in lines))
+        self.assertEqual(self.counts_of(out)["violations"], "6")
+        res = json.loads(self.audit("--json")[0])
+        self.assertEqual(res["other_source_violations"], 4)
+        self.assertEqual(sorted(v["rule"] for v in res["violations"]), ["p0", "stale"])
+        self.assertIn(secret, self.fake.pages)
+
+    def test_audit_without_other_source_violations_has_no_more_line(self):
+        self.card("Mine stale", last="2026-08-01")
+        self.assertNotIn("more violation", self.audit()[0])
+
+    def test_audit_source_defaults_and_flag(self):
+        self.card("Elsewhere stale", source="other/handoff.md", last="2026-08-01")
+        out, _ = self.audit("--source", "other/handoff.md")        # the later --source wins in argparse
+        self.assertIn("[stale] Elsewhere stale", out)
+
+    def test_audit_ignores_handoff_and_refuses_dry_run_and_needs_a_token(self):
+        os.remove(self.handoff)                                     # --handoff points at a missing file: never read
+        self.card("Fine")
+        self.assertEqual(self.sync("--audit")[0], 0)
+        self.fake.requests.clear()
+        code, out, err = self.sync("--audit", "--dry-run")
+        self.assertEqual(code, 4)
+        self.assertEqual(self.fake.requests, [])
+        code, out, err = self.sync("--audit", env={"NOTION_TOKEN": ""})
+        self.assertEqual((code, out), (2, "notion-sync: off (NOTION_TOKEN not set)\n"))
+        code, out, _ = self.sync("--audit", "--json", env={"NOTION_TOKEN": ""})
+        self.assertEqual((code, json.loads(out)["off"]), (2, True))
+        self.assertEqual(self.fake.requests, [])
+
+    def test_audit_schema_failure_and_bad_token_are_off(self):
+        schema = dict(ns.SCHEMA)
+        del schema["Priority"]
+        fake = FakeNotion(schema=schema)
+        self.addCleanup(fake.close)
+        code, out, _ = self.sync("--audit", fake=fake)
+        self.assertEqual(code, 2)
+        self.assertIn("Priority (select)", out)
+        bad = FakeNotion(token="other")
+        self.addCleanup(bad.close)
+        code, out, err = self.sync("--audit", fake=bad)
+        self.assertEqual(code, 2)
+        self.assertNotIn(TOKEN, out + err)
+        self.assertEqual(self.sync("--audit", env={"NOTION_TOKEN": "a b"})[0], 2)
+        self.assertEqual(self.sync("--audit", "--today", "nope")[0], 4)
+        self.assertEqual(self.sync("--audit", env={"NOTION_API_BASE": "https://evil.example"})[0], 4)
 
 
 class RefusalTests(unittest.TestCase):
