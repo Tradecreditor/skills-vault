@@ -8,9 +8,14 @@
 - **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
 
 ## 最近 20 項
+- 2026-10-06 · video · [[pages/20261006-cua-computer-use-agent-sandbox|Cua: give your AI agent its own computer (buildwithneej)]]
+- 2026-10-06 · video · [[pages/20260821-git-vs-github-mental-model|Git vs GitHub mental model: a change has to climb (RickTheEngineer)]]
+- 2026-10-05 · post · [[pages/20261005-openrig-persistent-claude-code-codex-agent-team|OpenRig: persistent Claude Code + Codex agent team (Keith Rumjahn)]]
+- 2026-10-05 · video · [[pages/20261005-nick-saraev-11-claude-plugins-job-roles|Nick Saraev: 11 free Claude plugins for job roles (comment 'PLUGIN' teaser)]]
 - 2026-10-05 · repo · [[pages/20261005-universal-modder-claude-code-game-modding|universal-modder — skills, um CLI and fal MCP that let coding agents mod almost any PC game]]
 - 2026-10-05 · repo · [[pages/20261005-opendots-copilotkit-ai-coworkers|OpenDots — CopilotKit's open-source, self-hosted template for always-on AI coworkers]]
 - 2026-10-05 · repo · [[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents]]
+- 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]
 - 2026-10-04 · repo · [[pages/20261004-backlog-md-markdown-kanban-for-agents|Backlog.md: Markdown-native Task Manager and Kanban for AI Agents]]
 - 2026-10-04 · video · [[pages/20260921-laya-pip-install-comment-fast-teaser|Albert Olgaard: Laya via pip install (comment 'Fast' teaser)]]
 - 2026-10-04 · video · [[pages/20260920-jev-in-60-seconds-nate-herk-teaser|Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser)]]
@@ -23,8 +28,3 @@
 - 2026-10-04 · post · [[pages/20260927-loops-graphs-agent-layers-ng-course-claim|Loops and Graphs for Agents: X Post Claims an Andrew Ng Course (Unverified)]]
 - 2026-10-04 · article · [[pages/20261002-decision-models-strands-decider-clef-jev|Decision Models After Jev: Strands Decider, Clef and Other Routes]]
 - 2026-10-04 · post · [[pages/20260928-claude-opus-5-5-tutorial-animation-prompt|Claude Opus 5.5 tutorial-animation prompt (research, compare, build, deliver)]]
-- 2026-10-04 · post · [[pages/20260927-hyperframes-camera-3d-captions-skill|HyperFrames camera-3d-captions: agent-installable 3D-camera caption skill]]
-- 2026-10-04 · post · [[pages/20260928-agent-patterns-andrew-ng-4-anthropic-5-workflows|9 agent patterns: Andrew Ng's 4 + Anthropic's 5 workflows]]
-- 2026-10-04 · post · [[pages/20261001-melies-cinematic-techniques-for-ai-video|melies.co: 424 Cinematic Techniques with Ready AI Video Prompts]]
-- 2026-10-04 · post · [[pages/20261002-competitor-landing-page-five-field-table-prompt|Competitor Landing Page Research: 5-Field Table + Agent Prompt]]
-- 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]

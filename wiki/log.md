@@ -148,3 +148,8 @@
 ## [2026-10-05] capture | OpenDots — CopilotKit's open-source, self-hosted template for always-on AI coworkers | 20261005-opendots-copilotkit-ai-coworkers
 ## [2026-10-05] capture | cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents | 20261005-cloudflare-security-audit-skill
 ## [2026-10-05] hot-list | 2026-W40 | hot-list/2026-W40
+## [2026-10-05] lint | 2026-W41 | outputs/health/2026-W41
+## [2026-10-05] capture | Nick Saraev: 11 free Claude plugins for job roles | 20261005-nick-saraev-11-claude-plugins-job-roles
+## [2026-10-05] capture | OpenRig: persistent Claude Code + Codex agent team | 20261005-openrig-persistent-claude-code-codex-agent-team
+## [2026-10-06] capture | Git vs GitHub mental model (RickTheEngineer) | 20260821-git-vs-github-mental-model
+## [2026-10-06] capture | Cua: give your AI agent its own computer (buildwithneej) | 20261006-cua-computer-use-agent-sandbox
