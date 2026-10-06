@@ -8,6 +8,7 @@
 - **[[pages/20261002-coucou-notch-agent-companion|Coucou]]**（Louis-CFM）— notch 小角色監察 Claude Code / Codex / Cursor session，可喺 notch 批准 permission。GitHub 2,820 stars，單平台 heat 0.75。
 
 ## 最近 20 項
+- 2026-10-06 · video · [[pages/20261006-cua-computer-use-agent-sandbox|Cua: give your AI agent its own computer (buildwithneej)]]
 - 2026-10-06 · video · [[pages/20260821-git-vs-github-mental-model|Git vs GitHub mental model: a change has to climb (RickTheEngineer)]]
 - 2026-10-05 · post · [[pages/20261005-openrig-persistent-claude-code-codex-agent-team|OpenRig: persistent Claude Code + Codex agent team (Keith Rumjahn)]]
 - 2026-10-05 · video · [[pages/20261005-nick-saraev-11-claude-plugins-job-roles|Nick Saraev: 11 free Claude plugins for job roles (comment 'PLUGIN' teaser)]]
