@@ -153,3 +153,4 @@
 ## [2026-10-05] capture | OpenRig: persistent Claude Code + Codex agent team | 20261005-openrig-persistent-claude-code-codex-agent-team
 ## [2026-10-06] capture | Git vs GitHub mental model (RickTheEngineer) | 20260821-git-vs-github-mental-model
 ## [2026-10-06] capture | Cua: give your AI agent its own computer (buildwithneej) | 20261006-cua-computer-use-agent-sandbox
+## [2026-10-06] capture | herdr: Claude Code and Codex working side by side (romanticamaj) | 20261005-herdr-claude-code-codex-side-by-side

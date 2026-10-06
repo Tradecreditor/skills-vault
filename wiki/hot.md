@@ -8,6 +8,7 @@
 - **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
 
 ## 最近 20 項
+- 2026-10-06 · video · [[pages/20261005-herdr-claude-code-codex-side-by-side|herdr: Claude Code and Codex working side by side (romanticamaj)]]
 - 2026-10-06 · video · [[pages/20261006-cua-computer-use-agent-sandbox|Cua: give your AI agent its own computer (buildwithneej)]]
 - 2026-10-06 · video · [[pages/20260821-git-vs-github-mental-model|Git vs GitHub mental model: a change has to climb (RickTheEngineer)]]
 - 2026-10-05 · post · [[pages/20261005-openrig-persistent-claude-code-codex-agent-team|OpenRig: persistent Claude Code + Codex agent team (Keith Rumjahn)]]
@@ -27,4 +28,3 @@
 - 2026-10-04 · post · [[pages/20260917-7-repos-i-install-on-every-claude-code-project|7 repos I install on every Claude Code project（Gaurav carousel，清單未取得）]]
 - 2026-10-04 · post · [[pages/20260927-loops-graphs-agent-layers-ng-course-claim|Loops and Graphs for Agents: X Post Claims an Andrew Ng Course (Unverified)]]
 - 2026-10-04 · article · [[pages/20261002-decision-models-strands-decider-clef-jev|Decision Models After Jev: Strands Decider, Clef and Other Routes]]
-- 2026-10-04 · post · [[pages/20260928-claude-opus-5-5-tutorial-animation-prompt|Claude Opus 5.5 tutorial-animation prompt (research, compare, build, deliver)]]
