@@ -2,7 +2,7 @@
 
 One file, one project. Any session or agent that changes code, prompts, config, skills, data or the plan updates this file before it ends (SOP: `skills/keeping-handoff-docs/SKILL.md`). Cloud Routines read it and never edit it. Keep it under ~150 lines; long detail goes to `outputs/` and is linked from here.
 
-Last updated: 2026-10-05 08:27 UTC by Claude Code cloud (Fable 5.1, session 018ZbUMaCg8HwBtjhZjMPHVB).
+Last updated: 2026-10-06 20:18 UTC by Claude Code cloud (session 01JCZqXBeWf7rDXGKbkNoWUB).
 
 ## Snapshot
 - Josep's personal agent skills vault: an Obsidian vault, a Karpathy-style LLM wiki and an installable Agent-Skills library. Rules: `CLAUDE.md` (`AGENTS.md` is an identical copy). Folder roles, note format, skill format and commit vocabulary are all there.
