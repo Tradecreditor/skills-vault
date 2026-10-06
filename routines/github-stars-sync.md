@@ -84,10 +84,11 @@ You are the GitHub-stars sync routine for Josep's skills vault (GitHub account: 
    (git push origin <sha>:refs/heads/main). Never report success you have not verified.
 7. Projects HQ sync. Run it every day, also when there were no new stars: python3 scripts/notion-sync.py
    It mirrors the "## In flight" table of handoff.md to Josep's Notion board (database "Project Status"). It writes nothing in
-   the repository, so there is nothing to commit. Exit 0 = synced; 2 = sync off (NOTION_TOKEN not set, the Notion page not
-   shared with the integration, or api.notion.com not in the allowed domains); 1 = some rows failed; 3 = handoff.md could not
-   be parsed. None of these fails this routine: copy the script's one-line output into the final message and carry on. Never
-   print, echo or export NOTION_TOKEN, and do not retry the script more than once.
+   the repository, so there is nothing to commit. Exit 0 = synced; 1 = some rows failed; 2 = sync off (NOTION_TOKEN not set or
+   malformed, the Notion page not shared with the integration, a select option missing in Notion, or api.notion.com not in
+   the allowed domains); 3 = handoff.md could not be parsed; 4 = refused locally (bad NOTION_VERSION). None of these fails
+   this routine: copy the script's one summary line (stdout; for exit 3 and 4 it is on stderr) into the final message and
+   carry on. Never print, echo or export NOTION_TOKEN, and do not run the script more than twice.
 8. Final message: N repos added, any that failed, how many rows wiki/github-stars.md now holds, whether more remain for tomorrow,
    and the notion-sync line from step 7.
 

@@ -5,7 +5,7 @@ Installable Agent-Skills folders (agentskills.io). Install anywhere:
     npx skills add Tradecreditor/skills-vault --skill <name> -a claude-code -a codex -a gemini-cli -a openclaw -a cursor -g -y
 
 Claude Code: `/plugin marketplace add Tradecreditor/skills-vault` then `/plugin install skills-vault@tradecreditor-vault`.
-`vault-capture`, `vault-search`, `model-tiering`, `judging-with-jev`, `keeping-handoff-docs` and `auditing-agent-skills` are the vault's own operating skills; everything else was captured from the web.
+`vault-capture`, `vault-search`, `model-tiering`, `judging-with-jev`, `keeping-handoff-docs`, `tracking-projects-in-notion` and `auditing-agent-skills` are the vault's own operating skills; everything else was captured from the web.
 
 **Install into other projects only skills marked `reviewer-approved` or `verified`.** The plugin and `npx skills add` can still
 reach every folder, so the status column is the gate: `draft` = not approved yet (never reviewed, or rejected; the report link
@@ -29,6 +29,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | scanning-agent-skills | reviewer-approved | post | Scans third-party agent skills, plugins and MCP servers with NVIDIA SkillSpector before install |
 | stacking-coding-agent-plugins | draft | post | Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) |
 | targeting-purchase-intent-keywords | reviewer-approved | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |
+| tracking-projects-in-notion | draft | vault-operations | Keeps a cross-project Notion status board and mirrors handoff.md In flight rows into it |
 | tracking-tasks-with-backlog-md | reviewer-approved | repo | Tracks agent and human work as Markdown task files with Backlog.md |
 | using-obsidian-skills | draft | repo | Installs and applies kepano/obsidian-skills for Obsidian markdown, bases and canvas |
 | using-ui-ux-pro-max | reviewer-approved | repo | Installs and applies the UI UX Pro Max skill for AI design system generation (192 rules, 79 styles) |
