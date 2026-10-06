@@ -77,11 +77,11 @@ class ParseTests(unittest.TestCase):
             ("Live", "Fixed (PR #3)", "Done", "Claude Code"),
             ("Done and merged", "Watch metrics", "Done", "Claude Code"),
             ("Finished", "Watch it", "Done", "Claude Code"),
-            ("Done on branch", "Josep: merge it", "Waiting on Josep", "Josep"),
+            ("Done on branch", "Jeff: merge it", "Waiting on Jeff", "Jeff"),
             ("Blocked by CI", "Fix tests", "Blocked", "Claude Code"),
             ("Live", "Blocked: waiting for a key", "Blocked", "Claude Code"),
             ("Not started; due 2026-12-01", "Start it", "Backlog", "Claude Code"),
-            ("Live", "Josep merges PR #7", "Waiting on Josep", "Josep"),
+            ("Live", "Jeff merges PR #7", "Waiting on Jeff", "Jeff"),
             ("Live", "Run the thing", "In progress", "Claude Code"),
             ("Live", "Routine reads it Monday", "In progress", "Routine"),
             ("Live", "Next scheduled run Mon", "In progress", "Routine"),
@@ -97,7 +97,7 @@ class ParseTests(unittest.TestCase):
         self.assertEqual(rows[1]["next_step"], "Fixed (PR #1). Later")
 
     def test_project_trimming(self):
-        rows = parse([("Skill review (Josep's ask 2026-10-04: x (nested) y)", "s", "n", ""),
+        rows = parse([("Skill review (Jeff's ask 2026-10-04: x (nested) y)", "s", "n", ""),
                       ('DEV trigger "x (y)"', "s", "n", ""),
                       ("**Jev pilot 1 —** (H1)", "s", "n", ""),
                       ("Jev pilot 1 — `weekly-hot-list` prefilter (H1, H2)", "s", "n", ""),
@@ -122,7 +122,7 @@ class ParseTests(unittest.TestCase):
                       ("anchor", "s", "n", "`wiki/x.md#sec`"),
                       ("dir", "s", "n", "`outputs/health/`"),
                       ("skip", "s", "n", "`jev.in_scope.act_min` `two words.md` `[[../p/<s>|x]]` `x.md`"),
-                      ("pr", "s", "Josep merges PR #5", "—"),
+                      ("pr", "s", "Jeff merges PR #5", "—"),
                       ("fallback", "s", "n", "—")])
         got = {r["project"]: r["link"] for r in rows}
         self.assertEqual(got["url"], "https://example.com/x")
@@ -195,17 +195,17 @@ class ParseTests(unittest.TestCase):
         return ns.parse_handoff(table(rows, HEADER7), TODAY, REPO_URL)[1]
 
     def test_explicit_columns_are_parsed_and_override_the_rules(self):
-        rows = self.parse7([("A", "in PROGRESS", "p1", "routine", "Live", "Josep merges PR #7", ""),
+        rows = self.parse7([("A", "in PROGRESS", "p1", "routine", "Live", "Jeff merges PR #7", ""),
                             ("B", "Waiting", "P0", "Claude Code", "Live", "Run it", ""),
-                            ("C", "Backlog", "p3", "Josep", "Live", "none", ""),
+                            ("C", "Backlog", "p3", "Jeff", "Live", "none", ""),
                             ("D", "Done", "P2", "Claude Code", "All good. More.", "—", ""),
-                            ("E", "Dropped", "P3", "Josep", "Not wanted. Later.", "none", ""),
+                            ("E", "Dropped", "P3", "Jeff", "Not wanted. Later.", "none", ""),
                             ("F", "Blocked", "", "", "Live", "Run it", ""),
-                            ("G", "", "P1", "", "Live", "Josep merges it", "")])
+                            ("G", "", "P1", "", "Live", "Jeff merges it", "")])
         got = [(r["status"], r["priority"], r["owner"]) for r in rows]
-        self.assertEqual(got, [("In progress", "P1", "Routine"), ("Waiting on Josep", "P0", "Claude Code"),
-                               ("Backlog", "P3", "Josep"), ("Done", "P2", "Claude Code"), ("Dropped", "P3", "Josep"),
-                               ("Blocked", None, "Claude Code"), ("Waiting on Josep", "P1", "Josep")])
+        self.assertEqual(got, [("In progress", "P1", "Routine"), ("Waiting on Jeff", "P0", "Claude Code"),
+                               ("Backlog", "P3", "Jeff"), ("Done", "P2", "Claude Code"), ("Dropped", "P3", "Jeff"),
+                               ("Blocked", None, "Claude Code"), ("Waiting on Jeff", "P1", "Jeff")])
         self.assertEqual(rows[3]["next_step"], "Done — All good.")
         self.assertEqual(rows[4]["next_step"], "Dropped: Not wanted.")      # policy: Dropped: <reason>
         self.assertEqual(rows[2]["next_step"], "none")                  # a Backlog row keeps its Next step as written
@@ -213,15 +213,46 @@ class ParseTests(unittest.TestCase):
     def test_invalid_explicit_values_warn_and_fall_back(self):
         err = io.StringIO()
         with contextlib.redirect_stderr(err):
-            rows = self.parse7([("A", "Doing", "P9", "Bob", "Live", "Josep merges it", "")])
-        self.assertEqual((rows[0]["status"], rows[0]["priority"], rows[0]["owner"]), ("Waiting on Josep", None, "Josep"))
+            rows = self.parse7([("A", "Doing", "P9", "Bob", "Live", "Jeff merges it", "")])
+        self.assertEqual((rows[0]["status"], rows[0]["priority"], rows[0]["owner"]), ("Waiting on Jeff", None, "Jeff"))
         for text in ("warn: row 'A': unknown Status 'Doing'; using the rule-based status",
                      "warn: row 'A': unknown Owner 'Bob'; using the rule-based owner",
                      "warn: row 'A': unknown Priority 'P9'"):
             self.assertIn(text, err.getvalue())
 
+    def test_current_person_status_and_owner_parse(self):
+        # the names derive from the one PERSON constant ...
+        self.assertEqual((ns.PERSON, ns.WAITING), ("Jeff", "Waiting on Jeff"))
+        self.assertIn("Waiting on Jeff", ns.STATUSES)
+        self.assertEqual(ns.OWNERS[0], "Jeff")
+        self.assertIn("Jeff", ns.WIP_LIMITS)
+        # ... and a handoff row that uses them is read as written: valid, no warning, explicit columns win over the rules
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            rows = self.parse7([("A", "Waiting on Jeff", "P1", "Jeff", "Live", "Run it", "")])
+        self.assertEqual((rows[0]["status"], rows[0]["priority"], rows[0]["owner"]), ("Waiting on Jeff", "P1", "Jeff"))
+        self.assertEqual(err.getvalue(), "")
+
+    def test_previous_person_name_is_unknown_not_silently_mapped(self):
+        old = "Jos" + "ep"            # the previous name, assembled so that it does not appear in the repository text
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err):
+            rows = self.parse7([("A", f"Waiting on {old}", "P1", old, "Live", "Run it", ""),
+                                ("B", "Backlog", "P2", "Claude Code", "Live", f"{old}: merge it", "")])
+        # explicit values: unknown, warned, rules used (Next step "Run it" -> In progress / Claude Code)
+        self.assertEqual((rows[0]["status"], rows[0]["owner"]), ("In progress", "Claude Code"))
+        self.assertIn(f"warn: row 'A': unknown Status 'Waiting on {old}'; using the rule-based status", err.getvalue())
+        self.assertIn(f"warn: row 'A': unknown Owner '{old}'; using the rule-based owner", err.getvalue())
+        # a Next step that starts with the old name no longer addresses the board owner (rule e / owner rule)
+        self.assertEqual(ns.classify("Live", f"{old}: merge it"), "In progress")
+        self.assertEqual(ns.owner_of(f"{old}: merge it"), "Claude Code")
+        self.assertEqual(rows[1]["owner"], "Claude Code")
+        self.assertNotIn(f"Waiting on {old}", ns.STATUSES)
+        self.assertNotIn("waiting on " + old.lower(), ns.STATUS_WORDS)
+        self.assertNotIn(old.lower(), ns.OWNER_WORDS)
+
     def test_old_four_column_format_parses_identically(self):
-        old = [("Alpha (first)", "Live", "Run the thing", "`scripts/a.py`"), ("Beta", "Waiting", "Josep merges PR #7", "—"),
+        old = [("Alpha (first)", "Live", "Run the thing", "`scripts/a.py`"), ("Beta", "Waiting", "Jeff merges PR #7", "—"),
                ("Gamma", "Done and merged", "none", "`docs/`")]
         new = [(w, "", "", "", st, nx, d) for w, st, nx, d in old]
         err = io.StringIO()
@@ -268,8 +299,8 @@ def normalise(props):
     return out
 
 
-OPTIONS = {"Status": ["Backlog", "In progress", "Waiting on Josep", "Blocked", "Done", "Dropped"],
-           "Priority": ["P0", "P1", "P2", "P3"], "Owner": ["Josep", "Claude Code", "Routine"], "Area": ["test"], "Source": ["test/handoff.md"]}
+OPTIONS = {"Status": ["Backlog", "In progress", "Waiting on Jeff", "Blocked", "Done", "Dropped"],
+           "Priority": ["P0", "P1", "P2", "P3"], "Owner": ["Jeff", "Claude Code", "Routine"], "Area": ["test"], "Source": ["test/handoff.md"]}
 
 
 class FakeNotion:
@@ -392,7 +423,7 @@ class FakeNotion:
 
 
 ROWS = [("Alpha (first)", "Live", "Run the thing", "`scripts/a.py`"),
-        ("Beta", "Waiting", "Josep merges PR #7", "—"),
+        ("Beta", "Waiting", "Jeff merges PR #7", "—"),
         ("Gamma", "Not started", "Start it", "`docs/`")]
 
 
@@ -435,8 +466,8 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(len(self.fake.pages), 3)
         page = next(p for p in self.fake.pages.values() if p["properties"]["Project"]["title"][0]["plain_text"] == "Beta")
         props = page["properties"]
-        self.assertEqual(props["Status"], {"select": {"name": "Waiting on Josep"}})
-        self.assertEqual(props["Owner"], {"select": {"name": "Josep"}})
+        self.assertEqual(props["Status"], {"select": {"name": "Waiting on Jeff"}})
+        self.assertEqual(props["Owner"], {"select": {"name": "Jeff"}})
         self.assertEqual(props["Source"], {"select": {"name": "test/handoff.md"}})
         self.assertEqual(props["Area"], {"select": {"name": "test"}})
         self.assertEqual(props["Link"], {"url": REPO_URL + "/pull/7"})
@@ -787,7 +818,7 @@ class SyncTests(unittest.TestCase):
     # ---- F5: the schema is never changed
 
     def test_missing_select_option_is_off_and_names_the_property(self):
-        for prop, value in (("Area", "test"), ("Source", "test/handoff.md"), ("Owner", "Josep"), ("Status", "Waiting on Josep")):
+        for prop, value in (("Area", "test"), ("Source", "test/handoff.md"), ("Owner", "Jeff"), ("Status", "Waiting on Jeff")):
             with self.subTest(prop=prop):
                 options = {k: [o for o in v if o != value] for k, v in OPTIONS.items()}
                 fake = FakeNotion(options=options)
@@ -801,7 +832,7 @@ class SyncTests(unittest.TestCase):
         self.addCleanup(fake.close)
         code, out, _ = self.sync(fake=fake)
         self.assertEqual(code, 2)
-        self.assertIn("Status option 'Waiting on Josep' missing in Notion", out)
+        self.assertIn("Status option 'Waiting on Jeff' missing in Notion", out)
         self.assertIn("Area option 'test' missing in Notion", out)
         self.assertIn("; add them by hand", out)
 
@@ -916,7 +947,7 @@ class SyncTests(unittest.TestCase):
             self.assertTrue(all("Target date" not in pg["properties"] for pg in fake.pages.values()))   # never written
 
     def test_dropped_row_is_synced_and_dropped_cards_are_left_alone(self):
-        rows = [("Gone", "Dropped", "P3", "Josep", "No longer wanted. Really.", "none", ""),
+        rows = [("Gone", "Dropped", "P3", "Jeff", "No longer wanted. Really.", "none", ""),
                 ("Kept", "In progress", "P2", "Claude Code", "Live", "Run it", "")]
         self.assertEqual(self.sync7(rows)[0], 0)
         props = self.props("Gone")
@@ -939,7 +970,7 @@ class SyncTests(unittest.TestCase):
     def test_dropped_option_must_exist(self):
         fake = FakeNotion(options=dict(OPTIONS, Status=[o for o in OPTIONS["Status"] if o != "Dropped"]))
         self.addCleanup(fake.close)
-        code, out, _ = self.sync7([("A", "Dropped", "P3", "Josep", "x", "none", "")], fake=fake)
+        code, out, _ = self.sync7([("A", "Dropped", "P3", "Jeff", "x", "none", "")], fake=fake)
         self.assertEqual(code, 2)
         self.assertIn("Status option 'Dropped' missing in Notion", out)
 
@@ -969,7 +1000,7 @@ class SyncTests(unittest.TestCase):
         done = self.fake.seed("Re", "test/handoff.md", status="Done", props={"Link": {"url": "https://x/pr/1"}})
         dropped = self.fake.seed("Dr", "test/handoff.md", status="Dropped")
         snapshot = json.dumps({k: self.fake.pages[k] for k in (done, dropped)}, sort_keys=True)
-        rows = [("Re", "In progress", "P2", "Claude Code", "Live", "Run it", ""), ("Dr", "Backlog", "P2", "Josep", "Live", "Start", "")]
+        rows = [("Re", "In progress", "P2", "Claude Code", "Live", "Run it", ""), ("Dr", "Backlog", "P2", "Jeff", "Live", "Start", "")]
         code, out, err = self.sync7(rows, "--json")
         self.assertEqual((code, json.loads(out)["counts"]["updated"], json.loads(out)["counts"]["created"]), (0, 0, 0))
         self.assertIn("card 'Re' is Done in Notion but its row says In progress; not reopened", err)
@@ -984,8 +1015,8 @@ class SyncTests(unittest.TestCase):
     def test_dropped_without_a_reason_warns(self):
         err = io.StringIO()
         with contextlib.redirect_stderr(err):
-            rows = ns.parse_handoff(table([("A", "Dropped", "P3", "Josep", "", "", ""), ("B", "Dropped", "P3", "Josep", "Why not. Ok.", "", ""),
-                                           ("C", "Dropped", "P3", "Josep", "x", "Dropped: because", "")], HEADER7), TODAY, REPO_URL)[1]
+            rows = ns.parse_handoff(table([("A", "Dropped", "P3", "Jeff", "", "", ""), ("B", "Dropped", "P3", "Jeff", "Why not. Ok.", "", ""),
+                                           ("C", "Dropped", "P3", "Jeff", "x", "Dropped: because", "")], HEADER7), TODAY, REPO_URL)[1]
         self.assertEqual([r["next_step"] for r in rows], ["Dropped", "Dropped: Why not.", "Dropped: because"])
         self.assertIn("warn: row 'A': Dropped without a reason", err.getvalue())
         self.assertEqual(err.getvalue().count("Dropped without a reason"), 1)         # only row A
@@ -1034,31 +1065,31 @@ class SyncTests(unittest.TestCase):
     def test_audit_wip_is_per_owner(self):
         def make(owner, n):
             return lambda f: [self.card("c%d" % i, owner=owner, fake=f) for i in range(n)]
-        for owner, n, want in (("Josep", 3, 0), ("Josep", 4, 1), ("Claude Code", 5, 0), ("Claude Code", 6, 1), ("Routine", 20, 0)):
+        for owner, n, want in (("Jeff", 3, 0), ("Jeff", 4, 1), ("Claude Code", 5, 0), ("Claude Code", 6, 1), ("Routine", 20, 0)):
             with self.subTest(owner=owner, n=n):
                 self.assertEqual(self.rule_count("wip", make(owner, n))[0], want)
 
         def both(f):
             for i in range(4):
-                self.card("j%d" % i, owner="Josep", fake=f)
+                self.card("j%d" % i, owner="Jeff", fake=f)
             for i in range(5):
                 self.card("c%d" % i, owner="Claude Code", fake=f)
         count, res = self.rule_count("wip", both)
-        self.assertEqual((count, [v["detail"] for v in res["violations"]]), (1, ["Josep: 4 In progress > 3"]))
+        self.assertEqual((count, [v["detail"] for v in res["violations"]]), (1, ["Jeff: 4 In progress > 3"]))
         self.assertIsNone(res["violations"][0]["card"])
 
     def test_audit_p0_one_open_per_owner(self):
-        cases = [("two for one owner", lambda f: [self.card("a", priority="P0", owner="Josep", status="Backlog", fake=f),
-                                                  self.card("b", priority="P0", owner="Josep", status="Backlog", fake=f)], 1),
-                 ("one each", lambda f: [self.card("a", priority="P0", owner="Josep", fake=f),
+        cases = [("two for one owner", lambda f: [self.card("a", priority="P0", owner="Jeff", status="Backlog", fake=f),
+                                                  self.card("b", priority="P0", owner="Jeff", status="Backlog", fake=f)], 1),
+                 ("one each", lambda f: [self.card("a", priority="P0", owner="Jeff", fake=f),
                                          self.card("b", priority="P0", owner="Claude Code", fake=f)], 0),
-                 ("second is Done", lambda f: [self.card("a", priority="P0", owner="Josep", fake=f),
-                                               self.card("b", priority="P0", owner="Josep", status="Done", fake=f)], 0)]
+                 ("second is Done", lambda f: [self.card("a", priority="P0", owner="Jeff", fake=f),
+                                               self.card("b", priority="P0", owner="Jeff", status="Done", fake=f)], 0)]
         for name, make, want in cases:
             with self.subTest(name):
                 self.assertEqual(self.rule_count("p0", make)[0], want)
         res = self.rule_count("p0", cases[0][1])[1]
-        self.assertEqual(res["violations"][0]["detail"], "Josep: 2 open P0 > 1")
+        self.assertEqual(res["violations"][0]["detail"], "Jeff: 2 open P0 > 1")
 
     def test_audit_missing_fields_on_open_cards_only(self):
         count, res = self.rule_count("missing", lambda f: [
@@ -1072,19 +1103,19 @@ class SyncTests(unittest.TestCase):
 
     def test_audit_stale(self):
         cases = [("In progress", "2026-09-22", 0), ("In progress", "2026-09-21", 1), ("Blocked", "2026-09-21", 1),
-                 ("Blocked", "2026-09-22", 0), ("Waiting on Josep", "2026-09-29", 0), ("Waiting on Josep", "2026-09-28", 1),
+                 ("Blocked", "2026-09-22", 0), ("Waiting on Jeff", "2026-09-29", 0), ("Waiting on Jeff", "2026-09-28", 1),
                  ("In progress", None, 1), ("Backlog", "2026-01-01", 0), ("Done", "2026-01-01", 0)]
         for status, last, want in cases:
             with self.subTest(status=status, last=last):
-                nxt = "Josep: decide" if status == "Waiting on Josep" else "Run it"
+                nxt = "Jeff: decide" if status == "Waiting on Jeff" else "Run it"
                 count, res = self.rule_count("stale", lambda f: self.card("s", status=status, last=last, nxt=nxt, fake=f))
                 self.assertEqual(count, want)
         res = self.rule_count("stale", lambda f: self.card("Old", last="2026-09-01", fake=f))[1]
         self.assertEqual(res["violations"], [{"rule": "stale", "card": "Old", "detail": "In progress, last update 2026-09-01 (35 days)"}])
 
     def test_audit_waiting_blocked_evidence_dropped(self):
-        cases = [("waiting", lambda f: self.card("w", status="Waiting on Josep", nxt="Merge it", fake=f), 1),
-                 ("waiting", lambda f: self.card("w", status="Waiting on Josep", nxt="JOSEP: merge it", fake=f), 0),
+        cases = [("waiting", lambda f: self.card("w", status="Waiting on Jeff", nxt="Merge it", fake=f), 1),
+                 ("waiting", lambda f: self.card("w", status="Waiting on Jeff", nxt="JEFF: merge it", fake=f), 0),
                  ("blocked", lambda f: self.card("b", status="Blocked", nxt="", fake=f), 1),
                  ("blocked", lambda f: self.card("b", status="Blocked", nxt="Vendor ships on 2026-11-01", fake=f), 0),
                  ("evidence", lambda f: self.card("d", status="Done", link=None, fake=f), 1),
@@ -1125,10 +1156,10 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(json.loads(self.audit("--json", fake=fake)[0])["counts"]["missing"], 1)
 
     def test_audit_waiting_and_dropped_need_the_prefix_with_a_colon_and_text(self):
-        for rule, status, nxt, want in (("waiting", "Waiting on Josep", "Josephine sends the file", 1),
-                                        ("waiting", "Waiting on Josep", "Josep merges PR #7", 1),
-                                        ("waiting", "Waiting on Josep", "Josep:", 1),
-                                        ("waiting", "Waiting on Josep", "josep: merge PR #7", 0),
+        for rule, status, nxt, want in (("waiting", "Waiting on Jeff", "Jeffrey sends the file", 1),
+                                        ("waiting", "Waiting on Jeff", "Jeff merges PR #7", 1),
+                                        ("waiting", "Waiting on Jeff", "Jeff:", 1),
+                                        ("waiting", "Waiting on Jeff", "jeff: merge PR #7", 0),
                                         ("dropped", "Dropped", "dropped it, lol", 1),
                                         ("dropped", "Dropped", "Dropped", 1),
                                         ("dropped", "Dropped", "Dropped:   ", 1),
@@ -1219,13 +1250,13 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(self.fake.count("PATCH", ""), 0)
 
     def test_audit_never_prints_titles_or_details_of_other_sources(self):
-        secret = self.card("SECRET-PROJECT-XYZ", source="manual", status="Waiting on Josep", owner="Josep", priority="P0",
+        secret = self.card("SECRET-PROJECT-XYZ", source="manual", status="Waiting on Jeff", owner="Jeff", priority="P0",
                            area="SECRET-AREA", nxt="SECRET-NEXT", link=None, last=None, target="2026-01-01",
                            created="2026-01-01T00:00:00.000Z")
         self.card("SECRET-PROJECT-XYZ", source="manual", status="Backlog", priority="P3", area="SECRET-AREA", nxt="SECRET-NEXT",
                   link="https://secret.example/SECRET-LINK", created="2026-01-02T00:00:00.000Z")
         self.card("Mine stale", last="2026-08-01")
-        self.card("Mine P0", owner="Josep", priority="P0", target="2026-12-01")
+        self.card("Mine P0", owner="Jeff", priority="P0", target="2026-12-01")
         for _ in range(2):
             for extra in ([], ["--json"]):
                 out, err = self.audit(*extra)
@@ -1233,9 +1264,9 @@ class SyncTests(unittest.TestCase):
         out, err = self.audit()
         lines = out.splitlines()
         self.assertEqual(err, "")
-        # secret card: waiting + stale + overdue (3); its twin: dup (1); p0 fires on Josep (2 open P0) and names only the owner
+        # secret card: waiting + stale + overdue (3); its twin: dup (1); p0 fires on Jeff (2 open P0) and names only the owner
         self.assertIn("- 4 more violation(s) on cards from other sources; details only in Notion (this repository is public).", lines)
-        self.assertIn("- [p0] Josep: 2 open P0 > 1", lines)
+        self.assertIn("- [p0] Jeff: 2 open P0 > 1", lines)
         self.assertTrue(any(ln.startswith("- [stale] Mine stale — In progress, last update 2026-08-01") for ln in lines))
         self.assertEqual(self.counts_of(out)["violations"], "6")
         res = json.loads(self.audit("--json")[0])

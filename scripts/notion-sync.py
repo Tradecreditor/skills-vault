@@ -16,8 +16,8 @@ that did land is not created twice. Extra copies of one card (same Source and Pr
 one (copies already Done or Dropped are skipped). stdout: one summary line (or one JSON object with --json); details go to stderr.
 
 In flight columns: Workstream (required); State, Next step, Detail; and optionally Status, Priority, Owner (header names are
-case-insensitive, order is free). Status: Backlog | In progress | Waiting on Josep (or Waiting) | Blocked | Done | Dropped. Owner:
-Josep | Claude Code | Routine. Priority: P0..P3. A valid Status / Owner overrides the rules derived from State and Next step; an
+case-insensitive, order is free). Status: Backlog | In progress | Waiting on Jeff (or Waiting) | Blocked | Done | Dropped. Owner:
+Jeff | Claude Code | Routine. Priority: P0..P3. A valid Status / Owner overrides the rules derived from State and Next step; an
 empty one uses the rules; an unknown one warns on stderr and uses the rules. An empty or unknown Priority is not written on an
 update (the value in Notion is left alone) and is created as P2, the board-policy default. A status change also sets Last update
 to the handoff date (Last update only moves forward). A Dropped row gets Next step "Dropped: <first sentence of State>" and a
@@ -70,16 +70,20 @@ DS_TITLE = "Project Status"
 SCHEMA = {"Project": "title", "Status": "select", "Priority": "select", "Area": "select", "Next step": "rich_text",
           "Owner": "select", "Link": "url", "Last update": "date", "Source": "select"}
 TARGET_DATE = "Target date"         # optional date property: read by --audit, never required, never written
-STATUSES = ("Backlog", "In progress", "Waiting on Josep", "Blocked", "Done", "Dropped")
-OWNERS = ("Josep", "Claude Code", "Routine")
+PERSON = "Jeff"                     # the board owner's name: the one line to change on a rename (the docstring and docs name it too)
+WAITING = f"Waiting on {PERSON}"    # Status option for a card that needs the board owner
+PERSON_PREFIX = PERSON.lower()      # a Next step that starts with this (any case) is addressed to the board owner
+PERSON_NEXT = re.compile(re.escape(PERSON) + r":\s*\S", re.I)     # the audit's well-formed Next step: "<PERSON>: <what is needed>"
+STATUSES = ("Backlog", "In progress", WAITING, "Blocked", "Done", "Dropped")
+OWNERS = (PERSON, "Claude Code", "Routine")
 PRIORITIES = ("P0", "P1", "P2", "P3")
 DEFAULT_PRIORITY = "P2"             # board policy section 2: a new card without a Priority gets P2 (never applied to an update)
 CLOSED = ("Done", "Dropped")
-STATUS_WORDS = dict({s.lower(): s for s in STATUSES}, waiting="Waiting on Josep")
+STATUS_WORDS = dict({s.lower(): s for s in STATUSES}, waiting=WAITING)
 OWNER_WORDS = {o.lower(): o for o in OWNERS}
 PRIORITY_WORDS = {p.lower(): p for p in PRIORITIES}
-WIP_LIMITS = {"Josep": 3, "Claude Code": 5}                                         # board policy section 5
-STALE_DAYS = {"In progress": 14, "Blocked": 14, "Waiting on Josep": 7}              # board policy section 5
+WIP_LIMITS = {PERSON: 3, "Claude Code": 5}                                          # board policy section 5
+STALE_DAYS = {"In progress": 14, "Blocked": 14, WAITING: 7}                         # board policy section 5
 RULES = ("wip", "p0", "missing", "stale", "waiting", "blocked", "target", "overdue", "evidence", "dropped", "dup")
 NO_NEXT = {"none", "—", "-", "n/a", "nothing"}
 PATH_EXT = (".md", ".yaml", ".yml", ".py", ".json", ".sh")
@@ -193,21 +197,21 @@ def classify(state, nxt):
     s, n = state.lower(), nxt.lower()
     if not n or n in NO_NEXT or n.startswith(("done", "fixed", "closed")):
         return "Done"
-    if s.startswith(("done", "closed", "finished")) and not n.startswith("josep"):
+    if s.startswith(("done", "closed", "finished")) and not n.startswith(PERSON_PREFIX):
         return "Done"
     if s.startswith("blocked") or n.startswith("blocked"):
         return "Blocked"
     if s.startswith("not started"):
         return "Backlog"
-    if n.startswith("josep"):
-        return "Waiting on Josep"
+    if n.startswith(PERSON_PREFIX):
+        return WAITING
     return "In progress"
 
 
 def owner_of(nxt):
     n = nxt.lower()
-    if n.startswith("josep"):
-        return "Josep"
+    if n.startswith(PERSON_PREFIX):
+        return PERSON
     return "Routine" if n.startswith(("routine", "next scheduled run")) else "Claude Code"
 
 
@@ -694,8 +698,8 @@ def audit_cards(cards, today, source, has_target):
         if age > limit:
             add("stale", c, f"{c['Status']}, last update {c['Last update']} ({age} days)")
     for c in cards:
-        if c["Status"] == "Waiting on Josep" and not re.match(r"josep:\s*\S", c["Next step"], re.I):
-            add("waiting", c, "Waiting on Josep but Next step is not 'Josep: <what is needed>'")
+        if c["Status"] == WAITING and not PERSON_NEXT.match(c["Next step"]):
+            add("waiting", c, f"{WAITING} but Next step is not '{PERSON}: <what is needed>'")
     for c in cards:
         if c["Status"] == "Blocked" and not c["Next step"]:
             add("blocked", c, "Blocked without a Next step")

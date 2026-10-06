@@ -13,7 +13,7 @@ Last updated: <YYYY-MM-DD HH:MM UTC> by <agent / model / session id>.
 ## In flight
 | Workstream | Status | Priority | Owner | State | Next step | Detail |
 |---|---|---|---|---|---|---|
-| <stable outcome title> | <Backlog / In progress / Waiting on Josep / Blocked / Done / Dropped> | <P0–P3, default P2> | <Josep / Claude Code / Routine> | <facts: merged / live / proven / not yet> | <one concrete action; `Josep: …` when waiting on him> | `<path, PR or evidence>` |
+| <stable outcome title> | <Backlog / In progress / Waiting on Jeff / Blocked / Done / Dropped> | <P0–P3, default P2> | <Jeff / Claude Code / Routine> | <facts: merged / live / proven / not yet> | <one concrete action; `Jeff: …` when waiting on him> | `<path, PR or evidence>` |
 
 Each row is one card on the Projects HQ board (`tracking-projects-in-notion`; policy in its `references/board-policy.md`).
 
