@@ -147,3 +147,4 @@
 ## [2026-10-05] lint | 2026-W41 | outputs/health/2026-W41
 ## [2026-10-05] capture | Nick Saraev: 11 free Claude plugins for job roles | 20261005-nick-saraev-11-claude-plugins-job-roles
 ## [2026-10-05] capture | OpenRig: persistent Claude Code + Codex agent team | 20261005-openrig-persistent-claude-code-codex-agent-team
+## [2026-10-06] capture | Git vs GitHub mental model (RickTheEngineer) | 20260821-git-vs-github-mental-model
