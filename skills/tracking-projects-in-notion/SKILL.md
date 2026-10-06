@@ -167,7 +167,7 @@ Add them in Notion, or through the connector, with Source `manual`. The sync nev
 
 ## Evidence
 
-- 2026-10-06 — skills-vault: board built and seeded (4 handoff rows plus Josep's manual rows). `scripts/notion-sync.py` was tested only against a local fake Notion server: 51 unit tests pass (`python3 -m unittest discover -s scripts -p 'test_*.py'`), and request shapes were checked against the official notion-sdk-js source. Not yet run against the live Notion API: that session had no token.
+- 2026-10-06 — skills-vault: board built and seeded with 16 cards (4 from the handoff In flight table, 12 manual). `scripts/notion-sync.py` was tested only against a local fake Notion server: 51 unit tests pass (`python3 -m unittest discover -s scripts -p 'test_*.py'`), three independent reviews (spec, API shape, token safety) found 2 major and 8 minor defects, all fixed and re-verified with mutation probes; request shapes were checked against the official notion-sdk-js source. The 4 seeded handoff cards, read back from Notion and replayed through the script, gave `created=0 updated=0 unchanged=4`. Not yet run against the live Notion API: that session had no token.
 
 ## Source
 

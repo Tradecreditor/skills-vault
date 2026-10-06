@@ -158,8 +158,10 @@ class ParseTests(unittest.TestCase):
     def test_last_update_ignores_version_dates(self):
         rows = parse([("A", "s", "Notion-Version 2026-03-11 and 2026-10-01", ""), ("B", "v2026-10-04 only", "n", ""),
                       ("C", "version 2026-10-03, VERSION-2026-10-02", "n", ""), ("D", "rev 2026-10-02 fixed", "n", ""),
-                      ("E", "Notion-Version 2026-03-11", "none", "")])
-        self.assertEqual([r["last_update"] for r in rows], ["2026-10-01", "2026-10-05", "2026-10-05", "2026-10-02", "2026-10-05"])
+                      ("E", "Notion-Version 2026-03-11", "none", ""), ("F", "data conversion 2026-10-03", "n", ""),
+                      ("G", "subversion-2026-10-02", "n", "")])
+        self.assertEqual([r["last_update"] for r in rows],
+                         ["2026-10-01", "2026-10-05", "2026-10-05", "2026-10-02", "2026-10-05", "2026-10-03", "2026-10-02"])
 
     def test_title_trim_needs_whitespace_before_the_parenthesis(self):
         rows = parse([("f(x)", "s", "n", ""), ("Tool(v2)", "s", "n", ""), ("Tool (v2)", "s", "n", ""), ("a(b) (c)", "s", "n", "")])

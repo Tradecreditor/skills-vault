@@ -2,7 +2,7 @@
 
 One file, one project. Any session or agent that changes code, prompts, config, skills, data or the plan updates this file before it ends (SOP: `skills/keeping-handoff-docs/SKILL.md`). Cloud Routines read it and never edit it. Keep it under ~150 lines; long detail goes to `outputs/` and is linked from here.
 
-Last updated: 2026-10-06 20:18 UTC by Claude Code cloud (session 01JCZqXBeWf7rDXGKbkNoWUB).
+Last updated: 2026-10-06 20:32 UTC by Claude Code cloud (session 01JCZqXBeWf7rDXGKbkNoWUB).
 
 ## Snapshot
 - Josep's personal agent skills vault: an Obsidian vault, a Karpathy-style LLM wiki and an installable Agent-Skills library. Rules: `CLAUDE.md` (`AGENTS.md` is an identical copy). Folder roles, note format, skill format and commit vocabulary are all there.
@@ -51,7 +51,7 @@ Last updated: 2026-10-06 20:18 UTC by Claude Code cloud (session 01JCZqXBeWf7rDX
 - Inside cloud sessions `api.github.com` search answers 403 ("sessions are bound to their configured repositories"); use the GitHub connector, Exa `web_fetch_exa` on the API URL, or the Jina relay (blocks anonymous use after ~20 calls). `raw.githubusercontent.com` is fine.
 - Exa web search returns no `x.com` / `threads.net` posts; X evidence comes from fxtwitter profile timelines (`api.fxtwitter.com/2/profile/<handle>/statuses`, field `reposts`).
 - Agents cannot change the four vault Routines: `update_trigger` answers "created via http_api, not by an agent" (2026-10-04), so every prompt edit needs Josep's re-paste. Fix: stub prompts (`routines/README.md` Step 4b) — each Routine reads `routines/<name>.md` from `main` at run time; all four stubs pasted 2026-10-04 13:28 UTC and verified with `list_triggers`; `github-stars-sync` Run now read its prompt from `main` and ran normally. A merged edit to `routines/<name>.md` is now live on the next run, no re-paste. Live prompts matched `main` on 2026-10-04.
-- A schedule-type Routine's "Run now" passes no run text (only API-type Routines have the box); agents can `fire_trigger` only triggers they created; `create_trigger` cannot attach connectors.
+- A schedule-type Routine's "Run now" passes no run text (only API-type Routines have the box); agents can `fire_trigger` only triggers they created; `create_trigger` could not attach connectors on 2026-10-04, but its schema has a `connectors` parameter as of 2026-10-06 (untested; the Notion sync uses `NOTION_TOKEN` instead, on Josep's call that Routines cannot use the Notion connector).
 - Exa `web_fetch_exa` defaults to 3,000 characters and truncates silently; always pass `maxCharacters` and a changing `cb=` — `CLAUDE.md` "Reading a URL with Exa".
 
 ## How to update this file
@@ -76,3 +76,4 @@ Last updated: 2026-10-06 20:18 UTC by Claude Code cloud (session 01JCZqXBeWf7rDX
 - 2026-10-04 · Claude Code cloud, Fable 5.1, session 01QXU3csJdLG8xa7fSMtwhTY · WhatsApp link drop (34 links): dedupe 9/25, Threads batch 10 pages + 2 draft skills on `claude/gifted-gates-ynairq`; IG / X / FB previews and kanban research in flight · next: finish those, report, Josep merges the branch.
 - 2026-10-04 · same session · drop finished: 20 captures (incl. 4 Supadata transcripts), 3 draft skills, Backlog.md captured as the kanban answer; no-Exa rule from Josep recorded as an open loop · next: Josep merges the branch, deletes the local phone-number file, decides the Exa rule's scope and whether to adopt Backlog.md.
 - 2026-10-05 · Claude Code cloud, Fable 5.1, session 018ZbUMaCg8HwBtjhZjMPHVB · read the W40 production run (`cse_01TNB9B5CUWQq91HysjbdD3R`): Jev on, 0 denials, bands consistent — pilot 1 accepted; handoff rows updated, snapshot-gap loop closed, new loop on Routines vs the `handoff` check for `skills/` · next: Josep merges PR #19; after W41 decide `in_scope.act_min`, `same_item`, model pin; then pilot 2a.
+- 2026-10-06 · Claude Code cloud, session 01JCZqXBeWf7rDXGKbkNoWUB · Projects HQ in Notion (Project Status database, Board by Status, 4 handoff + 12 manual cards), `scripts/notion-sync.py` + 51 tests (Sonnet built, three reviews, 10 fixes verified), `github-stars-sync` step 7, draft skill `tracking-projects-in-notion`; In flight refreshed (5 stale rows closed: PR #19, #28, #29 merged, check 8 verified) · next: Josep sets up `NOTION_TOKEN` + `api.notion.com`, merges the branch; first live sync should print `created=0`.
