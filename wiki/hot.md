@@ -28,4 +28,3 @@
 - 2026-10-04 · post · [[pages/20260928-agent-patterns-andrew-ng-4-anthropic-5-workflows|9 agent patterns: Andrew Ng's 4 + Anthropic's 5 workflows]]
 - 2026-10-04 · post · [[pages/20261001-melies-cinematic-techniques-for-ai-video|melies.co: 424 Cinematic Techniques with Ready AI Video Prompts]]
 - 2026-10-04 · post · [[pages/20261002-competitor-landing-page-five-field-table-prompt|Competitor Landing Page Research: 5-Field Table + Agent Prompt]]
-- 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]
