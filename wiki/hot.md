@@ -8,6 +8,7 @@
 - **[[pages/20261002-coucou-notch-agent-companion|Coucou]]**（Louis-CFM）— notch 小角色監察 Claude Code / Codex / Cursor session，可喺 notch 批准 permission。GitHub 2,820 stars，單平台 heat 0.75。
 
 ## 最近 20 項
+- 2026-10-06 · video · [[pages/20260821-git-vs-github-mental-model|Git vs GitHub mental model: a change has to climb (RickTheEngineer)]]
 - 2026-10-05 · post · [[pages/20261005-openrig-persistent-claude-code-codex-agent-team|OpenRig: persistent Claude Code + Codex agent team (Keith Rumjahn)]]
 - 2026-10-05 · video · [[pages/20261005-nick-saraev-11-claude-plugins-job-roles|Nick Saraev: 11 free Claude plugins for job roles (comment 'PLUGIN' teaser)]]
 - 2026-10-04 · repo · [[pages/20261004-backlog-md-markdown-kanban-for-agents|Backlog.md: Markdown-native Task Manager and Kanban for AI Agents]]
@@ -27,4 +28,3 @@
 - 2026-10-04 · post · [[pages/20261001-melies-cinematic-techniques-for-ai-video|melies.co: 424 Cinematic Techniques with Ready AI Video Prompts]]
 - 2026-10-04 · post · [[pages/20261002-competitor-landing-page-five-field-table-prompt|Competitor Landing Page Research: 5-Field Table + Agent Prompt]]
 - 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]
-- 2026-10-04 · post · [[pages/20261003-backup-agent-workflows-as-skill-zips|Back up agent workflows as Skill-format zips (Grokbot / Claude)]]
