@@ -1,14 +1,12 @@
-# wiki/reads.base — live view of everything captured as a read (type post / video / article).
-# Nothing to maintain: a page shows up by living in wiki/pages with one of those types and a topic/* first tag.
 filters:
   and:
-    - 'file.inFolder("wiki/pages")'
+    - file.inFolder("wiki/pages")
     - or:
-        - 'type == "post"'
-        - 'type == "video"'
-        - 'type == "article"'
+        - type == "post"
+        - type == "video"
+        - type == "article"
 formulas:
-  topic: 'tags.filter(value.startsWith("topic/")).join(", ")'
+  topic: tags.filter(value.startsWith("topic/")).join(", ")
 properties:
   title:
     displayName: Title
