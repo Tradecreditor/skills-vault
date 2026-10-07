@@ -25,10 +25,11 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 | `agents/<agent-name>/` | that agent | scratch area for non-core agents; the core agent promotes good material into `wiki/` or `skills/` |
 | `outputs/` | agents | long-form answers and `outputs/health/` lint reports. AI long-form output goes here, never into `wiki/pages/` |
 | `routines/` | core | the prompts used by the cloud Routines (edit here, not in the Routine UI) |
+| `commands/` | core | slash commands of the vault's Claude Code plugin (e.g. `/projecthq`); they run as prompts in every project that installs the plugin |
 
 ## Who is "core" (enforced by the GitHub ruleset on `main` + `.github/workflows/vault-guard.yml`)
 - **Core = the repository owner's GitHub account (`Tradecreditor`)**: Jeff's own Claude Code sessions, the Claude Code Routines, obsidian-git on his laptop. Core may push to `main` directly, may delete, may edit protected files.
-- **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-ui`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, modifies, renames or deletes anything under `raw/` (adding a new file is allowed), or edits a protected path (`.github/`, `.claude/`, `.claude-plugin/`, `.obsidian/`, `routines/`, `scripts/`, `supabase/`, `templates/`, `skills/*/scripts/`, `CLAUDE.md`, `AGENTS.md`).
+- **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-ui`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, modifies, renames or deletes anything under `raw/` (adding a new file is allowed), or edits a protected path (`.github/`, `.claude/`, `.claude-plugin/`, `.obsidian/`, `commands/`, `routines/`, `scripts/`, `supabase/`, `templates/`, `skills/*/scripts/`, `CLAUDE.md`, `AGENTS.md`).
 - Identity is the GitHub account behind the token, not the commit author line. If every agent uses the owner's tokens, every agent is core and the guard is only an audit trail.
 
 ### How this is actually configured (2026-09-21)

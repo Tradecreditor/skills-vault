@@ -6,7 +6,7 @@
 #   everyone : raw/ is add-only (never modified, renamed or deleted, core included) · skills/*/SKILL.md must be valid
 #              (name == folder, lowercase-hyphen, no claude/anthropic, description present, <=300 chars, contains "Use when")
 #   non-core : may not delete or rename-away ANY file · may not touch protected paths: .github/ .claude/ .claude-plugin/
-#              .obsidian/ routines/ scripts/ supabase/ templates/ CLAUDE.md AGENTS.md skills/*/scripts/
+#              .obsidian/ commands/ routines/ scripts/ supabase/ templates/ CLAUDE.md AGENTS.md skills/*/scripts/
 #   core     : deletions, renames and protected-path edits are allowed (audited/printed), never blocked
 # Core = the repository owner account (Jeff's own Claude Code sessions, Routines, obsidian-git) plus VAULT_CORE_LOGINS.
 # Non-core = any other GitHub account, e.g. the machine account used by Codex / Gemini CLI / OpenClaw. Tokens inherit their account's role.
@@ -24,7 +24,7 @@ CH=$(git diff --name-status -M50% "$BASE" "$HEAD" -- raw/ | grep -vE '^A' || tru
 if [ -n "$CH" ]; then echo "::error::raw/ files may only be added, never modified, renamed or deleted:"; echo "$CH"; FAIL=1; else echo "raw/: ok"; fi
 
 DEL=$(git diff --name-status -M50% "$BASE" "$HEAD" | awk '$1=="D" || $1 ~ /^R/ {print $0}')
-PROT_PATTERN='^(\.github/|\.claude/|\.claude-plugin/|\.obsidian/|routines/|scripts/|supabase/|templates/|CLAUDE\.md$|AGENTS\.md$|skills/[^/]+/scripts/)'
+PROT_PATTERN='^(\.github/|\.claude/|\.claude-plugin/|\.obsidian/|commands/|routines/|scripts/|supabase/|templates/|CLAUDE\.md$|AGENTS\.md$|skills/[^/]+/scripts/)'
 # -z: NUL-separated raw paths. Without it git C-quotes any path with non-ASCII, quotes or spaces, and the pattern would never match.
 PROT=$(git diff --name-status -z -M50% "$BASE" "$HEAD" | tr '\0' '\n' | grep -aE "$PROT_PATTERN" || true)
 
