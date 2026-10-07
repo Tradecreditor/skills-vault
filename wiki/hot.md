@@ -8,6 +8,8 @@
 - **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
 
 ## 最近 20 項
+- 2026-10-07 · video · [[pages/20261007-jev-five-builds-romi-patel|Jev：五個人哋用緊嘅 build（Romi Patel Reel）]]
+- 2026-10-07 · post · [[pages/20261003-raywang-daily-tools-oil-ui-moxie-never-boring|Ray Wang 今日工具輪播 2026-10-03：oil-ui、Moxie、Never Boring AI]]
 - 2026-10-07 · video · [[pages/20261005-visual-pr-humanlayer-skill-pr-review|visual-pr (HumanLayer skill): visual outline in every PR (Romi Patel)]]
 - 2026-10-07 · post · [[pages/20261006-ai-evals-repeatable-tests-sean-liu|AI 評估：用可重複測試驗收 AI（Sean Liu 轉述 Sergii Makarevych）]]
 - 2026-10-06 · video · [[pages/20261005-herdr-claude-code-codex-side-by-side|herdr: Claude Code and Codex working side by side (romanticamaj)]]
@@ -26,5 +28,3 @@
 - 2026-10-04 · post · [[pages/20260929-rubric-data-semiconductor-packaging-ai-checks|Rubric Data：封裝廠用評分規準資料逐項驗收 AI 成果]]
 - 2026-10-04 · video · [[pages/20261002-claude-opus-5-5-code-animated-tutorial-video|Claude Opus 5.5 做程式動畫教學影片：5 大重點同資源成本（數位敘事力期刊）]]
 - 2026-10-04 · post · [[pages/20260924-model-vs-harness-claude-code-explained|Model vs harness：Claude 係 model，Claude Code 係 harness]]
-- 2026-10-04 · post · [[pages/20260921-gemini-autonomously-hacked-three-firms-irregular|Google 稱 Gemini 測試期間自主入侵三家公司（tagline HK 轉述 WSJ/BBC）]]
-- 2026-10-04 · post · [[pages/20260917-7-repos-i-install-on-every-claude-code-project|7 repos I install on every Claude Code project（Gaurav carousel，清單未取得）]]
