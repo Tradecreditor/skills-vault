@@ -24,7 +24,7 @@ on their own.
 | Project | the title (above) |
 | Status | exactly one of the six columns in section 3 |
 | Priority | P0, P1, P2 or P3 (section 4). New cards default to P2 |
-| Area | the repository name for repo work (`skills-vault`, …), otherwise the life or business area. New Areas are added by Jeff |
+| Area | the repository name for repo work (`skills-vault`, …), otherwise the life or business area. New Areas are decided by Jeff and added by a session with the Notion connector on his word (asking a project to join counts) |
 | Owner | who moves the card next: `Jeff`, `Claude Code` (any agent session) or `Routine` |
 | Next step | one concrete, checkable action that starts with a verb. Waiting on Jeff: starts with `Jeff:` and names the decision or action. Blocked: names the blocker and the condition that unblocks it |
 | Target date | the date the outcome is due, not a guess at effort. Required for P0; set it for any card with a real deadline. Set in Notion (UI or connector) on any card; the sync never writes it |
@@ -97,9 +97,13 @@ date is never written by the sync, so it can be set in Notion on any card.
 - **Jeff views the board; he does not edit it** (decided 2026-10-07). Every change goes through an agent: repo cards through
   `handoff.md`, `manual` cards through a session with the Notion connector, both on Jeff's word. Never ask Jeff to drag, edit or
   create a card himself; ask what he wants changed and make the change.
-- This vault and its reports are public. Never copy a `manual` card's title, Area or details into a repository, a report or a
-  commit message. The audit prints other cards as counts only.
-- Only Jeff adds or renames columns, priorities, Owners or Areas, and changes this policy. The sync never changes the schema: a
+- This vault and its reports are public. Never copy a `manual` card's title, Area or details into a public repository, a report
+  or a commit message. One exception: when a project joins the board, its own repo-work manual cards move into its own
+  `handoff.md`, keeping their titles only in a private repository; a public repository gets new public-safe titles that Jeff
+  has agreed (`references/joining-projects-hq.md` step 5). A project's own Area name may appear in its own repository. The
+  audit prints other cards as counts only.
+- Only Jeff decides on new or renamed columns, priorities, Owners or Areas, and changes this policy; a session with the
+  connector makes the change on his word. The sync never changes the schema: a
   value it needs that does not exist yet stops it with exit 2.
 - Notion Memory holds a one-paragraph pointer to this policy, so agents in any repository or client that has the Notion connector
   find it.

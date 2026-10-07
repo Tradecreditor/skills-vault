@@ -152,7 +152,7 @@ python3 scripts/notion-sync.py --audit       # read-only policy audit (next subs
 | `--audit` | off | the audit instead of the sync; cannot be combined with `--dry-run` (exit 4) |
 | `--today YYYY-MM-DD` | current UTC date | tests; the audit's "today" |
 
-`<repo>` is the last two path components of `remote.origin.url` (HTTPS, SSH and proxy URLs all work); with no git remote it falls back to the checkout's folder name.
+`<repo>` is the last path component of `remote.origin.url` without `.git`, and the owner is the one before it (HTTPS, SSH and proxy URLs all work). With no remote, or a remote that is a local path, it is the checkout's folder name. Links are always built as `https://github.com/<owner>/<repo>/blob/main/…`; for another host or default branch, pass `--repo-url` or put full URLs in Detail.
 
 stdout is one line (details go to stderr):
 
@@ -207,9 +207,9 @@ Add them in Notion, or through the connector, with Source `manual` and every req
 
 ## Onboarding another project
 
-The step-by-step guide for an agent in the other project is [`references/joining-projects-hq.md`](references/joining-projects-hq.md): Jeff pastes its raw GitHub link into a session there and the agent follows it. It covers the approval check, the Area and Source options and the project's Board tab, the script download, the 7-column handoff, the `CLAUDE.md` / `AGENTS.md` block, `NOTION_TOKEN` on a local computer (Windows and macOS), the first sync and moving the project's old manual cards into the handoff. In short:
+The step-by-step guide for an agent in the other project is [`references/joining-projects-hq.md`](references/joining-projects-hq.md): Jeff pastes its raw GitHub link into a session there and the agent follows it. It covers the approval check (status and `review_hash` on one clone of the vault), whose repo it is and whether it is public, the Area and Source options and the project's Board tab, copying the script from that clone, the 7-column handoff, the `CLAUDE.md` / `AGENTS.md` block, `NOTION_TOKEN` on a local computer (Windows and macOS), committing (a PR repo stops until the merge), the first sync after Jeff confirms the rows, and dropping the project's old manual cards once their synced cards exist. In short:
 
-- **A repo** becomes one Area. A session with the connector adds its Area option, its Source option (`<repo>/handoff.md`) and a Board tab (`GROUP BY "Status"; FILTER "Area" = "<area>"`), never a separate database. The repo gets `scripts/notion-sync.py` (downloaded from this skill's `scripts/` folder), a 7-column In flight table, and the block in its agent instructions. It is synced by the next session in it, or by its own Routine: `python3 scripts/notion-sync.py --area "<area>" --source "<repo>/handoff.md"`. Run from that repo, `--audit` names only that repo's cards. Same token, same board.
+- **A repo** becomes one Area. A session with the connector adds its Area option, its Source option (`<repo>/handoff.md`) and a Board tab (`GROUP BY "Status"; FILTER "Area" = "<area>"`), never a separate database. The repo gets `scripts/notion-sync.py` (copied from this skill's `scripts/` folder in a reviewed clone), a 7-column In flight table, and the block in its agent instructions. It is synced by the next session in it, or by its own Routine: `python3 scripts/notion-sync.py --area "<area>" --source "<repo>/handoff.md"`. Run from that repo, `--audit` names only that repo's cards. Same token, same board.
 - **A project without a repo** has manual cards only. On Jeff's word, a session with the connector adds the Area option and creates the cards with Source `manual`, then follows the same protocol (open, move, close with a Link to the evidence). No script, no handoff.
 
 `scripts/notion-sync.py` in this skill is a byte-identical copy of the vault's `scripts/notion-sync.py`, so the copy other projects download is covered by this skill's review. Edit both together; `scripts/test_notion_sync.py` fails when they differ.
