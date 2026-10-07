@@ -81,6 +81,9 @@ Work is pulled in priority order: P0, then P1, then P2. Within one priority, the
 Never edit a synced card in Notion: the next sync overwrites Status, Priority, Owner, Area, Next step, Link and Last update. Target
 date is never written by the sync, so it can be set in Notion on any card.
 
+One manual card per repository is expected: while a repository joins the board, a `Projects HQ join` card (Source `manual`) in
+its Area tracks the join and is closed with the join commit as evidence (`references/joining-projects-hq.md`).
+
 ## 7. Cadence
 
 | When | Who | What |

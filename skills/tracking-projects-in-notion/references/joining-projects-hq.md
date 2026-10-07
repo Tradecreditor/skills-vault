@@ -14,31 +14,27 @@ step by step. My name is Jeff.
 `<guide>` below means this guide pinned to the reviewed vault commit that step 0 prints:
 `https://raw.githubusercontent.com/Tradecreditor/skills-vault/<commit id>/skills/tracking-projects-in-notion/references/joining-projects-hq.md`.
 
-**The join needs the Notion connector.** Steps 2, 3 and 9 read and change the board through it. Claude Code signed in with
-Jeff's Claude account has it when Notion is connected there. Without it, stop at step 2 and ask Jeff to run the join in a session
-that has it. After the join, any agent (Codex, Gemini CLI…) keeps this repo's cards current through `handoff.md` and the sync.
+**The join needs the Notion connector** (steps 2, 3, 7 and 9). Claude Code signed in with Jeff's Claude account has it when
+Notion is connected there. Without it, stop at step 2 and ask Jeff to run the join in a session that has it. After the join, any
+agent (Codex, Gemini CLI…) keeps a repo's cards current through `handoff.md` and the sync.
 
-**Nothing is written into the project until Jeff has confirmed it (step 6).** Steps 1 to 5 only read and draft.
+**Nothing is written until Jeff has confirmed it (step 6).** Steps 1 to 5 only read and draft. From step 7 on, the join is
+tracked on the board itself, by one manual card titled `Projects HQ join` in this project's Area. Its Next step always says what
+comes next, and its page body records what the clean-up needs. It is moved through the connector, so no commit is needed to
+advance or close the join.
 
 ## Resuming a join
 
-A join can span several sessions: Jeff may set the token and restart the agent, or merge a PR first. Decide from what is
-**committed**, not from the working tree:
+With the connector, look for a `Projects HQ join` card in this project's Area:
 
-- Run `git fetch` if there is a remote, then `git show <default>:handoff.md`, where `<default>` is `origin/main` (or the remote's
-  default branch) or, with no remote, the local default branch.
-- It has a **`Projects HQ join`** row that is not Done: continue at the step its Next step names, reading the guide address in
-  the row. Do not redo earlier steps.
-- Only a feature branch or an open PR has the join row: the join waits for Jeff's merge. Say so in one line and carry on with
-  whatever else Jeff asked for.
-- The join row is Done, or gone while the instruction files already carry the Projects HQ block: this project has joined. Say so.
-- No commit has the join row: start at step 0. If the working tree holds an uncommitted join row, block or
-  `scripts/notion-sync.py` from an earlier attempt, show Jeff and, on his word, reuse them instead of adding second copies.
-- A step needs something this session lacks (`NOTION_TOKEN`, the connector, Jeff's answer): say so in one line and carry on with
-  whatever else Jeff asked for.
+- **Open**: continue at the step its Next step names, reading the guide address in its Link. Do not redo earlier steps. If its
+  Next step names step 7 and the project's working tree already holds the join's files, show Jeff and reuse them instead of
+  adding second copies.
+- **Done**: the project has joined. Say so.
+- **None**: start at step 0.
 
-Jeff can resume on purpose with `claude --continue`, or by pasting "Resume the Projects HQ join: <the guide address in the join
-row>".
+Without the connector, say in one line that the join needs a session with it, and carry on with whatever else Jeff asked for.
+Jeff can resume on purpose with `claude --continue`, or by pasting "Resume the Projects HQ join: `<guide>`".
 
 ## Ground rules
 
@@ -58,14 +54,15 @@ row>".
   neither prints a version, Python is missing; tell Jeff.
 - **Shell variables do not survive between commands** in most agents. Where a step prints a path, note it and type it in full
   in later commands.
-- **Write files as UTF-8.** Use your file tool; in PowerShell 5.1, `Set-Content`, `Out-File` and `>` write ANSI or UTF-16 unless
-  given `-Encoding utf8`.
+- **Files are UTF-8.** Use your file tools. In PowerShell 5.1 pass `-Encoding utf8` to `Get-Content`, `Set-Content` and
+  `Out-File`, and never use `>`; otherwise dashes and non-English text are garbled, and garbled titles become card titles.
 
 ## 0. Check the skill's review
 
 **No repository**: this kind of join runs no vault code. Open
 https://raw.githubusercontent.com/Tradecreditor/skills-vault/main/skills/tracking-projects-in-notion/SKILL.md and continue to
-step 1 only if its `vault_status` line says `reviewer-approved` or `verified`; otherwise stop and tell Jeff.
+step 1 only if its `vault_status` line says `reviewer-approved` or `verified`; otherwise stop and tell Jeff. Use the main-branch
+address of this guide as `<guide>`.
 
 **A repository**: other projects may run code only from a vault skill that passed review, and only the files as reviewed.
 Check on one checkout made outside this repository, in two parts.
@@ -102,7 +99,7 @@ Whenever the script is copied again later, repeat step 0 first.
 ## 1. What kind of project is this?
 
 - **No repository** (job hunt, admin, a client relationship): its cards are **manual** (Source `manual`), created and moved
-  through the Notion connector. Do steps 2 and 3, then step 10. No script, no handoff, no token.
+  through the Notion connector. Do steps 2 and 3, then step 10. No script, no handoff, no token, no join card.
 - **A git repository**: it becomes one **Area** on the board, and its `handoff.md` "In flight" table becomes its cards, which
   a script mirrors into Notion. Do every step. First find out two things:
   - **Whose repository is it?** Look at `git remote get-url origin` and the recent authors (`git log --format='%an' -50 | sort -u`).
@@ -110,7 +107,7 @@ Whenever the script is copied again later, repeat step 0 first.
     stop and ask Jeff before you write anything. Offer to track it as manual cards instead (steps 2–3 only).
   - **Is it public?** Use `gh repo view --json visibility` if `gh` works, otherwise ask Jeff. If you cannot tell, treat it as
     public. In a public repository its `handoff.md`, instruction files, commit messages, branch names, PR titles and
-    descriptions and the Session log are all public.
+    descriptions and the Session log are all public; the Notion board is private.
 
 ## 2. Look at the board and pick the Area (Notion connector)
 
@@ -160,6 +157,7 @@ Find the page **Projects HQ** and its database **Project Status**. There is exac
    - Move: every move updates Next step and Last update in the same edit. Waiting on Jeff: Next step starts "Jeff:" and names the decision. Blocked: name the blocker and what unblocks it.
    - Close: Done only with Link = the evidence. Abandoned: Status Dropped, Next step "Dropped: <reason>". Never delete a card.
    - End: name the cards you opened, moved or closed in your final message. Jeff only views the board; never ask him to edit it.
+   - Without the Notion connector: say so in one line, do the task, and end your message with the card changes for a session with the connector to make. Never record cards anywhere else.
    ```
 
    Then go to step 10.
@@ -180,7 +178,7 @@ The repo's `handoff.md` gets an In flight table with exactly these columns:
 |---|---|
 | Workstream | one outcome, finishable in 2–6 weeks, as a stable noun phrase. **It is the card title, and renaming it later closes the card and opens a new one.** The sync strips links, `**` and backticks and drops one trailing ` (…)` group, so write titles with no formatting and no trailing parenthetical, and no two alike |
 | Status | Backlog, In progress, Waiting on Jeff, Blocked, Done or Dropped |
-| Priority | P0 (urgent, this week), P1 (current focus), P2 (default), P3 (someday). A P0 needs a Target date, which has no column: it is recorded in the join row (below) and set on the synced card in step 9 |
+| Priority | P0 (urgent, this week), P1 (current focus), P2 (default), P3 (someday). A P0 needs a Target date, which has no column: it is set on the synced card in step 9 |
 | Owner | Jeff, Claude Code (any agent session) or Routine (a scheduled job) |
 | State | the facts: what is merged, live or proven, and what is not yet |
 | Next step | one concrete action that starts with a verb. Waiting on Jeff: starts `Jeff:` and names the decision. Blocked: names the blocker and what unblocks it. Done: `none`. Dropped: `Dropped: <reason>` |
@@ -194,11 +192,6 @@ Draft the rows, in the chat:
   and PR titles and descriptions. Manual cards that are not repo work stay manual.
 - **New workstreams**: only ones that are clearly active (an open PR, recent commits toward one outcome). TODOs, issues and
   ideas go to Open loops, not In flight: every row becomes a card, and a card can be dropped but never removed.
-- **The join row**, first in the table: Workstream `Projects HQ join`, Priority P2, Detail `<guide>`; Status, Owner and Next step
-  are set in step 7. Its **State** records what step 9 needs, without any manual card title:
-  `Joining since <today YYYY-MM-DD>. Replaces manual cards: <id> -> "<row title>"; <id> -> "<row title>"; …. Target dates: "<row title>" <YYYY-MM-DD>; ….`
-  `<id>` is the 32-character id at the end of the old card's Notion URL (never the whole URL, whose readable part can contain
-  the title). Target dates are the old cards' dates and the P0 dates Jeff gives in step 6. Write `none` for an empty list.
 - Task-level tracking (Backlog.md, GitHub issues, Linear) stays where it is. A card is a workstream, not a task.
 
 ## 5. Draft the instruction block (repo only; do not write yet)
@@ -215,30 +208,32 @@ Board: private Notion page Projects HQ, database Project Status. This repo's car
 Policy: https://github.com/Tradecreditor/skills-vault/blob/main/skills/tracking-projects-in-notion/references/board-policy.md
 Sync: python3 scripts/notion-sync.py --area "<area>" --source "<source>"   (Windows: py -3; needs NOTION_TOKEN; never print it)
 - Columns: Backlog, In progress, Waiting on Jeff, Blocked, Done, Dropped. Priority P0-P3 (P2 default). WIP limit for In progress, counted across the whole board: Jeff 3, Claude Code 5.
-- Syncing: on the default branch with NOTION_TOKEN set, run the Sync line. Exception: while In flight has a "Projects HQ join" row that is not Done, run it with --dry-run first; if that shows unchanged=0 and updated=0, the first sync has not happened yet and belongs to the join (below): do not sync.
-- Join: while In flight has a "Projects HQ join" row that is not Done, do the step it names when you can (the row links the guide); if that needs something you lack (the Notion connector, NOTION_TOKEN, a merge, Jeff's answer), say so in one line and carry on with your task.
-- Start: read handoff.md (and this Area's cards if you have the Notion connector), then sync. Work only on something that has a card; open one first.
+- Start: read handoff.md (and this Area's cards if you have the Notion connector). On the default branch with NOTION_TOKEN set, run the Sync line. With the connector, if this Area has an open "Projects HQ join" card, finish it as its Next step says. Work only on something that has a card; open one first.
 - Open: add a row to handoff.md "In flight" (| Workstream | Status | Priority | Owner | State | Next step | Detail |) in the same commit as the first piece of work. Keep the Workstream text stable: renaming it opens a new card.
 - Move: change the row's Status / Owner / Next step in the same commit as the work. Waiting on Jeff: Next step starts "Jeff:" and names the decision. Blocked: name the blocker and what unblocks it.
 - Close: Done only with evidence in Detail (merged, live, checked). Abandoned: Status Dropped, Next step "Dropped: <reason>". Never delete a card; follow-up work is a new row.
 - Every commit that changes a row also sets handoff.md's "Last updated:" line to now (the sync never dates a card later than it).
-- End: update the rows you touched. Once the change is on the default branch, sync. Name the cards you opened, moved or closed in your final message.
+- End: update the rows you touched. Once the change is on the default branch, run the Sync line. Name the cards you opened, moved or closed in your final message.
 - Jeff only views the board; never ask him to edit it. Never edit a synced card in Notion, except its Target date (the sync never writes that field and overwrites all the others). Manual cards change only through the Notion connector, on Jeff's word.
 ```
 
 ## 6. Jeff confirms (repo only)
 
 Every row will become a permanent card. Show Jeff, in the chat: the In flight rows (Workstream, Status, Priority, Owner, Next
-step), which old manual card each row replaces (by its current title: the chat is private), the Target dates (ask him for any P0
-that has none), the files you will write (`scripts/notion-sync.py`, `handoff.md`, and which instruction files get the block), and
-whether this repo lands changes by PR or by direct push. Change what he asks for. Continue only when he agrees. If the session
-ends here, nothing was written: the next one starts again.
+step), which old manual card each row replaces (by its current title: the chat is private), the Target date for each P0 (ask
+him for any that has none), the files you will write (`scripts/notion-sync.py`, `handoff.md`, and which instruction files get
+the block), and whether this repo lands changes by PR or by direct push. Change what he asks for. Continue only when he agrees.
+If the session ends here, nothing was written: the next one starts again.
 
 ## 7. Write and commit (repo only)
 
 Run the step-8 check now, so Jeff hears about a missing token while he is here. Then:
 
-1. **Copy the script from the step-0 checkout**, never from a second download. It must sit directly in `<repo>/scripts/`,
+1. **Create the join card** in Notion (Source `manual`, Area `<area>`, Project `Projects HQ join`, Priority P2, Link `<guide>`,
+   Last update today, Status In progress, Owner Claude Code, Next step `Commit the join (step 7 of <guide>)`; if Claude Code is
+   at its WIP limit, say so in step 10). Its page body is private and records what step 9 needs: for each row that replaces a
+   manual card, `<old card URL> → "<row title>"`, and the Target dates Jeff gave in step 6.
+2. **Copy the script from the step-0 checkout**, never from a second download. It must sit directly in `<repo>/scripts/`,
    because it finds the repo root, `handoff.md` and the git remote from its own location. If `scripts/notion-sync.py` already
    exists and its docstring does not start with `notion-sync.py - one-way mirror of handoff.md`, it is a different file: stop
    and ask Jeff.
@@ -255,22 +250,18 @@ Run the step-8 check now, so Jeff hears about a missing token while he is here. 
    never deletes or archives anything, and writes only the cards whose Source is this repo's label. Commit it byte for byte: if
    a formatter or linter hook changes it, exclude `scripts/notion-sync.py` from that hook instead of accepting the change. It
    does not update itself: copy it again only when Jeff asks, repeating step 0 first.
-2. **Write `handoff.md`**. No handoff yet: create it from the checkout's `skills/keeping-handoff-docs/references/handoff-template.md`
+3. **Write `handoff.md`**. No handoff yet: create it from the checkout's `skills/keeping-handoff-docs/references/handoff-template.md`
    (Snapshot, In flight, Open loops, Recently done, Environment facts, Session log), filled from the repo and under about 150
    lines. A handoff already exists: keep everything and change only its In flight table. Either way: the heading is exactly
    `## In flight` (level 2, this capitalisation, at the start of a line) and the table is the first table under it, or the sync
    exits 3; set the `Last updated:` line to now; add under "Environment facts" `notion-sync.py copied from skills-vault <commit
    id from step 0> (reviewed)`; append a Session log line.
-3. **Set the join row** and the route:
-   - **Pull requests here**: Status Waiting on Jeff, Owner Jeff, Next step `Jeff: merge the join PR; then a session with the
-     Notion connector on the default branch does step 9 of <guide>`.
-   - **Direct pushes to the default branch**: Status In progress, Owner Claude Code, Next step `Run the first sync and the
-     clean-up: step 9 of <guide>`. If Claude Code is already at its WIP limit, say so in step 10.
 4. **Add the instruction block** from step 5 to the instruction files. Add to them; never rewrite what is already there.
 5. **Commit** `scripts/notion-sync.py`, `handoff.md` and the instruction files together, following this repository's rules.
-   Pull requests: open the PR, tell Jeff the first sync and the clean-up happen after the merge in a session with the Notion
-   connector on the default branch (the block sends it there), include the token steps if the check printed `missing`, and stop
-   the join. Direct push: push, then step 8.
+   - **Pull requests**: open the PR, then set the join card to Waiting on Jeff, Owner Jeff, Next step `Jeff: merge the join PR
+     (<PR URL>); the next session here with the Notion connector then finishes the join (step 9 of <guide>)`. Tell Jeff the
+     same (with the token steps if the check printed `missing`) and stop the join.
+   - **Direct push**: push, set the join card's Next step to `First sync and clean-up (step 9 of <guide>)`, then step 8.
 
 ## 8. NOTION_TOKEN on this computer (Jeff, once per computer)
 
@@ -305,34 +296,30 @@ If the secret ever lands anywhere else (a chat, a log, a repository file, a hand
 notion.so/profile/integrations (the integration → its secret's refresh option) and then update `NOTION_TOKEN` on the cloud
 environment "Skills Management" and on every computer that has it, or the daily sync goes off.
 
-## 9. First sync and clean-up (repo only; default branch; Notion connector)
+## 9. First sync, clean-up and close (repo only; default branch; Notion connector)
 
-Work on an up-to-date checkout of the default branch, with the connector and with the step-8 check printing `set`; without
-either, say so in one line and carry on with whatever else Jeff asked for. "The Sync line" is the command in the instruction
-block (with any `--repo-url`). This step is safe to re-enter. If an open PR already closes the join row (its description says
-so), the join is finished apart from the merge: say so in one line and carry on.
+Work on an up-to-date checkout of the default branch that contains the join commit, with the connector, and with the step-8
+check printing `set`; without any of these, say so in one line and carry on with whatever else Jeff asked for. "The Sync line" is
+the command in the instruction block (with any `--repo-url`). Every part is safe to repeat.
 
-1. **Check the old cards first.** For each `<id>` in the join row's State, fetch the card. One that is no longer open (Done or
-   Dropped since the join was drafted): leave it alone, and update its row to match (Done with that card's Link as evidence, or
-   Dropped with its reason) in the 9.4 commit. Note any other change (Status, Owner, Next step) for the same commit.
-2. **Dry run**: the Sync line with `--dry-run`. It reads Notion and writes nothing; the summary is on stdout, the plan on stderr.
-   - `created=<number of rows>` and nothing else: the first sync is due; go to 9.3.
-   - `created=0`, or any `unchanged` or `updated` (this repo's cards exist): the first sync already ran; run the Sync line once
-     and go to 9.4.
-   - stderr says `duplicate project`, or `created` is neither of those: two rows share a title, or some cards are missing. Fix
-     the rows (or re-run after a partly failed run, which creates only the missing cards); stop if it does not add up.
-   - Every card with this Source must have Area `<area>`; if not, stop and tell Jeff (another repository shares this Source).
-3. **First sync**: the Sync line, then once more. The second run must say `created=0` and `unchanged=<rows>`. Keep the two sync
-   lines for 9.5.
-4. **Clean-up in Notion.** Done already when each card in State's `Replaces manual cards` list is Dropped (or was closed, 9.1)
-   and each card in `Target dates` has its date. Otherwise: set each `Target dates` entry on the synced card with that title
-   and Source; then set each old card that is still open (page `<id>`) to **Dropped**, in one edit with Next step
-   `Dropped: moved to <source> as "<row title>"` and Last update today. Touch no other card; never delete one.
-5. **Close the join row**: Status Done, Owner Claude Code, Next step `none`, State = the latest two sync lines (run the Sync line
-   now if you have none) and `clean-up done`, Detail = the full URL of the join commit or the merged join PR (the evidence the
-   audit accepts; a bare sync line is not). Apply the row updates from 9.1, set `Last updated:` to now, and commit following
-   this repository's rules (a PR repo: a PR whose description says it closes the Projects HQ join). Run the Sync line once more
-   after it lands, so the join card shows Done.
+1. **Sync.** First the Sync line with `--dry-run` (it writes nothing; summary on stdout, plan on stderr). Stop and tell Jeff if
+   stderr says `duplicate project` (two rows share a title: fix the rows in a normal commit first), or if any card with this
+   Source has an Area other than `<area>` (another repository shares this Source). Otherwise run the Sync line, then once more:
+   the second run must say `created=0`. A session before this one may already have synced; that is fine.
+2. **Clean-up**, from the join card's page body. For each `<old card> → "<row title>"`:
+   - the old card is open: set it to **Dropped**, in one edit with Next step `Dropped: moved to <source> as "<row title>"` and
+     Last update today;
+   - it already says `Dropped: moved to <source>`: this join dropped it; nothing to do;
+   - it was closed some other way meanwhile (Done, or Dropped with another reason): leave it, and close the matching row in
+     `handoff.md` the same way in a normal commit (Done with evidence, or `Dropped: <reason>`). In a public repo write a
+     public-safe reason and public evidence, never the card's Notion link or text; ask Jeff if there is none.
+
+   Then for each synced P0 card, and each synced card that replaced a card with a Target date, set the Target date only if the
+   synced card has none: the old card's current date if it has one, otherwise the date Jeff gave (page body). Touch no other card;
+   never delete one.
+3. **Close the join card**: Status Done, Owner Claude Code, Next step `none`, Link = the full URL of the join commit or the merged
+   join PR (the evidence the audit accepts), Last update today, and the two sync lines in its page body. No repository commit is
+   needed.
 
 Exit codes: `2` = off (token missing, page not shared with the integration, an option missing, Notion unreachable; the reason
 is in the `off (…)` line); `3` = `handoff.md` cannot be parsed (the heading, the columns, or a file that is not UTF-8); `4` = bad
@@ -347,9 +334,9 @@ to set, files that use another name for him), and the vault commit id from step 
 
 ## After joining
 
-- Every session follows the block from step 5: open, move and close cards through `handoff.md`, and sync once the change is on
-  the default branch. There is no daily Routine for a local project. If Jeff wants one, a cloud Routine on this repo can run the
-  same command with `NOTION_TOKEN` set and `api.notion.com` in its allowed domains.
+- Every session follows the block from step 5: open, move and close cards through `handoff.md`, and run the Sync line once the
+  change is on the default branch. There is no daily Routine for a local project. If Jeff wants one, a cloud Routine on this repo
+  can run the same command with `NOTION_TOKEN` set and `api.notion.com` in its allowed domains.
 - `python3 scripts/notion-sync.py --audit --source "<source>"` checks the policy across the board, read-only. It names only this
   repo's cards; every other card appears as a count.
 - Jeff reviews the whole board on Mondays and tells a session what to change. You make the change.
