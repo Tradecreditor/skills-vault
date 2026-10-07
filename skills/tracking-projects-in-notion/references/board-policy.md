@@ -100,7 +100,7 @@ date is never written by the sync, so it can be set in Notion on any card.
 - This vault and its reports are public. Never copy a `manual` card's title, Area or details into a public repository, a report
   or a commit message. One exception: when a project joins the board, its own repo-work manual cards move into its own
   `handoff.md`, keeping their titles only in a private repository; a public repository gets new public-safe titles that Jeff
-  has agreed (`references/joining-projects-hq.md` step 5). A project's own Area name may appear in its own repository. The
+  has agreed (`references/joining-projects-hq.md` steps 4 and 6). A project's own Area name may appear in its own repository. The
   audit prints other cards as counts only.
 - Only Jeff decides on new or renamed columns, priorities, Owners or Areas, and changes this policy; a session with the
   connector makes the change on his word. The sync never changes the schema: a
