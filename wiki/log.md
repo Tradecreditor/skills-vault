@@ -159,3 +159,4 @@
 ## [2026-10-07] review | judging-with-jev approved | outputs/skill-reviews/2026-10-07-judging-with-jev
 ## [2026-10-07] review | tracking-tasks-with-backlog-md approved | outputs/skill-reviews/2026-10-07-tracking-tasks-with-backlog-md
 ## [2026-10-07] review | using-obsidian-skills rejected | outputs/skill-reviews/2026-10-07-using-obsidian-skills
+## [2026-10-07] review | tracking-projects-in-notion approved | outputs/skill-reviews/2026-10-07-tracking-projects-in-notion

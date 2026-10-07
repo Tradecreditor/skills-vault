@@ -4,7 +4,11 @@ description: "Runs Jeff's cross-project kanban in Notion under one board policy,
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-06"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-07T17:52:41Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "ae26b8c4da7095986a74feeef74a0f66b33959a48212bc908b695761e328c627"
+  review_report: "outputs/skill-reviews/2026-10-07-tracking-projects-in-notion.md"
 ---
 
 # tracking-projects-in-notion — one Notion board for every project
