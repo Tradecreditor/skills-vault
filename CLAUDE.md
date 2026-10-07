@@ -84,6 +84,8 @@ separate database or board per project). The working agreement is `skills/tracki
   the evidence: PR, commit, report); `Dropped` with `Dropped: <reason>` when abandoned. Move the row to "Recently done" in a later
   update. Never delete a card; follow-up work is a new card.
 - **End**: update the rows you touched; your final message names the cards you opened, moved or closed.
+- Jeff only views the board; he never edits it. Every change is yours: repo cards through `handoff.md`, `manual` cards through the
+  Notion connector, both on Jeff's word. Never ask him to drag, edit or create a card.
 - Never edit a card whose Source is a `handoff.md` in Notion (the sync overwrites it); edit the handoff. Never copy a `manual`
   card's title or details into this public repo. Only Jeff changes columns, priorities, Owners, Areas or the policy.
 - Machinery: `scripts/notion-sync.py` mirrors In flight to the board (daily, `github-stars-sync` step 7; any session may run it on
