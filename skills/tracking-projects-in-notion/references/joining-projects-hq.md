@@ -20,13 +20,14 @@ agent (Codex, Gemini CLI…) keeps a repo's cards current through `handoff.md` a
 
 **Nothing is written into the project, and no card is created, until Jeff has confirmed it (step 6).** Steps 1 to 5 read and
 draft; the only writes before that are step 3's Area and Source options and Board tab. From the end of step 7 on, the join is
-tracked on the board itself, by one manual card titled `Projects HQ join: <area>` in this project's Area. Its Next step always
+tracked on the board itself, by one manual card titled `Projects HQ join: <source>` in this project's Area. Its Next step always
 says what comes next, and its private page body records the confirmed plan and what the clean-up needs. It is moved through the
 connector, so no commit is needed to advance or close the join.
 
 ## Resuming a join
 
-With the connector, look for a `Projects HQ join: <area>` card in this project's Area:
+With the connector, look for a card titled `Projects HQ join: <repo>/handoff.md` or `Projects HQ join: <owner>-<repo>/handoff.md`
+(the Source this repository uses; see step 2.3), whose page body names this repository:
 
 - **Open**: continue at the step its Next step names, reading the guide address in its Link. Do not redo earlier steps. If its
   Next step names step 7: when the working tree holds the join's files, show Jeff and reuse them instead of adding second
@@ -122,7 +123,8 @@ Find the page **Projects HQ** and its database **Project Status**. There is exac
 
 1. Fetch the database's data source: its Area and Source options (names and colours), and the cards of any Area that could be
    this project.
-2. **Area**: if an Area already names this project (manual cards were seeded for several projects), reuse it exactly as written.
+2. **Area**: if an Area already names this project (manual cards were seeded for several projects), reuse it exactly as written,
+   unless it already holds another repository's synced cards or join card; then use the repository name.
    Otherwise a repo uses its repository name; a project without a repo asks Jeff for the name of its life or business area.
    Ask Jeff too when two Areas could both be this project.
 3. **Source** (repo only): `<repo>/handoff.md`, where `<repo>` is the last path component of `git remote get-url origin`
@@ -140,17 +142,19 @@ Find the page **Projects HQ** and its database **Project Status**. There is exac
 
 1. **Options.** The connector changes a select property's options only by restating the whole list
    (`ALTER COLUMN "Area" SET SELECT('opt':color, …)`), and an option left out is deleted from every card that uses it, which
-   cannot be undone. So: take the full list from step 2.1, send every existing option with its exact name and colour plus the
-   new one, then fetch the data source again and check that the count rose by exactly one and nothing was renamed or
-   recoloured. Add the Area option if it is new, and for a repo the Source option if it is new. Never rename, recolour or
-   remove an option.
+   cannot be undone. So, for each option to add: fetch the data source again right before the change (never reuse the step-2.1
+   list, which another session may have changed since), send every option of that fresh list with its exact name and colour
+   plus the new one, then fetch once more and check that every option of the fresh list is still there unchanged and the new one
+   is present. If anything disappeared, stop and tell Jeff. Add the Area option if it is new, and for a repo the Source option
+   if it is new. Never rename, recolour or remove an option. When several projects join at once, do step 3 in one session at a
+   time.
 2. If the database has no Board view named after the Area yet, add one: a **Board** view of Project Status,
    `GROUP BY "Status"; FILTER "Area" = "<area>"`. A view of the one database, never a new database. An Area that was seeded
    earlier usually has its tab already; leave it alone.
 3. **No repo**: show Jeff the Area's open manual cards and ask which workstreams he wants on the board (title, Status, Owner,
    Next step, Priority and any deadline). Create only the cards that do not exist yet, with every required field (policy
-   section 3), Last update today and Source `manual`. Never invent workstreams. If the project has a local folder, add this
-   block to the instruction file of every agent that works there (`CLAUDE.md` for Claude Code, `AGENTS.md` for Codex,
+   section 3), Last update today and Source `manual`. Never invent workstreams. If the project has a local folder, show Jeff
+   this block and, on his yes, add it to the instruction file of every agent that works there (`CLAUDE.md` for Claude Code, `AGENTS.md` for Codex,
    `GEMINI.md` for Gemini CLI), creating your own agent's file if it is missing:
 
    ```
@@ -165,7 +169,8 @@ Find the page **Projects HQ** and its database **Project Status**. There is exac
    - Without the Notion connector: say so in one line, do the task, and end your message with the card changes for a session with the connector to make. Never record cards anywhere else.
    ```
 
-   Then go to step 10.
+   For a repository that is not Jeff's own (step 1), write nothing into it unless Jeff asks; if he wants the block there, put it
+   in an untracked local file (for example `CLAUDE.local.md`, or a file listed in `.git/info/exclude`). Then go to step 10.
 
 The sync script never changes the schema. It stops with exit 2 naming any option it needs that does not exist yet, before it
 writes anything, so a typo in the Area or the Source cannot create stray cards.
@@ -213,7 +218,7 @@ Board: private Notion page Projects HQ, database Project Status. This repo's car
 Policy: https://github.com/Tradecreditor/skills-vault/blob/main/skills/tracking-projects-in-notion/references/board-policy.md
 Sync: python3 scripts/notion-sync.py --area "<area>" --source "<source>"   (Windows: py -3; needs NOTION_TOKEN; never print it)
 - Columns: Backlog, In progress, Waiting on Jeff, Blocked, Done, Dropped. Priority P0-P3 (P2 default). WIP limit for In progress, counted across the whole board: Jeff 3, Claude Code 5.
-- Start: read handoff.md (and this Area's cards if you have the Notion connector). On the default branch with NOTION_TOKEN set, run the Sync line. With the connector, if this Area has an open "Projects HQ join: <area>" card, finish it as its Next step says. Work only on something that has a card; open one first.
+- Start: read handoff.md (and this Area's cards if you have the Notion connector). On the default branch with NOTION_TOKEN set, run the Sync line. With the connector, if the board has an open "Projects HQ join: <source>" card, finish it as its Next step says. Work only on something that has a card; open one first.
 - Open: add a row to handoff.md "In flight" (| Workstream | Status | Priority | Owner | State | Next step | Detail |) in the same commit as the first piece of work. Keep the Workstream text stable: renaming it opens a new card.
 - Move: change the row's Status / Owner / Next step in the same commit as the work. Waiting on Jeff: Next step starts "Jeff:" and names the decision. Blocked: name the blocker and what unblocks it.
 - Close: Done only with evidence in Detail (merged, live, checked). Abandoned: Status Dropped, Next step "Dropped: <reason>". Never delete a card; follow-up work is a new row.
@@ -259,16 +264,17 @@ Run the step-8 check now, so Jeff hears about a missing token while he is here. 
    id from step 0> (reviewed)`; append a Session log line.
 3. **Add the instruction block** from step 5 to the instruction files. Add to them; never rewrite what is already there.
 4. **Create the join card** in Notion, or reuse the open one that "Resuming a join" found (never a second): Source `manual`,
-   Area `<area>`, Project `Projects HQ join: <area>`, Priority P2, Link `<guide>`, Last update today, Status In progress, Owner
+   Area `<area>`, Project `Projects HQ join: <source>`, Priority P2, Link `<guide>`, Last update today, Status In progress, Owner
    Claude Code, Next step `Commit the join (step 7 of <guide>)`; if Claude Code is at its WIP limit, say so in step 10. Its page
-   body is private and records the plan Jeff confirmed in step 6: the rows (all seven columns), the Source, the instruction
+   body is private and records the repository (its remote URL) and the plan Jeff confirmed in step 6: the rows (all seven columns), the Source, the instruction
    files, PR or direct push, the step-0 commit id, and what step 9 needs: for each row that replaces a manual card,
    `<old card URL> → "<row title>"`, and the Target dates. Whenever the rows change before step 9 (for example Jeff asks for a
    change in the PR), update the page body in the same session.
 5. **Commit** `scripts/notion-sync.py`, `handoff.md` and the instruction files together, following this repository's rules.
    - **Pull requests**: open the PR, then set the join card to Waiting on Jeff, Owner Jeff, Next step `Jeff: merge the join PR
      (<PR URL>); the next session here with the Notion connector then finishes the join (step 9 of <guide>)`, adding `and set
-     NOTION_TOKEN on this computer (step 8)` if the check printed `missing`. Tell Jeff the same and stop the join.
+     NOTION_TOKEN on this computer (step 8)` if the check printed `missing`. Tell Jeff the same (with steps 1–3 of step 8 if the
+     token is missing) and stop the join.
    - **Direct push**: push, set the join card's Next step to `First sync and clean-up (step 9 of <guide>)`, then step 8.
 
 ## 8. NOTION_TOKEN on this computer (Jeff, once per computer)
@@ -311,13 +317,15 @@ environment "Skills Management" and on every computer that has it, or the daily 
 Work on an up-to-date checkout of the default branch that contains the join (the pushed join commit, or the join PR merged in
 any way), with the connector, and with the step-8 check printing `set`. Without the connector, say so in one line and carry on
 with whatever else Jeff asked for. With the connector but without one of the others, set the join card to Waiting on Jeff,
-Owner Jeff, with a `Jeff:` Next step naming what is missing (merge `<PR URL>`, set NOTION_TOKEN), then carry on. "The Sync line" is
+Owner Jeff, with a `Jeff:` Next step naming what is missing: the merge (`<PR URL>`), or the token (follow step 8's `missing`
+branch, which also gives Jeff the instructions). Then carry on. "The Sync line" is
 the command in the instruction block (with any `--repo-url`). Every part is safe to repeat.
 
 1. **Sync.** First the Sync line with `--dry-run` (it writes nothing; summary on stdout, plan on stderr). Stop and tell Jeff if
    stderr says `duplicate project` (two rows share a title: fix the rows in a normal commit first), or if any card with this
    Source has an Area other than `<area>` (another repository shares this Source). Otherwise run the Sync line, then once more:
-   the second run must say `created=0`. A session before this one may already have synced; that is fine.
+   the second run must say `created=0`. A session before this one may already have synced; that is fine. An exit 2 naming a
+   missing option means it was lost or never added: redo step 3.1 for it, then sync again.
 2. **Clean-up**, from the join card's page body. For each `<old card> → "<row title>"`, first check that a card with Source
    `<source>` and Project `<row title>` exists (any status); if none does, leave the old card alone and ask Jeff. Then:
    - the old card is open: set it to **Dropped**, in one edit with Next step `Dropped: moved to <source> as "<row title>"` and
@@ -330,7 +338,8 @@ the command in the instruction block (with any `--repo-url`). Every part is safe
    Then for each synced P0 card, and each synced card that replaced a card with a Target date, set the Target date only if the
    synced card has none: the old card's current date if it has one, otherwise the date Jeff gave (page body). Touch no other card;
    never delete one.
-3. **Close the join card**: Status Done, Owner Claude Code, Next step `none`, Link = the full URL of the join commit or the merged
+3. **Close the join card**, once every pair in 9.2 is resolved (otherwise set it to Waiting on Jeff, Owner Jeff, Next step
+   `Jeff: decide what happens to the <n> old card(s) listed in this card's page body (step 9.2 of <guide>)`): Status Done, Owner Claude Code, Next step `none`, Link = the full URL of the join commit or the merged
    join PR (the evidence the audit accepts), Last update today, and the two sync lines in its page body. No repository commit is
    needed.
 
