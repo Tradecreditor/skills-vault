@@ -28,7 +28,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 - 同 Claude Code / Codex 嘅 computer-use 工作流有關：隔離 sandbox 避免 agent 搶用家輸入。
-- 可考慮用於 Josep 嘅 web app QA 同冇 API 網站嘅自動化。
+- 可考慮用於 Jeff 嘅 web app QA 同冇 API 網站嘅自動化。
 
 ## Source
 - https://www.instagram.com/reel/DeHdzMIRHzK/ · buildwithneej · published date unknown (captured 2026-10-06) · likes=392 comments=251

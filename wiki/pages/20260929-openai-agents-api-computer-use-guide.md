@@ -36,7 +36,7 @@ needs_manual_text: false
 ## 點解值得留意
 
 - 幫香港中小企做 AI 顧問時，客人成日問「OpenAI 嘅 agent 平台值唔值得用」；呢篇有現成嘅評估框架（七步導入、預算上限、人手批准點）可以直接搬入提案。
-- 「Computer use 要限站點、不可逆操作要人批准、防提示注入」同 Josep 自己用 Claude Code / 瀏覽器自動化時嘅安全習慣一致，可以當 checklist 同客戶講。
+- 「Computer use 要限站點、不可逆操作要人批准、防提示注入」同 Jeff 自己用 Claude Code / 瀏覽器自動化時嘅安全習慣一致，可以當 checklist 同客戶講。
 - 多代理「唔一定好」嘅判斷三問，適合放入短影音內容拆解「點解唔好一開始就砌多代理」。
 - Iron Log / English Overload 如果日後加入長流程代理功能，可以參考其指標清單（首次完成率、每成功任務成本）。
 

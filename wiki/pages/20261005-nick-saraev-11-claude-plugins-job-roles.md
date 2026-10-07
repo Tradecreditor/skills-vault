@@ -28,7 +28,7 @@ Nick Saraev 喺 Instagram reel 話 Anthropic 推出 11 個免費 Claude plugin�
 
 ## 點解值得留意
 - 同 vault 已有嘅 Claude Code plugin 資料相關，可核實 Anthropic 官方 role plugins（knowledge-work plugins）係咪真有此 11 個。
-- 對 Josep 嘅 AI 顧問業務有參考價值：按職能打包 skills + connectors 係向中小企推銷嘅現成框架。
+- 對 Jeff 嘅 AI 顧問業務有參考價值：按職能打包 skills + connectors 係向中小企推銷嘅現成框架。
 
 ## Source
 - https://www.instagram.com/reel/DeHUaCoPFTV/ — nick_saraev, 2026-10-05. Engagement: counts not returned. Reader: Jina (caption is the full spoken script; no Supadata used).

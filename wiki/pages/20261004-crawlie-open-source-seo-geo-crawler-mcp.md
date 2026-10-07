@@ -37,7 +37,7 @@ Arum（@arumwu）介紹 crawlie：一套免費、開源、跑喺本機嘅技術 
 
 ## 點解值得留意
 
-- **客戶 SEO／GEO 審核工具**：Josep 做 SEO／GEO，crawlie 免費、跑本機、可出 HTML／JSON 報告，可以補充或取代付費爬蟲嚟降低交付成本；同 vault 內 OpenSEO、Jev 審核成本兩篇互補。
+- **客戶 SEO／GEO 審核工具**：Jeff 做 SEO／GEO，crawlie 免費、跑本機、可出 HTML／JSON 報告，可以補充或取代付費爬蟲嚟降低交付成本；同 vault 內 OpenSEO、Jev 審核成本兩篇互補。
 - **Agent 自己審站**：MCP server 令 Claude Code 可以自己 crawl、讀 issue、列出修正清單，啱用喺「AI 生成網站上線前檢查」呢類中小企服務；已草擬 skill `auditing-seo-with-crawlie`（draft，仍要經 skill-review）。
 - **三個分數分開報**：Health、GEO、Accessibility 分開，方便向香港中小企客戶解釋「搜尋引擎排名」同「AI 搜尋可見度」係兩件事，亦可做 baseline、修正、重測嘅前後對比。
 - **風險要記住**：只爬自己或客戶授權嘅網站；Crawlie Cloud 閉源兼要 API key，客戶網站唔好隨便交俾第三方；帖文互動低，真正值得睇嘅係 repo 本身，星數未核實前唔好當成熟工具介紹。

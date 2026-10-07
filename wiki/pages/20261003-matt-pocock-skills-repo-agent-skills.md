@@ -38,7 +38,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- **同 vault 直接對應**：Josep 嘅 vault 本身就係可安裝 skills 嘅庫，呢個 repo 係一個大型、有 Claude Code 官方 marketplace 版本嘅參考，可以對照佢嘅 user-invoked / model-invoked 分法，同 vault 嘅 `keeping-handoff-docs`（對應 `handoff`）、`model-tiering` 等 skill 比較。
+- **同 vault 直接對應**：Jeff 嘅 vault 本身就係可安裝 skills 嘅庫，呢個 repo 係一個大型、有 Claude Code 官方 marketplace 版本嘅參考，可以對照佢嘅 user-invoked / model-invoked 分法，同 vault 嘅 `keeping-handoff-docs`（對應 `handoff`）、`model-tiering` 等 skill 比較。
 - **顧問流程可借用**：`grill-with-docs`、`to-spec`、`to-tickets` 係「先問到對齊需求，再拆單」嘅流程，適合用喺幫香港中小企做 AI 項目嘅需求訪談；`tdd`、`diagnosing-bugs` 可以直接放入 Claude Code 項目。
 - **安裝前先掃描**：`npx skills@latest add` 同 plugin 都係第三方內容，裝落客戶項目前先用 vault 嘅 `scanning-agent-skills` 掃一次；27.4 萬星同 Trending 第 6 都未核實，等 GitHub API 可用先好引用。
 - **短影音題材**：「大神私藏 skills 全公開」有噱頭，但 hook 要跟 README，唔好照抄帖文「Shell 腳本」呢個說法。

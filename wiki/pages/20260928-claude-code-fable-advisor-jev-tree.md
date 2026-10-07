@@ -42,7 +42,7 @@ needs_manual_text: false
 ## 點解值得留意
 
 - Fable 5.1 的完整 session 上下文閱讀能力使它成為理想審查者，只在三個最重要節點介入，避免打斷 Opus 5.5 的主工作流。
-- Jev routing 模式與 skills-vault 的 Jev cost-reduction 研究（20260925-jev-seo-geo-audit-cost-down-90）直接對應，可在 Josep 的代理專案中降低路由成本。
+- Jev routing 模式與 skills-vault 的 Jev cost-reduction 研究（20260925-jev-seo-geo-audit-cost-down-90）直接對應，可在 Jeff 的代理專案中降低路由成本。
 - 提供的完整設定提示可即用，方便快速在任何 Claude Code 專案中重現這個三層代理架構。
 - 與 `stacking-coding-agent-plugins` 技能互補，進一步強化 Claude Code 的多代理配置。
 

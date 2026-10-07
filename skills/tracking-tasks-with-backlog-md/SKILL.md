@@ -9,10 +9,10 @@ metadata:
   engagement: "stars=6.9k forks=441"
   origin_type: "repo"
   vault_status: "reviewer-approved"
-  reviewed_at: "2026-10-05T07:49:32Z"
-  reviewed_by: "routine:skill-review"
-  review_hash: "a98f330fffff99307a3f4662875a8cec2b2ba19f3e41a3b817c9196810ebf3b9"
-  review_report: "outputs/skill-reviews/2026-10-05-tracking-tasks-with-backlog-md.md"
+  reviewed_at: "2026-10-07T16:04:28Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "f81d5480f85a39c64b205bccac267d6a6cf685476503f131d6b76306d8e93b0d"
+  review_report: "outputs/skill-reviews/2026-10-07-tracking-tasks-with-backlog-md.md"
 ---
 
 # tracking-tasks-with-backlog-md
@@ -168,7 +168,7 @@ Without an agent, the same files work from the CLI or browser: `backlog task lis
 
 - Prefer the CLI, MCP or web UI over hand-editing task files (README); never pick or reserve task IDs yourself. The repo's own guidelines block says not to edit task, draft, document, decision or milestone files directly.
 - Multi-line text: `\n` is not converted. Repeat `--append-notes` per line or use real newlines inside double quotes. Text with literal backticks needs single-quoted arguments or the shell runs them as command substitution.
-- Vault placement: `backlog init` writes to `AGENTS.md` (and `backlog agents --update-instructions` touches CLAUDE.md, AGENTS.md, GEMINI.md, copilot-instructions). Those are protected, identical-copy files here. Do not run init in the Obsidian vault folder until Josep has approved the `docs:` change.
+- Vault placement: `backlog init` writes to `AGENTS.md` (and `backlog agents --update-instructions` touches CLAUDE.md, AGENTS.md, GEMINI.md, copilot-instructions). Those are protected, identical-copy files here. Do not run init in the Obsidian vault folder until Jeff has approved the `docs:` change.
 - The web UI binds `127.0.0.1` only, so it is not reachable from other devices; in a cloud or remote session you would need port forwarding (an inference, not in the README).
 - `onStatusChange` in config runs a shell command on every status change (the ADVANCED-CONFIG.md example launches `claude`). Never set it from untrusted text.
 - MCP is optional: the project MANIFESTO calls it a "legacy, optional adapter" and the CLI canonical. Prefer CLI instructions unless the person wants MCP.

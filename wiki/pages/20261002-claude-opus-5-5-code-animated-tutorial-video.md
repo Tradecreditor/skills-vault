@@ -42,12 +42,12 @@ needs_manual_text: false
 
 ## 點解值得留意
 - 同已入庫嘅 `20260928-claude-opus-5-5-tutorial-animation-prompt` 互補：嗰篇係「叫 Claude 研究、比較、再做教學動畫」嘅四階段 prompt（要 Claude 做咩）；呢條補咗生產線嗰邊嘅邏輯（宣告式動畫、JSON 分鏡、八參數框架、截圖自檢迴圈、TTS＋Whisper 時間戳對位）。以上全部係旁白自述，成品質素未驗證（片未睇）。
-- 模型分工（Opus 做整套、Sonnet 微調、Haiku 批量細工）加埋 caption 嘅實數（約 4% 週用量、Eleven Labs 免費額度一半），可以幫 Josep 同 HK 中小企客戶估算 AI 影片製作成本同報價；可對照 `20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost`。
-- 「驗收標準寫入提示詞、令 Claude Code 自己截圖查字溢出、對齊、中文變方塊」同「禁用隨機數同即時時間令每次渲染一致」係可直接搬去 Josep 用 Claude Code 做繁體中文影片嘅檢查清單；`20260927-hyperframes-camera-3d-captions-skill` 只係單一字幕特效，呢條講整條 pipeline，但旁白冇講明用乜渲染引擎。
+- 模型分工（Opus 做整套、Sonnet 微調、Haiku 批量細工）加埋 caption 嘅實數（約 4% 週用量、Eleven Labs 免費額度一半），可以幫 Jeff 同 HK 中小企客戶估算 AI 影片製作成本同報價；可對照 `20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost`。
+- 「驗收標準寫入提示詞、令 Claude Code 自己截圖查字溢出、對齊、中文變方塊」同「禁用隨機數同即時時間令每次渲染一致」係可直接搬去 Jeff 用 Claude Code 做繁體中文影片嘅檢查清單；`20260927-hyperframes-camera-3d-captions-skill` 只係單一字幕特效，呢條講整條 pipeline，但旁白冇講明用乜渲染引擎。
 - 暫時唔 draft skill：旁白只列出八個參數嘅標題，真正嘅 prompt 鷹架（留言區／說明欄）未攞到；攞到之後可以考慮寫成「宣告式動畫＋自檢迴圈」skill。
 
 ## Source
-- https://www.facebook.com/share/v/19JqXuVvpu/ — page 數位敘事力期刊（Journal of Digital Narrative）, video/reel. No publish date appears on the Jina page or in the Supadata metadata, so `published: 2026-10-02` is the day Josep saved the reel, not the true publish date.
+- https://www.facebook.com/share/v/19JqXuVvpu/ — page 數位敘事力期刊（Journal of Digital Narrative）, video/reel. No publish date appears on the Jina page or in the Supadata metadata, so `published: 2026-10-02` is the day Jeff saved the reel, not the true publish date.
 - `canonical_id` is `url:<sha1>` of the share URL, as the share link carried no numeric id. The Supadata metadata later showed the numeric video id 1060838723457433 (resolved URL `https://www.facebook.com/Journal.of.Digital.Narrative/videos/1060838723457433/`, recorded in `raw/`); grep for it when deduping, or re-key as `facebook:1060838723457433`.
 - Engagement: reactions=299 comments=12 shares=134 (three unlabeled numbers on the Jina page, order inferred from the Facebook UI) and views=41596 (Supadata metadata; the title says 41K).
 - Reader: Jina Reader (`r.jina.ai`; the full caption is in the page title line, the body is a login shell) + Supadata (metadata, HTTP 200; transcript). The first transcript request returned HTTP 502; the main session obtained the transcript on a single retry on 2026-10-04 (lang zh, mode=auto). It is kept verbatim in `raw/` under `## Transcript (supadata)`, Simplified Chinese with the ASR's character spacing, and several names are garbled (see Key facts). Exa not used.

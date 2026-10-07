@@ -5,10 +5,10 @@ metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-02"
   vault_status: "reviewer-approved"
-  reviewed_at: "2026-10-04T15:35:29Z"
+  reviewed_at: "2026-10-07T16:04:28Z"
   reviewed_by: "claude-code-cloud:vault-skill-reviewer"
-  review_hash: "639d4e71371d8110f280ccbe29561ade3e4f306be071500f85bfca89a1e338fa"
-  review_report: "outputs/skill-reviews/2026-10-04-judging-with-jev.md"
+  review_hash: "6992a8e98995ef7f71cd1bff7563a1f6713095b4dc7975df10a093617ddb61c9"
+  review_report: "outputs/skill-reviews/2026-10-07-judging-with-jev.md"
 ---
 
 # judging-with-jev — let Jev decide, let Sonnet write
@@ -106,7 +106,7 @@ Put the same jev line somewhere in the repo, not only in the final message: the 
 | github-stars-sync | pick backfill candidates whose 摘要 merely rewords the description | `summary_from_readme` | noul | < 0.50 = candidate / 0.50–0.80 | Sonnet reads | pilot 2 |
 | github-stars-sync | draft SKILL.md for a starred repo | `is_agent_asset` | noul | ≥ 0.80 / 0.50–0.80 | Sonnet decides | later |
 | vault-lint | near-duplicate titles | `near_duplicate` | noul | ≥ 0.80 / 0.50–0.80 | Sonnet compares | pilot 3 |
-| vault-lint | order the stale-draft list for Josep | `review_priority` | score 0–4 | ordering only | unordered list | later |
+| vault-lint | order the stale-draft list for Jeff | `review_priority` | score 0–4 | ordering only | unordered list | later |
 | capture-link | `type`, `topic`, `actionable`, `substance_in_caption`, `related_relevance` | choice / noul / score | see reference | Sonnet decides | later (consistency, not cost) |
 
 Exact JSON for every row, with the state fields and the prompt line it attaches to: `references/vault-routine-questions.md`. weekly-hot-list reads its thresholds and caps from `wiki/hot-list/_config.yaml` → `jev:` (edit numbers there, never in the routine prompt); the other routines get the same block when their pilots start.

@@ -44,7 +44,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 | H4 | 3：「draft skills/<name>/SKILL.md only if it is an installable skill or a repeatable procedure」| Opus 寫報告時順手判斷 | `installable_skill` noul | 贏家嘅 README / 帖文頭 2k tokens | ≥ 0.80 draft；否則唔 draft，Opus 唔再諗 | 之後（每週只有 2–3 個贏家，慳得少）|
 | H5 | 2：gate 同 heat 計算 | 算式 | — | — | — | **唔用 Jev**：確定性算式唔應該交俾機率模型 |
 
-慳到：Opus 唔再讀 ~450 個 snippet 同 ~390 個 repo 物件嘅 topical 判斷，fxtwitter 40 次配額全部用喺有關嘅帖；run 時間跟住短。風險：H1 誤判漏走一個贏家 — 緩解係門檻設低（3.5/5）、中間地帶交 Opus、同埋 ## 方法 要列出被 Jev 跳過嘅數目，Josep 可以抽查。
+慳到：Opus 唔再讀 ~450 個 snippet 同 ~390 個 repo 物件嘅 topical 判斷，fxtwitter 40 次配額全部用喺有關嘅帖；run 時間跟住短。風險：H1 誤判漏走一個贏家 — 緩解係門檻設低（3.5/5）、中間地帶交 Opus、同埋 ## 方法 要列出被 Jev 跳過嘅數目，Jeff 可以抽查。
 
 ### github-stars-sync（Sonnet，每日）
 
@@ -58,7 +58,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 | # | 步驟（prompt 原句）| 今日 | Jev 問題 | state | 門檻 → fallback | 結論 |
 |---|---|---|---|---|---|---|
 | L1 | 5：「near-duplicate titles」| Sonnet 逐週重新目測（W40 報告又再列 OpenSpec / OpenMAIC / OpenCLI 呢類表面相似）| `near_duplicate` noul：兩個條目係唔係同一樣工具 / 同一個來源 | 兩個條目嘅 title + type + source_url + 摘要 頭兩句（約 200 tokens）| 只對 token 重疊預篩出嘅配對問（約 20 對）；≥ 0.80 寫入 ## Suggested fixes；0.50–0.80 Sonnet 睇；< 0.50 唔提 | **採用（試點 3）** |
-| L2 | 6：「draft entries older than 30 days (list them for Josep to review)」| 只列清單；而家 42 個 draft，9 月 19 日嗰批好快過 30 日 | `review_priority` score（五級，0–4）：呢篇值唔值得 Josep 先 verify（內容完整、有 Related、有 raw、同近期 capture 有關）| frontmatter + 摘要（約 800 tokens）| 用分數排清單，唔刪任何項 | 之後 |
+| L2 | 6：「draft entries older than 30 days (list them for Jeff to review)」| 只列清單；而家 42 個 draft，9 月 19 日嗰批好快過 30 日 | `review_priority` score（五級，0–4）：呢篇值唔值得 Jeff 先 verify（內容完整、有 Related、有 raw、同近期 capture 有關）| frontmatter + 摘要（約 800 tokens）| 用分數排清單，唔刪任何項 | 之後 |
 | L3 | 1–4、7 嘅機械檢查 | 腳本 | — | — | — | **唔用 Jev**：確定性檢查 |
 
 ### capture-link（Sonnet，每條 URL 一次 run）— 排最後
@@ -75,7 +75,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 
 ### 唔採用 / 留待之後
 
-- **Supabase `capture` edge function 預篩**（例如「呢條 URL 值唔值得 capture」）：手機路徑多一個網絡呼叫同一個 secret，而 dedupe 已經係確定性；Josep 貼嘅連結本來就係佢想收嘅。
+- **Supabase `capture` edge function 預篩**（例如「呢條 URL 值唔值得 capture」）：手機路徑多一個網絡呼叫同一個 secret，而 dedupe 已經係確定性；Jeff 貼嘅連結本來就係佢想收嘅。
 - **`.claude/hooks/vault-suggest.sh` 用 Jev 重排建議**：SessionStart hook 只有 20 秒、laptop 要另外有 key；而家 keyword grep 嘅 6 條建議已經夠用。
 - **fast-jev-compaction、Jev routing tree**：Claude Code session 層面嘅用法，vault 已有 `20260920-fast-jev-compaction`（verified）同 draft skill `configuring-fable-advisor-jev-tree`；唔喺今次「四個 Routines」範圍。
 - **生意用途**：jev-seo 網站審核做 lead magnet、Iron Log / English Overload 內容 QA rubric、短片題材篩選 — 見 `wiki/pages/20260925-jev-seo-geo-audit-cost-down-90.md` 嘅 點解值得留意；同一個 `judging-with-jev` skill 嘅 request shape 可以直接套用。
@@ -103,7 +103,7 @@ Vault 四個 Routines 入面，寫作（摘要、Key facts、週報）一定要�
 6. **第一次 live 呼叫前**：喺 TypeSafe Playground 跑一條 noul、一條 choice、一條 score，核實 response 欄位名，再改 skill 入面 `parse_jev` 嘅對應。
 7. **Auto mode 嘅 permission classifier**（2026-10-02 development run 實測）：第一個帶 `$TYPESAFE_API_KEY` 嘅 `curl` 被 classifier 以「Data Exfiltration」拒絕，而 35 分鐘前生產 run 同一個 call 係通過嘅，即係判斷有隨機性。所以所有 Jev 請求改行 `skills/judging-with-jev/scripts/jev_ask.py`（`_config.yaml` 嘅 `jev.client`），指令行唔再出現 key，routine 只睇 exit code（0 on、2 整個 run off、3 單項 fallback、4 state 有 secret 被拒）。Repo 嘅 `.claude/settings.json` allow rule 繞唔過呢個 classifier（auto-mode 文件：只有 managed settings 嘅 `autoMode` 規則先得），所以仍然可能被拒；被拒就當 Jev off，run 照完成並喺 ## 方法 講明。
 
-## 下一步（Josep 批准後，每個一個 PR）
+## 下一步（Jeff 批准後，每個一個 PR）
 
 試點 1 已於 2026-10-03 合併上線（PR #15–#18），等 2026-10-05 星期一正式 run 驗收。試點 2–4 嘅逐步指引、驗收標準、每個試點都要行嘅步驟同 2026-10-02/03 實測嘅陷阱，全部喺交接文件 **`outputs/20261003-jev-pilots-handoff.md`**；下面只留次序：
 

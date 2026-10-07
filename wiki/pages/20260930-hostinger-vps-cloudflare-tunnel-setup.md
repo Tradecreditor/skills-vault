@@ -33,7 +33,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- **Iron Log / English Overload 部署參考**：每月約 US$6.5 就有 2 核 8GB，Cloudflare 免費層做前置，適合 Josep 個人 app 做低成本後端或測試環境。
+- **Iron Log / English Overload 部署參考**：每月約 US$6.5 就有 2 核 8GB，Cloudflare 免費層做前置，適合 Jeff 個人 app 做低成本後端或測試環境。
 - **客戶 SME 方案**：香港中小企想自架 n8n、內部工具或小型網站，可以用「VPS + Tunnel + R2 備份」做標準化報價，唔使開 port 亦減低安全風險。
 - **備份加 restore 演練係重點**：好多教學只講備份，呢帖講明做過 restore，可以抽出做 checklist。
 - **留意推廣成分**：內容混有 referral，屬作者自述經驗，上線前要自己實測。

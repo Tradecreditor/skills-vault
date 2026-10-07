@@ -74,7 +74,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- **可直接改用嘅 meta-prompt**：「先研究 → 比較做法 → 做成品 → 交付報告＋分鏡＋原始碼」呢個四步結構唔限於動畫，Josep 可以換個題目（例如客戶培訓影片、YouTube 教學）再用 Claude Code 跑，亦啱做短影音「AI 自己教你點用 AI」嘅示範。
+- **可直接改用嘅 meta-prompt**：「先研究 → 比較做法 → 做成品 → 交付報告＋分鏡＋原始碼」呢個四步結構唔限於動畫，Jeff 可以換個題目（例如客戶培訓影片、YouTube 教學）再用 Claude Code 跑，亦啱做短影音「AI 自己教你點用 AI」嘅示範。
 - **設計細節值得抄**：中途要先確認流程同分鏡（human checkpoint）、「查唔到就講，唔好作」條款、`【】` 參數位、要求交付來源連結同完整原始碼令客戶之後可以自己改——全部都可以放入 HK 中小企項目嘅交付 SOP。
 - **同 vault 已有題材互補**：vault 已有 Opus 5.5 一句 prompt 出 motion-graphics showreel，同 Video Shotcraft 嘅 Remotion 產品片流程；呢個帖係「叫 agent 自己研究方法再做」嘅另一種進路，三者可以對比。
 - **用前要核實**：作者所講嘅「冇接 MCP、Claude Code 直接生成」係自述，成品未睇到；prompt 要 agent 上網搜資料，來源品質要人手抽查。

@@ -36,7 +36,7 @@ needs_manual_text: false
 - **AI 顧問 (HK SME)：** 好多香港中小企仲係靠人手搵客、買 list。Clay 嘅「自然語言描述 ICP → 自動 enrich → 排序 → 寫 outreach」可以直接做成一個顧問方案模板，免費 plan 夠做 demo。不過要留意，佢嘅數據源以歐美 B2B 為主，香港本地公司嘅覆蓋率要先實測。
 - **Waterfall 概念本身可以抄：** 逐個數據源試到有結果先停，呢個 pattern 可以用喺任何 enrichment pipeline，例如用 Agent-Reach 或者 Scrapegraph-ai 自己砌一個平價版畀預算細嘅客。
 - **Agent 化 GTM：** Clay 已經出咗 MCP 同 Claude Code、Codex 嘅 plugin，即係 coding agent 可以直接幫你搵客、寫 email。呢個係「AI agent 入侵銷售」嘅好例子，啱拎嚟拍短片。
-- **內容題材：** TouchDown 用廣東話包裝外國 AI 融資新聞（標題「AI銷售獨角獸」、「OpenAI 都係佢客仔」），呢種 hook 格式可以參考嚟做 Josep 自己嘅 AI 短片。
+- **內容題材：** TouchDown 用廣東話包裝外國 AI 融資新聞（標題「AI銷售獨角獸」、「OpenAI 都係佢客仔」），呢種 hook 格式可以參考嚟做 Jeff 自己嘅 AI 短片。
 
 ## Source
 

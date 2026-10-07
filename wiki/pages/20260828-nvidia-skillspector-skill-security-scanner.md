@@ -38,7 +38,7 @@ needs_manual_text: false
 - 呢個 vault 本身就係由第三方 repo 大量收 skill（github-stars-sync、`npx skills add`），入 `wiki/stars/` 或者真正安裝落 Claude Code 之前，用 `skillspector scan <repo> --no-llm` 做一次 gate 好合理；CLAUDE.md 已經講明 draft skill 唔好自動跑，SkillSpector 係第二重保險。
 - 幫香港中小企做 AI 顧問時，客戶一定會問「裝人哋啲 skill / MCP 安唔安全」——呢個工具有具體分數同報告（SARIF / Markdown），可以直接放入顧問交付物或者 CI。
 - `claude_cli` / `codex_cli` provider 唔使 API key，用返本機登入就可以做 LLM 語意分析，成本低。
-- 條 Reel 本身係「留言 SKILL 攞資源」嘅 lead-magnet 格式（3.3K 留言），對 Josep 做 AI 短片內容有參考價值。
+- 條 Reel 本身係「留言 SKILL 攞資源」嘅 lead-magnet 格式（3.3K 留言），對 Jeff 做 AI 短片內容有參考價值。
 
 ## Source
 - Link: https://www.instagram.com/reel/DcllmSNv_Bk/

@@ -38,7 +38,7 @@ Keith 嘅結論係：對接 case 嘅 AI builder 嚟講，呢個唔係慳工具�
 
 ## 點解值得留意
 
-- 直接對應 Josep 嘅 AI 顧問生意：香港中小企好多都問「AI 搜尋搵唔搵到我」，一份用 `jev-seo` 出嘅 PDF 審核報告（每個網站成本幾毫子）可以做成低門檻 lead magnet 或者入門服務。
+- 直接對應 Jeff 嘅 AI 顧問生意：香港中小企好多都問「AI 搜尋搵唔搵到我」，一份用 `jev-seo` 出嘅 PDF 審核報告（每個網站成本幾毫子）可以做成低門檻 lead magnet 或者入門服務。
 - Keith 嗰句「唔係慳工具錢，係重寫定價」值得認真諗：交付成本跌咗一個數量級，報價應該按結果／價值計，而唔係按工時。
 - 「平價判斷模型逐 URL 打 rubric」呢個 pattern 可以搬去 Iron Log / English Overload 嘅內容 QA（例如用 yes/no 清單篩 AI 生成內容），亦可以做短片題材（「AI 幫你 audit 網站 GEO」）。
 - 兩個 `jev-seo` repo 都未 review，指令同 API key 設定未驗證；要用之前先喺獨立環境試，唔好直接喺客戶網站上跑修正。

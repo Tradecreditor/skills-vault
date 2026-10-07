@@ -50,7 +50,7 @@ UI UX Pro Max 是一個開源的 Agent Skill，為 Claude Code、Cursor、Windsu
 
 - **Vibe coding 的設計副駕：** 直接給 Claude Code 或任何 AI 助手注入 UI/UX 設計智慧，無需手動翻查設計規範或自行撰寫 design system prompt——192 個行業規則即插即用。
 - **BM25 推理引擎取代猜測：** 輸入產品類型，即可輸出 Pattern + Style + Colors + Typography + Anti-patterns + 交付前清單，大幅縮短 vibe-code 到可用 UI 的時間。
-- **多平台 agent 統一安裝：** `uipro init --ai all` 一次為 Claude Code、Cursor、Windsurf、Codex CLI、Gemini CLI 等安裝，適合 Josep 同時用多個 AI 工具的工作流。
+- **多平台 agent 統一安裝：** `uipro init --ai all` 一次為 Claude Code、Cursor、Windsurf、Codex CLI、Gemini CLI 等安裝，適合 Jeff 同時用多個 AI 工具的工作流。
 - **開源 + 可離線驗證：** 所有 catalog 數據提交在 repo 內，CI 離線執行，`npm --prefix cli run verify:data` 可本地驗證完整性，無需依賴雲端。
 
 ## Source

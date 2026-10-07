@@ -31,7 +31,7 @@ OpenDots 係 CopilotKit 喺 OpenAI 2026-09-29 推出 Dots 之後兩日開源（M
 ## 點解值得留意
 
 - Hot list 2026-W40 第二名（heat 0.94，GitHub topical gate + X 單帖 gate），詳見 [[hot-list/2026-W40|hot-list/2026-W40]]。
-- 「每個 agent 有自己電腦 + 存檔前人手批准」係可以抄落 Josep 自己 agent 項目嘅模式；比 OpenAI Dots 更易 self-host 同改。
+- 「每個 agent 有自己電腦 + 存檔前人手批准」係可以抄落 Jeff 自己 agent 項目嘅模式；比 OpenAI Dots 更易 self-host 同改。
 - 產品 template 而唔係 procedure，所以冇 draft SKILL.md。
 
 ## Source

@@ -73,7 +73,7 @@ Lint/CI          →  Health Check (weekly, outputs/health/)
 
 - **這個 vault 就是 Karpathy LLM-Wiki 的實作**：`raw/` → `wiki/pages/` → `outputs/` 的三層架構與作者描述的完全對應，可用此文驗證設計決策是否正確。
 - **Kepano「乾淨庫 vs. 髒庫」原則直接影響 vault 政策**：AI 捕獲的內容放 `raw/`，人工審核後才進 `wiki/`，與本庫現有規則一致——這篇文章是支持現有設計的外部佐證。
-- **「別一上來搭 RAG」是對 Josep 的直接提醒**：庫還小，索引檔案優先，等規模到了再加向量搜尋。
+- **「別一上來搭 RAG」是對 Jeff 的直接提醒**：庫還小，索引檔案優先，等規模到了再加向量搜尋。
 - **作者的公開 Obsidian 庫**可直接參考插件清單、Agent 提示詞範本，值得在需要擴充 skills 時查閱。
 
 ## Source

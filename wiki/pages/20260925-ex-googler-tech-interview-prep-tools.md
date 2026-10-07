@@ -35,7 +35,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- Wispr Flow（講嘢代替打字）可以直接用嚟對 Claude Code／coding agent 口述長 prompt，對 Josep 日常開發 Iron Log、English Overload 可能慳唔少打字時間；vault 已有 whisperX 可作本地開源替代比較。
+- Wispr Flow（講嘢代替打字）可以直接用嚟對 Claude Code／coding agent 口述長 prompt，對 Jeff 日常開發 Iron Log、English Overload 可能慳唔少打字時間；vault 已有 whisperX 可作本地開源替代比較。
 - Excalidraw 適合同香港中小企客講解 AI 系統架構時即場畫圖，免費、唔使登入。
 - 呢條片示範咗「留言關鍵字 → DM 完整清單」嘅引流 CTA：15 個可見留言差唔多全部係 "Tools"，但亦有人嫌內容太基本——做 AI 短片時，公開內容要夠料先唔會俾人覺得係 bait。
 - 內容本身偏薄（只有工具名），屬低優先參考；冇草擬 skill。

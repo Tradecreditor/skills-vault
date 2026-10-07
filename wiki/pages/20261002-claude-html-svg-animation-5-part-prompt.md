@@ -38,7 +38,7 @@ AI郵報（@aiposthub）分享用 Claude 製作 HTML＋SVG 動畫嘅入門教學
 
 ## 點解值得留意
 
-- **客戶 demo 快速原型**：「主體、畫布、動作、順序、輸出」呢個 Prompt 結構，Josep 可以直接用喺 Claude Code，為香港中小企快速出 Logo 開場、Loading 動畫或動態圖表，交付單一 HTML 檔。
+- **客戶 demo 快速原型**：「主體、畫布、動作、順序、輸出」呢個 Prompt 結構，Jeff 可以直接用喺 Claude Code，為香港中小企快速出 Logo 開場、Loading 動畫或動態圖表，交付單一 HTML 檔。
 - **Prompt 要具體到秒數同停止條件**：例子入面有比例、背景、2 秒描繪、0.5 秒淡入、最後停止、輸出格式，啱做成可重用嘅 prompt checklist（呢次只係筆記，未起草 skill）。
 - **同 vault 現有動畫素材互補**：pixel2motion 同 motion-design-skill 係「裝工具／skill」路線，呢個帖係純 Prompt 路線，可以對照邊個更適合客戶情境。
 - **先核實可用性**：MP4／GIF 點輸出帖中冇交代，留言又有人話香港用唔到（原因不明），推薦畀客戶之前要自己試過。

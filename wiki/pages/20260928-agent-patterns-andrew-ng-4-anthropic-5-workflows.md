@@ -37,7 +37,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- **客戶講解用 checklist**：「9 招」係一個易記嘅框架，Josep 向香港中小企解釋 agent 唔係神秘黑盒、重點係工作流程設計（作者論點：改流程可以勝過換 model）時可以用；45.5K views 亦反映呢類整理帖受眾好大，可以做短影音題材。
+- **客戶講解用 checklist**：「9 招」係一個易記嘅框架，Jeff 向香港中小企解釋 agent 唔係神秘黑盒、重點係工作流程設計（作者論點：改流程可以勝過換 model）時可以用；45.5K views 亦反映呢類整理帖受眾好大，可以做短影音題材。
 - **對應 Claude Code 日常做法**：Planning、Orchestrator-workers、Evaluator-optimizer 對應 plan mode、subagent 同獨立 reviewer（vault 嘅 skill-review routine 用獨立 reviewer subagent 審核 draft skill，精神上接近 Evaluator-optimizer）；留言提到 Reflection 要拆成 draft、critic、reviser 三個角色，值得參考。
 - **數字要核實先好引用**：「48 分升到 95 分」係轉述，冇列出 benchmark 同來源；用喺客戶簡報前，應直接睇 Andrew Ng 原講法同 Anthropic 嘅《Building Effective Agents》原文（可另行 capture）。
 

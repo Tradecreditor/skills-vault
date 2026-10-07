@@ -9,7 +9,7 @@ Claude Code: `/plugin marketplace add Tradecreditor/skills-vault` then `/plugin 
 
 **Install into other projects only skills marked `reviewer-approved` or `verified`.** The plugin and `npx skills add` can still
 reach every folder, so the status column is the gate: `draft` = not approved yet (never reviewed, or rejected; the report link
-says which), `reviewer-approved` = passed the `skill-review` routine's audit, `verified` = Josep's own mark, `deprecated` = retired.
+says which), `reviewer-approved` = passed the `skill-review` routine's audit, `verified` = Jeff's own mark, `deprecated` = retired.
 
 ## Skills in this vault
 | name | vault_status | origin_type | what it does |
@@ -29,7 +29,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | scanning-agent-skills | reviewer-approved | post | Scans third-party agent skills, plugins and MCP servers with NVIDIA SkillSpector before install |
 | stacking-coding-agent-plugins | draft | post | Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) |
 | targeting-purchase-intent-keywords | reviewer-approved | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |
-| tracking-projects-in-notion | draft | vault-operations | Runs Josep's cross-project kanban in Notion under one board policy; mirrors handoff.md In flight rows and audits the board weekly |
+| tracking-projects-in-notion | reviewer-approved | vault-operations | Runs Jeff's cross-project kanban in Notion under one board policy; mirrors handoff.md In flight rows and audits the board weekly |
 | tracking-tasks-with-backlog-md | reviewer-approved | repo | Tracks agent and human work as Markdown task files with Backlog.md |
 | using-obsidian-skills | draft | repo | Installs and applies kepano/obsidian-skills for Obsidian markdown, bases and canvas |
 | using-ui-ux-pro-max | reviewer-approved | repo | Installs and applies the UI UX Pro Max skill for AI design system generation (192 rules, 79 styles) |
@@ -37,7 +37,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | vault-search | verified | vault-operations | Searches the vault (index, skill descriptions, pages) for tools, skills and notes |
 
 New skills start `draft`. The daily `skill-review` routine audits each one with an independent reviewer agent
-(`.claude/agents/vault-skill-reviewer.md`, procedure `skills/auditing-agent-skills`) and sets `reviewer-approved` on a pass; Josep no
+(`.claude/agents/vault-skill-reviewer.md`, procedure `skills/auditing-agent-skills`) and sets `reviewer-approved` on a pass; Jeff no
 longer reviews skills himself (2026-10-04). Reports live in `outputs/skill-reviews/`. An edit to an approved skill changes its
 `review_hash` and sends it back through review. The capture routine adds a row when it drafts a skill; the weekly lint checks that
 every skill folder has a row whose `vault_status` and `origin_type` match its frontmatter, and that approved skills still match their hash.

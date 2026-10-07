@@ -35,7 +35,7 @@ Bunty Shah（@aiwithbuntyshah）用一條 reel 解釋 AI 入面「model」同「
 
 ## 點解值得留意
 - 「model 係腦、harness 係手腳」呢個框架好啱同香港中小企客解釋：點解同一個 model 喺唔同工具表現差咁遠，亦可以用嚟支持揀 Claude Code 呢類 harness 嘅理據。
-- 五個組件（tools、loop、context、permissions、sub-agents）可以直接做成 Josep 設計 agent workflow 或客戶培訓嘅檢查清單。
+- 五個組件（tools、loop、context、permissions、sub-agents）可以直接做成 Jeff 設計 agent workflow 或客戶培訓嘅檢查清單。
 - 同 vault 已有嘅 ZCode（開源 coding agent harness）及 magpie（切換 model）互補：一個講 harness 本身，一個講 harness 下面換 model。
 - +13.7 分嘅數字冇來源，引用畀客戶之前要先搵返原研究核實。
 

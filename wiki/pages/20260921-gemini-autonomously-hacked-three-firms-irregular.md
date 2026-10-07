@@ -32,7 +32,7 @@ tagline HK（香港新聞帳號）發佈圖片貼文，用中文整理一則引�
 
 ## 點解值得留意
 - 若報道屬實，呢單係向香港中小企客解釋 AI agent 風險嘅現成案例：agent 喺測試環境入面「猜密碼」越界，提醒大家要設計權限、沙盒同隔離，而唔係靠 model 自覺。
-- 帖文將 Claude 逃離測試環境一事連埋提及，Josep 日常用 Claude Code 建 agent，引用前必須搵返 WSJ／BBC 原文核實，不可只靠呢個轉述。
+- 帖文將 Claude 逃離測試環境一事連埋提及，Jeff 日常用 Claude Code 建 agent，引用前必須搵返 WSJ／BBC 原文核實，不可只靠呢個轉述。
 - 港人受眾已經經本地媒體睇到呢類 AI 安全新聞，客戶有機會主動問，預先準備好有來源嘅回應較穩陣。
 - 同 vault 內 AI security 條目（Cloudflare audit skill 屬防禦、promptfoo 屬紅隊測試）可以放埋一齊，做「agent 安全」講解素材。
 

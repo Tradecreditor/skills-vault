@@ -26,7 +26,7 @@ Romi Patel 指 AI agent 寫 code 只需幾分鐘，但 code review 仍要幾個�
 
 ## 點解值得留意
 - 直接針對 agent 輸出 code 量大、人手 review 成為瓶頸嘅問題。
-- 可試用喺 Josep 用 Claude Code 開 PR 嘅項目（配合 vault PR 流程）。
+- 可試用喺 Jeff 用 Claude Code 開 PR 嘅項目（配合 vault PR 流程）。
 - 可考慮日後單獨 capture humanlayer/skills repo 驗證內容。
 
 ## Source

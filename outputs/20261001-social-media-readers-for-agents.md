@@ -4,7 +4,7 @@
 
 ## 摘要
 
-Josep 主要由 Telegram 貼 X、Instagram、Facebook、YouTube 連結入 vault，由雲端 `capture-link` Routine 處理。而家冇登入已經讀到 X 單帖（fxtwitter）、Threads、IG caption（Jina 或公開 embed endpoint）、FB 公開帖（Jina）。讀唔到嘅係影片語音：IG reel / carousel 影片、FB 影片、YouTube 字幕（雲端 IP 被 YouTube 封 yt-dlp）。Agent-Reach 嘅 FB / IG 路線要喺桌面 Chrome 裝 OpenCLI 借用登入狀態，雲端 Routine 用唔到。所有要登入嘅方法（匯出 cookie、Playwright storageState、OpenCLI、Browser Use / Browserbase profile、Claude in Chrome）都違反平台條款、有封號風險，所以唔採用。Supadata 唔使登入就轉錄到 IG / FB 影片，免費層夠用（約每月 30 分鐘 AI 轉錄），所以成為唯一加入嘅 key，而且限定 IG / FB 先用。YouTube 喺雲端會只有 metadata 加 `needs_manual_text: true`，本機 Claude Code 跑一次先有字幕，呢個係接受咗嘅取捨。
+Jeff 主要由 Telegram 貼 X、Instagram、Facebook、YouTube 連結入 vault，由雲端 `capture-link` Routine 處理。而家冇登入已經讀到 X 單帖（fxtwitter）、Threads、IG caption（Jina 或公開 embed endpoint）、FB 公開帖（Jina）。讀唔到嘅係影片語音：IG reel / carousel 影片、FB 影片、YouTube 字幕（雲端 IP 被 YouTube 封 yt-dlp）。Agent-Reach 嘅 FB / IG 路線要喺桌面 Chrome 裝 OpenCLI 借用登入狀態，雲端 Routine 用唔到。所有要登入嘅方法（匯出 cookie、Playwright storageState、OpenCLI、Browser Use / Browserbase profile、Claude in Chrome）都違反平台條款、有封號風險，所以唔採用。Supadata 唔使登入就轉錄到 IG / FB 影片，免費層夠用（約每月 30 分鐘 AI 轉錄），所以成為唯一加入嘅 key，而且限定 IG / FB 先用。YouTube 喺雲端會只有 metadata 加 `needs_manual_text: true`，本機 Claude Code 跑一次先有字幕，呢個係接受咗嘅取捨。
 
 ## Per-platform matrix (what the vault does now)
 

@@ -35,7 +35,7 @@ Tino Su（@tino.su）用中文整理 DeepLearning.AI／Andrew Ng 發表嘅「The
 
 ## 點解值得留意
 
-- **顧問定位**：「Using Coding Agents」同「Shaping the Build」（product sense、理解客戶目標）貼近 Josep 畀香港中小企嘅價值：用 agent 起 solution，由人去定 spec。
+- **顧問定位**：「Using Coding Agents」同「Shaping the Build」（product sense、理解客戶目標）貼近 Jeff 畀香港中小企嘅價值：用 agent 起 solution，由人去定 spec。
 - **Evals 同 error analysis**：作者強調嘅核心紀律；替客戶做 AI 應用時可以加簡單 eval 流程，vault 已有 promptfoo 筆記。
 - **培訓大綱**：四項能力可以用嚟做客戶或團隊嘅 AI 技能盤點同培訓大綱。
 - **內容題材**：Andrew Ng 背書嘅「AI 工程能力地圖」啱做 Threads 或短片題材，但發佈前要睇原文核實數字。

@@ -32,7 +32,7 @@ Keith Rumjahn（@krumjahn）話有人將「3D 鏡頭加文字效果」做成 age
 
 ## 點解值得留意
 
-- **產品 demo／短影音字幕**：Josep 幫客戶或自己做產品 demo、reel 時，字幕同鏡頭動態通常要入剪片軟件；如果 agent 真係可以靠 skill 做出景深 3D 字幕，可以慳返後製時間。
+- **產品 demo／短影音字幕**：Jeff 幫客戶或自己做產品 demo、reel 時，字幕同鏡頭動態通常要入剪片軟件；如果 agent 真係可以靠 skill 做出景深 3D 字幕，可以慳返後製時間。
 - **「單一特效 = 一個 skill」嘅包裝方式**：作者形容呢個 skill 專做一個特效，可安裝、可由 agent 呼叫，同 vault 嘅 skill 設計方向一致，可以參考點樣界定細而準嘅 skill。
 - **資料不足，只作線索**：帖文冇來源連結，只可當作「有呢類 skill」嘅風向；要追到原 repo 先值得試，仲要同 Video Shotcraft（Remotion）嘅產品片流程做比較。
 

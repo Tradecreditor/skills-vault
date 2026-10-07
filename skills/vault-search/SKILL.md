@@ -1,6 +1,6 @@
 ---
 name: vault-search
-description: Searches Josep's skills vault (index, skill descriptions, pages) for tools, skills, repos, concepts or reads saved before and reports matches with install commands. Use when starting a new project, when asked whether something was saved (搵返, 之前收過), or before recommending a new tool.
+description: Searches Jeff's skills vault (index, skill descriptions, pages) for tools, skills, repos, concepts or reads saved before and reports matches with install commands. Use when starting a new project, when asked whether something was saved (搵返, 之前收過), or before recommending a new tool.
 metadata:
   vault_status: "verified"
   origin_type: "vault-operations"

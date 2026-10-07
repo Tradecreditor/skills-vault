@@ -144,7 +144,7 @@ State: header + `{"a": {"slug": "...", "title": "...", "type": "...", "source_ur
 Thresholds: `≥ 0.80` → list under `## Suggested fixes` as a merge proposal (never merge automatically; the prompt already forbids it); `0.50–0.80` → Sonnet compares and decides; `< 0.50` → not mentioned. Fallback: Sonnet eyeballs as today.
 
 ### L2 `review_priority` — order the stale-draft list (later)
-Attaches to check 6 ("draft entries older than 30 days (list them for Josep to review)"). Ordering only; nothing is removed.
+Attaches to check 6 ("draft entries older than 30 days (list them for Jeff to review)"). Ordering only; nothing is removed.
 
 State: header + `{"slug": "...", "type": "...", "title": "...", "captured_at": "...", "has_raw": true, "related_count": n, "summary": "<## 摘要>", "recent_captures": ["<titles of the last 20 hot.md items>"]}` (≈ 800 tokens).
 
@@ -152,19 +152,19 @@ State: header + `{"slug": "...", "type": "...", "title": "...", "captured_at": "
 {
   "review_priority": {
     "type": "score",
-    "instructions": "How much is this draft worth Josep's review time now? Rate on the five levels below.",
+    "instructions": "How much is this draft worth Jeff's review time now? Rate on the five levels below.",
     "criteria": [
       "thin or placeholder summary, no raw text, no related links; likely to be deprecated",
       "complete but off the vault's current interests and not referenced by other pages",
       "complete and on-topic, no urgency",
       "complete, on-topic and related to items captured in the last two weeks",
-      "complete, on-topic, referenced by other pages or a skill, and about a tool Josep is actively using"
+      "complete, on-topic, referenced by other pages or a skill, and about a tool Jeff is actively using"
     ]
   }
 }
 ```
 
-Use the score to sort the list in the report; Josep still decides.
+Use the score to sort the list in the report; Jeff still decides.
 
 ---
 

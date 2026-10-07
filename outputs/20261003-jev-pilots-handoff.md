@@ -14,7 +14,7 @@
 | API 形狀修正、provider 可配置、env var key 文件 | 同上 + `routines/README.md` | PR #16 merged |
 | 「開發改動即時測試，唔等 schedule」實踐 | `routines/README.md` Step 5（只係開發 session 嘅實踐，**唔寫入** CLAUDE.md / AGENTS.md / routine prompt） | PR #17 merged |
 | Jev client script、`jev.client` config、prompt 改用 script | `skills/judging-with-jev/scripts/jev_ask.py`、`wiki/hot-list/_config.yaml` `jev:`、`routines/weekly-hot-list.md` step 0 | PR #18 merged（2026-10-03 11:01 UTC） |
-| Live Routine prompt 重貼 | claude.ai Routine `weekly-hot-list`（trigger `trig_01FGvPxxku629BRWVuTGTxYv`） | 2026-10-03 11:29 UTC 已貼新版（Josep） |
+| Live Routine prompt 重貼 | claude.ai Routine `weekly-hot-list`（trigger `trig_01FGvPxxku629BRWVuTGTxYv`） | 2026-10-03 11:29 UTC 已貼新版（Jeff） |
 | 環境 | `TYPESAFE_API_KEY` 係環境變數；`api.typesafe.ai` 喺 allowed domains；Bearer 型 API credential 注入唔 work，唔要再試 | 完成 |
 | W40 開發測試報告 | branch `hot-list/2026-W40`、PR #19（**唔要 merge**，星期一正式 run 會 force-push 覆寫） | 開住 |
 
@@ -23,7 +23,7 @@
 
 ## 3. 試點 1 尾段待辦（按次序）
 
-1. **星期一 run 後驗收**（Josep 或下一個 session）：開 `hot-list/2026-W40` PR → `## 方法` 要有 `jev: in_scope a/b/c/d; topical …` 一行而唔係 `jev: off (...)`；transcript 冇 permission denial；H1 act 名單冇混入宣傳 / 活動帖。
+1. **星期一 run 後驗收**（Jeff 或下一個 session）：開 `hot-list/2026-W40` PR → `## 方法` 要有 `jev: in_scope a/b/c/d; topical …` 一行而唔係 `jev: off (...)`；transcript 冇 permission denial；H1 act 名單冇混入宣傳 / 活動帖。
 2. **門檻決定**：開發 run 見 `in_scope` 2.5 偏鬆（活動回顧 3.05、贊助鳴謝 2.90、「分享你嘅 setup」2.55 都入 act）。星期一數據一致嘅話，`wiki/hot-list/_config.yaml` → `jev.in_scope.act_min: 3.0`（改 file 即生效，唔使重貼 prompt）。`topical` 0.80 / 0.50 唔改。
 3. **兩個乾淨星期後**：`jev.same_item.enabled: true`；`jev.model` 由 `jev-latest` 釘到當時版本（例如 `jev-1.13.0`）。
 4. **Snapshot 缺口**：開發 run 同 W39 一樣只刷新搜尋命中嘅 repo，冇命中嘅 tracked repo（`_snapshot.json` ∪ `wiki/stars`）冇重新抓星數，所以「舊 repo 突然爆升」會漏。生產 Routine 有 GitHub connector / Exa，應照 prompt 刷新全部；如果 Monday run 都冇做，考慮喺 prompt 1a 加硬性一句。
@@ -51,8 +51,8 @@
 
 ## 7. 每個試點都要行嘅步驟
 
-1. 開分支改檔 → `bash scripts/vault-guard-check.sh origin/main HEAD Tradecreditor` → push → 開 PR（Josep merge；核心帳戶先可以）。
-2. Merge 後 Josep 本機 `git pull --rebase origin main`，然後 `.\scripts\copy-prompt.ps1 <routine>`（macOS/Linux：`bash scripts/copy-prompt.sh <routine>`），見綠色 "verified intact" 先去 Routine → Instructions 全選刪除 Ctrl+V Save。Routine 儲存自己一份 prompt，改 repo 檔唔會自動生效。
+1. 開分支改檔 → `bash scripts/vault-guard-check.sh origin/main HEAD Tradecreditor` → push → 開 PR（Jeff merge；核心帳戶先可以）。
+2. Merge 後 Jeff 本機 `git pull --rebase origin main`，然後 `.\scripts\copy-prompt.ps1 <routine>`（macOS/Linux：`bash scripts/copy-prompt.sh <routine>`），見綠色 "verified intact" 先去 Routine → Instructions 全選刪除 Ctrl+V Save。Routine 儲存自己一份 prompt，改 repo 檔唔會自動生效。
 3. **即時 Run now 測試，唔等 schedule**（開發實踐；只喺 README Step 5，唔寫入 routine prompt）。讀 transcript 核實 `jev_ask.py probe` 有出現、jev 行有數字。
 4. 所有 Jev 請求經 `jev_ask.py`（exit 0 答到 / 2 整個 run 關 Jev / 3 單項 fallback / 4 state 有 secret 被拒）。永不手寫帶 key 嘅 curl / Python。
 5. Jev 只揀分支，永不改數字、gate、公式、dedupe；state 只放 reference 列明嘅欄位。

@@ -45,7 +45,7 @@ Backlog.md 是一個開源（MIT）、以 Markdown 為核心的任務管理工�
 
 ## 點解值得留意
 
-- Josep 想為自己的 agent 找一個 kanban：Backlog.md 的任務就是倉庫內的 `.md` 檔，本機優先、無帳戶無 telemetry，與 Obsidian vault 的做法一致；Claude Code、Codex、Gemini CLI 都有現成接法（CLI 指引或 MCP）。
+- Jeff 想為自己的 agent 找一個 kanban：Backlog.md 的任務就是倉庫內的 `.md` 檔，本機優先、無帳戶無 telemetry，與 Obsidian vault 的做法一致；Claude Code、Codex、Gemini CLI 都有現成接法（CLI 指引或 MCP）。
 - Vault 目前用 `handoff.md`（見 `keeping-handoff-docs`）記錄 session 交接，用 Obsidian Bases（`wiki/reads.base`）檢視資料；Backlog.md 補的是「逐項任務 + 驗收條件 + 看板」，兩者角色不同，不一定要取代 `handoff.md`。
 - `backlog/` 資料夾不在 CLAUDE.md 的 folder-role 表內，採用前要先做一次 `docs:` 修改；而且 `backlog init` 預設會寫入 AGENTS.md，在本 vault 內 AGENTS.md 是 CLAUDE.md 的受保護複本，所以應先在獨立專案試行，或手動合併指引。
 - 安裝前先用 `scanning-agent-skills` 掃描，並確認 npm 套件 `backlog.md` 指向 github.com/MrLesk/Backlog.md；星數和維護狀況只是頁面顯示，未經 API 驗證。

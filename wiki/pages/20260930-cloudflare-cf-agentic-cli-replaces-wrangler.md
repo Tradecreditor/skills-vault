@@ -32,7 +32,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- **Agent 管理基建**：如果 `cf` 真係覆蓋 3000+ API，Claude Code 等 agent 可以直接做 DNS、Tunnel、R2 等設定，同 Josep 部署 Iron Log / English Overload 嘅流程好配。
+- **Agent 管理基建**：如果 `cf` 真係覆蓋 3000+ API，Claude Code 等 agent 可以直接做 DNS、Tunnel、R2 等設定，同 Jeff 部署 Iron Log / English Overload 嘅流程好配。
 - **SME 客戶部署服務**：香港中小企用 Cloudflare 做網站或內部工具時，可以用 agent 加 CLI 做標準化部署同設定審查。
 - **短影音題材**：「Cloudflare 推出 agentic CLI 取代 Wrangler」係時事型題材，適合做快速新聞式內容，但發佈前要先核實官方資料。
 - **安全提醒**：`npm i -g cf` 要先確認 npm 套件同官方 repo 一致，避免裝錯同名套件。

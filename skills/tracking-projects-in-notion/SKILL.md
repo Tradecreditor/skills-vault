@@ -4,7 +4,11 @@ description: "Runs Jeff's cross-project kanban in Notion under one board policy,
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-06"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-07T17:52:41Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "ae26b8c4da7095986a74feeef74a0f66b33959a48212bc908b695761e328c627"
+  review_report: "outputs/skill-reviews/2026-10-07-tracking-projects-in-notion.md"
 ---
 
 # tracking-projects-in-notion — one Notion board for every project
@@ -54,7 +58,7 @@ CREATE TABLE ("Project" TITLE,
 
 Board view configuration: `GROUP BY "Status"; SORT BY "Last update" DESC`.
 
-**Per-Area board views.** Every project's board is a Board view of this one database filtered by its Area, a tab named after the Area (for example **skills-vault**). A new Area gets a new filtered Board view: `GROUP BY "Status"; FILTER "Area" = "<area>"`, added by Jeff or by a session with the connector (the sync never changes views or the schema). Never create a separate database or board per project; the policy explains why ([section 1](references/board-policy.md)).
+**Per-Area board views.** Every project's board is a Board view of this one database filtered by its Area, a tab named after the Area (for example **skills-vault**). A new Area gets a new filtered Board view: `GROUP BY "Status"; FILTER "Area" = "<area>"`, added by a session with the connector on Jeff's word (the sync never changes views or the schema). Never create a separate database or board per project; the policy explains why ([section 1](references/board-policy.md)).
 
 ## Working the board (session protocol)
 
@@ -75,11 +79,11 @@ Never edit a synced card in Notion: the next sync overwrites it. Never copy a ma
 | Source value | Written by | What the sync does with it |
 |---|---|---|
 | `<repo>/handoff.md` | the sync only | overwrites it every run; sets Status `Done` when the Workstream leaves In flight (a card already Done or Dropped is left alone); never deletes or archives |
-| `manual` (or any other label) | Jeff, or a session through the connector | never reads it for writing, never writes it (the query filters on the sync's own Source) |
+| `manual` (or any other label) | a session through the connector, on Jeff's word | never reads it for writing, never writes it (the query filters on the sync's own Source) |
 
 - To change a sync card, **edit the handoff**, not the card: the next run overwrites Status, Priority, Area, Next step, Owner, Link and Last update. Target date is never written, so it can be set in Notion on any card.
-- The script never changes the schema. Add a new Area, Source, Status, Priority or Owner option in Notion (a session with the connector, on Jeff's word) **before** the first run that uses it. A run (a dry run too) whose plan needs a missing option stops with exit 2 naming it, before any write.
-- Two cards with the same Project and Source: the oldest is the live one; the others are set to Done with a note pointing at the live card and counted as `duplicates=<n>` in the summary (copies already Done or Dropped are skipped). Cards are never deleted, by the script or by hand. A duplicate manual card is set to Dropped by hand with a pointer to the live card (policy section 5).
+- The script never changes the schema. Add a new Area, Source, Status, Priority or Owner option in Notion (a session with the connector, on Jeff's word) **before** the first run that uses it. The connector sets a select property's options only by restating the whole list, and an option left out is removed from every card: fetch the data source right before the change (never reuse an older list), send every option of that fresh list with its exact name and colour plus the new one, then fetch again and check that every option is still there unchanged and the new one is present; if anything disappeared, stop and tell Jeff (`references/joining-projects-hq.md` step 3.1). A run (a dry run too) whose plan needs a missing option stops with exit 2 naming it, before any write.
+- Two cards with the same Project and Source: the oldest is the live one; the others are set to Done with a note pointing at the live card and counted as `duplicates=<n>` in the summary (copies already Done or Dropped are skipped). Cards are never deleted, by the script or by hand. A duplicate manual card is set to Dropped through the connector with a pointer to the live card (policy section 5).
 
 ## How a handoff row becomes a card
 
@@ -125,7 +129,7 @@ Cells are split on `|` except inside backtick spans and `\|`, so a wikilink such
 
 ## Set up once
 
-1. **Create the page and database.** In a session with the Notion connector: create the private page "Projects HQ", create the database with the DDL above, add the Board, Table, Waiting on Jeff and Active views and an inline Board on the page. Without the connector, build the same by hand from the property table. A board built before the policy (no Priority or Target date property, no Dropped option) needs them added by hand; until Priority exists the sync stops with exit 2.
+1. **Create the page and database.** In a session with the Notion connector: create the private page "Projects HQ", create the database with the DDL above, add the Board, Table, Waiting on Jeff and Active views and an inline Board on the page. Without the connector, wait for a session that has it (Jeff does not edit the board). Adding an option means restating the whole option list (see the Source rule above). A board built before the policy (no Priority or Target date property, no Dropped option) needs them added by a session with the connector, on Jeff's word; until Priority exists the sync stops with exit 2.
 2. **Create an internal integration** in Notion's developer portal (https://www.notion.so/profile/integrations; Notion also calls these "connections"). A workspace owner is needed. Capabilities: Read content, Update content, Insert content. Copy the secret.
 3. **Share the page with it**: on Projects HQ, ••• → Connections → add the integration. It then sees only that page and its database.
 4. **Store the secret** as a plain environment variable `NOTION_TOKEN` on the cloud environment (here "Skills Management") and add `api.notion.com` to that environment's allowed domains (`routines/README.md` Step 0 lists the domains; its keys table has the `NOTION_TOKEN` row).
@@ -152,7 +156,7 @@ python3 scripts/notion-sync.py --audit       # read-only policy audit (next subs
 | `--audit` | off | the audit instead of the sync; cannot be combined with `--dry-run` (exit 4) |
 | `--today YYYY-MM-DD` | current UTC date | tests; the audit's "today" |
 
-`<repo>` is the last two path components of `remote.origin.url` (HTTPS, SSH and proxy URLs all work); with no git remote it falls back to the checkout's folder name.
+`<repo>` is the last path component of `remote.origin.url` without `.git`, and the owner is the one before it (HTTPS, SSH and proxy URLs all work). With no remote, or a remote that is a local path, it is the checkout's folder name. Path, PR and fallback links are built as `<repo-url>/blob/main/…`, `<repo-url>/pull/<n>` and `<repo-url>/blob/main/handoff.md`, with `<repo-url>` defaulting to `https://github.com/<owner>/<repo>`: `--repo-url` changes only that base, so for a default branch other than `main` put full URLs in Detail.
 
 stdout is one line (details go to stderr):
 
@@ -203,32 +207,16 @@ Privacy (this repository and its reports are public): titles are printed only fo
 
 ## Manual cards (non-repo work)
 
-Add them in Notion, or through the connector, with Source `manual` and every required field (policy section 3). The sync never reads or writes them, and the audit reports on them as counts only. This vault is public: keep manual project names and details out of the repo, the handoff, the health reports and this skill; they live only in Notion.
+A session with the connector adds them, on Jeff's word, with Source `manual` and every required field (policy section 3). The sync never reads or writes them, and the audit reports on them as counts only. This vault is public: keep manual project names and details out of the repo, the handoff, the health reports and this skill; they live only in Notion.
 
 ## Onboarding another project
 
-**A. A repo** (it becomes one Area):
+The step-by-step guide for an agent in the other project is [`references/joining-projects-hq.md`](references/joining-projects-hq.md): Jeff pastes its raw GitHub link into a session there and the agent follows it. It covers the approval check (status and `review_hash` on one clone of the vault), whose repo it is and whether it is public, the Area and Source options and the project's Board tab, copying the script from that clone, the 7-column handoff, the `CLAUDE.md` / `AGENTS.md` block, `NOTION_TOKEN` on a local computer (Windows and macOS), Jeff confirming the rows and files before anything is written, writing and committing in one go (a PR repo stops until the merge), the first sync, dropping the project's old manual cards once their synced cards exist, and resuming a join that spans several sessions. The join itself is tracked by one manual card, `Projects HQ join: <source>`, in the project's Area: its Next step names the next step and its private page body lists the cards to drop, so the join advances and closes through the connector without extra commits. In short:
 
-1. Copy `scripts/notion-sync.py` (standard library only) into that repo's `scripts/`.
-2. In Notion add that repo's Area option and its Source option (`<repo>/handoff.md`) to the board (a session with the connector, on Jeff's word), and add its own Board tab: a Board view of Project Status with `GROUP BY "Status"; FILTER "Area" = "<area>"`. Never a separate database.
-3. Give its `handoff.md` the 7-column In flight table (`skills/keeping-handoff-docs/references/handoff-template.md`).
-4. Paste this block into that repo's `CLAUDE.md` / `AGENTS.md`:
+- **A repo** becomes one Area. A session with the connector adds its Area option, its Source option (`<repo>/handoff.md`) and a Board tab (`GROUP BY "Status"; FILTER "Area" = "<area>"`), never a separate database. The repo gets `scripts/notion-sync.py` (copied from this skill's `scripts/` folder in a reviewed clone), a 7-column In flight table, and the block in its agent instructions. It is synced by the next session in it, or by its own Routine: `python3 scripts/notion-sync.py --area "<area>" --source "<repo>/handoff.md"`. Run from that repo, `--audit` names only that repo's cards. Same token, same board.
+- **A project without a repo** has manual cards only. On Jeff's word, a session with the connector adds the Area option and creates the cards with Source `manual`, then follows the same protocol (open, move, close with a Link to the evidence). No script, no handoff.
 
-```
-## Projects HQ (Jeff's kanban for every project)
-Policy: https://github.com/Tradecreditor/skills-vault/blob/main/skills/tracking-projects-in-notion/references/board-policy.md
-Board: Notion page Projects HQ, database Project Status. Columns: Backlog, In progress, Waiting on Jeff, Blocked, Done, Dropped. Priority P0-P3.
-- Start: read handoff.md (and this project's cards if you have the Notion connector). Work only on something that has a card; open one first.
-- Open: add a row to handoff.md "In flight" (| Workstream | Status | Priority | Owner | State | Next step | Detail |) in the same commit as the first piece of work.
-- Move: change the row's Status / Owner / Next step in the same commit as the work. Waiting on Jeff: Next step starts "Jeff:". Blocked: name the blocker.
-- Close: Done only with evidence in Detail (merged, live, checked); abandoned: "Dropped: <reason>". Never delete a card; follow-up work is a new card.
-- End: update the rows you touched; name the cards you opened, moved or closed in your final message.
-- Never edit a synced card in Notion (the sync overwrites it). Never copy a manual card's details into a public repo.
-```
-
-5. Schedule its sync: a step in that repo's Routine (`python3 scripts/notion-sync.py`, same `NOTION_TOKEN`, `api.notion.com` allowed) or the next session. Run with the defaults (it derives `<repo>/handoff.md` and the Area from `git remote`) or pass `--source` and `--area`. Same token, same board. Run from that repo, `--audit` names only that repo's cards.
-
-**B. A project without a repo**: manual cards only. On Jeff's word a session with the Notion connector adds the Area option and creates the cards with Source `manual` and follow the same protocol (open, move, close with a Link to the evidence). No script or handoff is involved.
+`scripts/notion-sync.py` in this skill is a byte-identical copy of the vault's `scripts/notion-sync.py`, so the copy other projects download is covered by this skill's review. Edit both together; `scripts/test_notion_sync.py` fails when they differ.
 
 ## Common mistakes
 
@@ -255,10 +243,12 @@ Board: Notion page Projects HQ, database Project Status. Columns: Backlog, In pr
 ## Evidence
 
 - 2026-10-06 — skills-vault: board built and seeded with 16 cards (4 from the handoff In flight table, 12 manual). `scripts/notion-sync.py` has been tested only against a local fake Notion server. v1 (sync only): 51 tests and three independent reviews (spec, API shape, token safety); request shapes checked against the official notion-sdk-js source; the 4 seeded handoff cards, read back from Notion and replayed through the script, gave `created=0 updated=0 unchanged=4`.
-- v2 (Priority, Dropped, Target date, `--audit`, explicit Status / Priority / Owner columns): 86 unit tests pass after the 2026-10-06 rename to Jeff (`cd /home/user/skills-vault && python3 -m unittest discover -s scripts -p 'test_*.py'`); three independent reviews on v2 (privacy, correctness, policy fit), with the fixes re-verified. Still not run against the live Notion API.
+- v2 (Priority, Dropped, Target date, `--audit`, explicit Status / Priority / Owner columns): 86 unit tests pass after the 2026-10-06 rename to Jeff (`cd /home/user/skills-vault && python3 -m unittest discover -s scripts -p 'test_*.py'`); three independent reviews on v2 (privacy, correctness, policy fit), with the fixes re-verified.
+- Live since 2026-10-07 (skills-vault): first run `created=0 updated=0 unchanged=4` (the seeded cards matched), after PR #32 `updated=1`, then `unchanged=4`; first `--audit`: 16 cards, 3 violations.
+- 2026-10-07: `references/joining-projects-hq.md` (joining another project) went through eight rounds of independent multi-session walk-throughs and regression checks; the sync parts were replayed in throwaway repos against the fake Notion server; the script copy in `scripts/` is test-enforced identical to the vault's.
 
 ## Source
 
 - Jeff's request, 2026-10-06: a Projects HQ with a Project Status database and a Board view, seeded from the handoff In flight table and his personal projects; a Routine cannot use the connector, so `NOTION_TOKEN` plus `scripts/notion-sync.py`; draft this skill once the schema is stable.
 - Jeff's board policy, `references/board-policy.md`: one standard for all projects, with Priority, Dropped, Target date and a weekly audit.
-- Files: `scripts/notion-sync.py`, `scripts/test_notion_sync.py`, `references/board-policy.md`, `routines/github-stars-sync.md` step 7, `routines/vault-lint.md` check 9, `CLAUDE.md` "Projects HQ".
+- Files: `scripts/notion-sync.py` (copy in this skill's `scripts/`), `scripts/test_notion_sync.py`, `references/board-policy.md`, `references/joining-projects-hq.md`, `routines/github-stars-sync.md` step 7, `routines/vault-lint.md` check 9, `CLAUDE.md` "Projects HQ".

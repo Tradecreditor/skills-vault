@@ -1,6 +1,6 @@
 # WhatsApp links drop — 2026-09-28 → 2026-10-04
 
-Source: Josep's WhatsApp "note to self" chat, exported 2026-10-04 and uploaded to a Claude Code cloud session (the export itself was not committed: its file name carries a phone number and the repo is public). Only links were in the chat; tracking params (`stkn`, `img_index`, `fbclid`, `sfnsn`) stripped. Processed by session `01QXU3csJdLG8xa7fSMtwhTY` — see `wiki/log.md` for what was captured.
+Source: Jeff's WhatsApp "note to self" chat, exported 2026-10-04 and uploaded to a Claude Code cloud session (the export itself was not committed: its file name carries a phone number and the repo is public). Only links were in the chat; tracking params (`stkn`, `img_index`, `fbclid`, `sfnsn`) stripped. Processed by session `01QXU3csJdLG8xa7fSMtwhTY` — see `wiki/log.md` for what was captured.
 
 | # | Date | Link | Vault status at drop time |
 |---|---|---|---|

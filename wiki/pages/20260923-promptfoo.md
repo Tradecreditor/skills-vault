@@ -51,7 +51,7 @@ promptfoo 是一個開源的 CLI 工具與函式庫，專門用於評估和紅�
 ## 點解值得留意
 
 - **AI 安全必備工具**：提供 LLM 紅隊測試和漏洞掃描，對任何部署 AI 的專案都是關鍵防線。
-- **CI/CD 整合**：可自動化 LLM 品質和安全測試，適合 Josep 的 Claude Code 和其他 AI 專案工作流程。
+- **CI/CD 整合**：可自動化 LLM 品質和安全測試，適合 Jeff 的 Claude Code 和其他 AI 專案工作流程。
 - **模型比較神器**：跨 GPT、Claude、Gemini 等模型對比評估，有助於選型和優化 prompt engineering。
 - **本地執行隱私保障**：評估在本地跑，提示詞不外洩，適合包含敏感業務邏輯的專案。
 

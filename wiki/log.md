@@ -158,3 +158,7 @@
 ## [2026-10-07] capture | visual-pr (HumanLayer skill): visual outline in every PR | 20261005-visual-pr-humanlayer-skill-pr-review
 ## [2026-10-07] capture | Ray Wang 今日工具輪播 2026-10-03：oil-ui、Moxie、Never Boring AI | 20261003-raywang-daily-tools-oil-ui-moxie-never-boring
 ## [2026-10-07] capture | Jev five builds (Romi Patel) | 20261007-jev-five-builds-romi-patel
+## [2026-10-07] review | judging-with-jev approved | outputs/skill-reviews/2026-10-07-judging-with-jev
+## [2026-10-07] review | tracking-tasks-with-backlog-md approved | outputs/skill-reviews/2026-10-07-tracking-tasks-with-backlog-md
+## [2026-10-07] review | using-obsidian-skills rejected | outputs/skill-reviews/2026-10-07-using-obsidian-skills
+## [2026-10-07] review | tracking-projects-in-notion approved | outputs/skill-reviews/2026-10-07-tracking-projects-in-notion
