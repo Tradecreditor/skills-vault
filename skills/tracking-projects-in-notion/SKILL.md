@@ -210,7 +210,7 @@ Add them in Notion, or through the connector, with Source `manual` and every req
 **A. A repo** (it becomes one Area):
 
 1. Copy `scripts/notion-sync.py` (standard library only) into that repo's `scripts/`.
-2. In Notion add that repo's Area option and its Source option (`<repo>/handoff.md`) to the board by hand, and add its own Board tab: a Board view of Project Status with `GROUP BY "Status"; FILTER "Area" = "<area>"`. Never a separate database.
+2. In Notion add that repo's Area option and its Source option (`<repo>/handoff.md`) to the board (a session with the connector, on Jeff's word), and add its own Board tab: a Board view of Project Status with `GROUP BY "Status"; FILTER "Area" = "<area>"`. Never a separate database.
 3. Give its `handoff.md` the 7-column In flight table (`skills/keeping-handoff-docs/references/handoff-template.md`).
 4. Paste this block into that repo's `CLAUDE.md` / `AGENTS.md`:
 
@@ -248,7 +248,7 @@ Board: Notion page Projects HQ, database Project Status. Columns: Backlog, In pr
 | Using the Notion connector from a Routine | Jeff found it unavailable there (2026-10-06). Use `scripts/notion-sync.py` with `NOTION_TOKEN` |
 | Pasting `NOTION_TOKEN` with a line break or space inside it | Exit 2 "invalid characters". Re-enter the secret as one line; surrounding whitespace is stripped |
 | `api.notion.com` missing from the allowed domains | Exit 2 "cannot reach". Add it to the environment (`routines/README.md` Step 0) |
-| A new Area, Owner, Priority or Source value not yet in the board | Exit 2 naming the option. Add it in Notion by hand first (see the Source rule) |
+| A new Area, Owner, Priority or Source value not yet in the board | Exit 2 naming the option. A session with the connector adds it in Notion first, on Jeff's word (see the Source rule) |
 | Copying a manual card's title or details into the repo, a report or a commit | The repo is public. Manual cards stay in Notion; the audit prints other cards as counts only |
 | Running the sync from a feature branch | The board shows unmerged state until the next run on `main`. Run it on `main` |
 
