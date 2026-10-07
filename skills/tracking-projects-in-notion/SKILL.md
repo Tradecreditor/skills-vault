@@ -78,7 +78,7 @@ Never edit a synced card in Notion: the next sync overwrites it. Never copy a ma
 | `manual` (or any other label) | a session through the connector, on Jeff's word | never reads it for writing, never writes it (the query filters on the sync's own Source) |
 
 - To change a sync card, **edit the handoff**, not the card: the next run overwrites Status, Priority, Area, Next step, Owner, Link and Last update. Target date is never written, so it can be set in Notion on any card.
-- The script never changes the schema. Add a new Area, Source, Status, Priority or Owner option in Notion (a session with the connector, on Jeff's word) **before** the first run that uses it. A run (a dry run too) whose plan needs a missing option stops with exit 2 naming it, before any write.
+- The script never changes the schema. Add a new Area, Source, Status, Priority or Owner option in Notion (a session with the connector, on Jeff's word) **before** the first run that uses it. The connector sets a select property's options only by restating the whole list, and an option left out is removed from every card: send every existing option with its exact name and colour plus the new one, then fetch again and check that the count rose by exactly one (`references/joining-projects-hq.md` step 3). A run (a dry run too) whose plan needs a missing option stops with exit 2 naming it, before any write.
 - Two cards with the same Project and Source: the oldest is the live one; the others are set to Done with a note pointing at the live card and counted as `duplicates=<n>` in the summary (copies already Done or Dropped are skipped). Cards are never deleted, by the script or by hand. A duplicate manual card is set to Dropped through the connector with a pointer to the live card (policy section 5).
 
 ## How a handoff row becomes a card
@@ -125,7 +125,7 @@ Cells are split on `|` except inside backtick spans and `\|`, so a wikilink such
 
 ## Set up once
 
-1. **Create the page and database.** In a session with the Notion connector: create the private page "Projects HQ", create the database with the DDL above, add the Board, Table, Waiting on Jeff and Active views and an inline Board on the page. Without the connector, build the same by hand from the property table. A board built before the policy (no Priority or Target date property, no Dropped option) needs them added by hand; until Priority exists the sync stops with exit 2.
+1. **Create the page and database.** In a session with the Notion connector: create the private page "Projects HQ", create the database with the DDL above, add the Board, Table, Waiting on Jeff and Active views and an inline Board on the page. Without the connector, build the same by hand from the property table. A board built before the policy (no Priority or Target date property, no Dropped option) needs them added by a session with the connector, on Jeff's word; until Priority exists the sync stops with exit 2.
 2. **Create an internal integration** in Notion's developer portal (https://www.notion.so/profile/integrations; Notion also calls these "connections"). A workspace owner is needed. Capabilities: Read content, Update content, Insert content. Copy the secret.
 3. **Share the page with it**: on Projects HQ, ••• → Connections → add the integration. It then sees only that page and its database.
 4. **Store the secret** as a plain environment variable `NOTION_TOKEN` on the cloud environment (here "Skills Management") and add `api.notion.com` to that environment's allowed domains (`routines/README.md` Step 0 lists the domains; its keys table has the `NOTION_TOKEN` row).
@@ -203,7 +203,7 @@ Privacy (this repository and its reports are public): titles are printed only fo
 
 ## Manual cards (non-repo work)
 
-Add them in Notion, or through the connector, with Source `manual` and every required field (policy section 3). The sync never reads or writes them, and the audit reports on them as counts only. This vault is public: keep manual project names and details out of the repo, the handoff, the health reports and this skill; they live only in Notion.
+A session with the connector adds them, on Jeff's word, with Source `manual` and every required field (policy section 3). The sync never reads or writes them, and the audit reports on them as counts only. This vault is public: keep manual project names and details out of the repo, the handoff, the health reports and this skill; they live only in Notion.
 
 ## Onboarding another project
 
