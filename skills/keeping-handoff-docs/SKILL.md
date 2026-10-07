@@ -15,7 +15,7 @@ metadata:
 
 ## Overview
 
-Work on a project is spread over many sessions and several agents (Claude Code cloud and local, Codex, Gemini CLI, OpenClaw, cloud Routines). Each one starts with an empty context. Without a handoff the state lives in chat transcripts nobody re-reads, in PR descriptions, and in the head of whoever ran the last session; the next agent either repeats work or guesses. The fix is boring and reliable: **one `handoff.md` at the project root**, read first, updated last. This is Josep's standing rule for every project (2026-10-03).
+Work on a project is spread over many sessions and several agents (Claude Code cloud and local, Codex, Gemini CLI, OpenClaw, cloud Routines). Each one starts with an empty context. Without a handoff the state lives in chat transcripts nobody re-reads, in PR descriptions, and in the head of whoever ran the last session; the next agent either repeats work or guesses. The fix is boring and reliable: **one `handoff.md` at the project root**, read first, updated last. This is Jeff's standing rule for every project (2026-10-03).
 
 ## The rule
 
@@ -31,7 +31,7 @@ Work on a project is spread over many sessions and several agents (Claude Code c
 |---|---|---|
 | header | purpose line, "last updated" with UTC time and who | one paragraph |
 | **Snapshot** | what the project is, where the rules live, who may push where, what runs on a schedule | 3–6 bullets, stable for weeks |
-| **In flight** | a table: workstream · state · next concrete step · link to the detailed doc | one row per open workstream; this is the part the next agent acts on |
+| **In flight** | a table: workstream · status · priority · owner · state · next concrete step · link to the detailed doc | one row per open workstream; this is the part the next agent acts on. Each row is a card on Jeff's Projects HQ board (`tracking-projects-in-notion`): Status, Priority and Owner follow its board policy |
 | **Open loops** | known unfinished items that are nobody's current task (expiring tokens, settings to flip, reviews pending) | each with where it is documented |
 | **Recently done** | last ~7 days, PR numbers and dates | prune older lines when you add new ones |
 | **Environment facts that bite** | things that cost a session an hour and will again | one line each + link to the long form |
@@ -50,7 +50,7 @@ Work on a project is spread over many sessions and several agents (Claude Code c
 - Facts with anchors: dates (UTC), PR numbers, commit hashes, trigger / session ids, file paths. "Proven" and "not yet proven" are separate lists.
 - Keep the whole file under about 150 lines. When a section grows past that, move detail to a linked document and leave the summary.
 - Links use the project's own convention (this vault: relative paths and `[[wikilinks]]` where Obsidian reads them).
-- Language: the project's working language for agents (this vault: English, since Codex and Gemini CLI read it too); summaries for Josep stay in the reports.
+- Language: the project's working language for agents (this vault: English, since Codex and Gemini CLI read it too); summaries for Jeff stay in the reports.
 - Never rename or delete the file; the name is the contract other agents rely on.
 
 ## Session workflow
@@ -59,7 +59,7 @@ Work on a project is spread over many sessions and several agents (Claude Code c
 
 **During**: when you make a decision that a later agent would otherwise re-litigate (a threshold, a rejected approach, a platform limit you hit), note it in the detailed doc or the Environment facts section while it is fresh.
 
-**End**: update Snapshot if anything structural changed, the In flight rows you touched (state + next step), Recently done, Environment facts; append your Session log line; include the file in the commit / PR that carries the change. If the session ends without changing state, do not touch the file.
+**End**: update Snapshot if anything structural changed, the In flight rows you touched (status, owner, state + next step), Recently done, Environment facts; append your Session log line; include the file in the commit / PR that carries the change. If the session ends without changing state, do not touch the file.
 
 ## Installing the SOP in another project
 
@@ -71,9 +71,9 @@ Install this skill in another agent with `npx skills add Tradecreditor/skills-va
 
 ## Evidence
 
-- 2026-10-03 — skills-vault: the Jev pilot work spanned two days, five PRs, three sub-sessions and two cloud Routines. Its state was scattered over a report's 下一步 (with config names that had already changed), a skill reference, `routines/README.md` and PR bodies. Writing `outputs/20261003-jev-pilots-handoff.md` and then the root `handoff.md` took under an hour and is now the entry point for the next pilot; Josep made it the rule for every project.
+- 2026-10-03 — skills-vault: the Jev pilot work spanned two days, five PRs, three sub-sessions and two cloud Routines. Its state was scattered over a report's 下一步 (with config names that had already changed), a skill reference, `routines/README.md` and PR bodies. Writing `outputs/20261003-jev-pilots-handoff.md` and then the root `handoff.md` took under an hour and is now the entry point for the next pilot; Jeff made it the rule for every project.
 
 ## Source
 
-- Josep's instruction, 2026-10-03: "Keeping a handoff document should be an SOP for any projects to follow. This is for multi sessions or multi agents to work. Keep a handoff.md in every project."
+- Jeff's instruction, 2026-10-03: "Keeping a handoff document should be an SOP for any projects to follow. This is for multi sessions or multi agents to work. Keep a handoff.md in every project."
 - First instance: `handoff.md` and `outputs/20261003-jev-pilots-handoff.md` in this repository.

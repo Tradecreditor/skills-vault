@@ -8,7 +8,7 @@
 #   non-core : may not delete or rename-away ANY file · may not touch protected paths: .github/ .claude/ .claude-plugin/
 #              .obsidian/ routines/ scripts/ supabase/ templates/ CLAUDE.md AGENTS.md skills/*/scripts/
 #   core     : deletions, renames and protected-path edits are allowed (audited/printed), never blocked
-# Core = the repository owner account (Josep's own Claude Code sessions, Routines, obsidian-git) plus VAULT_CORE_LOGINS.
+# Core = the repository owner account (Jeff's own Claude Code sessions, Routines, obsidian-git) plus VAULT_CORE_LOGINS.
 # Non-core = any other GitHub account, e.g. the machine account used by Codex / Gemini CLI / OpenClaw. Tokens inherit their account's role.
 set -u
 export LC_ALL=C.UTF-8
