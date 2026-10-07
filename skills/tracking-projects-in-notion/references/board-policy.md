@@ -74,9 +74,9 @@ Work is pulled in priority order: P0, then P1, then P2. Within one priority, the
 
 | Action | Repo work (Source `<repo>/handoff.md`) | Non-repo work (Source `manual`) |
 |---|---|---|
-| Open | add a row to `handoff.md` "## In flight" with Status (usually Backlog or In progress), Priority, Owner, State, Next step and Detail, in the same commit as the first piece of work. The next sync creates the card | create the card in Notion (UI or connector) with every required field |
-| Move | change the row's Status, Owner, Next step (and State) in `handoff.md` in the same commit as the work that caused the move | edit the card |
-| Close | set the row's Status to `Done` (or `Dropped`), Next step `none` (or `Dropped: <reason>`), Detail to the evidence; in a later update move the row to "Recently done". A row that just disappears from In flight is closed by the sync as Done with "Left … In flight" and no evidence; the weekly audit flags it (`evidence`) | set Status Done (or Dropped) and Link to the evidence |
+| Open | add a row to `handoff.md` "## In flight" with Status (usually Backlog or In progress), Priority, Owner, State, Next step and Detail, in the same commit as the first piece of work. The next sync creates the card | a session with the Notion connector creates the card with every required field, on Jeff's word |
+| Move | change the row's Status, Owner, Next step (and State) in `handoff.md` in the same commit as the work that caused the move | a session with the Notion connector edits the card |
+| Close | set the row's Status to `Done` (or `Dropped`), Next step `none` (or `Dropped: <reason>`), Detail to the evidence; in a later update move the row to "Recently done". A row that just disappears from In flight is closed by the sync as Done with "Left … In flight" and no evidence; the weekly audit flags it (`evidence`) | a session with the Notion connector sets Status Done (or Dropped) and Link to the evidence |
 
 Never edit a synced card in Notion: the next sync overwrites Status, Priority, Owner, Area, Next step, Link and Last update. Target
 date is never written by the sync, so it can be set in Notion on any card.
@@ -89,11 +89,14 @@ date is never written by the sync, so it can be set in Notion on any card.
 | Every session, end | the agent | update the In flight rows it touched (Status, Priority, Owner, Next step) and, for non-repo work, the manual cards; say in the final message which cards moved |
 | Daily 06:00 UTC | `github-stars-sync` step 7 | `scripts/notion-sync.py` mirrors `skills-vault/handoff.md` (other repos: their own scheduled run or the next session) |
 | Weekly, Monday | `vault-lint` check 9 | `scripts/notion-sync.py --audit` lists policy breaches (WIP, more than one P0, missing fields, stale, Waiting without `Jeff:`, Blocked without a blocker, P0 without Target date, overdue, Done without evidence, Dropped without a reason, duplicates). Counts for every card; names only for this repo's synced cards |
-| Weekly, Monday | Jeff (≈15 min) | review in this order: Waiting on Jeff, Blocked, WIP per Owner, P0 and overdue Target dates, stale cards, then Backlog (reprioritise, drop) |
+| Weekly, Monday | Jeff (≈15 min) | review in this order: Waiting on Jeff, Blocked, WIP per Owner, P0 and overdue Target dates, stale cards, then Backlog (reprioritise, drop), and tell a session what to change |
 | Monthly | Jeff | P3 and Backlog older than 60 days: keep, park or drop |
 
 ## 8. Privacy and change control
 
+- **Jeff views the board; he does not edit it** (decided 2026-10-07). Every change goes through an agent: repo cards through
+  `handoff.md`, `manual` cards through a session with the Notion connector, both on Jeff's word. Never ask Jeff to drag, edit or
+  create a card himself; ask what he wants changed and make the change.
 - This vault and its reports are public. Never copy a `manual` card's title, Area or details into a repository, a report or a
   commit message. The audit prints other cards as counts only.
 - Only Jeff adds or renames columns, priorities, Owners or Areas, and changes this policy. The sync never changes the schema: a

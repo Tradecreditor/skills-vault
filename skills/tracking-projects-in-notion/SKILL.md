@@ -28,16 +28,16 @@ Private page **Projects HQ** holds the database **Project Status**. Views: **Boa
 
 | Property | Type | Written by |
 |---|---|---|
-| Project | title | sync (from the Workstream cell); manual cards by hand |
-| Status | select: Backlog, In progress, Waiting on Jeff, Blocked, Done, Dropped | sync; manual cards by hand |
-| Priority | select: P0, P1, P2, P3; default P2 on create | sync-owned on synced cards when the handoff has a Priority column; manual cards by hand |
+| Project | title | sync (from the Workstream cell); manual cards by a session with the connector |
+| Status | select: Backlog, In progress, Waiting on Jeff, Blocked, Done, Dropped | sync; manual cards by a session with the connector |
+| Priority | select: P0, P1, P2, P3; default P2 on create | sync-owned on synced cards when the handoff has a Priority column; manual cards by a session with the connector |
 | Area | select, one option per repo or life/business area (e.g. `skills-vault`) | sync (`--area`, default the repo name) |
 | Next step | text | sync (from the Next step cell) |
 | Owner | select: Jeff, Claude Code, Routine | sync |
 | Link | url | sync (from the Detail cell) |
 | Last update | date | sync |
 | Target date | date, optional | never written by the sync; set in Notion on any card; required for P0 |
-| Source | select: `<repo>/handoff.md` or `manual` | sync sets its own label; `manual` cards by hand |
+| Source | select: `<repo>/handoff.md` or `manual` | sync sets its own label; `manual` cards by a session with the connector |
 
 Create it with the connector (DDL):
 
@@ -68,6 +68,8 @@ Every session, for repo work and for manual work alike. Column entry rules, the 
 
 Never edit a synced card in Notion: the next sync overwrites it. Never copy a manual card's title or details into a public repo.
 
+**The board is view-only for Jeff** (decided 2026-10-07): he reads it, he never drags, edits or creates cards. Every change is made by an agent on his word — repo cards through `handoff.md`, manual cards through the Notion connector. Never ask him to edit the board.
+
 ## Who owns a row (the Source rule)
 
 | Source value | Written by | What the sync does with it |
@@ -76,7 +78,7 @@ Never edit a synced card in Notion: the next sync overwrites it. Never copy a ma
 | `manual` (or any other label) | Jeff, or a session through the connector | never reads it for writing, never writes it (the query filters on the sync's own Source) |
 
 - To change a sync card, **edit the handoff**, not the card: the next run overwrites Status, Priority, Area, Next step, Owner, Link and Last update. Target date is never written, so it can be set in Notion on any card.
-- The script never changes the schema. Add a new Area, Source, Status, Priority or Owner option in Notion by hand **before** the first run that uses it. A run (a dry run too) whose plan needs a missing option stops with exit 2 naming it, before any write.
+- The script never changes the schema. Add a new Area, Source, Status, Priority or Owner option in Notion (a session with the connector, on Jeff's word) **before** the first run that uses it. A run (a dry run too) whose plan needs a missing option stops with exit 2 naming it, before any write.
 - Two cards with the same Project and Source: the oldest is the live one; the others are set to Done with a note pointing at the live card and counted as `duplicates=<n>` in the summary (copies already Done or Dropped are skipped). Cards are never deleted, by the script or by hand. A duplicate manual card is set to Dropped by hand with a pointer to the live card (policy section 5).
 
 ## How a handoff row becomes a card
@@ -226,7 +228,7 @@ Board: Notion page Projects HQ, database Project Status. Columns: Backlog, In pr
 
 5. Schedule its sync: a step in that repo's Routine (`python3 scripts/notion-sync.py`, same `NOTION_TOKEN`, `api.notion.com` allowed) or the next session. Run with the defaults (it derives `<repo>/handoff.md` and the Area from `git remote`) or pass `--source` and `--area`. Same token, same board. Run from that repo, `--audit` names only that repo's cards.
 
-**B. A project without a repo**: manual cards only. Jeff adds the Area option; create the cards in Notion (UI or connector) with Source `manual` and follow the same protocol (open, move, close with a Link to the evidence). No script or handoff is involved.
+**B. A project without a repo**: manual cards only. On Jeff's word a session with the Notion connector adds the Area option and creates the cards with Source `manual` and follow the same protocol (open, move, close with a Link to the evidence). No script or handoff is involved.
 
 ## Common mistakes
 
