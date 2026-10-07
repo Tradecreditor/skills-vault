@@ -2,7 +2,7 @@
 title: "cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents"
 slug: 20261005-cloudflare-security-audit-skill
 type: repo
-status: draft
+status: verified
 source_url: "https://github.com/cloudflare/security-audit-skill"
 source_platform: github
 author: "Cloudflare"
@@ -34,6 +34,17 @@ cloudflare/security-audit-skill 係 Cloudflare 開源（MIT）嘅 coding-agent s
 - Hot list 2026-W40 第三名（heat 0.80，單平台 GitHub topical gate），同時係 2026-W38 Watch 第一位，詳見 [[hot-list/2026-W40|hot-list/2026-W40]]。
 - Jeff 嘅 vibe-coded 項目（Iron Log 等）上線前可以用；hunt-then-disprove 模式亦適用於 vault 自己嘅 skill review。
 - 係可安裝 skill，值得 draft 一個 vault skill（install + sandbox 要求 + 讀報告次序）；今次 routine 冇寫，因為 `skills/` 改動要同時更新 `handoff.md`，而 routine 唔可以改 handoff。
+
+## Review（2026-10-07，Jeff approved）
+
+- **Verdict**: Jeff approved；已經全域安裝喺 `~/.claude/skills/security-audit`（直接由已掃描嘅 clone 複製，commit `c1c8a8c`，冇經 `npx skills add`）。
+- **SkillSpector**（只跑 static；`claude_cli` LLM pass 失敗，因為 CLI 未登入）：score 86–100，CRITICAL / DO NOT INSTALL。逐條人手核對過，全部係 false positive：
+  - MP3 / PE3 / PE1 / EA2 / TM3 嘅位置都係 skill 自己解釋攻擊類型嘅文字（例如問 repo 有冇 check-in `.env`）。
+  - test 檔嘅 PE3 係用 `/etc/passwd` 做 path-traversal 測試輸入。
+  - AE1 只係指 skill 會喺執行時先寫出 `findings.json`、`REPORT.md` 等檔案；scanner 自己都講明唔係 evasion 嘅證據。
+  - RP1 係 README 入面冇 pin 版本嘅 `npx skills`。
+- **Scripts**：`validate-findings.cjs` 同 `validate-coverage-ledger.cjs` 只 import `fs` / `path` / `util`，只讀檔：冇 network、冇 child process、冇寫檔。
+- **Windows 限制**：喺 Node 22 / Windows 上，`validate-findings` 有 7 條 CLI test fail（"OS no-follow and nonblocking input protection is unavailable"），所以 phase 4 嘅 `findings.json` 檢查喺原生 Windows 會拒絕執行。改喺 WSL 或者 macOS / Linux 跑，或者接受報告未經 schema 驗證。`validate-coverage-ledger` 31 條 test 全部通過。
 
 ## Source
 

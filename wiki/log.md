@@ -162,3 +162,4 @@
 ## [2026-10-07] review | tracking-tasks-with-backlog-md approved | outputs/skill-reviews/2026-10-07-tracking-tasks-with-backlog-md
 ## [2026-10-07] review | using-obsidian-skills rejected | outputs/skill-reviews/2026-10-07-using-obsidian-skills
 ## [2026-10-07] review | tracking-projects-in-notion approved | outputs/skill-reviews/2026-10-07-tracking-projects-in-notion
+## [2026-10-07] promote | cloudflare/security-audit-skill verified by Jeff; installed globally (static scan false positives; Windows validator limit noted) | 20261005-cloudflare-security-audit-skill
