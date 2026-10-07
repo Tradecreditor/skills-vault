@@ -124,15 +124,17 @@ Find the page **Projects HQ** and its database **Project Status**. There is exac
 1. Fetch the database's data source: its Area and Source options (names and colours), and the cards of any Area that could be
    this project.
 2. **Area**: if an Area already names this project (manual cards were seeded for several projects), reuse it exactly as written,
-   unless it already holds another repository's synced cards or join card; then use the repository name.
+   unless it already holds another repository's synced cards or join card; then use `<owner>-<repo>`.
    Otherwise a repo uses its repository name; a project without a repo asks Jeff for the name of its life or business area.
    Ask Jeff too when two Areas could both be this project.
 3. **Source** (repo only): `<repo>/handoff.md`, where `<repo>` is the last path component of `git remote get-url origin`
-   without `.git` (no `origin` remote: the folder name, or ask Jeff). If that Source option exists, query the cards with that
-   Source. None: the option is unused (an earlier attempt at this join added it); reuse it. Some: another repository owns it;
-   use `<owner>-<repo>` for both the Area and the Source (`<owner>-<repo>/handoff.md`), passed with `--area` and `--source`.
+   without `.git` (no `origin` remote: the folder name, or ask Jeff). Another repository owns that Source if any card has it, or
+   if a `Projects HQ join: <repo>/handoff.md` card exists whose page body names a different repository; then use
+   `<owner>-<repo>` for both the Area and the Source (`<owner>-<repo>/handoff.md`), passed with `--area` and `--source`.
+   Otherwise an existing option is unused (an earlier attempt at this join added it): reuse it.
 4. List this Area's **open** manual cards (Backlog, In progress, Waiting on Jeff, Blocked) with their Notion URL, Status, Owner,
-   Priority, Next step and Target date. Done and Dropped manual cards stay as they are. Step 4 (repo) or step 3 (no repo)
+   Priority, Next step and Target date; if step 2.2 moved off an Area that names this project, list that Area's open manual
+   cards too, so step 6 can show Jeff which of them are this repository's work. Done and Dropped manual cards stay as they are. Step 4 (repo) or step 3 (no repo)
    decides what happens to the open ones; the same work must never be tracked twice.
 5. Count the In progress cards per Owner across the **whole board**. The WIP limits (Jeff 3, Claude Code 5) count every project
    together. Cards that already exist keep their Status. Only a workstream that was not on the board before starts in Backlog
@@ -323,7 +325,8 @@ the command in the instruction block (with any `--repo-url`). Every part is safe
 
 1. **Sync.** First the Sync line with `--dry-run` (it writes nothing; summary on stdout, plan on stderr). Stop and tell Jeff if
    stderr says `duplicate project` (two rows share a title: fix the rows in a normal commit first), or if any card with this
-   Source has an Area other than `<area>` (another repository shares this Source). Otherwise run the Sync line, then once more:
+   Source has an Area other than `<area>`, or if the dry run plans to close any card while it shows `unchanged=0 updated=0`
+   (both mean another repository shares this Source). Otherwise run the Sync line, then once more:
    the second run must say `created=0`. A session before this one may already have synced; that is fine. An exit 2 naming a
    missing option means it was lost or never added: redo step 3.1 for it, then sync again.
 2. **Clean-up**, from the join card's page body. For each `<old card> → "<row title>"`, first check that a card with Source
