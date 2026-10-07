@@ -155,3 +155,4 @@
 ## [2026-10-06] capture | Cua: give your AI agent its own computer (buildwithneej) | 20261006-cua-computer-use-agent-sandbox
 ## [2026-10-06] capture | herdr: Claude Code and Codex working side by side (romanticamaj) | 20261005-herdr-claude-code-codex-side-by-side
 ## [2026-10-07] capture | AI 評估：用可重複測試驗收 AI（Sean Liu） | 20261006-ai-evals-repeatable-tests-sean-liu
+## [2026-10-07] capture | visual-pr (HumanLayer skill): visual outline in every PR | 20261005-visual-pr-humanlayer-skill-pr-review
