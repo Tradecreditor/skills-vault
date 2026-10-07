@@ -29,7 +29,7 @@ outputs/      AI 長文輸出、outputs/health/ 每週健康報告、outputs/ski
 routines/     五個 Routine 嘅 prompt（改呢度，唔好喺 Routine 介面改）
 .claude/      SessionStart hook（vault-suggest，只推介 reviewer-approved / verified 嘅 skill）· agents/vault-skill-reviewer（skill 審查 agent）；skills 冇用 symlink
 .claude-plugin/   令呢個 repo 根目錄變成 Claude Code plugin 市集（skills/ 就係 plugin 嘅 skills 目錄）
-commands/     plugin 嘅 slash command：/projecthq（將而家個 project 加入 Projects HQ，或者接返未完成嘅加入）
+commands/     plugin 嘅 slash command：/skills-vault:projecthq（將而家個 project 加入 Projects HQ，或者接返未完成嘅加入）
 .github/      vault-guard（PR 守門：刪檔／raw/ 只准新增／保護路徑／skill 格式）+ CODEOWNERS
 supabase/     手機捷徑代理（Edge Function + migration）
 scripts/      setup-phase1（本機一鍵）· bootstrap-repo（首次推上 GitHub）· capture（一句指令 fire capture-link）· copy-prompt（將 routine prompt 完整抄去剪貼簿）· vault-guard-check.sh（本地預演 guard）；每個都有 .sh + .ps1（guard 除外）
@@ -88,7 +88,7 @@ bash scripts/setup-phase1.sh
 5. 測試：手機分享一條 YouTube link → 幾分鐘後 repo 有新 commit `capture: …`。
 
 ## 第 3 步 · 任何 project / agent 可搜可裝（星期日上晝，約 2 小時）
-- **Claude Code（本機任何 project）**：`/plugin marketplace add Tradecreditor/skills-vault` → `/plugin install skills-vault@tradecreditor-vault`（user scope）。呢個 repo 嘅根目錄就係 plugin，`skills/` 就係佢嘅 skills 目錄（冇用 symlink，Windows 一樣得）。裝咗之後任何 project 都有 `/projecthq`：將嗰個 project 加入 Projects HQ。repo 有更新就 `/plugin marketplace update tradecreditor-vault`。
+- **Claude Code（本機任何 project）**：`/plugin marketplace add Tradecreditor/skills-vault` → `/plugin install skills-vault@tradecreditor-vault`（user scope）。呢個 repo 嘅根目錄就係 plugin，`skills/` 就係佢嘅 skills 目錄（冇用 symlink，Windows 一樣得）。裝咗之後任何 project 都有 `/skills-vault:projecthq`（打 `/projecthq` 喺清單揀）：將嗰個 project 加入 Projects HQ。第三方 marketplace 預設唔會自動更新：repo 有更新就 `/plugin` → Marketplaces → `tradecreditor-vault` → Update marketplace（或者開 Enable auto-update），再更新 plugin，然後 `/reload-plugins`。
   想某個 repo 一開就自動啟用：嗰個 repo 嘅 `.claude/settings.json` 加
   `{"extraKnownMarketplaces":{"tradecreditor-vault":{"source":{"source":"github","repo":"Tradecreditor/skills-vault"}}},"enabledPlugins":{"skills-vault@tradecreditor-vault":true}}`（本機先有效，因為要用你本機嘅 git 權限）。
 - **Claude Code on the web / Routines 喺其他 repo**：呢個 repo 而家係公開嘅，所以任何雲端 session 都可以直接 `curl` / 讀到內容；但一個 session 淨係對已連結嘅 repo 先有 push 權限，所以想喺另一個 repo 嘅 session / Routine 度**寫入** skills-vault，就要喺嗰度加 `Tradecreditor/skills-vault` 做第二個 repository（或者將需要嘅 skill 複製入嗰個 repo）。
