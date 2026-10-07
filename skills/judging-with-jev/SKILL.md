@@ -4,11 +4,11 @@ description: "Asks TypeSafe's Jev System One model typed yes/no (noul), pick-one
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-02"
-  vault_status: "draft"
-  reviewed_at: "2026-10-04T15:35:29Z"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-07T16:04:28Z"
   reviewed_by: "claude-code-cloud:vault-skill-reviewer"
-  review_hash: "639d4e71371d8110f280ccbe29561ade3e4f306be071500f85bfca89a1e338fa"
-  review_report: "outputs/skill-reviews/2026-10-04-judging-with-jev.md"
+  review_hash: "6992a8e98995ef7f71cd1bff7563a1f6713095b4dc7975df10a093617ddb61c9"
+  review_report: "outputs/skill-reviews/2026-10-07-judging-with-jev.md"
 ---
 
 # judging-with-jev — let Jev decide, let Sonnet write

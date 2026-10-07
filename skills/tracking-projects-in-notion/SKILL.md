@@ -54,7 +54,7 @@ CREATE TABLE ("Project" TITLE,
 
 Board view configuration: `GROUP BY "Status"; SORT BY "Last update" DESC`.
 
-**Per-Area board views.** Every project's board is a Board view of this one database filtered by its Area, a tab named after the Area (for example **skills-vault**). A new Area gets a new filtered Board view: `GROUP BY "Status"; FILTER "Area" = "<area>"`, added by Jeff or by a session with the connector (the sync never changes views or the schema). Never create a separate database or board per project; the policy explains why ([section 1](references/board-policy.md)).
+**Per-Area board views.** Every project's board is a Board view of this one database filtered by its Area, a tab named after the Area (for example **skills-vault**). A new Area gets a new filtered Board view: `GROUP BY "Status"; FILTER "Area" = "<area>"`, added by a session with the connector on Jeff's word (the sync never changes views or the schema). Never create a separate database or board per project; the policy explains why ([section 1](references/board-policy.md)).
 
 ## Working the board (session protocol)
 
@@ -75,7 +75,7 @@ Never edit a synced card in Notion: the next sync overwrites it. Never copy a ma
 | Source value | Written by | What the sync does with it |
 |---|---|---|
 | `<repo>/handoff.md` | the sync only | overwrites it every run; sets Status `Done` when the Workstream leaves In flight (a card already Done or Dropped is left alone); never deletes or archives |
-| `manual` (or any other label) | Jeff, or a session through the connector | never reads it for writing, never writes it (the query filters on the sync's own Source) |
+| `manual` (or any other label) | a session through the connector, on Jeff's word | never reads it for writing, never writes it (the query filters on the sync's own Source) |
 
 - To change a sync card, **edit the handoff**, not the card: the next run overwrites Status, Priority, Area, Next step, Owner, Link and Last update. Target date is never written, so it can be set in Notion on any card.
 - The script never changes the schema. Add a new Area, Source, Status, Priority or Owner option in Notion (a session with the connector, on Jeff's word) **before** the first run that uses it. A run (a dry run too) whose plan needs a missing option stops with exit 2 naming it, before any write.
@@ -152,7 +152,7 @@ python3 scripts/notion-sync.py --audit       # read-only policy audit (next subs
 | `--audit` | off | the audit instead of the sync; cannot be combined with `--dry-run` (exit 4) |
 | `--today YYYY-MM-DD` | current UTC date | tests; the audit's "today" |
 
-`<repo>` is the last path component of `remote.origin.url` without `.git`, and the owner is the one before it (HTTPS, SSH and proxy URLs all work). With no remote, or a remote that is a local path, it is the checkout's folder name. Links are always built as `https://github.com/<owner>/<repo>/blob/main/…`; for another host or default branch, pass `--repo-url` or put full URLs in Detail.
+`<repo>` is the last path component of `remote.origin.url` without `.git`, and the owner is the one before it (HTTPS, SSH and proxy URLs all work). With no remote, or a remote that is a local path, it is the checkout's folder name. Path, PR and fallback links are built as `<repo-url>/blob/main/…`, `<repo-url>/pull/<n>` and `<repo-url>/blob/main/handoff.md`, with `<repo-url>` defaulting to `https://github.com/<owner>/<repo>`: `--repo-url` changes only that base, so for a default branch other than `main` put full URLs in Detail.
 
 stdout is one line (details go to stderr):
 
@@ -207,7 +207,7 @@ Add them in Notion, or through the connector, with Source `manual` and every req
 
 ## Onboarding another project
 
-The step-by-step guide for an agent in the other project is [`references/joining-projects-hq.md`](references/joining-projects-hq.md): Jeff pastes its raw GitHub link into a session there and the agent follows it. It covers the approval check (status and `review_hash` on one clone of the vault), whose repo it is and whether it is public, the Area and Source options and the project's Board tab, copying the script from that clone, the 7-column handoff, the `CLAUDE.md` / `AGENTS.md` block, `NOTION_TOKEN` on a local computer (Windows and macOS), committing (a PR repo stops until the merge), the first sync after Jeff confirms the rows, and dropping the project's old manual cards once their synced cards exist. In short:
+The step-by-step guide for an agent in the other project is [`references/joining-projects-hq.md`](references/joining-projects-hq.md): Jeff pastes its raw GitHub link into a session there and the agent follows it. It covers the approval check (status and `review_hash` on one clone of the vault), whose repo it is and whether it is public, the Area and Source options and the project's Board tab, copying the script from that clone, the 7-column handoff, the `CLAUDE.md` / `AGENTS.md` block, `NOTION_TOKEN` on a local computer (Windows and macOS), committing (a PR repo stops until the merge), Jeff confirming the rows before the commit, the first sync, dropping the project's old manual cards once their synced cards exist, and resuming a join that spans several sessions. In short:
 
 - **A repo** becomes one Area. A session with the connector adds its Area option, its Source option (`<repo>/handoff.md`) and a Board tab (`GROUP BY "Status"; FILTER "Area" = "<area>"`), never a separate database. The repo gets `scripts/notion-sync.py` (copied from this skill's `scripts/` folder in a reviewed clone), a 7-column In flight table, and the block in its agent instructions. It is synced by the next session in it, or by its own Routine: `python3 scripts/notion-sync.py --area "<area>" --source "<repo>/handoff.md"`. Run from that repo, `--audit` names only that repo's cards. Same token, same board.
 - **A project without a repo** has manual cards only. On Jeff's word, a session with the connector adds the Area option and creates the cards with Source `manual`, then follows the same protocol (open, move, close with a Link to the evidence). No script, no handoff.

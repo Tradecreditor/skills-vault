@@ -8,11 +8,11 @@ metadata:
   captured_at: "2026-10-04T21:22:27Z"
   engagement: "stars=6.9k forks=441"
   origin_type: "repo"
-  vault_status: "draft"
-  reviewed_at: "2026-10-05T07:49:32Z"
-  reviewed_by: "routine:skill-review"
-  review_hash: "a98f330fffff99307a3f4662875a8cec2b2ba19f3e41a3b817c9196810ebf3b9"
-  review_report: "outputs/skill-reviews/2026-10-05-tracking-tasks-with-backlog-md.md"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-07T16:04:28Z"
+  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
+  review_hash: "f81d5480f85a39c64b205bccac267d6a6cf685476503f131d6b76306d8e93b0d"
+  review_report: "outputs/skill-reviews/2026-10-07-tracking-tasks-with-backlog-md.md"
 ---
 
 # tracking-tasks-with-backlog-md
