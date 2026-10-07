@@ -32,7 +32,7 @@ cloudflare/security-audit-skill 係 Cloudflare 開源（MIT）嘅 coding-agent s
 ## 點解值得留意
 
 - Hot list 2026-W40 第三名（heat 0.80，單平台 GitHub topical gate），同時係 2026-W38 Watch 第一位，詳見 [[hot-list/2026-W40|hot-list/2026-W40]]。
-- Josep 嘅 vibe-coded 項目（Iron Log 等）上線前可以用；hunt-then-disprove 模式亦適用於 vault 自己嘅 skill review。
+- Jeff 嘅 vibe-coded 項目（Iron Log 等）上線前可以用；hunt-then-disprove 模式亦適用於 vault 自己嘅 skill review。
 - 係可安裝 skill，值得 draft 一個 vault skill（install + sandbox 要求 + 讀報告次序）；今次 routine 冇寫，因為 `skills/` 改動要同時更新 `handoff.md`，而 routine 唔可以改 handoff。
 
 ## Source

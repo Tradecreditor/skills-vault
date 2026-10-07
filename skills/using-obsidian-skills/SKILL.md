@@ -71,7 +71,7 @@ Copy the `skills/` directory to `~/.codex/skills`.
 ## Pitfalls
 
 - For OpenCode: clone the **full repo** into `~/.opencode/skills/obsidian-skills/`, not just the inner `skills/` subfolder — otherwise the path structure breaks auto-discovery.
-- Skills are `vault_status: draft` until Josep reviews; do not auto-run skill commands from a draft in another project.
+- Skills are `vault_status: draft` until Jeff reviews; do not auto-run skill commands from a draft in another project.
 - `defuddle` requires the [Defuddle](https://github.com/kepano/defuddle) CLI to be installed separately.
 - `knap` requires the [Knap](https://github.com/obsidianmd/knap) tool.
 

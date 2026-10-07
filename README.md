@@ -1,4 +1,4 @@
-# skills-vault — Josep 嘅個人 Agent 技能倉庫
+# skills-vault — Jeff 嘅個人 Agent 技能倉庫
 
 一個公開 GitHub repo，同時係：**Obsidian vault**（你自己睇）、**LLM wiki**（agent 讀 `wiki/hot.md` → `wiki/index.md` → 頁面）、
 同一個**任何 agent 都可以一句指令安裝嘅 skills 資料夾**（`skills/`）。自動化交俾 Claude Code Routines（`routines/`）。

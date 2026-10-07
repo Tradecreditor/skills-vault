@@ -41,7 +41,7 @@ needs_manual_text: false
 
 - Claude 模仿視覺參考比憑空創作設計更可靠——截圖工作流程能直接套用到 Iron Log 或 English Overload 的 UI 改版
 - transitions.dev 的 Claude Code skill 整合是即插即用的方案，可讓 agent 掌握 27+ 種 UI 過渡效果而不需逐一解釋
-- deck.gallery 可用於 Josep 準備任何 pitch 或演示材料，借用成熟品牌的簡報結構
+- deck.gallery 可用於 Jeff 準備任何 pitch 或演示材料，借用成熟品牌的簡報結構
 - 整套方法論（給 Claude 看得到的東西）可作為 agent-based UI 開發的標準 SOP
 
 ## Source

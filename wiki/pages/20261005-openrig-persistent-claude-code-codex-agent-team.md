@@ -25,7 +25,7 @@ Keith Rumjahn 喺 Threads 介紹 OpenRig：一個將 Claude Code 同 Codex 組�
 - Post has one image, not transcribed.
 
 ## 點解值得留意
-- 同 Josep 用 Claude Code + Codex 多 agent 協作嘅做法直接相關。
+- 同 Jeff 用 Claude Code + Codex 多 agent 協作嘅做法直接相關。
 - 可同 Backlog.md 之類 agent 任務板比較。
 - 下一步：搵出 repo 後用 github 連結再 capture。
 

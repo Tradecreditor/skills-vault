@@ -57,7 +57,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- Josep 的 skills-vault 本身就是一個 Obsidian vault，`obsidian-markdown` 和 `obsidian-cli` 技能可以直接套用，讓 AI 助理更正確地編輯 vault 內的 wiki 頁面格式
+- Jeff 的 skills-vault 本身就是一個 Obsidian vault，`obsidian-markdown` 和 `obsidian-cli` 技能可以直接套用，讓 AI 助理更正確地編輯 vault 內的 wiki 頁面格式
 - `defuddle` 技能與 `vault-capture` 的 Jina Reader 步驟互補：可在抓取網頁後用 defuddle 進一步清理，節省 token
 - `knap` 的 JSON/CSV 批量模板渲染功能，有潛力自動化 `wiki/pages/` 的生成流程
 - kepano 是 Obsidian 生態的重要貢獻者，這套 skills 代表一種「官方認可」的 agent-Obsidian 互動範式，值得追蹤後續更新

@@ -33,7 +33,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- Jev 相關工具（jev-ultrafast、laya、hindsight 嘅 Jev reranker）同 vault 內多個 Jev 項目屬同一條線，可以幫 Josep 追蹤呢個模型生態。
+- Jev 相關工具（jev-ultrafast、laya、hindsight 嘅 Jev reranker）同 vault 內多個 Jev 項目屬同一條線，可以幫 Jeff 追蹤呢個模型生態。
 - hindsight（跨 session 記憶）同 paperclip（agent 預算、審批關卡）對 AI 顧問向客戶介紹 agent 治理同成本控制好有參考價值。
 - laya 24 至 29 毫秒一次嘅本機判斷，值得評估能否用喺 Iron Log / English Overload 嘅輕量分類或評分功能。
 - 注意：caption 冇 repo 連結同安裝指令，採用前要自己搵返官方 repo 核實，唔好照搬貼文描述。

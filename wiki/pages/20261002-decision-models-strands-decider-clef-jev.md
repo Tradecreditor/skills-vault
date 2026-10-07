@@ -47,7 +47,7 @@ TypeSafe 喺 9 月中推出 Jev 後，「決策模型」（直接為預設答案
 
 ## 點解值得留意
 
-- Josep 嘅 vault routines 已經用 Jev 做低成本判斷（見 judging-with-jev）。文章指 Clef 相容 Jev API，將來想加第二個引擎做 fallback 或對比，理論上唔使重寫呼叫介面；但呢點係文章轉述，真係切換前要自己試。
+- Jeff 嘅 vault routines 已經用 Jev 做低成本判斷（見 judging-with-jev）。文章指 Clef 相容 Jev API，將來想加第二個引擎做 fallback 或對比，理論上唔使重寫呼叫介面；但呢點係文章轉述，真係切換前要自己試。
 - 做 AI 顧問時，可以拎呢份清單做「gate / 路由類判斷未必要叫大模型」嘅選型表：想放喺自己環境、避免每次判斷都叫外部雲端模型，睇 Strands Decider 2B（CPU 都跑得）；想託管同要圖片或影片輸入，睇 Clef（Workers AI）；已經用 OpenAI 就睇 Decisions API。Clef 自行部署要約 41 至 85 GB VRAM，香港中小企多數唔現實。
 - 呢篇係二手整理，冇 benchmark；VentureBeat 都話 Strands 未證明比 Jev 更準。轉用任何一款之前，應該用自己嘅分類或 gate 任務做小型 eval，唔好單憑呢份文章換模型。
 

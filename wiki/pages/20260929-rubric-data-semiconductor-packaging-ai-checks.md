@@ -34,7 +34,7 @@ Sean Liu 喺 Facebook 發文介紹「Rubric Data」：將「點樣先算做啱�
 - No tool, repo, template or sample data is given, and no numbers beyond the example items; the post ends unfinished ("不過...說是這麼說，但...就之後講吧").
 
 ## 點解值得留意
-- 同 Josep 評估 agent 輸出質素嘅工作好貼身：「條件、必要證據、不可接受錯誤」三件頭，可以直接當作幫 HK 中小企客戶寫 AI 交付驗收清單嘅框架，唔使淨係靠「睇落專業」去評。
+- 同 Jeff 評估 agent 輸出質素嘅工作好貼身：「條件、必要證據、不可接受錯誤」三件頭，可以直接當作幫 HK 中小企客戶寫 AI 交付驗收清單嘅框架，唔使淨係靠「睇落專業」去評。
 - 「證據不足時講明缺咩都算合格」同「捏造規格／檢測結果＝直接不合格（auto-fail）」兩個設計，可以抄入 Claude Code skill 或 agent 輸出嘅 checker，防止 AI 為求有答案而作嘢。
 - 概念上同 vault 已有嘅 evals（promptfoo assertions）同 Jev 嘅 rubric `score` 問題相通，之後可以試將某個客戶流程寫成 rubric 再自動打分；但呢篇只係概念文，冇範例資料，封裝廠例子要由領域專家驗證，唔好當成已證實嘅做法。
 

@@ -31,7 +31,7 @@ Keith Rumjahn（@krumjahn）介紹一個叫 OpenSEO 嘅開源工具，定位係�
 
 ## 點解值得留意
 
-- **客戶 SEO 報價可以唔再綁 Semrush 月費**：Josep 做香港中小企 AI 顧問，如果自架 OpenSEO 夠用，可以降低交付成本，甚至變成服務一部分。
+- **客戶 SEO 報價可以唔再綁 Semrush 月費**：Jeff 做香港中小企 AI 顧問，如果自架 OpenSEO 夠用，可以降低交付成本，甚至變成服務一部分。
 - **同 Jev SEO/GEO 審核成本話題互補**：一邊係用 agent 降低審核成本，一邊係用開源工具取代付費數據源，可以合併成一個「低成本 SEO 審核」報價方案。
 - **短影音題材**：「自架 Semrush 替代品」標題強，而且 29.3K views 顯示呢類題材有流量，可以拍成 short-form 內容。
 - **待查證**：貼文冇連結 repo，用之前要先搵到真正 repo 並核實 star 數同授權。

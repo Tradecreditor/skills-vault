@@ -31,7 +31,7 @@ needs_manual_text: false
 - **Gap**: the video's spoken content was not transcribed (Facebook blocks this environment; only the caption came through Jina). The primary source is the Higgsfield project page and its 19-minute tutorial.
 
 ## 點解值得留意
-- Josep 自己用緊 Higgsfield / Seedance 做 AI 片：「臉同身分開做資產」同佢而家「白底定裝 → 多角度 character sheet」嘅做法一脈相承，可以攞 Hell Grind 公開嘅真 prompt 去對照、改良自己嘅 prompt 模板。
+- Jeff 自己用緊 Higgsfield / Seedance 做 AI 片：「臉同身分開做資產」同佢而家「白底定裝 → 多角度 character sheet」嘅做法一脈相承，可以攞 Hell Grind 公開嘅真 prompt 去對照、改良自己嘅 prompt 模板。
 - 「3/4 側面 + 空間地圖」同「對白 prompt 寫語速、情緒、情境」都係好具體、即刻用得嘅 prompt 技巧，啱佢做 AI 短劇或者幫香港中小企拍品牌廣告。
 - 「約 3,000 字 prompt」同「15 秒一段重複生成」揭示咗長片級 AI 製作嘅真實成本同節奏（$400k compute），同客傾 AI 影片報價同期望管理時可以引用。
 - 「留言『教程』我發你」令 1K views 換到 647 個留言，係短片 lead magnet 漏斗嘅實例，做 AI 內容推廣時可以參考。

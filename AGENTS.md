@@ -89,8 +89,8 @@ separate database or board per project). The working agreement is `skills/tracki
 - Never edit a card whose Source is a `handoff.md` in Notion (the sync overwrites it); edit the handoff. Never copy a `manual`
   card's title or details into this public repo. Only Jeff changes columns, priorities, Owners, Areas or the policy.
 - Machinery: `scripts/notion-sync.py` mirrors In flight to the board (daily, `github-stars-sync` step 7; any session may run it on
-  `main` when `NOTION_TOKEN` is set); `--audit` checks the policy weekly (`vault-lint` check 9). Another repo joins by copying the
-  script and the "Projects HQ" lines from `skills/tracking-projects-in-notion/SKILL.md` into its own CLAUDE.md / AGENTS.md.
+  `main` when `NOTION_TOKEN` is set); `--audit` checks the policy weekly (`vault-lint` check 9). Another project joins by following
+  `skills/tracking-projects-in-notion/references/joining-projects-hq.md`: Jeff pastes its link into a session in that project.
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools

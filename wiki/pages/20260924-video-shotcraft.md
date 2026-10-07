@@ -48,7 +48,7 @@ Video Shotcraft 是建立在 Remotion 上的 Agent Skill，讓 Claude Code 和 C
 
 ## 點解值得留意
 
-- AI 做動畫的關鍵障礙不是模型能力，而是缺乏鏡頭語言——Video Shotcraft 把這個缺口填補了，對 Josep 用 Claude Code 製作任何產品展示影片直接有用。
+- AI 做動畫的關鍵障礙不是模型能力，而是缺乏鏡頭語言——Video Shotcraft 把這個缺口填補了，對 Jeff 用 Claude Code 製作任何產品展示影片直接有用。
 - 157 張已調校的 TSX 配方卡等於現成的鏡頭庫，可以直接插入 Remotion 專案，大幅縮短製作週期。
 - 「逐鏡驗收」框架（輸出指定影格、修改後重新渲染整片）是可以移植到其他 Agent 視覺任務的通用品質控制模式。
 - 9,308 stars 且持續更新，社群活躍度高，是值得長期追蹤的基礎設施專案。

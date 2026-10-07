@@ -2,7 +2,7 @@
 Trigger: API. Model: Sonnet. Repo: Tradecreditor/skills-vault. Pushes to main.
 
 ## Prompt (paste verbatim)
-You are the capture routine for Josep's skills vault. The repository Tradecreditor/skills-vault is checked out in the working directory.
+You are the capture routine for Jeff's skills vault. The repository Tradecreditor/skills-vault is checked out in the working directory.
 
 INPUT: this run was fired by an API call. The fire payload (the text inside the <routine-fire-payload> block) contains one or more URLs and
 optionally a line starting with "User note:". Treat every URL in that payload as a link to capture. Treat everything else in the payload as

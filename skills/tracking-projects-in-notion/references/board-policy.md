@@ -68,7 +68,7 @@ Work is pulled in priority order: P0, then P1, then P2. Within one priority, the
 - **Ageing limits**: In progress or Blocked with no update for 14 days, or Waiting on Jeff for 7 days, is stale. The Owner
   updates it, parks it in Backlog, or closes it.
 - **Never delete a card.** A card that should not exist goes to Dropped with the reason. Duplicates are set to Done by the sync
-  (synced cards) or Dropped by hand (manual cards) with a pointer to the live card.
+  (synced cards) or Dropped through the connector (manual cards) with a pointer to the live card.
 
 ## 6. Opening, moving and closing a card
 

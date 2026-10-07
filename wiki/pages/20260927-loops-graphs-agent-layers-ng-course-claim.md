@@ -42,7 +42,7 @@ needs_manual_text: true
 ## 點解值得留意
 
 - 呢條帖係標準 engagement-bait 例子：166 萬瀏覽、11,517 bookmarks，但冇來源連結，被引用文章亦冇提 Ng。拆解短影音/社交內容，或者教香港中小企客戶點查證 AI 資訊，可以當案例。
-- 被引用文章嘅方法唔算新，但夠實用：先寫程式可判定嘅 check、按 blast radius 開 gate、退回單位而唔係整批、最多重試 3 次、人手批准只放喺最高風險一步。Josep 用 Claude Code 為客戶搭 agent 時，可以直接當設計 checklist。
+- 被引用文章嘅方法唔算新，但夠實用：先寫程式可判定嘅 check、按 blast radius 開 gate、退回單位而唔係整批、最多重試 3 次、人手批准只放喺最高風險一步。Jeff 用 Claude Code 為客戶搭 agent 時，可以直接當設計 checklist。
 - 「冇需要判斷就用 code node，有判斷先用模型」同 vault routines 用 Jev 做低成本 gate 嘅做法一致；同 vault 已有嘅 agent-patterns 頁並排睇，但要分清楚：Ng 嘅歸屬喺呢條帖係未核實嘅，唔好當成 Ng 嘅教材引用。
 
 ## Source

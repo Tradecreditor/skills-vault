@@ -79,7 +79,7 @@ Never edit a synced card in Notion: the next sync overwrites it. Never copy a ma
 
 - To change a sync card, **edit the handoff**, not the card: the next run overwrites Status, Priority, Area, Next step, Owner, Link and Last update. Target date is never written, so it can be set in Notion on any card.
 - The script never changes the schema. Add a new Area, Source, Status, Priority or Owner option in Notion (a session with the connector, on Jeff's word) **before** the first run that uses it. A run (a dry run too) whose plan needs a missing option stops with exit 2 naming it, before any write.
-- Two cards with the same Project and Source: the oldest is the live one; the others are set to Done with a note pointing at the live card and counted as `duplicates=<n>` in the summary (copies already Done or Dropped are skipped). Cards are never deleted, by the script or by hand. A duplicate manual card is set to Dropped by hand with a pointer to the live card (policy section 5).
+- Two cards with the same Project and Source: the oldest is the live one; the others are set to Done with a note pointing at the live card and counted as `duplicates=<n>` in the summary (copies already Done or Dropped are skipped). Cards are never deleted, by the script or by hand. A duplicate manual card is set to Dropped through the connector with a pointer to the live card (policy section 5).
 
 ## How a handoff row becomes a card
 
@@ -207,28 +207,12 @@ Add them in Notion, or through the connector, with Source `manual` and every req
 
 ## Onboarding another project
 
-**A. A repo** (it becomes one Area):
+The step-by-step guide for an agent in the other project is [`references/joining-projects-hq.md`](references/joining-projects-hq.md): Jeff pastes its raw GitHub link into a session there and the agent follows it. It covers the approval check, the Area and Source options and the project's Board tab, the script download, the 7-column handoff, the `CLAUDE.md` / `AGENTS.md` block, `NOTION_TOKEN` on a local computer (Windows and macOS), the first sync and moving the project's old manual cards into the handoff. In short:
 
-1. Copy `scripts/notion-sync.py` (standard library only) into that repo's `scripts/`.
-2. In Notion add that repo's Area option and its Source option (`<repo>/handoff.md`) to the board (a session with the connector, on Jeff's word), and add its own Board tab: a Board view of Project Status with `GROUP BY "Status"; FILTER "Area" = "<area>"`. Never a separate database.
-3. Give its `handoff.md` the 7-column In flight table (`skills/keeping-handoff-docs/references/handoff-template.md`).
-4. Paste this block into that repo's `CLAUDE.md` / `AGENTS.md`:
+- **A repo** becomes one Area. A session with the connector adds its Area option, its Source option (`<repo>/handoff.md`) and a Board tab (`GROUP BY "Status"; FILTER "Area" = "<area>"`), never a separate database. The repo gets `scripts/notion-sync.py` (downloaded from this skill's `scripts/` folder), a 7-column In flight table, and the block in its agent instructions. It is synced by the next session in it, or by its own Routine: `python3 scripts/notion-sync.py --area "<area>" --source "<repo>/handoff.md"`. Run from that repo, `--audit` names only that repo's cards. Same token, same board.
+- **A project without a repo** has manual cards only. On Jeff's word, a session with the connector adds the Area option and creates the cards with Source `manual`, then follows the same protocol (open, move, close with a Link to the evidence). No script, no handoff.
 
-```
-## Projects HQ (Jeff's kanban for every project)
-Policy: https://github.com/Tradecreditor/skills-vault/blob/main/skills/tracking-projects-in-notion/references/board-policy.md
-Board: Notion page Projects HQ, database Project Status. Columns: Backlog, In progress, Waiting on Jeff, Blocked, Done, Dropped. Priority P0-P3.
-- Start: read handoff.md (and this project's cards if you have the Notion connector). Work only on something that has a card; open one first.
-- Open: add a row to handoff.md "In flight" (| Workstream | Status | Priority | Owner | State | Next step | Detail |) in the same commit as the first piece of work.
-- Move: change the row's Status / Owner / Next step in the same commit as the work. Waiting on Jeff: Next step starts "Jeff:". Blocked: name the blocker.
-- Close: Done only with evidence in Detail (merged, live, checked); abandoned: "Dropped: <reason>". Never delete a card; follow-up work is a new card.
-- End: update the rows you touched; name the cards you opened, moved or closed in your final message.
-- Never edit a synced card in Notion (the sync overwrites it). Never copy a manual card's details into a public repo.
-```
-
-5. Schedule its sync: a step in that repo's Routine (`python3 scripts/notion-sync.py`, same `NOTION_TOKEN`, `api.notion.com` allowed) or the next session. Run with the defaults (it derives `<repo>/handoff.md` and the Area from `git remote`) or pass `--source` and `--area`. Same token, same board. Run from that repo, `--audit` names only that repo's cards.
-
-**B. A project without a repo**: manual cards only. On Jeff's word a session with the Notion connector adds the Area option and creates the cards with Source `manual` and follow the same protocol (open, move, close with a Link to the evidence). No script or handoff is involved.
+`scripts/notion-sync.py` in this skill is a byte-identical copy of the vault's `scripts/notion-sync.py`, so the copy other projects download is covered by this skill's review. Edit both together; `scripts/test_notion_sync.py` fails when they differ.
 
 ## Common mistakes
 
@@ -261,4 +245,4 @@ Board: Notion page Projects HQ, database Project Status. Columns: Backlog, In pr
 
 - Jeff's request, 2026-10-06: a Projects HQ with a Project Status database and a Board view, seeded from the handoff In flight table and his personal projects; a Routine cannot use the connector, so `NOTION_TOKEN` plus `scripts/notion-sync.py`; draft this skill once the schema is stable.
 - Jeff's board policy, `references/board-policy.md`: one standard for all projects, with Priority, Dropped, Target date and a weekly audit.
-- Files: `scripts/notion-sync.py`, `scripts/test_notion_sync.py`, `references/board-policy.md`, `routines/github-stars-sync.md` step 7, `routines/vault-lint.md` check 9, `CLAUDE.md` "Projects HQ".
+- Files: `scripts/notion-sync.py` (copy in this skill's `scripts/`), `scripts/test_notion_sync.py`, `references/board-policy.md`, `references/joining-projects-hq.md`, `routines/github-stars-sync.md` step 7, `routines/vault-lint.md` check 9, `CLAUDE.md` "Projects HQ".

@@ -35,7 +35,7 @@ needs_manual_text: true
 
 ## 點解值得留意
 
-- Josep 做 AI 短片內容：一句 prompt 出 15 秒 motion graphics，可以直接做 reel 開場、hook 畫面，或者「AI 識做 motion design」呢類示範片，本身就係好嘅 content 題材。
+- Jeff 做 AI 短片內容：一句 prompt 出 15 秒 motion graphics，可以直接做 reel 開場、hook 畫面，或者「AI 識做 motion design」呢類示範片，本身就係好嘅 content 題材。
 - 香港中小企顧問：用參數化版本（`[TOPIC]`、`[BRAND COLORS]`）幫客戶出 launch video / 廣告短片，係可以即場 demo 嘅服務賣點；Iron Log、English Overload 上架都可以用嚟整 launch 片。
 - 呢個帖本身係 comment-to-DM 引流嘅教科書例子（留言數多過 like 數），同 `shortform-growth-system` 嘅 lead magnet 做法一致，可以參考佢點樣用「片 + 一句 CTA」收名單。
 - 配合 vault 已有嘅 motion-design-skill、gsap-skills、Motion Canvas，可以令 agent 寫動畫代碼時有節奏同品味，唔止靠一句 prompt 碰運氣。

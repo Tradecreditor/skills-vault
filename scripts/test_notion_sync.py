@@ -45,6 +45,11 @@ def parse(rows, repo_url=REPO_URL):
 
 
 class ParseTests(unittest.TestCase):
+    def test_skill_copy_is_identical(self):
+        # Other projects download the skill's copy (reviewed with the skill); the vault's Routines run this one.
+        copy = SCRIPT.parent.parent / "skills" / "tracking-projects-in-notion" / "scripts" / "notion-sync.py"
+        self.assertEqual(copy.read_bytes(), SCRIPT.read_bytes(), "edit both copies of notion-sync.py together")
+
     def test_split_row_protects_backtick_pipes_and_escapes(self):
         cells = ns.split_row("| a | `[[../pages/<slug>|…]]` | b \\| c | d |")
         self.assertEqual([c.strip() for c in cells], ["a", "`[[../pages/<slug>|…]]`", "b | c", "d"])
@@ -826,7 +831,7 @@ class SyncTests(unittest.TestCase):
                 for extra in ([], ["--dry-run"]):
                     code, out, _ = self.sync(*extra, fake=fake)
                     self.assertEqual(code, 2)
-                    self.assertIn(f"{prop} option '{value}' missing in Notion; add it by hand", out)
+                    self.assertIn(f"{prop} option '{value}' missing in Notion; a session with the Notion connector adds it first", out)
                 self.assertEqual(fake.writes(), [])
         fake = FakeNotion(options={"Status": [], "Owner": [], "Area": [], "Source": []})
         self.addCleanup(fake.close)
@@ -834,7 +839,7 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIn("Status option 'Waiting on Jeff' missing in Notion", out)
         self.assertIn("Area option 'test' missing in Notion", out)
-        self.assertIn("; add them by hand", out)
+        self.assertIn("; a session with the Notion connector adds them first", out)
 
     def test_unused_missing_option_does_not_block_an_unchanged_run(self):
         self.sync()

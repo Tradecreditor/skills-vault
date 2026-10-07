@@ -28,7 +28,7 @@ Gaurav（@gauravbuild）發佈一個 carousel，caption 得一句「You’re fal
 - Format: carousel image post; the spoken or on-slide content is not covered by the Jina caption reader.
 
 ## 點解值得留意
-- 標題指向「每個 Claude Code 項目都裝」嘅 repo 清單，同 vault 嘅 repo-picks 主題吻合，有機會成為 Josep 標準 Claude Code 項目 setup 嘅候選。
+- 標題指向「每個 Claude Code 項目都裝」嘅 repo 清單，同 vault 嘅 repo-picks 主題吻合，有機會成為 Jeff 標準 Claude Code 項目 setup 嘅候選。
 - 清單未取得，唔可以當作已知內容；要先睇 slides 補返 `## Notes`，否則呢頁只係一個書籤。
 - Caption 純粹係引流式 teaser（"falling behind"），冇任何 repo 名稱或安裝指令，優先度低，除非 slides 嘅清單有用。
 - 補返清單後可以同 vault 已有嘅 repo-picks 同 plugin 條目對照，睇有冇重疊或新發現。

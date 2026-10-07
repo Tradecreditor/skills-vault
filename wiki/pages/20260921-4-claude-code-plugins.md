@@ -42,7 +42,7 @@ needs_manual_text: false
 
 ## 點解值得留意
 
-- Graphify directly tackles the context-burn problem in Josep's own Claude Code sessions — instead of rereading large repos, the model follows a pre-built map.
+- Graphify directly tackles the context-burn problem in Jeff's own Claude Code sessions — instead of rereading large repos, the model follows a pre-built map.
 - Ponytail's ~54% code-reduction metric is a concrete benchmark worth validating in the skills-vault repo; if confirmed, it could be added as a default hook.
 - OmniRoute solves the mid-session quota interruption that blocks long vault-capture or analysis routines.
 - Agent Skills aligns with the skills-vault's own `spec → plan → build → test → ship` model for managing agent work.
