@@ -4,11 +4,11 @@ description: "Keeps one handoff.md per project so any later session or agent res
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-03"
-  vault_status: "draft"
-  reviewed_at: "2026-10-04T15:35:29Z"
-  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
-  review_hash: "36d0139cf19663afaf5c0fbdff4e123d2ef9b3c337c16db41cd2b340c79f4fec"
-  review_report: "outputs/skill-reviews/2026-10-04-keeping-handoff-docs.md"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-10-09T02:01:30Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "414567cfd06cac9eb3cac42f8071f850d8e52c1cfcef40e36d61b92e4ae2df6d"
+  review_report: "outputs/skill-reviews/2026-10-09-keeping-handoff-docs.md"
 ---
 
 # keeping-handoff-docs — one handoff.md per project
