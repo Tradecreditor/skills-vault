@@ -8,6 +8,7 @@
 - **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
 
 ## 最近 20 項
+- 2026-10-09 · post · [[pages/20261008-claude-tips-opus55-motion-graphics-six-prompts|Claude Tips & Tricks：Opus 5.5 用代碼做 motion graphics 嘅 6 個 prompt]]
 - 2026-10-07 · video · [[pages/20261007-jev-five-builds-romi-patel|Jev：五個人哋用緊嘅 build（Romi Patel Reel）]]
 - 2026-10-07 · post · [[pages/20261003-raywang-daily-tools-oil-ui-moxie-never-boring|Ray Wang 今日工具輪播 2026-10-03：oil-ui、Moxie、Never Boring AI]]
 - 2026-10-07 · video · [[pages/20261005-visual-pr-humanlayer-skill-pr-review|visual-pr (HumanLayer skill): visual outline in every PR (Romi Patel)]]
@@ -27,4 +28,3 @@
 - 2026-10-04 · video · [[pages/20260930-laya-free-local-jev-alternative-30ms-vs-200ms|Laya: free open-source local Jev alternative (~30 ms vs ~200 ms)]]
 - 2026-10-04 · post · [[pages/20260929-rubric-data-semiconductor-packaging-ai-checks|Rubric Data：封裝廠用評分規準資料逐項驗收 AI 成果]]
 - 2026-10-04 · video · [[pages/20261002-claude-opus-5-5-code-animated-tutorial-video|Claude Opus 5.5 做程式動畫教學影片：5 大重點同資源成本（數位敘事力期刊）]]
-- 2026-10-04 · post · [[pages/20260924-model-vs-harness-claude-code-explained|Model vs harness：Claude 係 model，Claude Code 係 harness]]

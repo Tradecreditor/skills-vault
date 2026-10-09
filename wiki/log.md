@@ -164,3 +164,4 @@
 ## [2026-10-07] review | tracking-projects-in-notion approved | outputs/skill-reviews/2026-10-07-tracking-projects-in-notion
 ## [2026-10-07] promote | cloudflare/security-audit-skill verified by Jeff; installed globally (static scan false positives; Windows validator limit noted) | 20261005-cloudflare-security-audit-skill
 ## [2026-10-09] review | keeping-handoff-docs approved | outputs/skill-reviews/2026-10-09-keeping-handoff-docs
+## [2026-10-09] capture | Claude Tips & Tricks: Opus 5.5 motion graphics six prompts | 20261008-claude-tips-opus55-motion-graphics-six-prompts
