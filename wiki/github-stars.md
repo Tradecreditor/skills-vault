@@ -11,6 +11,7 @@ early again. Set it back to `no` by hand if you ever suspect the ledger has gaps
 
 | starred_at | repo | note |
 |---|---|---|
+| 2026-10-10 | browser-use/browser-use | Open-source browser agent (Python): hosted cloud, CLI skill, or library |
 | 2026-09-21 | openai/codex-plugin-cc | Official OpenAI Claude Code plugin: call Codex for review or delegate tasks |
 | 2026-09-21 | career-ops-hq/career-ops | Open-source AI job search CLI: evaluate, tailor CV, track — never auto-submits |
 | 2026-09-21 | microsoft/playwright-mcp | Official Playwright MCP server: browser automation via accessibility tree |
