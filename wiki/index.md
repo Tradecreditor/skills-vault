@@ -106,3 +106,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | 20261007-jev-five-builds-romi-patel | video | Jev：五個人哋用緊嘅 build（Romi Patel Reel） | instagram | 2026-10-07 | draft | topic/agent-tooling, jev, model-routing, triage | instagram:Ddy7mF-IgF5 |
 | 20261008-claude-tips-opus55-motion-graphics-six-prompts | post | Claude Tips & Tricks：Opus 5.5 用代碼做 motion graphics 嘅 6 個 prompt | instagram | 2026-10-09 | draft | topic/video-gen, motion-graphics, opus-5-5, headless-browser, claude-tips | instagram:DeOuCSrDCj8 |
 | browser-use--browser-use | repo | browser-use | github | 2026-10-10 | draft | ai-agents, browser-automation, playwright, python, llm | github:browser-use/browser-use |
+| 20261011-kelly-tsai-multi-agent-architecture-creao | video | Kelly Tsai ft. Creao AI：多 AI Agent 架構點用、點判斷該唔該用 | youtube | 2026-10-11 | draft | topic/agent-platforms, multi-agent, creao, sponsored | youtube:wDk6OVRLtPs |

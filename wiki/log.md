@@ -166,3 +166,4 @@
 ## [2026-10-09] review | keeping-handoff-docs approved | outputs/skill-reviews/2026-10-09-keeping-handoff-docs
 ## [2026-10-09] capture | Claude Tips & Tricks: Opus 5.5 motion graphics six prompts | 20261008-claude-tips-opus55-motion-graphics-six-prompts
 ## [2026-10-10] star | browser-use/browser-use | stars/browser-use--browser-use
+## [2026-10-11] capture | Kelly Tsai ft. Creao AI multi-agent architecture | 20261011-kelly-tsai-multi-agent-architecture-creao
