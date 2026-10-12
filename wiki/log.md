@@ -167,3 +167,7 @@
 ## [2026-10-09] capture | Claude Tips & Tricks: Opus 5.5 motion graphics six prompts | 20261008-claude-tips-opus55-motion-graphics-six-prompts
 ## [2026-10-10] star | browser-use/browser-use | stars/browser-use--browser-use
 ## [2026-10-11] capture | Kelly Tsai ft. Creao AI multi-agent architecture | 20261011-kelly-tsai-multi-agent-architecture-creao
+## [2026-10-12] capture | morluto/rea — REA: Reverse Engineer Anything | 20261012-rea-reverse-engineer-anything
+## [2026-10-12] capture | wheresryan22/anatomy — isometric explainer skill | 20261012-anatomy-isometric-explainer-skill
+## [2026-10-12] capture | lexmount/moli — headless browser for AI agents | 20261012-moli-headless-browser-for-ai-agents
+## [2026-10-12] hot-list | 2026-W41 | hot-list/2026-W41

@@ -1,13 +1,16 @@
 # Hot — read me first
 
 ## 本週熱門榜
-`2026-W40`，完整報告見 [[hot-list/2026-W40|hot-list/2026-W40]]：
+`2026-W41`，完整報告見 [[hot-list/2026-W41|hot-list/2026-W41]]：
 
-- **[[pages/20261005-universal-modder-claude-code-game-modding|universal-modder]]**（rehan-remade）— skills + `um` CLI + fal MCP，畀 Claude Code / Codex mod 幾乎任何 PC 遊戲。GitHub 3,419 stars（09-30 建立）+ X 發佈帖 14,124 likes / 369 萬 views，heat 0.94。
-- **[[pages/20261005-opendots-copilotkit-ai-coworkers|OpenDots]]**（CopilotKit）— 開源 self-hosted「always-on AI 同事」template，每個 Dot 有自己電腦，web / 通話 / Slack 通用。GitHub 3,325 stars + X 6,035 likes / 103 萬 views，heat 0.94。
-- **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
+- **[[pages/20261012-rea-reverse-engineer-anything|REA]]**（morluto/rea）— 一個 MCP + CLI，畀 coding agent 喺冇 source code 嘅情況下拆解 binary、Electron app、APK 同網站，再幫你重做功能。一星期 GitHub +119,603 stars + X @MatthewBerman 37,504 likes / 323 萬 views，heat 0.94。
+- **[[pages/20261012-anatomy-isometric-explainer-skill|Anatomy]]**（wheresryan22）— Claude Code / Codex skill，將技術概念整成可以互動嘅等軸測機器（SVG / WebGL / 3D）。10-08 開 repo 已有 4,232 stars + 作者發佈帖 13,292 likes / 145 萬 views，heat 0.94。
+- **[[pages/20261012-moli-headless-browser-for-ai-agents|Moli]]**（lexmount）— Rust 寫嘅 AI agent 專用 headless browser，結構優先、要像素先至渲染，支援 CDP / WebDriver。一星期 +8,633 stars，單平台 heat 0.80（九個項目同分，按實測增幅排先）。
 
 ## 最近 20 項
+- 2026-10-12 · repo · [[pages/20261012-rea-reverse-engineer-anything|morluto/rea — REA: Reverse Engineer Anything, one MCP for agent-driven reverse engineering]]
+- 2026-10-12 · repo · [[pages/20261012-anatomy-isometric-explainer-skill|wheresryan22/anatomy — agent skill that explains an idea as an interactive isometric machine]]
+- 2026-10-12 · repo · [[pages/20261012-moli-headless-browser-for-ai-agents|lexmount/moli — structure-first Rust headless browser for AI agents]]
 - 2026-10-11 · video · [[pages/20261011-kelly-tsai-multi-agent-architecture-creao|Kelly Tsai ft. Creao AI：多 AI Agent 架構點用、點判斷該唔該用]]
 - 2026-10-10 · repo · [[stars/browser-use--browser-use|browser-use/browser-use]]
 - 2026-10-09 · post · [[pages/20261008-claude-tips-opus55-motion-graphics-six-prompts|Claude Tips & Tricks：Opus 5.5 用代碼做 motion graphics 嘅 6 個 prompt]]
@@ -25,8 +28,3 @@
 - 2026-10-05 · repo · [[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents]]
 - 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]
 - 2026-10-04 · repo · [[pages/20261004-backlog-md-markdown-kanban-for-agents|Backlog.md: Markdown-native Task Manager and Kanban for AI Agents]]
-- 2026-10-04 · video · [[pages/20260921-laya-pip-install-comment-fast-teaser|Albert Olgaard: Laya via pip install (comment 'Fast' teaser)]]
-- 2026-10-04 · video · [[pages/20260920-jev-in-60-seconds-nate-herk-teaser|Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser)]]
-- 2026-10-04 · video · [[pages/20260930-laya-free-local-jev-alternative-30ms-vs-200ms|Laya: free open-source local Jev alternative (~30 ms vs ~200 ms)]]
-- 2026-10-04 · post · [[pages/20260929-rubric-data-semiconductor-packaging-ai-checks|Rubric Data：封裝廠用評分規準資料逐項驗收 AI 成果]]
-- 2026-10-04 · video · [[pages/20261002-claude-opus-5-5-code-animated-tutorial-video|Claude Opus 5.5 做程式動畫教學影片：5 大重點同資源成本（數位敘事力期刊）]]
