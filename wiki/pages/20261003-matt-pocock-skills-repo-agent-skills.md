@@ -58,3 +58,7 @@ needs_manual_text: false
 - [[../stars/vercel-labs--skills|skills (vercel-labs)]] — the `npx skills` installer the README uses to deliver these skills
 - [[../pages/20260921-4-claude-code-plugins|4 Claude Code Plugins That Fix the Real Bottlenecks]] — another bundle of skills and plugins for Claude Code
 - [[../pages/20260918-obsidian-skills|obsidian-skills: Agent Skills for Obsidian]] — another Agent Skills repo already in the vault
+
+## Notes
+
+- also trending 2026-W41 (github:mattpocock/skills 286,876 stars on 2026-10-12, +10,444 since the 2026-10-05 snapshot; skills.sh 24h trending: grilling 6.6K, grill-me 6.4K installs) — [[hot-list/2026-W41]]
