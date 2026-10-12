@@ -28,5 +28,3 @@
 - 2026-10-04 · video · [[pages/20260921-laya-pip-install-comment-fast-teaser|Albert Olgaard: Laya via pip install (comment 'Fast' teaser)]]
 - 2026-10-04 · video · [[pages/20260920-jev-in-60-seconds-nate-herk-teaser|Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser)]]
 - 2026-10-04 · video · [[pages/20260930-laya-free-local-jev-alternative-30ms-vs-200ms|Laya: free open-source local Jev alternative (~30 ms vs ~200 ms)]]
-- 2026-10-04 · post · [[pages/20260929-rubric-data-semiconductor-packaging-ai-checks|Rubric Data：封裝廠用評分規準資料逐項驗收 AI 成果]]
-- 2026-10-04 · video · [[pages/20261002-claude-opus-5-5-code-animated-tutorial-video|Claude Opus 5.5 做程式動畫教學影片：5 大重點同資源成本（數位敘事力期刊）]]
