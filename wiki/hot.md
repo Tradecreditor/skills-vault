@@ -8,6 +8,7 @@
 - **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
 
 ## 最近 20 項
+- 2026-10-16 · post · [[pages/20261016-youraveragetechbro-devin-automations|youraveragetechbro：Devin automations]]
 - 2026-10-16 · repo · [[stars/multica-ai--andrej-karpathy-skills|multica-ai/andrej-karpathy-skills]]
 - 2026-10-11 · video · [[pages/20261011-kelly-tsai-multi-agent-architecture-creao|Kelly Tsai ft. Creao AI：多 AI Agent 架構點用、點判斷該唔該用]]
 - 2026-10-10 · repo · [[stars/browser-use--browser-use|browser-use/browser-use]]

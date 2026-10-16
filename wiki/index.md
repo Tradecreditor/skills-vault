@@ -108,3 +108,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | browser-use--browser-use | repo | browser-use | github | 2026-10-10 | draft | ai-agents, browser-automation, playwright, python, llm | github:browser-use/browser-use |
 | 20261011-kelly-tsai-multi-agent-architecture-creao | video | Kelly Tsai ft. Creao AI：多 AI Agent 架構點用、點判斷該唔該用 | youtube | 2026-10-11 | draft | topic/agent-platforms, multi-agent, creao, sponsored | youtube:wDk6OVRLtPs |
 | multica-ai--andrej-karpathy-skills | repo | andrej-karpathy-skills | github | 2026-10-16 | draft | claude-code, claude-md, guidelines, karpathy, prompt-engineering | github:multica-ai/andrej-karpathy-skills |
+| 20261016-youraveragetechbro-devin-automations | post | youraveragetechbro：Devin automations 簡化 AI coding loop | instagram | 2026-10-16 | draft | topic/agent-tooling, devin, automations, coding-agent | instagram:Db-62YfRw6w |
