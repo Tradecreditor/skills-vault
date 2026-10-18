@@ -9,16 +9,13 @@ You are the GitHub-stars sync routine for Jeff's skills vault (GitHub account: T
 2. List stars newest first. Try in this order and use the first that returns data:
    a. gh api "user/starred?sort=created&direction=desc&per_page=5&page=N" -H "Accept: application/vnd.github.star+json" (items have starred_at + repo; works locally).
    b. curl -s "https://api.github.com/users/Tradecreditor/starred?per_page=5&page=N" (public list, newest first, no starred_at).
-   c. Exa connector: web_fetch_exa with urls = https://api.github.com/users/Tradecreditor/starred?per_page=5&page=N&cb=<YYYYMMDDHHMM of right now>
-      AND maxCharacters = 30000.
-      Two parameters here are not optional, and each has already broken a run:
-      - maxCharacters. Exa's default is 3000 characters. One GitHub repo object in this response is about 4500 characters, so a
-        default fetch returns LESS THAN ONE REPO and the rest is cut off mid-object with no error. That is why a run once saw
-        3 of 35 stars. Pass maxCharacters on every Exa fetch in this routine. Keep per_page at 5: 5 x 4500 fits inside 30000.
-      - cb. Exa caches by exact URL, so without a fresh cb it replays an older response - including an empty list captured
-        before the account's stars were public. Vary cb on every fetch.
-   In this cloud environment expect (a) to fail with 403 from the GitHub proxy and (b) possibly too; (c) is the reliable path.
-   If any method returns an empty list, do not conclude "no stars" immediately: retry (c) once with a different cb value. Only if the
+   c. Jina Reader as a relay (Exa is never used, CLAUDE.md "Reading a URL"):
+      curl -s -H "Accept: application/json" -H "X-No-Cache: true" "https://r.jina.ai/https://api.github.com/users/Tradecreditor/starred?per_page=5&page=N"
+      The JSON list is the string in .data.content (public list, newest first, no starred_at). X-No-Cache is not optional: Jina caches
+      by URL and would replay an older page - including an empty list captured before the account's stars were public. One request
+      at a time; on a 429 wait 20 s and retry once. Verified 200 from a cloud session on 2026-10-18.
+   In this cloud environment expect (a) to fail with 403 from the GitHub proxy and (b) too; (c) is the reliable path.
+   If any method returns an empty list, do not conclude "no stars" immediately: retry (c) once after 20 s. Only if the
    second fetch is also empty, report "no stars on this account yet" and add one line saying the account's stars may be hidden
    (GitHub Settings > Public profile > "Make profile private and hide activity") or that an authenticated path is needed.
    Walking the pages: start at page 1 and go up. SKIP any repo that already has a row in wiki/github-stars.md and keep going to the
@@ -34,9 +31,9 @@ You are the GitHub-stars sync routine for Jeff's skills vault (GitHub account: T
    Process the new ones oldest-first, so a partial run always leaves a clean boundary. If the list is empty, print "no stars on this account yet" and stop.
 3. For each new repo, metadata + README, again first that works: gh repo view <owner>/<repo> --json name,description,stargazerCount,forkCount,primaryLanguage,repositoryTopics,licenseInfo,pushedAt,createdAt,url
    and gh api repos/<owner>/<repo>/readme -H "Accept: application/vnd.github.raw+json"; else curl -s https://api.github.com/repos/<owner>/<repo> and
-   curl -s https://raw.githubusercontent.com/<owner>/<repo>/HEAD/README.md; else the GitHub connector get_file_contents (path README.md); else Exa web_fetch_exa on
-   https://api.github.com/repos/<owner>/<repo>?cb=<YYYYMMDDHHMM> (JSON: stargazers_count, forks_count, topics, license, created_at, pushed_at) and on
-   https://raw.githubusercontent.com/<owner>/<repo>/HEAD/README.md?cb=<YYYYMMDDHHMM> (raw README - prefer this over the github.com HTML page, which
+   curl -s https://raw.githubusercontent.com/<owner>/<repo>/HEAD/README.md; else the GitHub connector get_file_contents (path README.md); else Jina Reader on
+   https://r.jina.ai/https://api.github.com/repos/<owner>/<repo> with -H "Accept: application/json" (JSON in .data.content: stargazers_count, forks_count, topics, license, created_at, pushed_at) and on
+   https://r.jina.ai/https://raw.githubusercontent.com/<owner>/<repo>/HEAD/README.md (raw README - prefer this over the github.com HTML page, which
    comes back wrapped in site chrome). If HEAD 404s, retry with /main/ then /master/. Use the first 300 README lines.
    The 摘要 is the point of the whole note: never leave it as a placeholder. If every README path fails, write the 摘要 from the repo
    description plus topics instead and set needs_manual_text: true - but only then, and say so in the final message.

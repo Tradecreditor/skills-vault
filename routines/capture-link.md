@@ -11,11 +11,13 @@ If the payload contains no URL, print "no url in payload" and stop.
 
 STEPS
 1. Read CLAUDE.md and skills/vault-capture/SKILL.md and follow the capture procedure exactly for each URL.
-2. Reader order stays exactly as in the skill (Agent-Reach upstream tools -> Exa -> per-platform fallbacks). Cloud notes: the Agent-Reach
+2. Reader order stays as in the skill (Agent-Reach upstream tools -> per-platform fallbacks), minus its Exa column: never call Exa
+   (CLAUDE.md "Reading a URL"). Cloud notes: the Agent-Reach
    upstream readers that work here via plain curl are api.fxtwitter.com (X), r.jina.ai (web, Threads), api.github.com REST + raw.githubusercontent.com
    (GitHub, public repos only; gh itself is proxy-blocked for repos not attached to this session, so do not rely on gh). yt-dlp is blocked from
-   this IP: go to Exa (web_fetch_exa on the URL, with maxCharacters = 50000 — the default 3000 truncates the source silently and raw/ must be verbatim) and then Supadata if SUPADATA_KEY is set. Exa web_fetch_exa also works as the relay for any
-   host the sandbox cannot reach (e.g. fetch https://api.fxtwitter.com/<user>/status/<id> or https://api.github.com/repos/<o>/<r> through it).
+   this IP: use the YouTube oEmbed / Jina fallbacks in the skill and then Supadata if SUPADATA_KEY is set. Jina Reader (https://r.jina.ai/<url>) also works as
+   the relay for any host the sandbox cannot reach (e.g. https://r.jina.ai/https://api.github.com/repos/<o>/<r> with -H "Accept: application/json";
+   at most 2 requests in flight, on a 429 wait 20 s).
    If every reader fails, still write the page with needs_manual_text: true. Never invent content.
 3. Write raw/<slug>.md, wiki/pages/<slug>.md, a draft skills/<name>/SKILL.md only when the content is an actionable procedure,
    and append rows to wiki/index.md, wiki/log.md and wiki/hot.md. Summaries in Traditional Chinese, commands and SKILL.md bodies in English.
