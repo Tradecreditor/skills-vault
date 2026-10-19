@@ -45,3 +45,7 @@ REA（Reverse Engineer Anything）係 morluto 開源（MIT）嘅 MCP server 加 
 
 - [[hot-list/2026-W41]]
 - [[pages/20261005-universal-modder-claude-code-game-modding]]: another repo that gives Claude Code reverse-engineering tools, for game modding
+
+## Notes
+
+- also trending 2026-W42 (github:morluto/rea 327,790 stars / 82,965 forks on 2026-10-19, +204,916 since the 2026-10-12 snapshot; X: @akshay_pachaar 571 likes / 98 reposts / 33K views). The W42 report flags the jump as likely inorganic (another 2.7x after a 37x jump in W41) — [[hot-list/2026-W42]]
