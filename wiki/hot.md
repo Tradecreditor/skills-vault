@@ -1,17 +1,20 @@
 # Hot — read me first
 
 ## 本週熱門榜
-`2026-W41`，完整報告見 [[hot-list/2026-W41|hot-list/2026-W41]]：
+`2026-W42`，完整報告見 [[hot-list/2026-W42|hot-list/2026-W42]]：
 
-- **[[pages/20261012-rea-reverse-engineer-anything|REA]]**（morluto/rea）— 一個 MCP + CLI，畀 coding agent 喺冇 source code 嘅情況下拆解 binary、Electron app、APK 同網站，再幫你重做功能。一星期 GitHub +119,603 stars + X @MatthewBerman 37,504 likes / 323 萬 views，heat 0.94。
-- **[[pages/20261012-anatomy-isometric-explainer-skill|Anatomy]]**（wheresryan22）— Claude Code / Codex skill，將技術概念整成可以互動嘅等軸測機器（SVG / WebGL / 3D）。10-08 開 repo 已有 4,232 stars + 作者發佈帖 13,292 likes / 145 萬 views，heat 0.94。
-- **[[pages/20261012-moli-headless-browser-for-ai-agents|Moli]]**（lexmount）— Rust 寫嘅 AI agent 專用 headless browser，結構優先、要像素先至渲染，支援 CDP / WebDriver。一星期 +8,633 stars，單平台 heat 0.80（九個項目同分，按實測增幅排先）。
+- **[[pages/20261019-dsh-our-free-model-plugin|dsh-our-free-model]]**（Ebony-Vinyl）— DeepSeek Harness 插件，唔使登入或 API Key 就有 DeepSeek V4.1 Flash、Kimi K3 等免費模型，連本地 OpenAI / Anthropic gateway。一星期 +15,863 stars，單平台 heat 0.80；部分 stars 係 star 先解鎖 EAC 渠道換返嚟，有服務條款風險，當趨勢睇。
+- **[[pages/20261019-orca-ade-parallel-coding-agents|Orca]]**（stablyai）— 開源 ADE，同時行 Claude Code / Codex / OpenCode 一隊 agent，每個一個 worktree，有手機 app。一星期 +7,130 stars + skills.sh `orchestration` 8.4K 安裝，單平台 heat 0.80。
+- **[[pages/20261019-harness2-recursive-agent-harnessing|Harness²]]**（Google Research）— 唔改模型，用同一任務 A/B 試改 agent harness 再累積教訓。X 三位作者過 300 likes（@akshay_pachaar 5,430 likes），X 單平台 heat 0.70，今個星期唯一過社交 gate 嘅項目。
 
 ## 最近 20 項
 - 2026-10-19 · post · [[pages/20261019-sebastianhardy-improve-system-claude-history|sebastianhardy_：improve-system]]
 - 2026-10-19 · post · [[pages/20261019-denghao-carousel-no-caption|等號：圖片輪播帖]]
 - 2026-10-19 · post · [[pages/20261019-code-and-chill-team-dashboard|Code & Chill：團隊專案管理 dashboard]]
 - 2026-10-19 · post · [[pages/20261019-chase-h-ai-ponytail-carousel|chase.h.ai：ponytail 輪播帖]]
+- 2026-10-19 · repo · [[pages/20261019-dsh-our-free-model-plugin|Ebony-Vinyl/dsh-our-free-model — DeepSeek Harness plugin with free model lanes and no API key]]
+- 2026-10-19 · repo · [[pages/20261019-orca-ade-parallel-coding-agents|stablyai/orca — Orca ADE: run a fleet of coding agents side by side, each in its own worktree]]
+- 2026-10-19 · repo · [[pages/20261019-harness2-recursive-agent-harnessing|google-research/harness2 — Harness²: recursive, verifier-free harness improvement for agents]]
 - 2026-10-16 · post · [[pages/20261016-youraveragetechbro-devin-automations|youraveragetechbro：Devin automations]]
 - 2026-10-16 · repo · [[stars/multica-ai--andrej-karpathy-skills|multica-ai/andrej-karpathy-skills]]
 - 2026-10-12 · repo · [[pages/20261012-rea-reverse-engineer-anything|morluto/rea — REA: Reverse Engineer Anything, one MCP for agent-driven reverse engineering]]
@@ -25,6 +28,3 @@
 - 2026-10-07 · video · [[pages/20261005-visual-pr-humanlayer-skill-pr-review|visual-pr (HumanLayer skill): visual outline in every PR (Romi Patel)]]
 - 2026-10-07 · post · [[pages/20261006-ai-evals-repeatable-tests-sean-liu|AI 評估：用可重複測試驗收 AI（Sean Liu 轉述 Sergii Makarevych）]]
 - 2026-10-06 · video · [[pages/20261005-herdr-claude-code-codex-side-by-side|herdr: Claude Code and Codex working side by side (romanticamaj)]]
-- 2026-10-06 · video · [[pages/20261006-cua-computer-use-agent-sandbox|Cua: give your AI agent its own computer (buildwithneej)]]
-- 2026-10-06 · video · [[pages/20260821-git-vs-github-mental-model|Git vs GitHub mental model: a change has to climb (RickTheEngineer)]]
-- 2026-10-05 · post · [[pages/20261005-openrig-persistent-claude-code-codex-agent-team|OpenRig: persistent Claude Code + Codex agent team (Keith Rumjahn)]]
