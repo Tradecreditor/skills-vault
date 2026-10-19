@@ -8,6 +8,12 @@
 - **[[pages/20261012-moli-headless-browser-for-ai-agents|Moli]]**（lexmount）— Rust 寫嘅 AI agent 專用 headless browser，結構優先、要像素先至渲染，支援 CDP / WebDriver。一星期 +8,633 stars，單平台 heat 0.80（九個項目同分，按實測增幅排先）。
 
 ## 最近 20 項
+- 2026-10-19 · post · [[pages/20261019-sebastianhardy-improve-system-claude-history|sebastianhardy_：improve-system]]
+- 2026-10-19 · post · [[pages/20261019-denghao-carousel-no-caption|等號：圖片輪播帖]]
+- 2026-10-19 · post · [[pages/20261019-code-and-chill-team-dashboard|Code & Chill：團隊專案管理 dashboard]]
+- 2026-10-19 · post · [[pages/20261019-chase-h-ai-ponytail-carousel|chase.h.ai：ponytail 輪播帖]]
+- 2026-10-16 · post · [[pages/20261016-youraveragetechbro-devin-automations|youraveragetechbro：Devin automations]]
+- 2026-10-16 · repo · [[stars/multica-ai--andrej-karpathy-skills|multica-ai/andrej-karpathy-skills]]
 - 2026-10-12 · repo · [[pages/20261012-rea-reverse-engineer-anything|morluto/rea — REA: Reverse Engineer Anything, one MCP for agent-driven reverse engineering]]
 - 2026-10-12 · repo · [[pages/20261012-anatomy-isometric-explainer-skill|wheresryan22/anatomy — agent skill that explains an idea as an interactive isometric machine]]
 - 2026-10-12 · repo · [[pages/20261012-moli-headless-browser-for-ai-agents|lexmount/moli — structure-first Rust headless browser for AI agents]]
@@ -22,9 +28,3 @@
 - 2026-10-06 · video · [[pages/20261006-cua-computer-use-agent-sandbox|Cua: give your AI agent its own computer (buildwithneej)]]
 - 2026-10-06 · video · [[pages/20260821-git-vs-github-mental-model|Git vs GitHub mental model: a change has to climb (RickTheEngineer)]]
 - 2026-10-05 · post · [[pages/20261005-openrig-persistent-claude-code-codex-agent-team|OpenRig: persistent Claude Code + Codex agent team (Keith Rumjahn)]]
-- 2026-10-05 · video · [[pages/20261005-nick-saraev-11-claude-plugins-job-roles|Nick Saraev: 11 free Claude plugins for job roles (comment 'PLUGIN' teaser)]]
-- 2026-10-05 · repo · [[pages/20261005-universal-modder-claude-code-game-modding|universal-modder — skills, um CLI and fal MCP that let coding agents mod almost any PC game]]
-- 2026-10-05 · repo · [[pages/20261005-opendots-copilotkit-ai-coworkers|OpenDots — CopilotKit's open-source, self-hosted template for always-on AI coworkers]]
-- 2026-10-05 · repo · [[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents]]
-- 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]
-- 2026-10-04 · repo · [[pages/20261004-backlog-md-markdown-kanban-for-agents|Backlog.md: Markdown-native Task Manager and Kanban for AI Agents]]

@@ -171,3 +171,13 @@
 ## [2026-10-12] capture | wheresryan22/anatomy — isometric explainer skill | 20261012-anatomy-isometric-explainer-skill
 ## [2026-10-12] capture | lexmount/moli — headless browser for AI agents | 20261012-moli-headless-browser-for-ai-agents
 ## [2026-10-12] hot-list | 2026-W41 | hot-list/2026-W41
+
+## [2026-10-12] lint | 2026-W42 | outputs/health/2026-W42
+
+## [2026-10-16] star | multica-ai/andrej-karpathy-skills | stars/multica-ai--andrej-karpathy-skills
+## [2026-10-16] capture | youraveragetechbro：Devin automations 簡化 AI coding loop | 20261016-youraveragetechbro-devin-automations
+## [2026-10-19] lint | 2026-W43 | outputs/health/2026-W43
+## [2026-10-19] capture | chase.h.ai ponytail carousel (needs_manual_text) | 20261019-chase-h-ai-ponytail-carousel
+## [2026-10-19] capture | Code & Chill team dashboard reel (needs_manual_text) | 20261019-code-and-chill-team-dashboard
+## [2026-10-19] capture | denghao.0304 carousel (needs_manual_text) | 20261019-denghao-carousel-no-caption
+## [2026-10-19] capture | sebastianhardy_ improve-system reel | 20261019-sebastianhardy-improve-system-claude-history
