@@ -8,6 +8,10 @@
 - **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
 
 ## 最近 20 項
+- 2026-10-19 · post · [[pages/20261019-sebastianhardy-improve-system-claude-history|sebastianhardy_：improve-system]]
+- 2026-10-19 · post · [[pages/20261019-denghao-carousel-no-caption|等號：圖片輪播帖]]
+- 2026-10-19 · post · [[pages/20261019-code-and-chill-team-dashboard|Code & Chill：團隊專案管理 dashboard]]
+- 2026-10-19 · post · [[pages/20261019-chase-h-ai-ponytail-carousel|chase.h.ai：ponytail 輪播帖]]
 - 2026-10-16 · post · [[pages/20261016-youraveragetechbro-devin-automations|youraveragetechbro：Devin automations]]
 - 2026-10-16 · repo · [[stars/multica-ai--andrej-karpathy-skills|multica-ai/andrej-karpathy-skills]]
 - 2026-10-11 · video · [[pages/20261011-kelly-tsai-multi-agent-architecture-creao|Kelly Tsai ft. Creao AI：多 AI Agent 架構點用、點判斷該唔該用]]
@@ -24,9 +28,3 @@
 - 2026-10-05 · video · [[pages/20261005-nick-saraev-11-claude-plugins-job-roles|Nick Saraev: 11 free Claude plugins for job roles (comment 'PLUGIN' teaser)]]
 - 2026-10-05 · repo · [[pages/20261005-universal-modder-claude-code-game-modding|universal-modder — skills, um CLI and fal MCP that let coding agents mod almost any PC game]]
 - 2026-10-05 · repo · [[pages/20261005-opendots-copilotkit-ai-coworkers|OpenDots — CopilotKit's open-source, self-hosted template for always-on AI coworkers]]
-- 2026-10-05 · repo · [[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents]]
-- 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]
-- 2026-10-04 · repo · [[pages/20261004-backlog-md-markdown-kanban-for-agents|Backlog.md: Markdown-native Task Manager and Kanban for AI Agents]]
-- 2026-10-04 · video · [[pages/20260921-laya-pip-install-comment-fast-teaser|Albert Olgaard: Laya via pip install (comment 'Fast' teaser)]]
-- 2026-10-04 · video · [[pages/20260920-jev-in-60-seconds-nate-herk-teaser|Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser)]]
-- 2026-10-04 · video · [[pages/20260930-laya-free-local-jev-alternative-30ms-vs-200ms|Laya: free open-source local Jev alternative (~30 ms vs ~200 ms)]]
