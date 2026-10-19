@@ -112,3 +112,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | 20261019-chase-h-ai-ponytail-carousel | post | chase.h.ai：Comment “ponytail” 輪播帖（只有 teaser） | instagram | 2026-10-19 | draft | topic/ai-news, instagram, carousel, lead-magnet | instagram:DeqPvXDnPIH |
 | 20261019-code-and-chill-team-dashboard | post | Code & Chill：團隊專案管理 dashboard（只有標題） | instagram | 2026-10-19 | draft | topic/agent-tooling, instagram, dashboard, frontend, ui-demo | instagram:Deoi1WhP83h |
 | 20261019-denghao-carousel-no-caption | post | 等號 (denghao.0304) 圖片輪播帖（無 caption） | instagram | 2026-10-19 | draft | topic/ai-news, instagram, carousel | instagram:Deo4JZfEuI4 |
+| 20261019-sebastianhardy-improve-system-claude-history | post | sebastianhardy_：用 /improve-system 分析 Claude 對話紀錄，自動改進 | instagram | 2026-10-19 | draft | topic/agent-tooling, instagram, claude-code, session-history, skill-generation | instagram:Deh3cvbxFnv |
