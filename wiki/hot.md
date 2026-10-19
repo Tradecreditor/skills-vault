@@ -8,6 +8,7 @@
 - **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
 
 ## 最近 20 項
+- 2026-10-19 · post · [[pages/20261019-denghao-carousel-no-caption|等號：圖片輪播帖]]
 - 2026-10-19 · post · [[pages/20261019-code-and-chill-team-dashboard|Code & Chill：團隊專案管理 dashboard]]
 - 2026-10-19 · post · [[pages/20261019-chase-h-ai-ponytail-carousel|chase.h.ai：ponytail 輪播帖]]
 - 2026-10-16 · post · [[pages/20261016-youraveragetechbro-devin-automations|youraveragetechbro：Devin automations]]
@@ -27,4 +28,3 @@
 - 2026-10-05 · repo · [[pages/20261005-universal-modder-claude-code-game-modding|universal-modder — skills, um CLI and fal MCP that let coding agents mod almost any PC game]]
 - 2026-10-05 · repo · [[pages/20261005-opendots-copilotkit-ai-coworkers|OpenDots — CopilotKit's open-source, self-hosted template for always-on AI coworkers]]
 - 2026-10-05 · repo · [[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents]]
-- 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]

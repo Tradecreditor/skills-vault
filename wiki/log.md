@@ -175,3 +175,4 @@
 ## [2026-10-19] lint | 2026-W43 | outputs/health/2026-W43
 ## [2026-10-19] capture | chase.h.ai ponytail carousel (needs_manual_text) | 20261019-chase-h-ai-ponytail-carousel
 ## [2026-10-19] capture | Code & Chill team dashboard reel (needs_manual_text) | 20261019-code-and-chill-team-dashboard
+## [2026-10-19] capture | denghao.0304 carousel (needs_manual_text) | 20261019-denghao-carousel-no-caption
