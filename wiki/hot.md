@@ -28,5 +28,3 @@
 - 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]
 - 2026-10-04 · repo · [[pages/20261004-backlog-md-markdown-kanban-for-agents|Backlog.md: Markdown-native Task Manager and Kanban for AI Agents]]
 - 2026-10-04 · video · [[pages/20260921-laya-pip-install-comment-fast-teaser|Albert Olgaard: Laya via pip install (comment 'Fast' teaser)]]
-- 2026-10-04 · video · [[pages/20260920-jev-in-60-seconds-nate-herk-teaser|Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser)]]
-- 2026-10-04 · video · [[pages/20260930-laya-free-local-jev-alternative-30ms-vs-200ms|Laya: free open-source local Jev alternative (~30 ms vs ~200 ms)]]
