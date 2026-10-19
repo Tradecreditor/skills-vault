@@ -109,3 +109,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | 20261011-kelly-tsai-multi-agent-architecture-creao | video | Kelly Tsai ft. Creao AI：多 AI Agent 架構點用、點判斷該唔該用 | youtube | 2026-10-11 | draft | topic/agent-platforms, multi-agent, creao, sponsored | youtube:wDk6OVRLtPs |
 | multica-ai--andrej-karpathy-skills | repo | andrej-karpathy-skills | github | 2026-10-16 | draft | claude-code, claude-md, guidelines, karpathy, prompt-engineering | github:multica-ai/andrej-karpathy-skills |
 | 20261016-youraveragetechbro-devin-automations | post | youraveragetechbro：Devin automations 簡化 AI coding loop | instagram | 2026-10-16 | draft | topic/agent-tooling, devin, automations, coding-agent | instagram:Db-62YfRw6w |
+| 20261019-chase-h-ai-ponytail-carousel | post | chase.h.ai：Comment “ponytail” 輪播帖（只有 teaser） | instagram | 2026-10-19 | draft | topic/ai-news, instagram, carousel, lead-magnet | instagram:DeqPvXDnPIH |

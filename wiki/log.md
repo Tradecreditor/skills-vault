@@ -173,3 +173,4 @@
 ## [2026-10-16] star | multica-ai/andrej-karpathy-skills | stars/multica-ai--andrej-karpathy-skills
 ## [2026-10-16] capture | youraveragetechbro：Devin automations 簡化 AI coding loop | 20261016-youraveragetechbro-devin-automations
 ## [2026-10-19] lint | 2026-W43 | outputs/health/2026-W43
+## [2026-10-19] capture | chase.h.ai ponytail carousel (needs_manual_text) | 20261019-chase-h-ai-ponytail-carousel
