@@ -39,3 +39,5 @@ needs_manual_text: false
 - URL: https://github.com/multica-ai/andrej-karpathy-skills
 - Created: 2026-01-27
 - Reader: routine:github-stars-sync (Exa, raw README)
+
+## Related
