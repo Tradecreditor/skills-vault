@@ -172,3 +172,7 @@
 
 ## [2026-10-16] star | multica-ai/andrej-karpathy-skills | stars/multica-ai--andrej-karpathy-skills
 ## [2026-10-16] capture | youraveragetechbro：Devin automations 簡化 AI coding loop | 20261016-youraveragetechbro-devin-automations
+## [2026-10-19] capture | Ebony-Vinyl/dsh-our-free-model — free model lanes for DeepSeek Harness | 20261019-dsh-our-free-model-plugin
+## [2026-10-19] capture | stablyai/orca — Orca ADE for parallel coding agents | 20261019-orca-ade-parallel-coding-agents
+## [2026-10-19] capture | google-research/harness2 — Harness² recursive agent harnessing | 20261019-harness2-recursive-agent-harnessing
+## [2026-10-19] hot-list | 2026-W42 | hot-list/2026-W42

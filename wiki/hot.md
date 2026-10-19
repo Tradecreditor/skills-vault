@@ -1,13 +1,16 @@
 # Hot — read me first
 
 ## 本週熱門榜
-`2026-W40`，完整報告見 [[hot-list/2026-W40|hot-list/2026-W40]]：
+`2026-W42`，完整報告見 [[hot-list/2026-W42|hot-list/2026-W42]]：
 
-- **[[pages/20261005-universal-modder-claude-code-game-modding|universal-modder]]**（rehan-remade）— skills + `um` CLI + fal MCP，畀 Claude Code / Codex mod 幾乎任何 PC 遊戲。GitHub 3,419 stars（09-30 建立）+ X 發佈帖 14,124 likes / 369 萬 views，heat 0.94。
-- **[[pages/20261005-opendots-copilotkit-ai-coworkers|OpenDots]]**（CopilotKit）— 開源 self-hosted「always-on AI 同事」template，每個 Dot 有自己電腦，web / 通話 / Slack 通用。GitHub 3,325 stars + X 6,035 likes / 103 萬 views，heat 0.94。
-- **[[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]**（Cloudflare）— 六階段安全審計 skill，另一個 agent 負責推翻每個發現。15 日 +6,554 stars（約 3,059 / 7 日），單平台 heat 0.80。
+- **[[pages/20261019-dsh-our-free-model-plugin|dsh-our-free-model]]**（Ebony-Vinyl）— DeepSeek Harness 插件，唔使登入或 API Key 就有 DeepSeek V4.1 Flash、Kimi K3 等免費模型，連本地 OpenAI / Anthropic gateway。一星期 +15,863 stars，單平台 heat 0.80；部分 stars 係 star 先解鎖 EAC 渠道換返嚟，有服務條款風險，當趨勢睇。
+- **[[pages/20261019-orca-ade-parallel-coding-agents|Orca]]**（stablyai）— 開源 ADE，同時行 Claude Code / Codex / OpenCode 一隊 agent，每個一個 worktree，有手機 app。一星期 +7,130 stars + skills.sh `orchestration` 8.4K 安裝，單平台 heat 0.80。
+- **[[pages/20261019-harness2-recursive-agent-harnessing|Harness²]]**（Google Research）— 唔改模型，用同一任務 A/B 試改 agent harness 再累積教訓。X 三位作者過 300 likes（@akshay_pachaar 5,430 likes），X 單平台 heat 0.70，今個星期唯一過社交 gate 嘅項目。
 
 ## 最近 20 項
+- 2026-10-19 · repo · [[pages/20261019-dsh-our-free-model-plugin|Ebony-Vinyl/dsh-our-free-model — DeepSeek Harness plugin with free model lanes and no API key]]
+- 2026-10-19 · repo · [[pages/20261019-orca-ade-parallel-coding-agents|stablyai/orca — Orca ADE: run a fleet of coding agents side by side, each in its own worktree]]
+- 2026-10-19 · repo · [[pages/20261019-harness2-recursive-agent-harnessing|google-research/harness2 — Harness²: recursive, verifier-free harness improvement for agents]]
 - 2026-10-16 · post · [[pages/20261016-youraveragetechbro-devin-automations|youraveragetechbro：Devin automations]]
 - 2026-10-16 · repo · [[stars/multica-ai--andrej-karpathy-skills|multica-ai/andrej-karpathy-skills]]
 - 2026-10-11 · video · [[pages/20261011-kelly-tsai-multi-agent-architecture-creao|Kelly Tsai ft. Creao AI：多 AI Agent 架構點用、點判斷該唔該用]]
@@ -25,8 +28,3 @@
 - 2026-10-05 · repo · [[pages/20261005-universal-modder-claude-code-game-modding|universal-modder — skills, um CLI and fal MCP that let coding agents mod almost any PC game]]
 - 2026-10-05 · repo · [[pages/20261005-opendots-copilotkit-ai-coworkers|OpenDots — CopilotKit's open-source, self-hosted template for always-on AI coworkers]]
 - 2026-10-05 · repo · [[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill — six-phase, adversarially verified security audit skill for coding agents]]
-- 2026-10-04 · post · [[pages/20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]]
-- 2026-10-04 · repo · [[pages/20261004-backlog-md-markdown-kanban-for-agents|Backlog.md: Markdown-native Task Manager and Kanban for AI Agents]]
-- 2026-10-04 · video · [[pages/20260921-laya-pip-install-comment-fast-teaser|Albert Olgaard: Laya via pip install (comment 'Fast' teaser)]]
-- 2026-10-04 · video · [[pages/20260920-jev-in-60-seconds-nate-herk-teaser|Nate Herk: Jev in under 60 seconds (comment 'JEV' teaser)]]
-- 2026-10-04 · video · [[pages/20260930-laya-free-local-jev-alternative-30ms-vs-200ms|Laya: free open-source local Jev alternative (~30 ms vs ~200 ms)]]
