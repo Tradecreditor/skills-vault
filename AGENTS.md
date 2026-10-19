@@ -95,19 +95,23 @@ separate database or board per project). The working agreement is `skills/tracki
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools
-(twitter-cli / yt-dlp / gh / Jina Reader) first, Exa as backup, then per-platform fallbacks. Readers are no-login by design (no cookies,
+(twitter-cli / yt-dlp / gh / Jina Reader) first, then per-platform fallbacks; Exa is not used (next section). Readers are no-login by design (no cookies,
 no logged-in browsers); the only paid-tier key, `SUPADATA_KEY`, is used solely for Instagram and Facebook video audio.
 Every capture produces `raw/<slug>.md` (verbatim), `wiki/pages/<slug>.md` (compiled), optionally `skills/<name>/SKILL.md`
 (gerund name, see "Skill format"), plus rows in `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`.
 
-## Reading a URL with Exa (applies to every agent and every routine)
-`web_fetch_exa` defaults to **maxCharacters: 3000** and truncates silently — no error, no marker, the tail just is not there.
-3000 characters is less than one GitHub repo object and less than half of a normal article, so always pass `maxCharacters`
-explicitly: 30000 for an API listing, 50000+ for a page whose full text goes into `raw/`. If the result ends mid-sentence or
-mid-object, it was cut: raise the limit or fetch a smaller page, never write the truncated version to `raw/`.
-Exa also **caches by exact URL**. For anything you poll or re-run (a starred list, a weekly search, an engagement count),
-append a changing `&cb=<YYYYMMDDHHMM>` — the APIs ignore it, and without it you will score a stale response as fresh.
-A 402 from Exa means the credits are exhausted: skip the Exa tier for the rest of the run instead of retrying.
+## Reading a URL (applies to every agent and every routine)
+**Never call Exa** (`web_fetch_exa`, `web_search_exa`, `agent_run`): Jeff's rule (2026-10-04, confirmed 2026-10-18). Where a
+skill or older note still names an Exa tier, skip it and go to the next reader. The no-login readers that work from a cloud session:
+- **Jina Reader** `curl -s https://r.jina.ai/<url>` for web pages, Threads posts, and as a relay for hosts the proxy blocks
+  (`api.github.com` JSON comes back in `.data.content` with `-H "Accept: application/json"`). At most 2 requests in flight;
+  on a 429 wait 20 s and retry once. For anything you poll or re-run (a starred list, a weekly page) send `-H "X-No-Cache: true"`,
+  or Jina replays a cached copy. Search: DuckDuckGo's HTML endpoint through Jina (`https://r.jina.ai/https://html.duckduckgo.com/html/?q=...`)
+  and the WebSearch tool.
+- **GitHub**: the GitHub connector (`search_repositories`, `get_file_contents`), `raw.githubusercontent.com` for READMEs.
+- **X**: `api.fxtwitter.com` JSON (single posts and profile timelines). **Instagram / Facebook video**: Supadata.
+If a reader's output ends mid-sentence or mid-object, it was cut: fetch again or fetch a smaller page, never write the truncated
+version to `raw/`.
 
 ## Note format (`wiki/pages/<slug>.md` and `wiki/stars/<slug>.md`)
 ```yaml
