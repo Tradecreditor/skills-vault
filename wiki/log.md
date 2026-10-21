@@ -186,3 +186,4 @@
 ## [2026-10-19] capture | denghao.0304 carousel (needs_manual_text) | 20261019-denghao-carousel-no-caption
 ## [2026-10-19] capture | sebastianhardy_ improve-system reel | 20261019-sebastianhardy-improve-system-claude-history
 ## [2026-10-20] capture | Prince Gupta Harness² reel | 20261020-princegupta-harness2-self-improving-agents
+## [2026-10-21] capture | snapai.io three SEO tools reel | 20261021-snapai-three-tools-take-over-seo

@@ -8,6 +8,7 @@
 - **[[pages/20261019-harness2-recursive-agent-harnessing|Harness²]]**（Google Research）— 唔改模型，用同一任務 A/B 試改 agent harness 再累積教訓。X 三位作者過 300 likes（@akshay_pachaar 5,430 likes），X 單平台 heat 0.70，今個星期唯一過社交 gate 嘅項目。
 
 ## 最近 20 項
+- 2026-10-21 · post · [[pages/20261021-snapai-three-tools-take-over-seo|snapai.io：三個工具接管 SEO]]
 - 2026-10-20 · post · [[pages/20261020-princegupta-harness2-self-improving-agents|Prince Gupta：Harness² 自我升級 agent]]
 - 2026-10-19 · post · [[pages/20261019-sebastianhardy-improve-system-claude-history|sebastianhardy_：improve-system]]
 - 2026-10-19 · post · [[pages/20261019-denghao-carousel-no-caption|等號：圖片輪播帖]]
@@ -27,5 +28,3 @@
 - 2026-10-07 · video · [[pages/20261007-jev-five-builds-romi-patel|Jev：五個人哋用緊嘅 build（Romi Patel Reel）]]
 - 2026-10-07 · post · [[pages/20261003-raywang-daily-tools-oil-ui-moxie-never-boring|Ray Wang 今日工具輪播 2026-10-03：oil-ui、Moxie、Never Boring AI]]
 - 2026-10-07 · video · [[pages/20261005-visual-pr-humanlayer-skill-pr-review|visual-pr (HumanLayer skill): visual outline in every PR (Romi Patel)]]
-- 2026-10-07 · post · [[pages/20261006-ai-evals-repeatable-tests-sean-liu|AI 評估：用可重複測試驗收 AI（Sean Liu 轉述 Sergii Makarevych）]]
-- 2026-10-06 · video · [[pages/20261005-herdr-claude-code-codex-side-by-side|herdr: Claude Code and Codex working side by side (romanticamaj)]]
