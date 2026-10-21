@@ -32,6 +32,7 @@ needs_manual_text: false
 
 ## Source
 - https://www.instagram.com/reel/DewsQQSJj1k/ — snapai.io, 2026-10-21, likes=0 comments=0. Reader: Instagram embed (caption) + Supadata (transcript).
+- Full transcript: raw/20261021-snapai-three-tools-take-over-seo-v2.md (v1 transcript section is empty because of a failed fetch).
 
 ## Related
 - [[20261004-crawlie-open-source-seo-geo-crawler-mcp]]
