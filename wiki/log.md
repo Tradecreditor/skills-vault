@@ -187,3 +187,4 @@
 ## [2026-10-19] capture | sebastianhardy_ improve-system reel | 20261019-sebastianhardy-improve-system-claude-history
 ## [2026-10-20] capture | Prince Gupta Harness² reel | 20261020-princegupta-harness2-self-improving-agents
 ## [2026-10-21] capture | snapai.io three SEO tools reel | 20261021-snapai-three-tools-take-over-seo
+## [2026-10-23] capture | AutoBrand.HK pstack coding skills reel | 20261023-autobrandhk-pstack-lauren-tan-coding-skills
