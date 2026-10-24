@@ -123,3 +123,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | 20261021-snapai-three-tools-take-over-seo | post | snapai.io：三個工具接管 SEO（GSC MCP、mktg-seo-audit、mktg-ai-seo） | instagram | 2026-10-21 | draft | topic/seo-geo, seo, aeo, geo, mcp, agent-skills | instagram:DewsQQSJj1k |
 | 20261023-autobrandhk-pstack-lauren-tan-coding-skills | post | AutoBrand.HK：pstack — Lauren Tan 嘅 coding skills 套件 | instagram | 2026-10-23 | draft | topic/agent-tooling, instagram, pstack, coding-skills, verification, tdd | instagram:DerbKjMILF8 |
 | peach-mitao--peach | repo | peach | github | 2026-10-24 | draft | local-first, media-library, self-hosted, python, react, video-player | github:peach-mitao/peach |
+| 20261024-aiposthub-memhub-cross-tool-ai-memory | post | AI郵報：騰訊 Hy Memory 2.0 / MemHub 跨 AI 工具共享記憶 | instagram | 2026-10-24 | draft | topic/agent-tooling, instagram, memory, memhub, hy-memory, claude-code, codex | instagram:De3Ot-UE8oE |
