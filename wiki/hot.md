@@ -8,6 +8,7 @@
 - **[[pages/20261019-harness2-recursive-agent-harnessing|Harness²]]**（Google Research）— 唔改模型，用同一任務 A/B 試改 agent harness 再累積教訓。X 三位作者過 300 likes（@akshay_pachaar 5,430 likes），X 單平台 heat 0.70，今個星期唯一過社交 gate 嘅項目。
 
 ## 最近 20 項
+- 2026-10-24 · repo · [[stars/peach-mitao--peach|peach-mitao/peach：本地優先個人媒體館藏]]
 - 2026-10-23 · post · [[pages/20261023-autobrandhk-pstack-lauren-tan-coding-skills|AutoBrand.HK：pstack coding skills]]
 - 2026-10-21 · post · [[pages/20261021-snapai-three-tools-take-over-seo|snapai.io：三個工具接管 SEO]]
 - 2026-10-20 · post · [[pages/20261020-princegupta-harness2-self-improving-agents|Prince Gupta：Harness² 自我升級 agent]]
