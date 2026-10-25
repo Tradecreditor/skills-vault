@@ -35,3 +35,9 @@ AutoBrand.HK 推介名為 pstack 嘅 coding skills 套件，作者 Lauren Tan（
 
 ## Related
 - [[pages/20261021-snapai-three-tools-take-over-seo|snapai.io：三個工具接管 SEO]] (same comment-to-DM funnel pattern)
+
+## Notes
+- 2026-10-25: source repo located — `cursor/plugins`, folder `pstack/` (https://github.com/cursor/plugins/tree/main/pstack), author Lauren Tan (`poteto`, React core team, Cursor), MIT. The Claude Code build ships from `harness/pstack/claude-code` via the repo's `.claude-plugin/marketplace.json` (plugin `pstack`, marketplace `cursor-plugins`).
+- Install in Claude Code: `/plugin marketplace add cursor/plugins` then `/plugin install pstack@cursor-plugins`; then `/pstack:setup-pstack` (writes `~/.claude/rules/pstack-models.md`) and use `/pstack:poteto-mode`. Third-party marketplaces do not auto-update; update with `claude plugin update pstack@cursor-plugins`. Cursor: `/add-plugin pstack`.
+- Contents as of today: `poteto-mode` with 23 playbooks (bug fix, perf, feature, refactoring, babysit, shipping, autonomous run, orchestrate…), plus ~27 skills incl. `tdd`, `interrogate`, `recall`, `create-verification-skill`, `how`, `why`, `architect`, `arena`, `swarm`, `blast-radius`, `no-comments`, `unslop`. Many community ports exist (e.g. `pasevin/pstack-portable-skills` for `npx skills`), all unofficial.
+- Reader: GitHub connector search + Jina Reader (README), raw.githubusercontent.com (LICENSE, marketplace.json).
