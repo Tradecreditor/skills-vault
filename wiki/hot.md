@@ -8,6 +8,7 @@
 - **[[pages/20261019-harness2-recursive-agent-harnessing|Harness²]]**（Google Research）— 唔改模型，用同一任務 A/B 試改 agent harness 再累積教訓。X 三位作者過 300 likes（@akshay_pachaar 5,430 likes），X 單平台 heat 0.70，今個星期唯一過社交 gate 嘅項目。
 
 ## 最近 20 項
+- 2026-10-25 · post · [[pages/20261025-nick-saraev-agency-agents-claude-code|Nick Saraev：Agency Agents 免費 AI 代理商]]
 - 2026-10-24 · post · [[pages/20261024-aiposthub-memhub-cross-tool-ai-memory|AI郵報：MemHub 跨 AI 工具共享記憶]]
 - 2026-10-24 · repo · [[stars/peach-mitao--peach|peach-mitao/peach：本地優先個人媒體館藏]]
 - 2026-10-23 · post · [[pages/20261023-autobrandhk-pstack-lauren-tan-coding-skills|AutoBrand.HK：pstack coding skills]]
@@ -27,4 +28,3 @@
 - 2026-10-12 · repo · [[pages/20261012-moli-headless-browser-for-ai-agents|lexmount/moli — structure-first Rust headless browser for AI agents]]
 - 2026-10-11 · video · [[pages/20261011-kelly-tsai-multi-agent-architecture-creao|Kelly Tsai ft. Creao AI：多 AI Agent 架構點用、點判斷該唔該用]]
 - 2026-10-10 · repo · [[stars/browser-use--browser-use|browser-use/browser-use]]
-- 2026-10-09 · post · [[pages/20261008-claude-tips-opus55-motion-graphics-six-prompts|Claude Tips & Tricks：Opus 5.5 用代碼做 motion graphics 嘅 6 個 prompt]]
