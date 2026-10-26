@@ -192,3 +192,4 @@
 ## [2026-10-24] capture | AI郵報 MemHub cross-tool AI memory carousel | 20261024-aiposthub-memhub-cross-tool-ai-memory
 ## [2026-10-25] capture | Nick Saraev Agency Agents reel | 20261025-nick-saraev-agency-agents-claude-code
 ## [2026-10-25] capture | AI郵報 Google three Markdown files post | 20261025-aiposthub-google-three-markdown-files
+## [2026-10-26] capture | Nick Saraev MiroFish startup simulation reel | 20261026-nick-saraev-mirofish-startup-simulation
