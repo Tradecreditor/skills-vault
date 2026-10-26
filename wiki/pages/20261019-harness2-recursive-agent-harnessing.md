@@ -44,3 +44,7 @@ Harness² 係 Google Cloud AI Research 開源嘅框架（Apache-2.0，論文 arX
 - [[hot-list/2026-W42]]
 - [[stars/NousResearch--hermes-agent-self-evolution]]: evolutionary self-improvement of an agent's skills and prompts
 - [[stars/bytedance--deer-flow]]: a long-horizon agent harness of the kind Harness² edits
+
+## Notes
+
+- also trending 2026-W43 (19,872 stars on 2026-10-26, +11,332 since 2026-10-19; it now clears the new-repo gate too; GitHub search API; see [[hot-list/2026-W43]])

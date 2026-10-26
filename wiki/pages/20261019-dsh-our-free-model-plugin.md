@@ -44,3 +44,7 @@ dsh-our-free-model 係 DeepSeek Harness（dsh）嘅模型插件：裝咗之後�
 
 - [[hot-list/2026-W42]]
 - [[pages/20261002-magpie-agent-model-switcher]]: routes Codex / Claude Code to other models from the menu bar; same "any agent, any model" demand
+
+## Notes
+
+- also trending 2026-W43 (43,692 stars / 1,238 forks on 2026-10-26, +17,638 since 2026-10-19; GitHub search API; see [[hot-list/2026-W43]]). The star-to-unlock EAC lane noted above still applies, so read the number as incentivised.

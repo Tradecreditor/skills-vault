@@ -1,13 +1,18 @@
 # Hot — read me first
 
 ## 本週熱門榜
-`2026-W42`，完整報告見 [[hot-list/2026-W42|hot-list/2026-W42]]：
+`2026-W43`，完整報告見 [[hot-list/2026-W43|hot-list/2026-W43]]：
 
-- **[[pages/20261019-dsh-our-free-model-plugin|dsh-our-free-model]]**（Ebony-Vinyl）— DeepSeek Harness 插件，唔使登入或 API Key 就有 DeepSeek V4.1 Flash、Kimi K3 等免費模型，連本地 OpenAI / Anthropic gateway。一星期 +15,863 stars，單平台 heat 0.80；部分 stars 係 star 先解鎖 EAC 渠道換返嚟，有服務條款風險，當趨勢睇。
-- **[[pages/20261019-orca-ade-parallel-coding-agents|Orca]]**（stablyai）— 開源 ADE，同時行 Claude Code / Codex / OpenCode 一隊 agent，每個一個 worktree，有手機 app。一星期 +7,130 stars + skills.sh `orchestration` 8.4K 安裝，單平台 heat 0.80。
-- **[[pages/20261019-harness2-recursive-agent-harnessing|Harness²]]**（Google Research）— 唔改模型，用同一任務 A/B 試改 agent harness 再累積教訓。X 三位作者過 300 likes（@akshay_pachaar 5,430 likes），X 單平台 heat 0.70，今個星期唯一過社交 gate 嘅項目。
+- **[[pages/20261026-deepseek-harness-everything-is-a-plugin|DeepSeek Harness]]**（deepseek-ai）— DeepSeek 開源嘅 agent harness `dsh`，「萬物皆插件」，`npx @deepseek-ai/dsh web` 開 Web UI，周邊插件生態爆星。一星期 +8,093 stars（共 261,866），單平台 heat 0.80；上星期 Watch 第一。
+- **[[pages/20261026-xerj-local-search-engine-mcp-for-agents|XERJ]]**（xerj-org）— 本機 Rust 搜尋引擎兼 MCP server，幫 coding agent index code 同文件，「reference coding」代替 grep。一星期 +6,982 stars，單平台 heat 0.80。
+- **[[pages/20261026-impeccable-design-skill-for-coding-agents|Impeccable]]**（pbakaus）— coding agent 用嘅設計 skill，24 個指令加 62 條反「AI 樣」偵測規則。一星期 +5,341 stars，單平台 heat 0.80。
+
+今個星期冇一個範圍內項目過 X / Threads gate，所以「至少一個社交入選」呢條規則未達到（Jina 被封，X 搜尋只靠 fxtwitter timeline）。
 
 ## 最近 20 項
+- 2026-10-26 · repo · [[pages/20261026-deepseek-harness-everything-is-a-plugin|deepseek-ai/deepseek-harness — DeepSeek Harness agent harness]]
+- 2026-10-26 · repo · [[pages/20261026-xerj-local-search-engine-mcp-for-agents|xerj-org/xerj — local search engine and MCP server for agents]]
+- 2026-10-26 · repo · [[pages/20261026-impeccable-design-skill-for-coding-agents|pbakaus/impeccable — design skill for coding agents]]
 - 2026-10-26 · post · [[pages/20261026-nick-saraev-mirofish-startup-simulation|Nick Saraev：MiroFish 模擬引擎驗證創業點子]]
 - 2026-10-25 · post · [[pages/20261025-aiposthub-google-three-markdown-files|AI郵報：Google 三份 Markdown 分工]]
 - 2026-10-25 · post · [[pages/20261025-nick-saraev-agency-agents-claude-code|Nick Saraev：Agency Agents 免費 AI 代理商]]
@@ -25,6 +30,3 @@
 - 2026-10-19 · repo · [[pages/20261019-harness2-recursive-agent-harnessing|google-research/harness2 — Harness²: recursive, verifier-free harness improvement for agents]]
 - 2026-10-16 · post · [[pages/20261016-youraveragetechbro-devin-automations|youraveragetechbro：Devin automations]]
 - 2026-10-16 · repo · [[stars/multica-ai--andrej-karpathy-skills|multica-ai/andrej-karpathy-skills]]
-- 2026-10-12 · repo · [[pages/20261012-rea-reverse-engineer-anything|morluto/rea — REA: Reverse Engineer Anything, one MCP for agent-driven reverse engineering]]
-- 2026-10-12 · repo · [[pages/20261012-anatomy-isometric-explainer-skill|wheresryan22/anatomy — agent skill that explains an idea as an interactive isometric machine]]
-- 2026-10-12 · repo · [[pages/20261012-moli-headless-browser-for-ai-agents|lexmount/moli — structure-first Rust headless browser for AI agents]]

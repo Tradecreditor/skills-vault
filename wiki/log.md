@@ -193,3 +193,7 @@
 ## [2026-10-25] capture | Nick Saraev Agency Agents reel | 20261025-nick-saraev-agency-agents-claude-code
 ## [2026-10-25] capture | AI郵報 Google three Markdown files post | 20261025-aiposthub-google-three-markdown-files
 ## [2026-10-26] capture | Nick Saraev MiroFish startup simulation reel | 20261026-nick-saraev-mirofish-startup-simulation
+## [2026-10-26] capture | deepseek-ai/deepseek-harness — DeepSeek Harness agent harness | 20261026-deepseek-harness-everything-is-a-plugin
+## [2026-10-26] capture | xerj-org/xerj — local search engine and MCP server for agents | 20261026-xerj-local-search-engine-mcp-for-agents
+## [2026-10-26] capture | pbakaus/impeccable — design skill for coding agents | 20261026-impeccable-design-skill-for-coding-agents
+## [2026-10-26] hot-list | 2026-W43 | hot-list/2026-W43
