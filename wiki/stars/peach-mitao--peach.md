@@ -38,3 +38,5 @@ Peach（蜜桃）係一個單用戶、本地優先嘅個人影片館藏系統，
 - URL: https://github.com/peach-mitao/peach
 - Created: 2026-08-19
 - Reader: raw.githubusercontent.com README + Jina Reader (GitHub API JSON)
+
+## Related
