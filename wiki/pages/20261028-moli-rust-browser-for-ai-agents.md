@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:De9t1wcD01v"
 engagement: "not shown by reader"
 tags: [topic/agent-tooling, instagram, moli, rust, headless-browser, playwright, open-source]
-related: []
+related: [20261012-moli-headless-browser-for-ai-agents]
 needs_manual_text: false
 ---
 
@@ -37,3 +37,4 @@ needs_manual_text: false
 ## Related
 - [[Panniantong--Agent-Reach|Agent-Reach]]
 - [[jackwener--OpenCLI|OpenCLI]]
+- [[20261012-moli-headless-browser-for-ai-agents|lexmount/moli（先前已入庫嘅 repo 頁）]]

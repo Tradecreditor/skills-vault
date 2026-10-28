@@ -7,6 +7,8 @@
 - **[[pages/20261019-orca-ade-parallel-coding-agents|Orca]]**（stablyai）— 開源 ADE，同時行 Claude Code / Codex / OpenCode 一隊 agent，每個一個 worktree，有手機 app。一星期 +7,130 stars + skills.sh `orchestration` 8.4K 安裝，單平台 heat 0.80。
 - **[[pages/20261019-harness2-recursive-agent-harnessing|Harness²]]**（Google Research）— 唔改模型，用同一任務 A/B 試改 agent harness 再累積教訓。X 三位作者過 300 likes（@akshay_pachaar 5,430 likes），X 單平台 heat 0.70，今個星期唯一過社交 gate 嘅項目。
 
+## 最近 20 項
+- 2026-10-28 · post · [[pages/20261028-moli-rust-browser-for-ai-agents|Moli：專為 AI 代理而設的 Rust 瀏覽器]]
 - 2026-10-26 · post · [[pages/20261026-nick-saraev-mirofish-startup-simulation|Nick Saraev：MiroFish 模擬引擎驗證創業點子]]
 - 2026-10-25 · post · [[pages/20261025-aiposthub-google-three-markdown-files|AI郵報：Google 三份 Markdown 分工]]
 - 2026-10-25 · post · [[pages/20261025-nick-saraev-agency-agents-claude-code|Nick Saraev：Agency Agents 免費 AI 代理商]]
