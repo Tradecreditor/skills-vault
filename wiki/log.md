@@ -194,3 +194,4 @@
 ## [2026-10-25] capture | AI郵報 Google three Markdown files post | 20261025-aiposthub-google-three-markdown-files
 ## [2026-10-26] capture | Nick Saraev MiroFish startup simulation reel | 20261026-nick-saraev-mirofish-startup-simulation
 ## [2026-10-26] lint | 2026-W44 | outputs/health/2026-W44
+## [2026-10-28] capture | Moli Rust browser for AI agents reel | 20261028-moli-rust-browser-for-ai-agents
