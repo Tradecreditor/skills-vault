@@ -18,7 +18,7 @@ topics:            # seed queries used on every source; add your own interests
   - "ai agent framework"
   - "coding agent harness"
 
-sources:           # decision 5: Agent-Reach first, then the no-login fallbacks below. Exa is NOT used (Jeff, 2026-10-04, confirmed 2026-10-18; CLAUDE.md "Reading a URL"). xAI x_search is NOT used.
+sources:           # decision 5: Agent-Reach first, then the no-login fallbacks below. Exa is the paid fallback after Jina (Jeff 2026-10-30, reversing the 2026-10-04 / 10-18 ban): only when scripts/read-url.sh exits 2 or both searches come back empty (CLAUDE.md "Reading a URL"). xAI x_search is NOT used.
   github: ["gh search repos locally; in the cloud (gh and api.github.com are proxy-blocked) use the GitHub connector search_repositories tool, or Jina Reader on https://api.github.com/search/repositories?q=... (JSON comes back in .data.content)", "snapshot delta from _snapshot.json (stars via the connector's search_repositories with batched repo:<o>/<r> queries, as the W41 run did)"]
   x: ["agent-reach twitter-cli search (only if TWITTER_AUTH_TOKEN and TWITTER_CT0 are set; burner account)", "DuckDuckGo HTML via bash scripts/read-url.sh --fresh 'https://html.duckduckgo.com/html/?q=<urlencoded <topic> site:x.com>' (Jina Reader, then direct once html.duckduckgo.com is in the environment's allowed domains), plus the WebSearch tool; pre-filter by the tweet-id snowflake timestamp, then every in-window hit is verified via fxtwitter JSON before any number is used"]
   x_verify: "fxtwitter JSON for every candidate post (never trust search-result counts)"
@@ -82,6 +82,7 @@ cost_caps_per_run:
   web_searches: 30   # X / Threads discovery queries (DuckDuckGo via Jina + WebSearch tool): 13 topics x (X + Threads) = 26, plus ~4 name-specific corroboration searches; page reads are not counted here
   twitter_cli_searches: 10
   fxtwitter_fetches: 40
+  exa_calls: 20      # web_fetch_exa + web_search_exa together, fallback only (W42 used 16 when Exa was the main reader); on HTTP 402 stop calling Exa for the run
   github_api_calls: 200
 
 jev:               # pilot 1 (2026-10-02): TypeSafe's Jev prefilters candidates; it never changes a star number, a gate or the heat formula.

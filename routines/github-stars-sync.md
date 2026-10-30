@@ -9,7 +9,7 @@ You are the GitHub-stars sync routine for Jeff's skills vault (GitHub account: T
 2. List stars newest first. Try in this order and use the first that returns data:
    a. gh api "user/starred?sort=created&direction=desc&per_page=5&page=N" -H "Accept: application/vnd.github.star+json" (items have starred_at + repo; works locally).
    b. curl -s "https://api.github.com/users/Tradecreditor/starred?per_page=5&page=N" (public list, newest first, no starred_at).
-   c. Jina Reader as a relay (Exa is never used, CLAUDE.md "Reading a URL"):
+   c. Jina Reader as a relay (if it fails, Exa's web_fetch_exa on the same API URL, CLAUDE.md "Reading a URL"):
       curl -s -H "Accept: application/json" -H "X-No-Cache: true" "https://r.jina.ai/https://api.github.com/users/Tradecreditor/starred?per_page=5&page=N"
       The JSON list is the string in .data.content (public list, newest first, no starred_at). X-No-Cache is not optional: Jina caches
       by URL and would replay an older page - including an empty list captured before the account's stars were public. One request
