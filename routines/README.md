@@ -8,7 +8,7 @@ heading is the routine's prompt. The prompts point at files in this repo, so tun
 |---|---|---|---|
 | `capture-link` | API (fired by the Supabase `capture` function / iPhone Shortcut / Telegram) | Sonnet | pushes to `main` |
 | `github-stars-sync` | Schedule, daily 07:00 HKT | Sonnet (Haiku drops the READMEs and writes English one-liners; see the prompt file) | pushes to `main`; step 7 mirrors `handoff.md` In flight to the Notion board (`scripts/notion-sync.py`, needs `NOTION_TOKEN`) |
-| `weekly-hot-list` | Schedule, Monday 09:00 HKT | Opus | opens a PR from `hot-list/YYYY-Www` |
+| `weekly-hot-list` | Schedule, Monday 09:00 HKT | Opus | pushes to `main` (a PR from `hot-list/YYYY-Www` until 2026-10-30) |
 | `vault-lint` | Schedule, Monday 10:00 HKT | Sonnet | pushes report to `main`; PR if it proposes merges; check 9 audits the Projects HQ board (`scripts/notion-sync.py --audit`) |
 | `skill-review` | Schedule, daily 15:47 HKT (`47 7 * * *` UTC) | Opus | pushes to `main`: sets draft skills to `reviewer-approved` or leaves them `draft`, reports in `outputs/skill-reviews/` |
 
@@ -33,6 +33,9 @@ Every routine inherits its network policy from its cloud environment, so do this
    api.supadata.ai
    api.scrapecreators.com
    skills.sh
+   www.skills.sh
+   trendshift.io
+   html.duckduckgo.com
    clawhub.ai
    skillsmp.com
    www.youtube.com
@@ -49,7 +52,7 @@ Every routine inherits its network policy from its cloud environment, so do this
    | Key | Where | What it unlocks | Cost |
    |---|---|---|---|
    | `SUPADATA_KEY` | dash.supadata.ai → API key | **Instagram and Facebook only**: reel / carousel / video transcripts and counts. The skill never spends it on X or YouTube | free 100 credits/month (1 per existing transcript, 2 per AI-generated minute ≈ 30 min of video); paid from $5/month, no rollover |
-   | `JINA_API_KEY` | jina.ai → API key | higher r.jina.ai rate limit; reported to bypass the anonymous per-domain blocks | free |
+   | `JINA_API_KEY` | jina.ai → API key, stored as a plain **environment variable** (the Bearer API-credential path never injected for TypeSafe, so do not rely on it here) | `scripts/read-url.sh` sends it from inside the script; ends the anonymous `401 AuthenticationRequiredError` ("bad IP reputation") that took out DuckDuckGo, skills.sh and Trendshift in the W43 run, and raises the rate limit. Without it the script falls back to a direct fetch, which needs the host in the list above (`www.skills.sh`, `trendshift.io`, `html.duckduckgo.com` added 2026-10-30) | free tier |
    | `SC_API_KEY`, `THREADS_APP_TOKEN` | scrapecreators.com, Meta app | Threads like/repost counts, Threads oEmbed | optional, not required |
    | `TWITTER_AUTH_TOKEN` + `TWITTER_CT0` | Cookie-Editor export from a **burner** X account | X search for the weekly list only (a single post needs no cookie) | free, account risk |
 | `TYPESAFE_API_KEY` | Key from the TypeSafe console, stored as a plain **environment variable** on the environment (Edit environment → Environment variables → `TYPESAFE_API_KEY=apikey_…`), with `api.typesafe.ai` in the allowed domains. The API-credential path (Bearer, Allowed websites `api.typesafe.ai`) was tried on 2026-10-02 and the proxy never injected the header in any of four variants from fresh sessions, while the same key answered 200 from a laptop; delete such a credential if one exists so the proxy does not special-case the host. The variable is visible to every session in the environment, so rotate the key in the console if a transcript ever prints it | **weekly-hot-list only (pilot 1, 2026-10-02)**: Jev prefilters X / Threads hits before the fxtwitter cap is spent and decides the topical gate; thresholds live in `wiki/hot-list/_config.yaml` → `jev:`. Without it TypeSafe answers 403 `authentication_error` (verified 2026-10-02), the routine judges everything itself as before and prints `jev: off (authentication_error …)` under ## 方法 | metered, input tokens only; published median ≈ US$0.000068 per decision, under US$0.10 a week at the pilot's caps |

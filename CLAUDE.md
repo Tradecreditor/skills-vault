@@ -61,7 +61,7 @@ everything appears to work without it, right up until the agent pushes to `main`
 - Create and edit freely under `inbox/`, `agents/`, `wiki/pages/`, `wiki/stars/`, `wiki/hot-list/`, `skills/`, `outputs/`; append rows to `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`.
 - **Never delete or rename files.** To retire an entry set `status: deprecated` and add `deprecated_reason:` in its frontmatter (skills: `vault_status: "deprecated"`).
 - **Never modify anything under `raw/`.** A corrected capture is a new file `raw/<slug>-v2.md`.
-- `git pull --rebase` before every push. Core captures push straight to `main`; the weekly hot list opens a PR (branch `hot-list/YYYY-Www`); non-core agents always open a PR (`gh pr create`, then `gh pr merge --auto --rebase` if allowed).
+- `git pull --rebase` before every push. Core captures and every Routine, the weekly hot list included (Jeff, 2026-10-30), push straight to `main`, so agents on any computer get the latest with `git pull`; non-core agents always open a PR (`gh pr create`, then `gh pr merge --auto --rebase` if allowed).
 - Non-core agents work in their own clone with their own token; never run inside Jeff's Obsidian folder.
 - Never commit secrets or cookies. API keys live in environment variables (Routine secrets, Supabase secrets, local shell).
 - **Keep `handoff.md` current.** Any session or agent that changes code, prompts, config, skills, data or the plan updates it before ending and appends one line to its Session log, in the same commit or PR. Routines read it and never edit it; their output goes to `wiki/log.md`, `wiki/hot.md` and `outputs/health/`. Enforced by `scripts/handoff-check.sh`: a Claude Code Stop hook (`.claude/settings.json`) will not let a session end while its branch changed state without touching `handoff.md`, and the PR check `handoff` turns red for any agent that skips it. Captures and Routine output (`raw/`, `wiki/pages/`, `wiki/stars/`, index / log / hot, hot-list reports, `outputs/health/`) are exempt.
@@ -103,7 +103,11 @@ Every capture produces `raw/<slug>.md` (verbatim), `wiki/pages/<slug>.md` (compi
 ## Reading a URL (applies to every agent and every routine)
 **Never call Exa** (`web_fetch_exa`, `web_search_exa`, `agent_run`): Jeff's rule (2026-10-04, confirmed 2026-10-18). Where a
 skill or older note still names an Exa tier, skip it and go to the next reader. The no-login readers that work from a cloud session:
-- **Jina Reader** `curl -s https://r.jina.ai/<url>` for web pages, Threads posts, and as a relay for hosts the proxy blocks
+- **`bash scripts/read-url.sh [--fresh] [--json] <url>`** is the default way to read a page: Jina Reader first, sending `JINA_API_KEY` as a Bearer
+  token when it is set (an anonymous call from a cloud IP can get 401 "bad IP reputation"; a keyed call does not), then a direct fetch
+  of the URL (works locally, and in the cloud once the host is in the environment's allowed domains). It prints `reader: <name>` on
+  stderr for the page's Source line and exits 2 naming the host when both fail. `--fresh` = Jina's `X-No-Cache`, `--json` = JSON.
+- **Jina Reader** `curl -s https://r.jina.ai/<url>` (what `read-url.sh` calls first) for web pages, Threads posts, and as a relay for hosts the proxy blocks
   (`api.github.com` JSON comes back in `.data.content` with `-H "Accept: application/json"`). At most 2 requests in flight;
   on a 429 wait 20 s and retry once. For anything you poll or re-run (a starred list, a weekly page) send `-H "X-No-Cache: true"`,
   or Jina replays a cached copy. Search: DuckDuckGo's HTML endpoint through Jina (`https://r.jina.ai/https://html.duckduckgo.com/html/?q=...`)

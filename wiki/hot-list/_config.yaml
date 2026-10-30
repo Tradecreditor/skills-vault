@@ -20,11 +20,11 @@ topics:            # seed queries used on every source; add your own interests
 
 sources:           # decision 5: Agent-Reach first, then the no-login fallbacks below. Exa is NOT used (Jeff, 2026-10-04, confirmed 2026-10-18; CLAUDE.md "Reading a URL"). xAI x_search is NOT used.
   github: ["gh search repos locally; in the cloud (gh and api.github.com are proxy-blocked) use the GitHub connector search_repositories tool, or Jina Reader on https://api.github.com/search/repositories?q=... (JSON comes back in .data.content)", "snapshot delta from _snapshot.json (stars via the connector's search_repositories with batched repo:<o>/<r> queries, as the W41 run did)"]
-  x: ["agent-reach twitter-cli search (only if TWITTER_AUTH_TOKEN and TWITTER_CT0 are set; burner account)", "DuckDuckGo HTML through Jina Reader: https://r.jina.ai/https://html.duckduckgo.com/html/?q=<urlencoded '<topic> site:x.com'> (DuckDuckGo direct is proxy-blocked), plus the WebSearch tool; pre-filter by the tweet-id snowflake timestamp, then every in-window hit is verified via fxtwitter JSON before any number is used"]
+  x: ["agent-reach twitter-cli search (only if TWITTER_AUTH_TOKEN and TWITTER_CT0 are set; burner account)", "DuckDuckGo HTML via bash scripts/read-url.sh --fresh 'https://html.duckduckgo.com/html/?q=<urlencoded <topic> site:x.com>' (Jina Reader, then direct once html.duckduckgo.com is in the environment's allowed domains), plus the WebSearch tool; pre-filter by the tweet-id snowflake timestamp, then every in-window hit is verified via fxtwitter JSON before any number is used"]
   x_verify: "fxtwitter JSON for every candidate post (never trust search-result counts)"
   threads: ["the same DuckDuckGo-through-Jina search with '<topic> site:threads.net' (untested; W41 ran no Threads search); confirm each post's date after reading it via Jina", "jina reader to read the post; Scrape Creators (SC_API_KEY) for like/repost counts; Meta oEmbed only with THREADS_APP_TOKEN"]
-  registries: ["skills.sh trending: read https://skills.sh/trending (or the home page) via Jina Reader with header X-No-Cache: true (it is re-read every week; skills.sh direct is proxy-blocked); the JSON endpoint /api/v1/skills?view=trending needs a Vercel OIDC token and is not usable", "GET https://clawhub.ai/api/v1/skills?limit=20&sort=trending&nonSuspiciousOnly=true", "GET https://skillsmp.com/api/v1/skills/search?q=<topic>&sortBy=stars&limit=20"]
-  discovery: ["trendshift.io weekly trending page via Jina Reader with header X-No-Cache: true - GitHub discovery aid only, never a scored source; found all three 2026-W39 winners that the seed topics missed"]
+  registries: ["skills.sh trending: read https://skills.sh/trending (or the home page) via bash scripts/read-url.sh --fresh (re-read every week; direct needs skills.sh and www.skills.sh allowed); the JSON endpoint /api/v1/skills?view=trending needs a Vercel OIDC token and is not usable", "GET https://clawhub.ai/api/v1/skills?limit=20&sort=trending&nonSuspiciousOnly=true", "GET https://skillsmp.com/api/v1/skills/search?q=<topic>&sortBy=stars&limit=20"]
+  discovery: ["trendshift.io weekly trending page via bash scripts/read-url.sh --fresh (direct needs trendshift.io allowed) - GitHub discovery aid only, never a scored source; found all three 2026-W39 winners that the seed topics missed"]
 
 gates:             # an item is a candidate if it clears at least one gate on GitHub, X or Threads
   github:
@@ -64,6 +64,12 @@ score:
     # Worked: 17,934 stars / 10,000 = 1.79 -> 0.40 x 1.79 = 0.72, qualifies. 10,814 / 10,000 = 1.08 -> 0.43, does not.
     # The multi_platform_bonus never applies here; by definition only one platform was gated.
   social_rule: "at least one winner per week must have cleared the X or Threads gate"
+  pasted_links:                       # Jeff 2026-10-30: a link Jeff pasted himself needs only ONE gate (GitHub, X or Threads), never two platforms
+    not_pasted: [routine:weekly-hot-list, routine:github-stars-sync]   # captured_by values of pages the routines found on their own; every other captured_by (claude-code-cloud/local, routine:capture-link, codex...) is a link Jeff pasted
+    candidates: "pages in wiki/pages/ captured in the window, plus any search candidate whose canonical_id hits a pasted page"
+    qualify: "clears any one gate under gates: github, x or threads; corroboration.min_platforms_with_gate and single_source_min_heat do not apply"
+    rank_heat: "max(normal heat, weight x min(single_source_overshoot_cap, metric / threshold) on its best gated platform)"
+    dedupe: "never discarded by dedupe; a qualifying item gets '- also trending YYYY-Www (numbers)' under ## Notes of its page instead of a new capture"
   winners: { min: 2, max: 3 }
   quiet_week: "if fewer than 2 qualify, title the report 'quiet week', list the best 3 sub-threshold items under Watch, never lower thresholds"
 
@@ -109,5 +115,5 @@ jev:               # pilot 1 (2026-10-02): TypeSafe's Jev prefilters candidates;
 output:
   report: "wiki/hot-list/YYYY-Www.md"
   snapshot: "wiki/hot-list/_snapshot.json"      # { "<owner>/<repo>": { "stars": n, "as_of": "YYYY-MM-DD" } }
-  branch: "hot-list/YYYY-Www"                   # decision 6: weekly list opens a PR, never pushes to main
-  pr_title: "hot-list: YYYY-Www"
+  push: "main"                                  # Jeff 2026-10-30: commit straight to main so every agent sees the list the same day (replaces decision 6's hot-list/YYYY-Www PR)
+  commit_message: "hot-list: YYYY-Www"
