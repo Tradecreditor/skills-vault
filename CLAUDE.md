@@ -95,14 +95,19 @@ separate database or board per project). The working agreement is `skills/tracki
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools
-(twitter-cli / yt-dlp / gh / Jina Reader) first, then per-platform fallbacks; Exa is not used (next section). Readers are no-login by design (no cookies,
+(twitter-cli / yt-dlp / gh / Jina Reader) first, then per-platform fallbacks; Exa is the paid fallback after Jina (next section). Readers are no-login by design (no cookies,
 no logged-in browsers); the only paid-tier key, `SUPADATA_KEY`, is used solely for Instagram and Facebook video audio.
 Every capture produces `raw/<slug>.md` (verbatim), `wiki/pages/<slug>.md` (compiled), optionally `skills/<name>/SKILL.md`
 (gerund name, see "Skill format"), plus rows in `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`.
 
 ## Reading a URL (applies to every agent and every routine)
-**Never call Exa** (`web_fetch_exa`, `web_search_exa`, `agent_run`): Jeff's rule (2026-10-04, confirmed 2026-10-18). Where a
-skill or older note still names an Exa tier, skip it and go to the next reader. The no-login readers that work from a cloud session:
+**Order: Jina first, then Exa** (Jeff, 2026-10-30; it reverses his 2026-10-04 / 10-18 ban, which followed Exa's credits running out).
+Read with `scripts/read-url.sh` below (Jina, then a free direct fetch). Only when it exits 2, or its output is cut, a login wall or an
+error page, use the Exa MCP: `web_fetch_exa` with `maxCharacters` 50000 for a page (the default 3000 truncates silently, and `raw/`
+must be verbatim), `web_search_exa` when the DuckDuckGo-through-Jina search and WebSearch both come back empty. Never `agent_run`.
+Exa goes through its connector, so it also reads hosts the environment's network blocks (trendshift.io verified 2026-10-30).
+Exa is metered: on HTTP 402 its credits are gone, so say so once and skip Exa for the rest of the run. Source line: `reader: exa`.
+The no-login readers that work from a cloud session:
 - **`bash scripts/read-url.sh [--fresh] [--json] <url>`** is the default way to read a page: Jina Reader first, sending `JINA_API_KEY` as a Bearer
   token when it is set (an anonymous call from a cloud IP can get 401 "bad IP reputation"; a keyed call does not), then a direct fetch
   of the URL (works locally, and in the cloud once the host is in the environment's allowed domains). It prints `reader: <name>` on
@@ -111,7 +116,7 @@ skill or older note still names an Exa tier, skip it and go to the next reader. 
   (`api.github.com` JSON comes back in `.data.content` with `-H "Accept: application/json"`). At most 2 requests in flight;
   on a 429 wait 20 s and retry once. For anything you poll or re-run (a starred list, a weekly page) send `-H "X-No-Cache: true"`,
   or Jina replays a cached copy. Search: DuckDuckGo's HTML endpoint through Jina (`https://r.jina.ai/https://html.duckduckgo.com/html/?q=...`)
-  and the WebSearch tool.
+  and the WebSearch tool; `web_search_exa` only when both come back empty.
 - **GitHub**: the GitHub connector (`search_repositories`, `get_file_contents`), `raw.githubusercontent.com` for READMEs.
 - **X**: `api.fxtwitter.com` JSON (single posts and profile timelines). **Instagram / Facebook video**: Supadata.
 If a reader's output ends mid-sentence or mid-object, it was cut: fetch again or fetch a smaller page, never write the truncated

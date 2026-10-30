@@ -12,7 +12,8 @@
 #      On 429 wait 20 s and retry once. Any other failure moves on.
 #   2. Direct fetch of the URL with curl. Works locally, and in a cloud session only when the host is in the environment's
 #      allowed domains. HTML is reduced to markdown-ish text (headings, list items, links kept) with Python's html.parser.
-#   3. Nothing worked: exit 2 and name the host, so the caller can report which domain needs allowing.
+#   3. Nothing worked: exit 2 and name the host. The caller's next reader is the Exa MCP (web_fetch_exa), which a shell cannot call
+#      (CLAUDE.md "Reading a URL": Jina first, then Exa).
 # Exit: 0 ok, 2 every reader failed, 64 usage.
 set -uo pipefail
 
@@ -110,7 +111,7 @@ PY
   exit 0
 fi
 
-echo "read-url: every reader failed for $url: $why; direct ${dcode:-000}." >&2
+echo "read-url: every reader failed for $url: $why; direct ${dcode:-000}. Next reader: Exa web_fetch_exa (CLAUDE.md \"Reading a URL\")." >&2
 hint=""; [ -z "${JINA_API_KEY:-}" ] && hint=" (or set JINA_API_KEY)"
 [ "${dcode:-000}" = 000 ] && echo "read-url: $host is unreachable from here. In a cloud session, add $host to the environment's allowed domains$hint." >&2
 exit 2

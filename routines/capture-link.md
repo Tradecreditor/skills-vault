@@ -11,8 +11,8 @@ If the payload contains no URL, print "no url in payload" and stop.
 
 STEPS
 1. Read CLAUDE.md and skills/vault-capture/SKILL.md and follow the capture procedure exactly for each URL.
-2. Reader order stays as in the skill (Agent-Reach upstream tools -> per-platform fallbacks), minus its Exa column: never call Exa
-   (CLAUDE.md "Reading a URL"). Cloud notes: the Agent-Reach
+2. Reader order stays as in the skill, its Exa column included: the Agent-Reach upstream tool or Jina first, Exa only when that
+   fails, then the per-platform fallback (CLAUDE.md "Reading a URL"; on HTTP 402 skip Exa for the rest of the run, as the skill says). Cloud notes: the Agent-Reach
    upstream readers that work here via plain curl are api.fxtwitter.com (X), r.jina.ai (web, Threads), api.github.com REST + raw.githubusercontent.com
    (GitHub, public repos only; gh itself is proxy-blocked for repos not attached to this session, so do not rely on gh). yt-dlp is blocked from
    this IP: use the YouTube oEmbed / Jina fallbacks in the skill and then Supadata if SUPADATA_KEY is set. Jina Reader (https://r.jina.ai/<url>) also works as
