@@ -57,3 +57,7 @@ cloudflare/security-audit-skill 係 Cloudflare 開源（MIT）嘅 coding-agent s
 - [[pages/20261004-cloudflare-open-source-ai-security-audit-skill]]
 - [[pages/20260828-nvidia-skillspector-skill-security-scanner]]
 - [[../../skills/scanning-agent-skills/SKILL|skill: scanning-agent-skills]]
+
+## Notes
+
+- also trending 2026-W43 (47,496 stars / 2,948 forks on 2026-10-26, +16,188 since 2026-10-19; GitHub search API; see [[hot-list/2026-W43]])
