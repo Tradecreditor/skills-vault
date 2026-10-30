@@ -102,7 +102,7 @@ bash scripts/setup-phase1.sh
 - 其他 agent 寫入：用自己嘅 clone 同機器帳戶嘅 token（第 5 步），寫去 `agents/<名>/` 或 `wiki/pages/`，push 上 `agent/<名>/<slug>` branch 開 PR，等你 approve；佢直接 push main 會被 ruleset 拒絕。
 
 ## 第 4 步 · 定時 Routine（星期日下晝，約 3 小時）
-按 `routines/README.md` 嘅表開 `github-stars-sync`（每日 07:00 HKT，Sonnet）、`weekly-hot-list`（星期一 09:00 HKT，Opus，開 PR）、`vault-lint`（星期一 10:00 HKT，Sonnet），
+按 `routines/README.md` 嘅表開 `github-stars-sync`（每日 07:00 HKT，Sonnet）、`weekly-hot-list`（星期一 09:00 HKT，Opus，直接入 main；2026-10-30 之前係開 PR）、`vault-lint`（星期一 10:00 HKT，Sonnet），
 同 `skill-review`（每日 15:47 HKT，Opus；2026-10-04 加：用獨立 reviewer agent 審查 draft skill，過關就改做 `reviewer-approved`，詳見 `routines/README.md`「Creating `skill-review`」）。
 每個開完先手動 Run 一次，睇 output，再調 `wiki/hot-list/_config.yaml`。
 注意（已實測）：雲端 Routine 入面 `gh api user/starred`、`gh search repos`、`gh repo view --json` 都會被 GitHub proxy 擋（403）。prompt 已寫明後備路線：GitHub connector 嘅 `search_repositories` / `get_file_contents`，同 Exa connector 讀 `https://api.github.com/...` 嘅 JSON（已實測可行）。`wiki/stars/` 已同步 34 個 star（2026-09-26）；只有帳戶完全冇 star 時 Routine 先會話「no stars on this account yet」。
