@@ -11,6 +11,7 @@ early again. Set it back to `no` by hand if you ever suspect the ledger has gaps
 
 | starred_at | repo | note |
 |---|---|---|
+| 2026-11-01 | ai-job-search-dev/ai-job-search | Rename of MadsLorentzen/ai-job-search (same project, new org); see stars/MadsLorentzen--ai-job-search |
 | 2026-10-24 | peach-mitao/peach | Single-user local-first personal media library (Python + React), AGPL, 18+ |
 | 2026-10-16 | multica-ai/andrej-karpathy-skills | Single CLAUDE.md with four Karpathy-derived coding principles for Claude Code |
 | 2026-10-10 | browser-use/browser-use | Open-source browser agent (Python): hosted cloud, CLI skill, or library |

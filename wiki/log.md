@@ -199,3 +199,4 @@
 ## [2026-10-26] hot-list | 2026-W43 | hot-list/2026-W43
 ## [2026-10-26] lint | 2026-W44 | outputs/health/2026-W44
 ## [2026-10-28] capture | Moli Rust browser for AI agents reel | 20261028-moli-rust-browser-for-ai-agents
+## [2026-11-01] star | ai-job-search-dev/ai-job-search (rename of MadsLorentzen/ai-job-search, notes appended) | stars/MadsLorentzen--ai-job-search
