@@ -1,15 +1,18 @@
 # Hot — read me first
 
 ## 本週熱門榜
-`2026-W43`，完整報告見 [[hot-list/2026-W43|hot-list/2026-W43]]：
+`2026-W44`，完整報告見 [[hot-list/2026-W44|hot-list/2026-W44]]：
 
-- **[[pages/20261026-deepseek-harness-everything-is-a-plugin|DeepSeek Harness]]**（deepseek-ai）— DeepSeek 開源嘅 agent harness `dsh`，「萬物皆插件」，`npx @deepseek-ai/dsh web` 開 Web UI，周邊插件生態爆星。一星期 +8,093 stars（共 261,866），單平台 heat 0.80；上星期 Watch 第一。
-- **[[pages/20261026-xerj-local-search-engine-mcp-for-agents|XERJ]]**（xerj-org）— 本機 Rust 搜尋引擎兼 MCP server，幫 coding agent index code 同文件，「reference coding」代替 grep。一星期 +6,982 stars，單平台 heat 0.80。
-- **[[pages/20261026-impeccable-design-skill-for-coding-agents|Impeccable]]**（pbakaus）— coding agent 用嘅設計 skill，24 個指令加 62 條反「AI 樣」偵測規則。一星期 +5,341 stars，單平台 heat 0.80。
+- **[[pages/20261102-dsh-superagent-proactive-coding-agent|dsh-superagent]]**（deepseek-ai）— DeepSeek 開源嘅研究原型：守住一個 GitHub repo、自己處理 issue 同 PR 嘅主動 coding agent，以 dsh bundle 安裝。10-31 開源，兩日 10,169 stars，單平台 heat 0.80。
+- **[[pages/20261102-elephant-goldfish-model-spec-review-plugin|Elephant-Goldfish Model]]**（google）— 「大象」agent 帶 context 寫 spec、「金魚」零 context subagent 做 review 嘅插件，Claude Code / Codex / Antigravity 都裝得到。一星期 +8,316 stars，單平台 heat 0.80。
+- **[[pages/20261102-benji-taylor-stageshow-faux-ui-skill|Stageshow]]**（@benjitaylor）— 教 coding agent 整似真產品假 UI 圖同動畫嘅 skill，`npx skills add benjitaylor/skills --skill stageshow`。X 一個 post 12,651 like / 622 轉推 / 119 萬瀏覽，X 單平台 heat 0.70，係今個星期唯一社交入選。
 
-今個星期冇一個範圍內項目過 X / Threads gate，所以「至少一個社交入選」呢條規則未達到（Jina 被封，X 搜尋只靠 fxtwitter timeline）。
+你貼嘅 link 有兩個合資格：[[pages/20261003-matt-pocock-skills-repo-agent-skills|mattpocock/skills]]（一星期 +6,005 stars）同 [[pages/20261028-moli-rust-browser-for-ai-agents|Moli]]（lexmount/moli 過新 repo gate，22,100 stars），兩個都輸咗同分排序，已喺頁面加 Notes。
 
 ## 最近 20 項
+- 2026-11-02 · repo · [[pages/20261102-dsh-superagent-proactive-coding-agent|deepseek-ai/dsh-superagent-prototype — 主動 coding agent]]
+- 2026-11-02 · repo · [[pages/20261102-elephant-goldfish-model-spec-review-plugin|google/elephant-goldfish-model — spec 撰寫同零 context review 插件]]
+- 2026-11-02 · post · [[pages/20261102-benji-taylor-stageshow-faux-ui-skill|Benji Taylor：Stageshow 假 UI skill]]
 - 2026-10-28 · post · [[pages/20261028-moli-rust-browser-for-ai-agents|Moli：專為 AI 代理而設的 Rust 瀏覽器]]
 - 2026-10-26 · repo · [[pages/20261026-deepseek-harness-everything-is-a-plugin|deepseek-ai/deepseek-harness — DeepSeek Harness agent harness]]
 - 2026-10-26 · repo · [[pages/20261026-xerj-local-search-engine-mcp-for-agents|xerj-org/xerj — local search engine and MCP server for agents]]
@@ -27,6 +30,3 @@
 - 2026-10-19 · post · [[pages/20261019-code-and-chill-team-dashboard|Code & Chill：團隊專案管理 dashboard]]
 - 2026-10-19 · post · [[pages/20261019-chase-h-ai-ponytail-carousel|chase.h.ai：ponytail 輪播帖]]
 - 2026-10-19 · repo · [[pages/20261019-dsh-our-free-model-plugin|Ebony-Vinyl/dsh-our-free-model — DeepSeek Harness plugin with free model lanes and no API key]]
-- 2026-10-19 · repo · [[pages/20261019-orca-ade-parallel-coding-agents|stablyai/orca — Orca ADE: run a fleet of coding agents side by side, each in its own worktree]]
-- 2026-10-19 · repo · [[pages/20261019-harness2-recursive-agent-harnessing|google-research/harness2 — Harness²: recursive, verifier-free harness improvement for agents]]
-- 2026-10-16 · post · [[pages/20261016-youraveragetechbro-devin-automations|youraveragetechbro：Devin automations]]

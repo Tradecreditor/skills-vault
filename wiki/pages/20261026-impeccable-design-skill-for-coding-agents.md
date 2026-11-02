@@ -45,3 +45,7 @@ Impeccable 係 Paul Bakaus 做嘅設計 skill（Apache-2.0），俾 Claude Code�
 - [[stars/Leonxlnx--taste-skill]]: agent skills that give coding agents taste, the closest neighbour
 - [[stars/VoltAgent--awesome-design-md]]: DESIGN.md files that a coding agent can follow
 - [[pages/20260924-4-free-design-sites-for-vibe-coders]]: design references for vibe coders
+
+## Notes
+
+- also trending 2026-W44 (99,745 stars / 5,900 forks on 2026-11-02, +11,552 since 2026-10-26; GitHub search API; see [[hot-list/2026-W44]])

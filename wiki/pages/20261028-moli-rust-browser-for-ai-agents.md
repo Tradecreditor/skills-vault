@@ -38,3 +38,7 @@ needs_manual_text: false
 - [[Panniantong--Agent-Reach|Agent-Reach]]
 - [[jackwener--OpenCLI|OpenCLI]]
 - [[20261012-moli-headless-browser-for-ai-agents|lexmount/moli（先前已入庫嘅 repo 頁）]]
+
+## Notes
+
+- also trending 2026-W44 (22,100 stars / 603 forks on 2026-11-02, +1,323 since 2026-10-26; GitHub search API; repo lexmount/moli clears the new-repo gate (created 2026-08-10, over 10,000 stars), so this pasted link qualifies; see [[hot-list/2026-W44]])
