@@ -204,3 +204,4 @@
 ## [2026-11-02] capture | google/elephant-goldfish-model — spec drafting and zero-context review plugin | 20261102-elephant-goldfish-model-spec-review-plugin
 ## [2026-11-02] capture | Benji Taylor: Stageshow faux-UI skill (X post) | 20261102-benji-taylor-stageshow-faux-ui-skill
 ## [2026-11-02] hot-list | 2026-W44 | hot-list/2026-W44
+## [2026-11-02] lint | 2026-W45 | outputs/health/2026-W45
