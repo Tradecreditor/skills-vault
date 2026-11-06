@@ -30,18 +30,22 @@ Set up four plugins that address distinct Claude Code bottlenecks: context satur
 
 ### 1. Graphify — repo knowledge graph
 
+Needs Python 3.10+ and uv. Graphify is a Python package, not an npm one, and its PyPI name has two y's (`graphifyy`). Tested on Windows on 2026-11-06.
+
 ```bash
-# Install
-git clone https://github.com/Graphify-Labs/graphify
-cd graphify && npm install
+# Install once per machine
+uv tool install graphifyy==0.9.103
+graphify install --platform claude
 
-# Build the graph (run once per repo, zero LLM calls)
-npx graphify build --repo /path/to/your/repo
-
-# Add to CLAUDE.md or a session-start hook so Claude reads the graph first
+# Build or refresh the code graph, from the repo root (local, zero LLM calls)
+graphify update .
 ```
 
-**Effect**: Claude follows the pre-built map instead of re-reading files; eliminates redundant file reads.
+To map docs, PDFs, images or video as well, type `/graphify .` in the assistant. That pass uses the assistant's model or a configured API key.
+
+**Changes outside the repo**: adds the `graphify` and `graphify-mcp` commands and `~/.claude/skills/graphify/`, and appends a short `/graphify` registration block to `~/.claude/CLAUDE.md`. It adds no hook. Each repo gets a `graphify-out/` folder.
+
+**Effect**: Claude can query the graph with `graphify query`, `graphify path` and `graphify explain` instead of searching through files.
 
 ### 2. Agent Skills — structured engineering workflow
 
@@ -72,7 +76,7 @@ git clone https://github.com/diegosouzapw/OmniRoute
 
 ## Pitfalls
 
-- Graphify's graph goes stale when files change significantly — rebuild after large refactors.
+- Graphify's graph goes stale when files change: run `graphify update .` after changing code.
 - Ponytail's justification step adds latency; disable for trivial tasks (single-file scripts).
 - OmniRoute fallback models may not match Claude's instruction-following quality — review output after a provider switch.
 - Agent Skills stages require a CLAUDE.md or skills folder in every project; set up once per repo.
@@ -80,3 +84,4 @@ git clone https://github.com/diegosouzapw/OmniRoute
 ## Source
 
 - https://www.instagram.com/reel/DdjkD4xi1ma/ — @peterstewiestartup, 2026-09-21
+- https://github.com/Graphify-Labs/graphify — Graphify README and v0.9.103 install code, 2026-11-06
