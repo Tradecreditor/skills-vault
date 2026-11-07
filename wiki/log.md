@@ -205,3 +205,4 @@
 ## [2026-11-02] capture | Benji Taylor: Stageshow faux-UI skill (X post) | 20261102-benji-taylor-stageshow-faux-ui-skill
 ## [2026-11-02] hot-list | 2026-W44 | hot-list/2026-W44
 ## [2026-11-02] lint | 2026-W45 | outputs/health/2026-W45
+## [2026-11-07] review | stacking-coding-agent-plugins rejected | outputs/skill-reviews/2026-11-07-stacking-coding-agent-plugins
