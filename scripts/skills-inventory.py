@@ -15,7 +15,11 @@ What it reads (never writes anything on disk):
     <root>/.claude/settings.json and .claude/settings.local.json (enabledPlugins set to true).
   --global: the per-computer equivalents under <home>: ~/.claude/skills, ~/.agents/skills, ~/.gemini/skills, ~/.cursor/skills,
     ~/.openclaw/skills, ~/.claude/plugins/installed_plugins.json and ~/.claude/settings.json enabledPlugins. Project defaults to
-    "global:<hostname>" (override with --project); that label is written to Notion only (Notion is private).
+    --project, else the SKILLS_INVENTORY_GLOBAL_LABEL environment variable, else "global:<hostname>"; that label is written to
+    Notion only (Notion is private).
+  --if-changed (for the plugin hooks, hooks/hooks.json): a local fingerprint of the collected rows is kept per Source under
+    ~/.cache/skills-inventory (SKILLS_INVENTORY_STATE overrides); when it matches the last successful run and that run is less
+    than 7 days old, the Notion round trip is skipped and nothing is read from the network.
 
 What it writes: one Notion row per skill (or plugin id) keyed by Skill title + Source label. A Claude Code plugin row carries its
 marketplace repo in "Source repo" but never the "Vault skill" flag: that flag means "a skill folder the vault's review covers". Rows of another Source are never
@@ -49,6 +53,7 @@ Optional: NOTION_VERSION (YYYY-MM-DD), NOTION_SKILLS_DS (data source id). Python
 """
 import argparse
 import datetime
+import hashlib
 import http.client
 import json
 import os
@@ -89,6 +94,9 @@ GITHUB_SOURCE = re.compile(r"^(?:https?://github\.com/)?([A-Za-z0-9_.-]+)/([A-Za
 TOKEN_RE = re.compile(r"[\x21-\x7e]+")
 VERSION_RE = re.compile(r"\d{4}-\d{2}-\d{2}", re.A)
 MAX_TEXT = 2000
+IF_CHANGED_MAX_AGE = 7 * 24 * 3600            # --if-changed runs anyway when the last run is older than this (keeps Last seen fresh)
+GLOBAL_LABEL_ENV = "SKILLS_INVENTORY_GLOBAL_LABEL"   # this computer's --global Project label (e.g. "global:jeff-pc"), for hooks
+STATE_DIR_ENV = "SKILLS_INVENTORY_STATE"            # where --if-changed keeps its fingerprints (default ~/.cache/skills-inventory)
 _last_request = [0.0]
 
 
@@ -739,7 +747,8 @@ def repo_identity(root):
 def default_labels(args):
     """(Project label, Source label) for this run."""
     if args.global_scope:
-        label = args.project or "global:" + (socket.gethostname().split(".")[0] or "unknown")
+        label = args.project or os.environ.get(GLOBAL_LABEL_ENV, "").strip() or \
+            "global:" + (socket.gethostname().split(".")[0] or "unknown")
         return label, args.source or label
     owner, repo = repo_identity(args.root or ROOT)
     project = args.project or repo
@@ -800,6 +809,38 @@ def resolve(cfg, args):
     return ds, options
 
 
+def fingerprint(rows):
+    """A stable digest of what a run would write (everything but dates), so --if-changed can skip an unchanged state offline."""
+    keys = ("skill", "scope", "kind", "source_repo", "agents", "hash", "vault", "link")
+    body = json.dumps([[r[k] for k in keys] for r in rows], sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(body.encode("utf-8")).hexdigest()
+
+
+def state_path(source):
+    base = Path(os.environ.get(STATE_DIR_ENV, "").strip() or (Path.home() / ".cache" / "skills-inventory"))
+    return base / (hashlib.sha1(source.encode("utf-8")).hexdigest()[:16] + ".json")
+
+
+def unchanged_since_last_run(source, digest):
+    """True when the last successful run for this Source wrote the same fingerprint less than IF_CHANGED_MAX_AGE ago."""
+    try:
+        with open(state_path(source), encoding="utf-8") as f:
+            st = json.load(f)
+        return st.get("fingerprint") == digest and time.time() - float(st.get("ran_at", 0)) < IF_CHANGED_MAX_AGE
+    except (OSError, ValueError, TypeError):
+        return False
+
+
+def remember_run(source, digest):
+    path = state_path(source)
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({"source": source, "fingerprint": digest, "ran_at": time.time()}, f)
+    except OSError as e:
+        log(f"warn: could not write {path} ({e.__class__.__name__}); --if-changed will run again next time")
+
+
 def run(args):
     if args.audit:
         return run_audit(args)
@@ -821,6 +862,10 @@ def run(args):
     project, source = default_labels(args)
     res = {"ok": True, "dry_run": args.dry_run, "project": project, "source": source, "data_source": None,
            "rows": rows, "plan": None, "counts": None}
+    digest = fingerprint(rows)
+    if args.if_changed and not args.dry_run and unchanged_since_last_run(source, digest):
+        res["skipped"] = True
+        return res, 0
     token = os.environ.get("NOTION_TOKEN", "").strip()
     if not token:
         if args.dry_run:
@@ -845,6 +890,8 @@ def run(args):
                 log(f"dry-run {kind} '{e['skill']}' {sorted(e['values'])}")
         return res, 0
     res["counts"] = execute(cfg, ds, plan)
+    if args.if_changed and not res["counts"]["failed"]:
+        remember_run(source, digest)
     return res, (1 if res["counts"]["failed"] else 0)
 
 
@@ -872,6 +919,9 @@ def render(res, as_json):
         emit(f"skills-inventory: {head}enriched={c['enriched']} unchanged={c['unchanged']} failed={c['failed']} "
              f"vault_skills={res['vault_skills']} data_source={res['data_source']}\n")
         return
+    if res.get("skipped"):
+        emit(f"skills-inventory: unchanged since the last run (--if-changed) rows={len(res['rows'])} source={res['source']}\n")
+        return
     c, ds8 = res["counts"], (res["data_source"] or "").replace("-", "")[:8]
     if res["dry_run"]:
         for r in res["rows"]:
@@ -897,6 +947,8 @@ def main(argv=None):
     p.add_argument("--dry-run", action="store_true", help="collect and plan; never write")
     p.add_argument("--json", action="store_true", help="print one JSON object instead of the summary line")
     p.add_argument("--audit", action="store_true", help="read-only check of every row; see the docstring")
+    p.add_argument("--if-changed", action="store_true", help="skip the Notion round trip when nothing changed since the last "
+                   "successful run for this Source (local fingerprint, at most %d days old); for hooks" % (IF_CHANGED_MAX_AGE // 86400))
     p.add_argument("--today", help="override today's date, YYYY-MM-DD (tests)")
     try:
         args = p.parse_args(argv)

@@ -26,10 +26,11 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 | `outputs/` | agents | long-form answers and `outputs/health/` lint reports. AI long-form output goes here, never into `wiki/pages/` |
 | `routines/` | core | the prompts used by the cloud Routines (edit here, not in the Routine UI) |
 | `commands/` | core | slash commands of the vault's Claude Code plugin (`/skills-vault:projecthq`, `/skills-vault:skillsync`); they run as prompts in every project that installs the plugin |
+| `hooks/` | core | the plugin's hooks (`hooks.json` + scripts), run by Claude Code in every project that has the plugin: today `skill-install-sync` keeps the Skill Installs database current |
 
 ## Who is "core" (enforced by the GitHub ruleset on `main` + `.github/workflows/vault-guard.yml`)
 - **Core = the repository owner's GitHub account (`Tradecreditor`)**: Jeff's own Claude Code sessions, the Claude Code Routines, obsidian-git on his laptop. Core may push to `main` directly, may delete, may edit protected files.
-- **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-ui`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, modifies, renames or deletes anything under `raw/` (adding a new file is allowed), or edits a protected path (`.github/`, `.claude/`, `.claude-plugin/`, `.obsidian/`, `commands/`, `routines/`, `scripts/`, `supabase/`, `templates/`, `skills/*/scripts/`, `CLAUDE.md`, `AGENTS.md`).
+- **Non-core = any other GitHub account**, e.g. the machine account (`tradecreditor-ui`) whose tokens are given to Codex, Gemini CLI, OpenClaw or custom scripts. Non-core can only land changes through a pull request, and the `guard` check rejects a PR that deletes or renames any file, modifies, renames or deletes anything under `raw/` (adding a new file is allowed), or edits a protected path (`.github/`, `.claude/`, `.claude-plugin/`, `.obsidian/`, `commands/`, `hooks/`, `routines/`, `scripts/`, `supabase/`, `templates/`, `skills/*/scripts/`, `CLAUDE.md`, `AGENTS.md`).
 - Identity is the GitHub account behind the token, not the commit author line. If every agent uses the owner's tokens, every agent is core and the guard is only an audit trail.
 
 ### How this is actually configured (2026-09-21)
@@ -98,10 +99,14 @@ Jeff tracks every installed agent skill and Claude Code plugin, per project and 
 database **Skill Installs** (separate from Projects HQ; same integration and `NOTION_TOKEN`). Rows are written only by
 `scripts/skills-inventory.py` (skill `skills/tracking-skill-installs-in-notion/SKILL.md`), never by hand, and never deleted (a vanished
 install becomes `Removed`). Rules:
-- **After every install or removal** in a project (`npx skills add`, `npx skills remove`, `/plugin install`), run
-  `python3 scripts/skills-inventory.py` there before the session ends (in a project with the vault plugin: `/skills-vault:skillsync`).
+- **Automatic where the vault plugin is installed** (`hooks/hooks.json`, since 2026-11-09): a PostToolUse hook records the
+  project (and, for `-g` or `claude plugin …`, the computer) right after a Bash command that ran `npx skills add|remove|update` or
+  `claude plugin install|uninstall|update|enable|disable`; a SessionStart hook records whatever changed since the last run
+  (`--if-changed`: a local fingerprint, no network when nothing changed). Each computer sets `SKILLS_INVENTORY_GLOBAL_LABEL`
+  (e.g. `global:jeff-pc`) once so its global rows keep one label. The hooks need `NOTION_TOKEN` in the environment and are silent without it.
+- **Manually** (no plugin, or to be sure): `python3 scripts/skills-inventory.py` in the project (`/skills-vault:skillsync` where the
+  plugin is installed; from a vault clone `--root <project dir>`), and once per computer `--global --project "global:<name>"`.
   It reads `skills-lock.json`, the `.claude/skills/` / `.agents/skills/` folders and `enabledPlugins`, and writes nothing on disk.
-- **Once per computer**, and after a global (`-g`) install: `python3 scripts/skills-inventory.py --global --project "global:<name>"`.
 - **Only the vault runs `--enrich`** (daily, `github-stars-sync` step 7b): it fills `Vault status` from `skills/README.md`. The weekly
   `vault-lint` check 10 runs `--audit`: `draft-installed` means a vault skill that is not `reviewer-approved` / `verified` is installed
   somewhere, which `skills/README.md` forbids; fix the install, not the row.

@@ -99,12 +99,13 @@ python3 scripts/skills-inventory.py --audit          # read-only check of every 
 
 | Flag | Default | Meaning |
 |---|---|---|
-| `--project LABEL` | `<repo>` (from `remote.origin.url`, else the folder name); `--global`: `global:<hostname>` | Project value |
+| `--project LABEL` | `<repo>` (from `remote.origin.url`, else the folder name); `--global`: `SKILLS_INVENTORY_GLOBAL_LABEL`, else `global:<hostname>` | Project value |
 | `--source LABEL` | `<project>/skills-lock.json`; `--global`: the Project label | Source value: the only rows this run may touch, the only rows an audit names |
 | `--root DIR` | the script's repo root | project checkout to scan |
 | `--global` / `--home DIR` | off / the user's home | scan the computer instead of a project |
 | `--enrich` / `--vault DIR` | off / the script's repo root | the vault-only enrichment (needs `skills/README.md`) |
 | `--data-source ID` | `NOTION_SKILLS_DS`, else search for the title `Skill Installs` | data source id (a database id with one data source is accepted and noted) |
+| `--if-changed` | off | skip the Notion round trip when the local fingerprint matches the last successful run for this Source (under 7 days old); what the hooks use |
 | `--audit` | off | the audit instead of the sync; cannot be combined with `--dry-run` or `--enrich` (exit 4) |
 | `--today YYYY-MM-DD` | current UTC date | tests; the audit's "today" |
 
@@ -147,7 +148,25 @@ from every message and no traceback is ever printed. Python 3.9+, standard libra
    computers). No new secret. Optional `NOTION_SKILLS_DS` = the data source id, only if the title search is ambiguous.
 4. **First run**: `python3 scripts/skills-inventory.py --dry-run`, then without `--dry-run`; a second run must print `created=0`.
 
-## Per project: after every install
+## Automatic: the plugin's hooks
+
+Where the vault plugin `skills-vault@tradecreditor-vault` is installed, `hooks/hooks.json` (plugin root) registers two hooks
+that run `hooks/skill-install-sync.sh` (PowerShell twin `skill-install-sync.ps1` for a Windows setup whose `bash` is WSL):
+
+| Event | When it records | What |
+|---|---|---|
+| PostToolUse (Bash) | the command Claude just ran matched `skills add|remove|rm|update|experimental_install|experimental_sync` or `claude plugin install|uninstall|update|enable|disable` | this project (`--root "$CLAUDE_PROJECT_DIR" --if-changed`); plus the computer (`--global --if-changed`) when the command had `-g` / `--global` or was a `claude plugin` command (plugins are user-scope by default) |
+| SessionStart (startup, resume) | every session | this project and the computer, `--if-changed` |
+
+`--if-changed` keeps a fingerprint of the collected rows per Source under `~/.cache/skills-inventory/` (`SKILLS_INVENTORY_STATE`
+overrides); when it matches the last successful run and that run is under 7 days old, nothing is read from the network. So an
+install made outside Bash (the `/plugin` UI) is picked up at the next session start, and Last seen never goes stale while a
+project is in use. The hook is silent when `NOTION_TOKEN` is unset, prints one summary line only when something changed, and
+always exits 0. Set `SKILLS_INVENTORY_GLOBAL_LABEL` once per computer (`global:jeff-pc`) so its global rows keep one label:
+Windows `[Environment]::SetEnvironmentVariable("SKILLS_INVENTORY_GLOBAL_LABEL", "global:jeff-pc", "User")`, macOS / Linux in the
+shell profile. Without it the label is `global:<hostname>`.
+
+## Per project: manually
 
 Whenever a skill or plugin is added to or removed from a project (`npx skills add …`, `npx skills remove …`,
 `/plugin install …`), run the inventory in that project before the session ends:
@@ -204,6 +223,6 @@ they differ.
 - Jeff's request, 2026-11-09: keep track of which skills are installed across projects in Notion; decisions: a separate page and
   database (not under Projects HQ), each project runs its own script, all sources tracked with vault skills flagged.
 - Files: `scripts/skills-inventory.py` (copy in this skill's `scripts/`), `scripts/test_skills_inventory.py`,
-  `commands/skillsync.md`, `routines/github-stars-sync.md` step 7b, `routines/vault-lint.md` check 10, `CLAUDE.md` "Skill installs".
+  `hooks/hooks.json`, `hooks/skill-install-sync.sh` / `.ps1`, `commands/skillsync.md`, `routines/github-stars-sync.md` step 7b, `routines/vault-lint.md` check 10, `CLAUDE.md` "Skill installs".
 - Lockfile and install paths: the `skills` CLI docs (github.com/vercel-labs/skills, `docs/agents.md`); Claude Code plugin
   records: code.claude.com/docs/en/plugins/loading.

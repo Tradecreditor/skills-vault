@@ -466,6 +466,42 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(lines[-1], "- 2 more violation(s) on rows from other projects; details only in Notion (this repository is public).")
         self.assertEqual(self.fake.writes(), [])
 
+    def test_if_changed_skips_offline_until_state_changes_or_ages(self):
+        state = str(self.root / "state")
+        code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
+        self.assertEqual(code, 0)
+        self.summary(out, created=2)
+        n = len(self.fake.requests)
+        code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
+        self.assertEqual((code, out), (0, "skills-inventory: unchanged since the last run (--if-changed) rows=2 source=proj/skills-lock.json\n"))
+        self.assertEqual(len(self.fake.requests), n)                        # no network at all
+        make_skill(self.root, ".agents/skills", "tdd")                      # a change: runs again
+        code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
+        self.summary(out, updated=1, unchanged=1)
+        stamp = next((self.root / "state").iterdir())
+        st = json.loads(stamp.read_text(encoding="utf-8"))
+        st["ran_at"] -= si.IF_CHANGED_MAX_AGE + 1                           # too old: runs again even if unchanged
+        stamp.write_text(json.dumps(st), encoding="utf-8")
+        code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
+        self.summary(out, unchanged=2)
+        code, out, _ = self.run_cli("--if-changed", "--dry-run", env={"SKILLS_INVENTORY_STATE": state})
+        self.assertTrue(out.startswith("skills-inventory: dry-run rows=2"), out)   # dry-run never skips, never stamps
+        bad = FakeNotion(token="ntn_OTHER")
+        self.addCleanup(bad.close)
+        (self.root / "skills-lock.json").write_text("{}", encoding="utf-8")
+        code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state}, fake=bad)
+        self.assertEqual(code, 2)                                           # a failed run leaves no stamp
+        code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
+        self.assertTrue(out.startswith("skills-inventory: created=0 updated=2 removed=0"), out)   # both became bare folders
+
+    def test_global_label_from_environment(self):
+        class A:
+            global_scope, project, source, root = True, None, None, None
+        with mock.patch.dict(os.environ, {"SKILLS_INVENTORY_GLOBAL_LABEL": "global:jeff-pc"}):
+            self.assertEqual(si.default_labels(A), ("global:jeff-pc", "global:jeff-pc"))
+        with mock.patch.dict(os.environ, {"SKILLS_INVENTORY_GLOBAL_LABEL": ""}):
+            self.assertTrue(si.default_labels(A)[0].startswith("global:"))
+
     def test_unexpected_exception_is_one_scrubbed_line(self):
         with mock.patch.object(si, "collect_project", side_effect=RuntimeError("boom " + TOKEN)):
             code, out, err = self.run_cli()

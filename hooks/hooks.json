@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/skill-install-sync.sh\"",
+            "timeout": 90,
+            "statusMessage": "Recording skill installs in Notion"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/skill-install-sync.sh\"",
+            "timeout": 90,
+            "statusMessage": "Checking skill installs"
+          }
+        ]
+      }
+    ]
+  }
+}
