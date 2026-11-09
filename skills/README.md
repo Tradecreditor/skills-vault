@@ -34,6 +34,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | tracking-projects-in-notion | reviewer-approved | vault-operations | Runs Jeff's cross-project kanban in Notion under one board policy; mirrors handoff.md In flight rows and audits the board weekly |
 | tracking-skill-installs-in-notion | draft | vault-operations | Records which skills and plugins are installed in which project or computer in Jeff's Notion database Skill Installs (`scripts/skills-inventory.py`) |
 | tracking-tasks-with-backlog-md | reviewer-approved | repo | Tracks agent and human work as Markdown task files with Backlog.md |
+| using-caveman-mode | draft | repo | Installs and applies the caveman skill, a terse answer-first voice that cuts output tokens |
 | using-obsidian-skills | draft | repo | Installs and applies kepano/obsidian-skills for Obsidian markdown, bases and canvas |
 | using-ui-ux-pro-max | reviewer-approved | repo | Installs and applies the UI UX Pro Max skill for AI design system generation (192 rules, 79 styles) |
 | vault-capture | verified | vault-operations | Captures a pasted link (X, Threads, Instagram, YouTube, GitHub, any page) into the vault |
