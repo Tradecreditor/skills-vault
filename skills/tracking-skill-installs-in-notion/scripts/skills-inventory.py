@@ -474,9 +474,13 @@ def query(cfg, ds, flt=None):
             return rows
 
 
-def fetch_existing(cfg, ds, source):
-    """{skill title: [live row, extra copies...]} of this Source, oldest created_time first."""
+def fetch_existing(cfg, ds, source, options):
+    """{skill title: [live row, extra copies...]} of this Source, oldest created_time first. A Source option Notion does not
+    have yet owns no rows, and a filter on an unknown option is a 400, so the query is skipped (the first write creates it)."""
     existing = {}
+    if source not in options.get("Source", ()):
+        log(f"Source option '{source}' is new in Notion; the first write creates it")
+        return existing
     for cur in query(cfg, ds, {"property": "Source", "select": {"equals": source}}):
         if cur["Source"] != source:
             continue                              # defence in depth: only ever act on this source's rows
@@ -541,7 +545,12 @@ def maybe_landed(e):
 
 def find_created(cfg, ds, source, title):
     flt = {"and": [{"property": "Source", "select": {"equals": source}}, {"property": "Skill", "title": {"equals": title}}]}
-    return any(c["Source"] == source and c["skill"] == title for c in query(cfg, ds, flt))
+    try:
+        return any(c["Source"] == source and c["skill"] == title for c in query(cfg, ds, flt))
+    except ApiError as e:
+        if e.status == 400:                     # the Source option does not exist yet, so no row with it landed
+            return False
+        raise
 
 
 def create_page(cfg, ds, entry):
@@ -805,7 +814,7 @@ def run(args):
     try:
         ds, options = resolve(cfg, args)
         res["data_source"] = ds
-        existing = fetch_existing(cfg, ds, source)
+        existing = fetch_existing(cfg, ds, source, options)
     except ApiError as e:
         raise Stop(2, str(e) + (NOT_FOUND_HINT if e.status == 404 else ""))
     except Unreachable as e:

@@ -99,6 +99,10 @@ class FakeNotion:
         if method == "POST" and path == "/v1/data_sources/%s/query" % DS:
             flt = body.get("filter")
             parts = (flt.get("and") or [flt]) if flt else []
+            for f in parts:
+                if "select" in f and f["select"]["equals"] not in self.options.get(f["property"], []):
+                    return 400, {"object": "error", "status": 400, "code": "validation_error", "message":
+                                 'select option "%s" not found for property "%s".' % (f["select"]["equals"], f["property"])}
             rows = [p for p in self.pages.values() if all(self.matches(p, f) for f in parts)]
             return 200, {"results": rows, "has_more": False, "next_cursor": None}
         if method == "POST" and path == "/v1/pages":
@@ -107,6 +111,9 @@ class FakeNotion:
             pid = "page-%d" % (len(self.pages) + 1)
             self.pages[pid] = {"id": pid, "url": "https://www.notion.so/" + pid, "created_time": self.stamp(),
                                "properties": normalise(body["properties"])}
+            for name, v in body["properties"].items():
+                if "select" in v and v["select"]["name"] not in self.options.get(name, []):
+                    self.options = dict(self.options, **{name: self.options.get(name, []) + [v["select"]["name"]]})
             return 200, self.pages[pid]
         m = re.fullmatch(r"/v1/pages/([^/]+)", path)
         if method == "PATCH" and m and m.group(1) in self.pages:
@@ -397,11 +404,15 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(si.default_labels(A), ("alice-app", "custom"))
 
     def test_global_run_labels(self):
+        # "global:laptop" is not yet a Source option: Notion would 400 on a filter for it, so the first run must not query by it
         home = self.root / "home"
         make_skill(home, ".claude/skills", "security-audit")
-        code, out, _ = self.run_cli("--global", "--home", str(home), "--project", "global:laptop", "--today", TODAY, base_args=False)
-        self.assertEqual(code, 0)
+        code, out, err = self.run_cli("--global", "--home", str(home), "--project", "global:laptop", "--today", TODAY, base_args=False)
+        self.assertEqual((code, out.startswith("skills-inventory: created=1 ")), (0, True), out + err)
+        self.assertIn("Source option 'global:laptop' is new", err)
         self.assertIn("source=global:laptop", out)
+        code, out, _ = self.run_cli("--global", "--home", str(home), "--project", "global:laptop", "--today", TODAY, base_args=False)
+        self.assertTrue(out.startswith("skills-inventory: created=0 updated=0 removed=0 unchanged=1"), out)   # option exists now
         page = next(iter(self.fake.pages.values()))["properties"]
         self.assertEqual((page["Project"]["select"]["name"], page["Scope"]["select"]["name"]), ("global:laptop", "global"))
 
