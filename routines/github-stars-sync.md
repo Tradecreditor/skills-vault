@@ -86,7 +86,13 @@ You are the GitHub-stars sync routine for Jeff's skills vault (GitHub account: T
    the allowed domains); 3 = handoff.md could not be parsed; 4 = refused locally (bad NOTION_VERSION). None of these fails
    this routine: copy the script's one summary line (stdout; for exit 3 and 4 it is on stderr) into the final message and
    carry on. Never print, echo or export NOTION_TOKEN, and do not run the script more than twice.
+7b. Skill Installs (Notion page Skills HQ; skill skills/tracking-skill-installs-in-notion/SKILL.md). Run, in this order:
+   python3 scripts/skills-inventory.py            (the vault's own installed skills: skills-lock.json, .claude/skills, enabledPlugins)
+   python3 scripts/skills-inventory.py --enrich   (fills Vault status on every vault-skill row from skills/README.md)
+   Both write nothing in the repository. Same exit codes as step 7 (2 = off, e.g. the Skills HQ page not yet shared with the
+   integration: expected until Jeff connects it; 3 = skills-lock.json or skills/README.md unreadable). None of these fails this
+   routine: copy each one-line summary into the final message and carry on. Never print NOTION_TOKEN; at most two attempts each.
 8. Final message: N repos added, any that failed, how many rows wiki/github-stars.md now holds, whether more remain for tomorrow,
-   and the notion-sync line from step 7.
+   the notion-sync line from step 7 and the two skills-inventory lines from step 7b.
 
 NEVER delete or rename files. NEVER touch raw/. Do not re-summarise repos that already have a page.

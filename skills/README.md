@@ -5,7 +5,9 @@ Installable Agent-Skills folders (agentskills.io). Install anywhere:
     npx skills add Tradecreditor/skills-vault --skill <name> -a claude-code -a codex -a gemini-cli -a openclaw -a cursor -g -y
 
 Claude Code: `/plugin marketplace add Tradecreditor/skills-vault` then `/plugin install skills-vault@tradecreditor-vault`.
-`vault-capture`, `vault-search`, `model-tiering`, `judging-with-jev`, `keeping-handoff-docs`, `tracking-projects-in-notion` and `auditing-agent-skills` are the vault's own operating skills; everything else was captured from the web.
+After installing or removing a skill in a project, record it in Notion: `python3 scripts/skills-inventory.py` (or
+`/skills-vault:skillsync` where the plugin is installed); see `tracking-skill-installs-in-notion`.
+`vault-capture`, `vault-search`, `model-tiering`, `judging-with-jev`, `keeping-handoff-docs`, `tracking-projects-in-notion`, `tracking-skill-installs-in-notion` and `auditing-agent-skills` are the vault's own operating skills; everything else was captured from the web.
 
 **Install into other projects only skills marked `reviewer-approved` or `verified`.** The plugin and `npx skills add` can still
 reach every folder, so the status column is the gate: `draft` = not approved yet (never reviewed, or rejected; the report link
@@ -30,6 +32,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | stacking-coding-agent-plugins | draft | post | Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) |
 | targeting-purchase-intent-keywords | reviewer-approved | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |
 | tracking-projects-in-notion | reviewer-approved | vault-operations | Runs Jeff's cross-project kanban in Notion under one board policy; mirrors handoff.md In flight rows and audits the board weekly |
+| tracking-skill-installs-in-notion | draft | vault-operations | Records which skills and plugins are installed in which project or computer in Jeff's Notion database Skill Installs (`scripts/skills-inventory.py`) |
 | tracking-tasks-with-backlog-md | reviewer-approved | repo | Tracks agent and human work as Markdown task files with Backlog.md |
 | using-obsidian-skills | draft | repo | Installs and applies kepano/obsidian-skills for Obsidian markdown, bases and canvas |
 | using-ui-ux-pro-max | reviewer-approved | repo | Installs and applies the UI UX Pro Max skill for AI design system generation (192 rules, 79 styles) |
