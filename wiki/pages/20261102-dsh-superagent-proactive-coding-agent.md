@@ -46,3 +46,7 @@ dsh-superagent 係 DeepSeek 喺 2026-10-31 開源嘅研究原型：一個「主�
 - [[hot-list/2026-W44]]
 - [[pages/20261026-deepseek-harness-everything-is-a-plugin]]: the harness it runs on (W43 winner)
 - [[pages/20261019-orca-ade-parallel-coding-agents]]: another way to run many coding agents in parallel
+
+## Notes
+
+- also trending 2026-W45 (21,463 stars on 2026-11-09, +11,294 since 2026-11-02; GitHub search API; see [[hot-list/2026-W45]])

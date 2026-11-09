@@ -61,3 +61,4 @@ cloudflare/security-audit-skill 係 Cloudflare 開源（MIT）嘅 coding-agent s
 ## Notes
 
 - also trending 2026-W43 (47,496 stars / 2,948 forks on 2026-10-26, +16,188 since 2026-10-19; GitHub search API; see [[hot-list/2026-W43]])
+- also trending 2026-W45 (67,233 stars on 2026-11-09, +10,558 since 2026-11-02; GitHub search API; see [[hot-list/2026-W45]])

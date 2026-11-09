@@ -49,3 +49,4 @@ dsh-our-free-model 係 DeepSeek Harness（dsh）嘅模型插件：裝咗之後�
 
 - also trending 2026-W43 (43,692 stars / 1,238 forks on 2026-10-26, +17,638 since 2026-10-19; GitHub search API; see [[hot-list/2026-W43]]). The star-to-unlock EAC lane noted above still applies, so read the number as incentivised.
 - also trending 2026-W44 (56,341 stars / 1,541 forks on 2026-11-02, +12,649 since 2026-10-26; GitHub search API; incentivised stars, as noted above; see [[hot-list/2026-W44]])
+- also trending 2026-W45 (66,661 stars on 2026-11-09, +10,320 since 2026-11-02; GitHub search API; incentivised stars, as noted above; see [[hot-list/2026-W45]])

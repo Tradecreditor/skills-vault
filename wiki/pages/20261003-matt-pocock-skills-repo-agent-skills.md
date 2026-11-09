@@ -63,3 +63,4 @@ needs_manual_text: false
 
 - also trending 2026-W41 (github:mattpocock/skills 286,876 stars on 2026-10-12, +10,444 since the 2026-10-05 snapshot; skills.sh 24h trending: grilling 6.6K, grill-me 6.4K installs) — [[hot-list/2026-W41]]
 - also trending 2026-W44 (309,510 stars / 26,045 forks on 2026-11-02, +6,005 since 2026-10-26; GitHub search API; skills.sh 24h trending: grilling 6.1K, grill-me 5.4K, codebase-design 5.2K installs; qualifies as a pasted link on the GitHub gain gate; see [[hot-list/2026-W44]])
+- also trending 2026-W45 (318,933 stars on 2026-11-09, +9,423 since 2026-11-02; GitHub search API; skills.sh 24h trending: grill-me 4.6K, grilling 4.6K, grill-with-docs 4.1K installs; qualifies as a pasted link on the GitHub gain gate; see [[hot-list/2026-W45]])

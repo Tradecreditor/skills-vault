@@ -1,15 +1,18 @@
 # Hot — read me first
 
 ## 本週熱門榜
-`2026-W44`，完整報告見 [[hot-list/2026-W44|hot-list/2026-W44]]：
+`2026-W45`，完整報告見 [[hot-list/2026-W45|hot-list/2026-W45]]：
 
-- **[[pages/20261102-dsh-superagent-proactive-coding-agent|dsh-superagent]]**（deepseek-ai）— DeepSeek 開源嘅研究原型：守住一個 GitHub repo、自己處理 issue 同 PR 嘅主動 coding agent，以 dsh bundle 安裝。10-31 開源，兩日 10,169 stars，單平台 heat 0.80。
-- **[[pages/20261102-elephant-goldfish-model-spec-review-plugin|Elephant-Goldfish Model]]**（google）— 「大象」agent 帶 context 寫 spec、「金魚」零 context subagent 做 review 嘅插件，Claude Code / Codex / Antigravity 都裝得到。一星期 +8,316 stars，單平台 heat 0.80。
-- **[[pages/20261102-benji-taylor-stageshow-faux-ui-skill|Stageshow]]**（@benjitaylor）— 教 coding agent 整似真產品假 UI 圖同動畫嘅 skill，`npx skills add benjitaylor/skills --skill stageshow`。X 一個 post 12,651 like / 622 轉推 / 119 萬瀏覽，X 單平台 heat 0.70，係今個星期唯一社交入選。
+- **[[pages/20261109-craft-anything-rebuild-any-software-with-agents|Craft Anything]]**（storytold）— 指住任何網站、app 或遊戲講一句「照住整」，佢研究原版，再叫 Claude Code 等 coding agent 重建、自動比對同修正；320 個工具全部係 CLI 兼 MCP tool。一星期 +21,526 stars，單平台 heat 0.80。
+- **[[pages/20261109-dsh-go-android-client-for-deepseek-harness|DSH Go]]**（ccch1mneyyy）— DeepSeek Harness 嘅社群 Android 客戶端：手機本機跑 dsh，或者 SSH 遙控電腦上嘅 dsh，仲可以操作手機。一星期 +11,582 stars，單平台 heat 0.80。
+- **[[pages/20261109-anthropic-components-of-agent-memory-dreaming|Anthropic：agent memory 與 dreaming]]**（@AnthropicAI）— Claude 點樣用「dreaming」重溫 transcript 去改正記憶、逐步建立 wiki、將重要筆記升到頂層。X 一個 post 13,976 like / 1,289 轉推 / 197 萬瀏覽，X 單平台 heat 0.70，係今個星期唯一社交入選。
 
-你貼嘅 link 有兩個合資格：[[pages/20261003-matt-pocock-skills-repo-agent-skills|mattpocock/skills]]（一星期 +6,005 stars）同 [[pages/20261028-moli-rust-browser-for-ai-agents|Moli]]（lexmount/moli 過新 repo gate，22,100 stars），兩個都輸咗同分排序，已喺頁面加 Notes。
+你貼嘅 link 有一個合資格：[[pages/20261003-matt-pocock-skills-repo-agent-skills|mattpocock/skills]]（一星期 +9,423 stars），輸咗同分排序，已喺頁面加 Notes。
 
 ## 最近 20 項
+- 2026-11-09 · repo · [[pages/20261109-craft-anything-rebuild-any-software-with-agents|storytold/craft-anything — 研究任何軟件再叫 agent 重建]]
+- 2026-11-09 · repo · [[pages/20261109-dsh-go-android-client-for-deepseek-harness|ccch1mneyyy/dsh-Go — DeepSeek Harness Android 客戶端]]
+- 2026-11-09 · post · [[pages/20261109-anthropic-components-of-agent-memory-dreaming|Anthropic：agent memory 與 dreaming]]
 - 2026-11-02 · repo · [[pages/20261102-dsh-superagent-proactive-coding-agent|deepseek-ai/dsh-superagent-prototype — 主動 coding agent]]
 - 2026-11-02 · repo · [[pages/20261102-elephant-goldfish-model-spec-review-plugin|google/elephant-goldfish-model — spec 撰寫同零 context review 插件]]
 - 2026-11-02 · post · [[pages/20261102-benji-taylor-stageshow-faux-ui-skill|Benji Taylor：Stageshow 假 UI skill]]
@@ -27,6 +30,3 @@
 - 2026-10-20 · post · [[pages/20261020-princegupta-harness2-self-improving-agents|Prince Gupta：Harness² 自我升級 agent]]
 - 2026-10-19 · post · [[pages/20261019-sebastianhardy-improve-system-claude-history|sebastianhardy_：improve-system]]
 - 2026-10-19 · post · [[pages/20261019-denghao-carousel-no-caption|等號：圖片輪播帖]]
-- 2026-10-19 · post · [[pages/20261019-code-and-chill-team-dashboard|Code & Chill：團隊專案管理 dashboard]]
-- 2026-10-19 · post · [[pages/20261019-chase-h-ai-ponytail-carousel|chase.h.ai：ponytail 輪播帖]]
-- 2026-10-19 · repo · [[pages/20261019-dsh-our-free-model-plugin|Ebony-Vinyl/dsh-our-free-model — DeepSeek Harness plugin with free model lanes and no API key]]

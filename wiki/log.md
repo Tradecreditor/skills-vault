@@ -206,3 +206,7 @@
 ## [2026-11-02] hot-list | 2026-W44 | hot-list/2026-W44
 ## [2026-11-02] lint | 2026-W45 | outputs/health/2026-W45
 ## [2026-11-07] review | stacking-coding-agent-plugins rejected | outputs/skill-reviews/2026-11-07-stacking-coding-agent-plugins
+## [2026-11-09] capture | storytold/craft-anything — study any software, then have a coding agent rebuild it | 20261109-craft-anything-rebuild-any-software-with-agents
+## [2026-11-09] capture | ccch1mneyyy/dsh-Go — Android client for DeepSeek Harness | 20261109-dsh-go-android-client-for-deepseek-harness
+## [2026-11-09] capture | Anthropic: The components of agent memory (X post) | 20261109-anthropic-components-of-agent-memory-dreaming
+## [2026-11-09] hot-list | 2026-W45 | hot-list/2026-W45
