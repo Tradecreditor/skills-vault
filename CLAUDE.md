@@ -25,7 +25,7 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 | `agents/<agent-name>/` | that agent | scratch area for non-core agents; the core agent promotes good material into `wiki/` or `skills/` |
 | `outputs/` | agents | long-form answers and `outputs/health/` lint reports. AI long-form output goes here, never into `wiki/pages/` |
 | `routines/` | core | the prompts used by the cloud Routines (edit here, not in the Routine UI) |
-| `commands/` | core | slash commands of the vault's Claude Code plugin (e.g. `/skills-vault:projecthq`); they run as prompts in every project that installs the plugin |
+| `commands/` | core | slash commands of the vault's Claude Code plugin (`/skills-vault:projecthq`, `/skills-vault:skillsync`); they run as prompts in every project that installs the plugin |
 
 ## Who is "core" (enforced by the GitHub ruleset on `main` + `.github/workflows/vault-guard.yml`)
 - **Core = the repository owner's GitHub account (`Tradecreditor`)**: Jeff's own Claude Code sessions, the Claude Code Routines, obsidian-git on his laptop. Core may push to `main` directly, may delete, may edit protected files.
@@ -92,6 +92,21 @@ separate database or board per project). The working agreement is `skills/tracki
 - Machinery: `scripts/notion-sync.py` mirrors In flight to the board (daily, `github-stars-sync` step 7; any session may run it on
   `main` when `NOTION_TOKEN` is set); `--audit` checks the policy weekly (`vault-lint` check 9). Another project joins by following
   `skills/tracking-projects-in-notion/references/joining-projects-hq.md`: Jeff pastes its link into a session in that project.
+
+## Skill installs — which skill is installed where (all agents)
+Jeff tracks every installed agent skill and Claude Code plugin, per project and per computer, in the private Notion page **Skills HQ**,
+database **Skill Installs** (separate from Projects HQ; same integration and `NOTION_TOKEN`). Rows are written only by
+`scripts/skills-inventory.py` (skill `skills/tracking-skill-installs-in-notion/SKILL.md`), never by hand, and never deleted (a vanished
+install becomes `Removed`). Rules:
+- **After every install or removal** in a project (`npx skills add`, `npx skills remove`, `/plugin install`), run
+  `python3 scripts/skills-inventory.py` there before the session ends (in a project with the vault plugin: `/skills-vault:skillsync`).
+  It reads `skills-lock.json`, the `.claude/skills/` / `.agents/skills/` folders and `enabledPlugins`, and writes nothing on disk.
+- **Once per computer**, and after a global (`-g`) install: `python3 scripts/skills-inventory.py --global --project "global:<name>"`.
+- **Only the vault runs `--enrich`** (daily, `github-stars-sync` step 7b): it fills `Vault status` from `skills/README.md`. The weekly
+  `vault-lint` check 10 runs `--audit`: `draft-installed` means a vault skill that is not `reviewer-approved` / `verified` is installed
+  somewhere, which `skills/README.md` forbids; fix the install, not the row.
+- Another project gets the script the same way it gets `notion-sync.py`: copied from a reviewed clone after the step-0 hash check, and
+  recorded in its `handoff.md` "Environment facts". Hostnames and project names go to Notion only.
 
 ## Capturing a link
 Use the `vault-capture` skill (`skills/vault-capture/SKILL.md`). Reader order is fixed: Agent-Reach upstream tools
