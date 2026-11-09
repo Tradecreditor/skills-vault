@@ -46,7 +46,7 @@ not reviewer-approved / verified), **Removed**.
 | Status | select: Installed, Removed | script; a row this run's Source no longer sees becomes Removed (never deleted); seen again → Installed |
 | Installed | date | script, on create only (first seen) |
 | Last seen | date | script; only moves forward |
-| Vault skill | checkbox | script: the source is `Tradecreditor/skills-vault` (or `.` inside the vault checkout) |
+| Vault skill | checkbox | script: a skill folder whose source is `Tradecreditor/skills-vault` (or `.` inside the vault checkout). Never set on a plugin row: a plugin is a bundle, its provenance is the Source repo |
 | Vault status | select: draft, reviewer-approved, verified, deprecated, unknown | **the vault's `--enrich` run only**, from `skills/README.md` |
 | Link | url | script: `https://github.com/<owner>/<repo>/tree/main/skills/<name>` for a GitHub source |
 | Source | select | script: the ownership key, `<repo>/skills-lock.json` or the global label; a run touches only its own Source |
@@ -100,7 +100,7 @@ python3 scripts/skills-inventory.py --audit          # read-only check of every 
 | Flag | Default | Meaning |
 |---|---|---|
 | `--project LABEL` | `<repo>` (from `remote.origin.url`, else the folder name); `--global`: `global:<hostname>` | Project value |
-| `--source LABEL` | `<repo>/skills-lock.json`; `--global`: the Project label | Source value: the only rows this run may touch, the only rows an audit names |
+| `--source LABEL` | `<project>/skills-lock.json`; `--global`: the Project label | Source value: the only rows this run may touch, the only rows an audit names |
 | `--root DIR` | the script's repo root | project checkout to scan |
 | `--global` / `--home DIR` | off / the user's home | scan the computer instead of a project |
 | `--enrich` / `--vault DIR` | off / the script's repo root | the vault-only enrichment (needs `skills/README.md`) |
@@ -180,6 +180,7 @@ they differ.
 | Installing a `draft` vault skill in a project | The audit flags `draft-installed`; only reviewer-approved or verified skills belong in other projects (`skills/README.md`) |
 | A project never runs the inventory again | Its rows go `stale` after 30 days: run the script there (or `/skills-vault:skillsync`) |
 | Running `--enrich` outside the vault | It needs `skills/README.md`; exit 3. Only the vault runs it |
+| Two repositories with the same name under different owners (`alice/app`, `bob/app`) | They would share the Source `app/skills-lock.json` and overwrite each other. Pass distinct `--project` labels (e.g. `alice-app`); the Source follows the Project label |
 | Two computers with the same hostname | Their `--global` runs share one Source and overwrite each other's rows: pass distinct `--project "global:<name>"` labels |
 | Pasting the database id as `NOTION_SKILLS_DS` | It must be the data source id; a database id with exactly one data source is accepted with a note |
 | Forgetting to connect the integration to Skills HQ | Exit 2 "not found": Skills HQ → ••• → Connections → add it |

@@ -8,7 +8,8 @@ source "Skill Installs" (page "Skills HQ"), plus a vault-only enrichment (--enri
     skills-inventory.py --audit [--source LABEL] [--json] [--today D]
 
 What it reads (never writes anything on disk):
-  project scope (default): <root>/skills-lock.json (the `skills` CLI lockfile: skills[<name>] = {source, sourceType,
+  project scope (default; Project = the repo name, Source = <project>/skills-lock.json, so two repositories with the same name
+    under different owners need distinct --project labels, e.g. "<owner>-<repo>"): <root>/skills-lock.json (the `skills` CLI lockfile: skills[<name>] = {source, sourceType,
     computedHash, ...}), the agent skill folders <root>/.claude/skills/*, <root>/.agents/skills/* and <root>/skills/*
     (OpenClaw; skipped when <root> is the vault itself, whose skills/ is the library), and the Claude Code plugins enabled in
     <root>/.claude/settings.json and .claude/settings.local.json (enabledPlugins set to true).
@@ -16,7 +17,8 @@ What it reads (never writes anything on disk):
     ~/.openclaw/skills, ~/.claude/plugins/installed_plugins.json and ~/.claude/settings.json enabledPlugins. Project defaults to
     "global:<hostname>" (override with --project); that label is written to Notion only (Notion is private).
 
-What it writes: one Notion row per skill (or plugin id) keyed by Skill title + Source label. Rows of another Source are never
+What it writes: one Notion row per skill (or plugin id) keyed by Skill title + Source label. A Claude Code plugin row carries its
+marketplace repo in "Source repo" but never the "Vault skill" flag: that flag means "a skill folder the vault's review covers". Rows of another Source are never
 touched. A row that this run no longer sees is set to Status "Removed" (never deleted or archived); a row seen again goes back
 to "Installed". "Installed" (first seen) is written on create only; "Vault status" is written only by --enrich. The schema is
 never changed; Project, Source and Agents options are created by Notion on demand when a new value is written, every other
@@ -275,9 +277,10 @@ def collect_global(home):
     versions = installed_plugins(home / ".claude" / "plugins" / "installed_plugins.json")
     for pid in sorted(set(enabled_plugins(home / ".claude" / "settings.json")) | set(versions)):
         repo = marketplace_repo(pid, home)
+        # a plugin is a bundle, not a reviewed skill folder: its provenance goes in Source repo, never in the Vault skill flag
+        # (which drives --enrich and the draft-installed audit by skill name)
         rows.append({"skill": pid, "scope": "global", "kind": "claude-plugin", "source_repo": repo, "agents": ["claude-code"],
-                     "hash": versions.get(pid, ""), "vault": bool(repo) and repo.lower().rstrip("/") == VAULT_REPO.lower(),
-                     "link": None})
+                     "hash": versions.get(pid, ""), "vault": False, "link": None})
     return rows
 
 
@@ -715,7 +718,7 @@ def default_labels(args):
         return label, args.source or label
     owner, repo = repo_identity(args.root or ROOT)
     project = args.project or repo
-    return project, args.source or f"{repo}/skills-lock.json"
+    return project, args.source or f"{project}/skills-lock.json"      # follows --project: two repos named alike stay apart
 
 
 NOT_FOUND_HINT = " (not found: share the Skills HQ page with the integration, or use the data source id, not the database id)"
@@ -859,7 +862,7 @@ def render(res, as_json):
 def main(argv=None):
     p = argparse.ArgumentParser(description="Record installed agent skills in Notion; see the module docstring for exit codes.")
     p.add_argument("--project", help="Project label (default: the repo name; --global: global:<hostname>)")
-    p.add_argument("--source", help="Source label, the rows this run owns (default: <repo>/skills-lock.json or the global label)")
+    p.add_argument("--source", help="Source label, the rows this run owns (default: <project>/skills-lock.json or the global label)")
     p.add_argument("--root", help="project checkout to scan (default: this script's repo root)")
     p.add_argument("--global", dest="global_scope", action="store_true", help="scan the computer's global skill folders instead")
     p.add_argument("--home", help="home directory for --global (default: the user's)")

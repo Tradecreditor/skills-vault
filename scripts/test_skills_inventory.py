@@ -221,7 +221,7 @@ class CollectTests(unittest.TestCase):
         self.assertEqual(rows["other-one"]["agents"], ["cursor"])
         p = rows["skills-vault@tradecreditor-vault"]
         self.assertEqual((p["kind"], p["scope"], p["hash"], p["vault"], p["source_repo"]),
-                         ("claude-plugin", "global", "abc123def456", True, "Tradecreditor/skills-vault"))
+                         ("claude-plugin", "global", "abc123def456", False, "Tradecreditor/skills-vault"))   # provenance only
         self.assertEqual(rows["flat@m"]["hash"], "1.0.0")
 
     def test_bad_lockfile_is_exit_3_and_missing_lockfile_is_fine(self):
@@ -386,6 +386,15 @@ class SyncTests(unittest.TestCase):
         res = json.loads(out)
         self.assertEqual((code, res["ok"], res["exit"], res["counts"]["created"]), (0, True, 0, 2))
         self.assertEqual(res["plan"]["create"], ["keeping-handoff-docs", "tdd"])
+
+    def test_default_source_follows_project_label(self):
+        class A:
+            global_scope, project, source, root = False, None, None, str(self.root)
+        self.assertEqual(si.default_labels(A), (self.root.name, f"{self.root.name}/skills-lock.json"))
+        A.project = "alice-app"
+        self.assertEqual(si.default_labels(A), ("alice-app", "alice-app/skills-lock.json"))
+        A.source = "custom"
+        self.assertEqual(si.default_labels(A), ("alice-app", "custom"))
 
     def test_global_run_labels(self):
         home = self.root / "home"
