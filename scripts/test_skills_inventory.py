@@ -426,15 +426,26 @@ class SyncTests(unittest.TestCase):
         b = self.fake.seed("b-skill", "other/skills-lock.json", vault=True, vault_status="draft")
         c = self.fake.seed("c-skill", "other/skills-lock.json", vault=True)
         d = self.fake.seed("tdd", SOURCE, vault=False)
+        # bare folders: a vault name with no source is recognised, a foreign name or a known source is not
+        e = self.fake.seed("b-skill", "global:pc", vault=False)
+        self.fake.pages[e]["properties"]["Kind"] = {"select": {"name": "folder"}}
+        f = self.fake.seed("b-skill", "global:other", vault=False)
+        self.fake.pages[f]["properties"]["Kind"] = {"select": {"name": "folder"}}
+        self.fake.pages[f]["properties"]["Source repo"] = normalise({"x": {"rich_text": [{"type": "text", "text": {"content": "someone/else"}}]}})["x"]
+        g = self.fake.seed("frontend-design", "global:pc", vault=False)
+        self.fake.pages[g]["properties"]["Kind"] = {"select": {"name": "folder"}}
         code, out, _ = self.run_cli("--enrich", "--vault", str(vault), base_args=False)
         self.assertEqual(code, 0)
-        self.assertEqual(out, "skills-inventory: enriched=2 unchanged=1 failed=0 vault_skills=2 data_source=11111111\n")
+        self.assertEqual(out, "skills-inventory: enriched=3 unchanged=1 failed=0 vault_skills=2 data_source=11111111\n")
+        self.assertEqual((self.fake.prop(e, "Vault skill")["checkbox"], self.fake.prop(e, "Vault status")["select"]["name"]), (True, "draft"))
+        self.assertFalse(self.fake.prop(f, "Vault skill")["checkbox"])
+        self.assertFalse(self.fake.prop(g, "Vault skill")["checkbox"])
         self.assertEqual(self.fake.prop(a, "Vault status")["select"]["name"], "verified")
         self.assertEqual(self.fake.prop(b, "Vault status")["select"]["name"], "draft")
         self.assertEqual(self.fake.prop(c, "Vault status")["select"]["name"], "unknown")
         self.assertIsNone(self.fake.prop(d, "Vault status"))
         code, out, _ = self.run_cli("--enrich", "--vault", str(vault), "--dry-run", base_args=False)
-        self.assertEqual(out, "skills-inventory: dry-run enriched=0 unchanged=3 failed=0 vault_skills=2 data_source=11111111\n")
+        self.assertEqual(out, "skills-inventory: dry-run enriched=0 unchanged=4 failed=0 vault_skills=2 data_source=11111111\n")
         code, out, _ = self.run_cli("--enrich", "--vault", str(self.root / "nowhere"), base_args=False)
         self.assertEqual(code, 3)
 

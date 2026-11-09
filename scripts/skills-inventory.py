@@ -26,7 +26,9 @@ select value (Scope, Kind, Status, Vault status) must already be an option or th
 
 --enrich (the vault's daily run only): reads <vault>/skills/README.md (the "Skills in this vault" table, name -> vault_status)
 and sets "Vault status" on every row whose "Vault skill" box is ticked, whatever its Source. A vault skill the table does not
-list gets "unknown". Nothing else is written.
+list gets "unknown". A bare skill folder (Kind folder, empty Source repo: copied by hand, or a global install that left no
+lockfile) whose name is in that table is recognised as the vault's skill: Vault skill is ticked and the status set. Nothing
+else is written.
 
 --audit (read-only; names only rows of this run's Source, counts the rest): draft-installed (a vault skill whose Vault status
 is draft, deprecated or unknown is Installed somewhere), stale (Installed but Last seen more than 30 days ago), unknown-vault
@@ -599,14 +601,24 @@ def execute(cfg, ds, plan):
 # ---------------------------------------------------------------- enrich (vault only) and audit (read-only)
 
 def enrich_plan(rows, statuses):
-    """Updates for every row with Vault skill ticked whose Vault status differs from the vault's table."""
+    """Updates for every row with Vault skill ticked whose Vault status differs from the vault's table; and for a bare skill
+    folder (Kind folder, no Source repo: copied by hand or by a global install that left no lockfile) whose name is in the
+    vault's table, tick Vault skill and set the status too. Vault skill names are specific gerunds, so a name match is taken as
+    the vault's skill; a plugin row or a row with a known foreign source is never touched."""
     plan = []
     for c in rows:
-        if not c["Vault skill"]:
+        values = {}
+        if c["Vault skill"]:
+            want = statuses.get(c["skill"], "unknown")
+        elif c["Kind"] == "folder" and not c["Source repo"] and c["skill"] in statuses:
+            want = statuses[c["skill"]]
+            values["Vault skill"] = True
+        else:
             continue
-        want = statuses.get(c["skill"], "unknown")
         if c["Vault status"] != want:
-            plan.append({"skill": c["skill"], "id": c["id"], "values": {"Vault status": want}})
+            values["Vault status"] = want
+        if values:
+            plan.append({"skill": c["skill"], "id": c["id"], "values": values})
     return plan
 
 
@@ -616,27 +628,31 @@ def run_enrich(args):
     statuses = vault_statuses(vault)
     try:
         ds, options = resolve(cfg, args)
-        rows = query(cfg, ds, {"property": "Vault skill", "checkbox": {"equals": True}})
+        rows = query(cfg, ds)                      # every row: ticked vault skills, plus bare folders to recognise by name
     except ApiError as e:
         raise Stop(2, str(e) + (NOT_FOUND_HINT if e.status == 404 else ""))
     except Unreachable as e:
         raise Stop(2, str(e))
     plan = enrich_plan(rows, statuses)
-    missing = sorted({e["values"]["Vault status"] for e in plan} - set(options.get("Vault status", ())))
+    missing = sorted({e["values"]["Vault status"] for e in plan if "Vault status" in e["values"]} - set(options.get("Vault status", ())))
     if missing:
         raise Stop(2, "Vault status option(s) missing in Notion: " + ", ".join(missing))
-    counts = {"enriched": 0, "unchanged": len(rows) - len(plan), "failed": 0}
+    vault_rows = [c for c in rows if c["Vault skill"]]
+    counts = {"enriched": 0, "unchanged": len(vault_rows) - len([e for e in plan if "Vault skill" not in e["values"]]), "failed": 0}
+
+    def describe(e):
+        return ("vault skill, " if "Vault skill" in e["values"] else "") + str(e["values"].get("Vault status", "status kept"))
     if args.dry_run:
         for e in plan:
-            log(f"dry-run enrich '{e['skill']}' -> {e['values']['Vault status']}")
+            log(f"dry-run enrich '{e['skill']}' -> {describe(e)}")
         counts["enriched"] = len(plan)
     else:
         for e in plan:
             try:
                 call(cfg, "PATCH", "/v1/pages/" + urllib.parse.quote(e["id"], safe=""),
-                     {"properties": {"Vault status": to_prop("Vault status", e["values"]["Vault status"])}})
+                     {"properties": {k: to_prop(k, v) for k, v in e["values"].items()}})
                 counts["enriched"] += 1
-                log(f"enriched '{e['skill']}' -> {e['values']['Vault status']}")
+                log(f"enriched '{e['skill']}' -> {describe(e)}")
             except ApiError as e2:
                 if e2.status in (401, 403):
                     raise Stop(2, f"HTTP {e2.status} during writes; {counts['enriched']} writes done before it")

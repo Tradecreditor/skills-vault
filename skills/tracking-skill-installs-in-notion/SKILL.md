@@ -47,7 +47,7 @@ not reviewer-approved / verified), **Removed**.
 | Installed | date | script, on create only (first seen) |
 | Last seen | date | script; only moves forward |
 | Vault skill | checkbox | script: a skill folder whose source is `Tradecreditor/skills-vault` (or `.` inside the vault checkout). Never set on a plugin row: a plugin is a bundle, its provenance is the Source repo |
-| Vault status | select: draft, reviewer-approved, verified, deprecated, unknown | **the vault's `--enrich` run only**, from `skills/README.md` |
+| Vault status | select: draft, reviewer-approved, verified, deprecated, unknown | **the vault's `--enrich` run only**, from `skills/README.md`. It also ticks Vault skill on a bare folder (Kind folder, no Source repo) whose name is in that table: a hand-copied or `-g` install of a vault skill |
 | Link | url | script: `https://github.com/<owner>/<repo>/tree/main/skills/<name>` for a GitHub source |
 | Source | select | script: the ownership key, `<repo>/skills-lock.json` or the global label; a run touches only its own Source |
 
