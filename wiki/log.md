@@ -210,3 +210,4 @@
 ## [2026-11-09] capture | ccch1mneyyy/dsh-Go — Android client for DeepSeek Harness | 20261109-dsh-go-android-client-for-deepseek-harness
 ## [2026-11-09] capture | Anthropic: The components of agent memory (X post) | 20261109-anthropic-components-of-agent-memory-dreaming
 ## [2026-11-09] hot-list | 2026-W45 | hot-list/2026-W45
+## [2026-11-09] lint | 2026-W46 | outputs/health/2026-W46
