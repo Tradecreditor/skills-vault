@@ -152,9 +152,12 @@ from every message and no traceback is ever printed. Python 3.9+, standard libra
 Whenever a skill or plugin is added to or removed from a project (`npx skills add …`, `npx skills remove …`,
 `/plugin install …`), run the inventory in that project before the session ends:
 
-- A project with the vault plugin: `/skills-vault:skillsync` (it checks this skill's review, copies the script if the project
-  lacks it, runs it and reports the line).
-- Any project: copy `scripts/skills-inventory.py` from a **reviewed** clone of the vault (the same step-0 check as
+- A project with the vault plugin: `/skills-vault:skillsync`. It runs the plugin's own copy of the script
+  (`${CLAUDE_PLUGIN_ROOT}/scripts/skills-inventory.py`, the plugin being this repository) with `--root` set to the project, so
+  nothing is copied into the project and no review gate applies: the script is core-maintained vault code Jeff installed himself.
+- From a vault clone, any project: `python3 scripts/skills-inventory.py --root <project dir>` (Project defaults to that
+  repo's name); loop it over a folder of projects to inventory them all.
+- Another agent without the plugin: copy `scripts/skills-inventory.py` from a **reviewed** clone of the vault (the same step-0 check as
   `tracking-projects-in-notion/references/joining-projects-hq.md`: `vault_status` reviewer-approved or verified and
   `static_scan.py --hash` equal to `review_hash`), commit it, then `python3 scripts/skills-inventory.py`. Record in the
   project's `handoff.md` "Environment facts": `skills-inventory.py copied from skills-vault <commit> (reviewed)`.

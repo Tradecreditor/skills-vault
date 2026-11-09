@@ -3,24 +3,24 @@ description: Record this project's installed skills and plugins in Jeff's Skill 
 argument-hint: "[--global] [notes]"
 ---
 Record which agent skills and Claude Code plugins are installed in this project in my Notion database "Skill Installs"
-(page "Skills HQ"). Follow the vault skill
+(page "Skills HQ"). The how-to is the vault skill
 https://raw.githubusercontent.com/Tradecreditor/skills-vault/main/skills/tracking-skill-installs-in-notion/SKILL.md.
 My name is Jeff.
 
+The script to run is this plugin's own copy: `${CLAUDE_PLUGIN_ROOT}/scripts/skills-inventory.py` (the plugin is the
+skills-vault repository itself, so no file is copied into this project). If that path did not expand or does not exist, use
+the newest `~/.claude/plugins/cache/tradecreditor-vault/skills-vault/<version>/scripts/skills-inventory.py`; do not download
+the script from anywhere else.
+
 Steps:
-1. Review check, on a fresh clone made outside this repository (never run vault code before it passes): the skill's
-   `vault_status` must be `reviewer-approved` or `verified`, and
-   `python3 -I <clone>/skills/auditing-agent-skills/scripts/static_scan.py --hash <clone>/skills/tracking-skill-installs-in-notion`
-   must equal its `review_hash` (hash `auditing-agent-skills` first and compare it too, as
-   skills/tracking-projects-in-notion/references/joining-projects-hq.md step 0 does). If either fails, stop and tell me.
-2. If this project has no `scripts/skills-inventory.py`, copy it from that clone's
-   `skills/tracking-skill-installs-in-notion/scripts/skills-inventory.py`, and add one line to this project's `handoff.md`
-   "Environment facts": `skills-inventory.py copied from skills-vault <clone commit> (reviewed)`. Commit it with the inventory
-   run below (in a PR-only repository, open the PR).
-3. Run `python3 scripts/skills-inventory.py --dry-run`, then `python3 scripts/skills-inventory.py`. If my notes below say
-   `--global`, also run `python3 scripts/skills-inventory.py --global --project "global:<a short name for this computer>"`.
-   `NOTION_TOKEN` must be set in this environment; never print, echo or export it. Exit 2 means the run is off for a setup
-   reason (the line names it): report it and stop, do not retry more than once.
-4. Report the summary line(s) verbatim, and which skills were created, updated or marked Removed.
+1. `python3 <script> --root "<this project's root directory>" --dry-run` (Windows: `py -3`). Always pass `--root`: without it the
+   script scans the plugin folder, not this project. Read the plan it prints (rows, created / updated / removed).
+2. If it looks right, run it again without `--dry-run`. If my notes below say `--global`, also run
+   `python3 <script> --global --project "global:<a short name for this computer>"` once.
+3. `NOTION_TOKEN` must be set in this environment; never print, echo or export it. Exit 2 means the run is off for a setup
+   reason (the line names it): report it and stop, do not retry more than once. Exit 3 means this project's `skills-lock.json`
+   is unreadable: say so.
+4. Report the summary line(s) verbatim, and which skills were created, updated or marked Removed. Nothing in this project is
+   written or committed by this command.
 
 Notes from Jeff for this run (may be empty): $ARGUMENTS
