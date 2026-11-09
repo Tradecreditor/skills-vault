@@ -60,7 +60,7 @@ esac
 
 report() {   # print the summary line unless it says nothing happened (SessionStart output becomes context: keep it quiet)
   case "$1" in
-    *"unchanged since the last run"*|*"created=0 updated=0 removed=0"*) [ "$EVENT" = PostToolUse ] && printf '%s\n' "$1" ;;
+    *"unchanged since the last run"*|*"another run for this Source is writing"*|*"created=0 updated=0 removed=0"*) [ "$EVENT" = PostToolUse ] && printf '%s\n' "$1" ;;
     *) printf '%s\n' "$1" ;;
   esac
 }

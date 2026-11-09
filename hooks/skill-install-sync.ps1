@@ -39,7 +39,7 @@ switch ($event) {
 
 function Report($line) {
   if (-not $line) { return }
-  $quiet = ($line -like "*unchanged since the last run*") -or ($line -like "*created=0 updated=0 removed=0*")
+  $quiet = ($line -like "*unchanged since the last run*") -or ($line -like "*another run for this Source is writing*") -or ($line -like "*created=0 updated=0 removed=0*")
   if (-not $quiet -or $event -eq "PostToolUse") { Write-Output $line }
 }
 $exe = $py[0]; $pre = @(); if ($py.Length -gt 1) { $pre = $py[1..($py.Length - 1)] }

@@ -494,6 +494,46 @@ class SyncTests(unittest.TestCase):
         code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
         self.assertTrue(out.startswith("skills-inventory: created=0 updated=2 removed=0"), out)   # both became bare folders
 
+    def test_extra_copies_of_a_row_are_retired_and_the_oldest_kept(self):
+        # two runs that raced on a new Source each created the rows: keep the oldest, mark the copies Removed
+        old = self.fake.seed("keeping-handoff-docs", SOURCE, status="Removed")
+        dup = self.fake.seed("keeping-handoff-docs", SOURCE)
+        gone = self.fake.seed("vanished", SOURCE, status="Removed")
+        gone_dup = self.fake.seed("vanished", SOURCE)
+        code, out, err = self.run_cli()
+        self.assertEqual(code, 0)
+        self.summary(out, created=1, updated=1, removed=2)
+        self.assertEqual(self.fake.prop(old, "Status")["select"]["name"], "Installed")     # the oldest is the live row
+        for pid in (dup, gone, gone_dup):
+            self.assertEqual(self.fake.prop(pid, "Status")["select"]["name"], "Removed")
+        self.assertIn("extra copies become Removed", err)
+        code, out, _ = self.run_cli()
+        self.summary(out, unchanged=2)                                      # settled: nothing left to retire
+
+    def test_one_writer_per_source(self):
+        state = self.root / "state"
+        env = {"SKILLS_INVENTORY_STATE": str(state)}
+        with mock.patch.dict(os.environ, env):
+            lock = si.lock_path(SOURCE)
+        state.mkdir()
+        lock.write_text("{}", encoding="utf-8")                             # another session is writing
+        code, out, _ = self.run_cli("--if-changed", env=env)
+        self.assertEqual((code, out), (0, "skills-inventory: another run for this Source is writing; skipped (--if-changed) "
+                                          "source=proj/skills-lock.json\n"))
+        self.assertEqual(self.fake.writes(), [])
+        self.assertEqual(list(state.glob("*.json")), [])                    # no stamp: the next session runs
+        with mock.patch.object(si, "LOCK_WAIT", 0):
+            code, out, _ = self.run_cli(env=env)
+        self.assertEqual(code, 2)
+        self.assertIn("still holds", out)
+        code, out, _ = self.run_cli("--dry-run", env=env)                   # a dry run never needs the lock
+        self.assertEqual(code, 0)
+        old = lock.stat().st_mtime - si.LOCK_STALE - 1
+        os.utime(lock, (old, old))                                          # its owner died long ago: taken over
+        code, out, _ = self.run_cli("--if-changed", env=env)
+        self.summary(out, created=2)
+        self.assertFalse(lock.exists())                                     # released after the run
+
     def test_global_label_from_environment(self):
         class A:
             global_scope, project, source, root = True, None, None, None

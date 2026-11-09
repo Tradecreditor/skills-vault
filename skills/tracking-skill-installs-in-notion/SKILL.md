@@ -166,6 +166,11 @@ always exits 0. Set `SKILLS_INVENTORY_GLOBAL_LABEL` once per computer (`global:j
 Windows `[Environment]::SetEnvironmentVariable("SKILLS_INVENTORY_GLOBAL_LABEL", "global:jeff-pc", "User")`, macOS / Linux in the
 shell profile. Without it the label is `global:<hostname>`.
 
+One writer per Source: a run that writes holds `<hash>.lock` beside the fingerprints, so when several sessions start at once only
+the first writes; an `--if-changed` run that finds it held skips quietly (no stamp, so the next session runs), a manual run waits
+up to 3 minutes, and a lock older than 15 minutes (a run killed by the hook's 90 s timeout) is taken over. Should duplicate rows
+exist anyway (one Skill title twice under one Source), every run keeps the oldest as the live row and marks the copies `Removed`.
+
 ## Per project: manually
 
 Whenever a skill or plugin is added to or removed from a project (`npx skills add …`, `npx skills remove …`,
