@@ -54,13 +54,15 @@ Not the brand — the decisions: spacing rhythm, type sizes, one accent color.
 
 ## Optional: transitions.dev skill (third-party)
 
-transitions.dev is a third-party project (GitHub `Jakubantalik/transitions.dev`, its own "Transitions.dev License"). Its README and https://transitions.dev/skill.html document this install command; the vault has not audited that code. Scan it first with the vault's `scanning-agent-skills` skill, then install, pinned to the commit that was the repo's HEAD when this skill was written (it has no release tags):
+transitions.dev is a third-party project (GitHub `Jakubantalik/transitions.dev`, its own "Transitions.dev License"). Its README and https://transitions.dev/skill.html document the install as `npx skills add Jakubantalik/transitions.dev`; the vault has not audited that code. That command is unpinned and installs every skill the repo ships (`transitions-dev`, `transitions-polish`, `transitions-ui-generation`). To install only `transitions-dev`, from a commit you have scanned, clone the repo at the commit that was its HEAD when this skill was written (2026-11-08; it has no release tags), scan the clone with the vault's `scanning-agent-skills` skill, then install from the clone:
 
 ```
-npx skills add Jakubantalik/transitions.dev@20d70c1262bf721c0300c2946cbe1fc7605a555c --skill transitions-dev
+git clone https://github.com/Jakubantalik/transitions.dev
+git -C transitions.dev checkout 20d70c1262bf721c0300c2946cbe1fc7605a555c
+npx skills@1.7.6 add ./transitions.dev --skill transitions-dev
 ```
 
-The `owner/repo@<tag-or-commit>` pin and `--skill` form come from the `skills` CLI reference (https://github.com/vercel-labs/skills/blob/main/docs/commands.md). Upstream's own unpinned form is `npx skills add Jakubantalik/transitions.dev`; the same repo also ships a `transitions-ui-generation` skill that the unpinned command installs too. Upstream says the skill includes a library of 27+ transitions and adds commands such as `transitions reveal`, `transitions review` and `transitions apply`. Do not run the `npx transitions-dev ...` commands on that page: they are a separate npm package, and the Pro ones sign in through a browser.
+Do not pin with `owner/repo@<commit>`: `skills` 1.7.6 accepts that form but installs the default branch whatever follows the `@` (tested 2026-11-10: a ref that does not exist installs without an error), so it gives no pin. The local-path and `--skill` forms are in the `skills` CLI reference (https://github.com/vercel-labs/skills/blob/main/docs/commands.md); the `skills@1.7.6` version is this skill's addition. Upstream says the skill includes a library of 27+ transitions and adds commands such as `transitions reveal`, `transitions review` and `transitions apply`. Do not run the `npx transitions-dev ...` commands on that page: they are a separate npm package, and the Pro ones sign in through a browser.
 
 ## Pitfalls
 
