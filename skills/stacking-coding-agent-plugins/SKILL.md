@@ -1,6 +1,6 @@
 ---
 name: stacking-coding-agent-plugins
-description: Scans, then installs what passes the scan gate - Graphify (pinned PyPI CLI, /graphify skill, CLAUDE.md entry) and chosen addyosmani/agent-skills skills at a pinned tag; only describes Ponytail (hooks) and OmniRoute (gateway). Use when asked to set up Graphify or Agent Skills, or to assess Ponytail or OmniRoute.
+description: Scans, then installs what passes the scan gate - Graphify (pinned PyPI CLI, /graphify skill, CLAUDE.md entry) and chosen addyosmani/agent-skills skills at a pinned tag; only describes Ponytail and OmniRoute. Use when asked to set up Graphify or Agent Skills, or to assess Ponytail or OmniRoute.
 metadata:
   source_url: "https://www.instagram.com/reel/DdjkD4xi1ma/"
   source_platform: "instagram"
