@@ -211,3 +211,5 @@
 ## [2026-11-09] capture | Anthropic: The components of agent memory (X post) | 20261109-anthropic-components-of-agent-memory-dreaming
 ## [2026-11-09] hot-list | 2026-W45 | hot-list/2026-W45
 ## [2026-11-09] lint | 2026-W46 | outputs/health/2026-W46
+## [2026-11-10] star | opensandbox-group/OpenSandbox | stars/opensandbox-group--OpenSandbox
+## [2026-11-10] star | JuliusBrussee/caveman | stars/JuliusBrussee--caveman

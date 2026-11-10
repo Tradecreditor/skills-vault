@@ -10,6 +10,8 @@
 你貼嘅 link 有一個合資格：[[pages/20261003-matt-pocock-skills-repo-agent-skills|mattpocock/skills]]（一星期 +9,423 stars），輸咗同分排序，已喺頁面加 Notes。
 
 ## 最近 20 項
+- 2026-11-10 · repo · [[stars/JuliusBrussee--caveman|JuliusBrussee/caveman — agent 慳 token 工具組]]
+- 2026-11-10 · repo · [[stars/opensandbox-group--OpenSandbox|opensandbox-group/OpenSandbox — AI agent 沙盒執行環境]]
 - 2026-11-09 · repo · [[pages/20261109-craft-anything-rebuild-any-software-with-agents|storytold/craft-anything — 研究任何軟件再叫 agent 重建]]
 - 2026-11-09 · repo · [[pages/20261109-dsh-go-android-client-for-deepseek-harness|ccch1mneyyy/dsh-Go — DeepSeek Harness Android 客戶端]]
 - 2026-11-09 · post · [[pages/20261109-anthropic-components-of-agent-memory-dreaming|Anthropic：agent memory 與 dreaming]]
@@ -28,5 +30,3 @@
 - 2026-10-23 · post · [[pages/20261023-autobrandhk-pstack-lauren-tan-coding-skills|AutoBrand.HK：pstack coding skills]]
 - 2026-10-21 · post · [[pages/20261021-snapai-three-tools-take-over-seo|snapai.io：三個工具接管 SEO]]
 - 2026-10-20 · post · [[pages/20261020-princegupta-harness2-self-improving-agents|Prince Gupta：Harness² 自我升級 agent]]
-- 2026-10-19 · post · [[pages/20261019-sebastianhardy-improve-system-claude-history|sebastianhardy_：improve-system]]
-- 2026-10-19 · post · [[pages/20261019-denghao-carousel-no-caption|等號：圖片輪播帖]]

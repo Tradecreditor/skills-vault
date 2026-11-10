@@ -28,6 +28,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | model-tiering | draft | vault-operations | Picks the model tier and effort level: expensive models advise and review, Sonnet executes |
 | providing-design-references | draft | post | Provides Claude with visual design references so it can match real layouts and UI decisions |
 | researching-competitor-landing-pages | reviewer-approved | post | Compares competitor landing pages on five fields with a ready agent prompt |
+| saving-tokens-with-caveman | draft | repo | Installs and uses caveman to cut agent token use (short replies, compressed tool output) |
 | scanning-agent-skills | reviewer-approved | post | Scans third-party agent skills, plugins and MCP servers with NVIDIA SkillSpector before install |
 | stacking-coding-agent-plugins | draft | post | Installs four coding-agent plugins (Graphify, Agent Skills, Ponytail, OmniRoute) |
 | targeting-purchase-intent-keywords | reviewer-approved | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |
