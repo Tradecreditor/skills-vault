@@ -21,19 +21,10 @@ Installs the `kepano/obsidian-skills` Agent Skills pack so a compatible agent (C
 
 ## Steps
 
-1. **Check whether it is already installed. Install only if it is not.** Upstream README (https://raw.githubusercontent.com/kepano/obsidian-skills/main/README.md) names these install locations; look in each that applies:
-   ```bash
-   # Marketplace install: plugin id is obsidian@obsidian-skills
-   grep -s "obsidian@obsidian-skills" .claude/settings.json .claude/settings.local.json ~/.claude/settings.json
-   # npx skills / manual Claude Code install: skill folders in the vault's .claude/ (or .agents/skills/)
-   ls -d .claude/skills/obsidian-markdown .agents/skills/obsidian-markdown 2>/dev/null
-   # Codex: ~/.codex/skills; OpenCode: ~/.opencode/skills/obsidian-skills/skills/
-   ls -d ~/.codex/skills/obsidian-markdown ~/.opencode/skills/obsidian-skills/skills/obsidian-markdown 2>/dev/null
-   ```
-   Any hit means it is installed: report where, and stop. No hit means install (step 3).
+1. **Check whether it is already installed. Install only if it is not.** Ask the user whether obsidian-skills is already set up for this agent. If they are unsure, look at the skills your agent already lists as available (in Claude Code the `/plugin` view and the skills list) for the pack's names: `obsidian-markdown`, `obsidian-bases`, `json-canvas`, `obsidian-cli`, `defuddle`, `knap`. Any of them present means it is installed: report which, and stop. None present means install (step 3).
 2. **Choose the skills** the vault needs from the table below; the pack installs all six together, so this only decides what to tell the user about.
-3. **Install** with the option matching the agent (all from the upstream README; none is pinned to a tag or commit).
-4. **Verify** by repeating the step 1 check and reporting the path found. Restart the agent if it does not list the skills (the README says OpenCode needs a restart).
+3. **Install** with the option matching the agent (from the upstream README; the upstream repo is not pinned to a tag or commit). The `skills@1.7.6` CLI version in option B is this skill's addition; the README's commands are unpinned.
+4. **Verify** by repeating the step 1 check (the pack's skill names now show in the agent's skills list) and reporting what you found. Restart the agent if it does not list the skills (the README says OpenCode needs a restart).
 
 ## Skills included
 
@@ -57,9 +48,9 @@ Installs the `kepano/obsidian-skills` Agent Skills pack so a compatible agent (C
 ### Option B: npx skills
 ```bash
 # SSH
-npx skills add git@github.com:kepano/obsidian-skills.git
+npx skills@1.7.6 add git@github.com:kepano/obsidian-skills.git
 # HTTPS
-npx skills add https://github.com/kepano/obsidian-skills
+npx skills@1.7.6 add https://github.com/kepano/obsidian-skills
 ```
 
 ### Option C: Manual, Claude Code
