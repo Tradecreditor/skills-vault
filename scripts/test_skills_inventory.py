@@ -10,6 +10,8 @@ import json
 import os
 import re
 import shutil
+import subprocess
+import sys
 import tempfile
 import threading
 import unittest
@@ -478,7 +480,7 @@ class SyncTests(unittest.TestCase):
         make_skill(self.root, ".agents/skills", "tdd")                      # a change: runs again
         code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
         self.summary(out, updated=1, unchanged=1)
-        stamp = next((self.root / "state").iterdir())
+        stamp = next((self.root / "state").glob("*.json"))                 # the lock file sits beside it
         st = json.loads(stamp.read_text(encoding="utf-8"))
         st["ran_at"] -= si.IF_CHANGED_MAX_AGE + 1                           # too old: runs again even if unchanged
         stamp.write_text(json.dumps(st), encoding="utf-8")
@@ -514,9 +516,9 @@ class SyncTests(unittest.TestCase):
         state = self.root / "state"
         env = {"SKILLS_INVENTORY_STATE": str(state)}
         with mock.patch.dict(os.environ, env):
-            lock = si.lock_path(SOURCE)
-        state.mkdir()
-        lock.write_text("{}", encoding="utf-8")                             # another session is writing
+            holder = si.acquire_lock(SOURCE, 0)                             # another session is writing
+            self.assertTrue(holder)
+            self.assertIs(si.acquire_lock(SOURCE, 0), False)                # a second taker is refused, never let in
         code, out, _ = self.run_cli("--if-changed", env=env)
         self.assertEqual((code, out), (0, "skills-inventory: another run for this Source is writing; skipped (--if-changed) "
                                           "source=proj/skills-lock.json\n"))
@@ -528,11 +530,32 @@ class SyncTests(unittest.TestCase):
         self.assertIn("still holds", out)
         code, out, _ = self.run_cli("--dry-run", env=env)                   # a dry run never needs the lock
         self.assertEqual(code, 0)
-        old = lock.stat().st_mtime - si.LOCK_STALE - 1
-        os.utime(lock, (old, old))                                          # its owner died long ago: taken over
+        si.release_lock(holder)                                             # its owner ends (or dies): the OS drops the lock
         code, out, _ = self.run_cli("--if-changed", env=env)
         self.summary(out, created=2)
-        self.assertFalse(lock.exists())                                     # released after the run
+        with mock.patch.dict(os.environ, env):
+            again = si.acquire_lock(SOURCE, 0)                              # the finished run released it
+            self.assertTrue(again)
+            si.release_lock(again)
+
+    def test_lock_dies_with_its_process(self):
+        state = self.root / "state"
+        child = subprocess.Popen([sys.executable, "-c", (
+            "import importlib.util,os,sys,time\n"
+            "spec=importlib.util.spec_from_file_location('si', sys.argv[1]); si=importlib.util.module_from_spec(spec)\n"
+            "spec.loader.exec_module(si)\n"
+            "h=si.acquire_lock(sys.argv[2], 0); print('held' if h else 'no', flush=True); time.sleep(60)"),
+            str(Path(si.__file__)), SOURCE], stdout=subprocess.PIPE, text=True, env=dict(os.environ, SKILLS_INVENTORY_STATE=str(state)))
+        self.addCleanup(child.wait)
+        self.addCleanup(child.kill)
+        self.assertEqual(child.stdout.readline().strip(), "held")
+        with mock.patch.dict(os.environ, {"SKILLS_INVENTORY_STATE": str(state)}):
+            self.assertIs(si.acquire_lock(SOURCE, 0), False)
+            child.kill()                                                    # killed like a hook past its timeout
+            child.wait()
+            h = si.acquire_lock(SOURCE, 0)
+            self.assertTrue(h)
+            si.release_lock(h)
 
     def test_global_label_from_environment(self):
         class A:
