@@ -16,6 +16,16 @@ on their own.
   card closes it and opens a new one.
 - One project can have several cards at once; an Area groups them.
 - **One board, per-project views.** Every project's board is a Board view of this one database filtered by its Area (a tab named after the Area). Never create a separate database or board per project: WIP limits, priorities and the weekly review work only across one board. A project that needs task-level tracking keeps it in its own repo (handoff.md / the session task list, or Backlog.md via `tracking-tasks-with-backlog-md`), not as more cards.
+- **A new project opens its own board tab at the start of its first session** (Jeff, 2026-11-10). A project is the folder that
+  holds the session's project instruction file (`CLAUDE.md`, `AGENTS.md` or `GEMINI.md`, the nearest one at or above the working
+  folder; a user-level file such as `~/.claude/CLAUDE.md` does not count) or, for repo work, the repository. If that file has no
+  "Projects HQ" block of its own (it has none, or the only block is inherited from a parent folder's file), the project is new:
+  before other work, a session with the Notion connector adds its Area option (the restate-the-full-list procedure in the
+  skill), adds its Board tab (`GROUP BY "Status"; FILTER "Area" = "<area>"`), moves the project's open manual cards from the
+  parent's Area to it, and writes the Projects HQ block naming the Area into that file. No separate ask to Jeff is needed; the
+  final message reports the new Area and tab. A sub-project with its own instruction file is its own Area. With no project
+  instruction file at all, ask Jeff once instead of creating one. Without the connector, say so and leave the step to the next
+  session that has it. A repo still needs its Source option and handoff table (the joining guide) before the sync runs.
 
 ## 2. Fields
 
@@ -24,7 +34,7 @@ on their own.
 | Project | the title (above) |
 | Status | exactly one of the six columns in section 3 |
 | Priority | P0, P1, P2 or P3 (section 4). New cards default to P2 |
-| Area | the repository name for repo work (`skills-vault`, …), otherwise the life or business area. New Areas are decided by Jeff and added by a session with the Notion connector on his word (asking a project to join counts) |
+| Area | the repository name for repo work (`skills-vault`, …), otherwise the project folder's name or the life or business area. A new project's session adds its Area itself (section 1); any other new Area is decided by Jeff and added by a session with the Notion connector on his word (asking a project to join counts) |
 | Owner | who moves the card next: `Jeff`, `Claude Code` (any agent session) or `Routine` |
 | Next step | one concrete, checkable action that starts with a verb. Waiting on Jeff: starts with `Jeff:` and names the decision or action. Blocked: names the blocker and the condition that unblocks it |
 | Target date | the date the outcome is due, not a guess at effort. Required for P0; set it for any card with a real deadline. Set in Notion (UI or connector) on any card; the sync never writes it |
