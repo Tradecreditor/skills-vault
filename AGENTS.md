@@ -89,7 +89,8 @@ separate database or board per project). The working agreement is `skills/tracki
 - Jeff only views the board; he never edits it. Every change is yours: repo cards through `handoff.md`, `manual` cards through the
   Notion connector, both on Jeff's word. Never ask him to drag, edit or create a card.
 - Never edit a card whose Source is a `handoff.md` in Notion (the sync overwrites it); edit the handoff. Never copy a `manual`
-  card's title or details into this public repo. Only Jeff changes columns, priorities, Owners, Areas or the policy.
+  card's title or details into this public repo. Only Jeff changes columns, priorities, Owners, Areas or the policy; the one exception
+  is a new project's own Area and Board tab, which its first session opens (policy section 1, Jeff 2026-11-10).
 - Machinery: `scripts/notion-sync.py` mirrors In flight to the board (daily, `github-stars-sync` step 7; any session may run it on
   `main` when `NOTION_TOKEN` is set); `--audit` checks the policy weekly (`vault-lint` check 9). Another project joins by following
   `skills/tracking-projects-in-notion/references/joining-projects-hq.md`: Jeff pastes its link into a session in that project.
