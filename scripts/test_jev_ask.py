@@ -23,7 +23,7 @@ ITEM = json.dumps({                     # a valid `ask` input; the example fake 
 
 
 def jev(args, env=None, stdin=None):
-    """Run jev_ask.py; return (exit code, stdout parsed as JSON, or {"unparsed": stdout})."""
+    """Run jev_ask.py; return (exit code, stdout parsed as JSON, or {"unparsed": stdout, "stderr": stderr})."""
     full = {"PATH": os.environ.get("PATH", os.defpath), "JEV_BASE_URL": NOWHERE}
     full.update(env or {})
     p = subprocess.run([sys.executable, str(SCRIPT), *args], env=full, input=stdin, capture_output=True, text=True, timeout=30)
@@ -47,6 +47,9 @@ class KillSwitch(unittest.TestCase):
 
     def test_disabled_is_the_reason_given_without_key_or_canned_answers(self):
         self.assert_off_by_kill_switch(jev(["probe"], {"JEV_DISABLED": "1"}))
+
+    def test_any_value_but_empty_or_zero_disables(self):
+        self.assert_off_by_kill_switch(jev(["probe"], {"JEV_DISABLED": "true", "JEV_FAKE": str(FAKE)}))
 
     def test_disabled_wins_over_an_input_the_script_would_refuse(self):
         self.assert_off_by_kill_switch(jev(["ask", "--state", "-"], {"JEV_DISABLED": "1"}, "not json"))
