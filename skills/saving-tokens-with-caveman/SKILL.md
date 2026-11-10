@@ -8,7 +8,11 @@ metadata:
   captured_at: "2026-11-10T06:06:37Z"
   engagement: "stars=118720 forks=6906"
   origin_type: "repo"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-11-10T07:49:51Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "585524b3ec96ab55999b9684c79f67a05b7870715e339141bb039e1ff207eae3"
+  review_report: "outputs/skill-reviews/2026-11-10-saving-tokens-with-caveman.md"
 ---
 # Saving tokens with caveman
 

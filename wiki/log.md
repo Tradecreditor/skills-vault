@@ -213,3 +213,5 @@
 ## [2026-11-09] lint | 2026-W46 | outputs/health/2026-W46
 ## [2026-11-10] star | opensandbox-group/OpenSandbox | stars/opensandbox-group--OpenSandbox
 ## [2026-11-10] star | JuliusBrussee/caveman | stars/JuliusBrussee--caveman
+## [2026-11-10] review | saving-tokens-with-caveman approved | outputs/skill-reviews/2026-11-10-saving-tokens-with-caveman
+## [2026-11-10] review | tracking-skill-installs-in-notion approved | outputs/skill-reviews/2026-11-10-tracking-skill-installs-in-notion

@@ -4,7 +4,11 @@ description: "Records which agent skills and Claude Code plugins are installed i
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-11-09"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-11-10T07:49:51Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "6cce53cc177a5a19c73698c5bbdae7445307117dfba2157a6dbd07e261671bc4"
+  review_report: "outputs/skill-reviews/2026-11-10-tracking-skill-installs-in-notion.md"
 ---
 
 # tracking-skill-installs-in-notion — one Notion database for every installed skill
