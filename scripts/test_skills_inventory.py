@@ -10,6 +10,8 @@ import json
 import os
 import re
 import shutil
+import subprocess
+import sys
 import tempfile
 import threading
 import unittest
@@ -478,7 +480,7 @@ class SyncTests(unittest.TestCase):
         make_skill(self.root, ".agents/skills", "tdd")                      # a change: runs again
         code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
         self.summary(out, updated=1, unchanged=1)
-        stamp = next((self.root / "state").iterdir())
+        stamp = next((self.root / "state").glob("*.json"))                 # the lock file sits beside it
         st = json.loads(stamp.read_text(encoding="utf-8"))
         st["ran_at"] -= si.IF_CHANGED_MAX_AGE + 1                           # too old: runs again even if unchanged
         stamp.write_text(json.dumps(st), encoding="utf-8")
@@ -493,6 +495,67 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(code, 2)                                           # a failed run leaves no stamp
         code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
         self.assertTrue(out.startswith("skills-inventory: created=0 updated=2 removed=0"), out)   # both became bare folders
+
+    def test_extra_copies_of_a_row_are_retired_and_the_oldest_kept(self):
+        # two runs that raced on a new Source each created the rows: keep the oldest, mark the copies Removed
+        old = self.fake.seed("keeping-handoff-docs", SOURCE, status="Removed")
+        dup = self.fake.seed("keeping-handoff-docs", SOURCE)
+        gone = self.fake.seed("vanished", SOURCE, status="Removed")
+        gone_dup = self.fake.seed("vanished", SOURCE)
+        code, out, err = self.run_cli()
+        self.assertEqual(code, 0)
+        self.summary(out, created=1, updated=1, removed=2)
+        self.assertEqual(self.fake.prop(old, "Status")["select"]["name"], "Installed")     # the oldest is the live row
+        for pid in (dup, gone, gone_dup):
+            self.assertEqual(self.fake.prop(pid, "Status")["select"]["name"], "Removed")
+        self.assertIn("extra copies become Removed", err)
+        code, out, _ = self.run_cli()
+        self.summary(out, unchanged=2)                                      # settled: nothing left to retire
+
+    def test_one_writer_per_source(self):
+        state = self.root / "state"
+        env = {"SKILLS_INVENTORY_STATE": str(state)}
+        with mock.patch.dict(os.environ, env):
+            holder = si.acquire_lock(SOURCE, 0)                             # another session is writing
+            self.assertTrue(holder)
+            self.assertIs(si.acquire_lock(SOURCE, 0), False)                # a second taker is refused, never let in
+        code, out, _ = self.run_cli("--if-changed", env=env)
+        self.assertEqual((code, out), (0, "skills-inventory: another run for this Source is writing; skipped (--if-changed) "
+                                          "source=proj/skills-lock.json\n"))
+        self.assertEqual(self.fake.writes(), [])
+        self.assertEqual(list(state.glob("*.json")), [])                    # no stamp: the next session runs
+        with mock.patch.object(si, "LOCK_WAIT", 0):
+            code, out, _ = self.run_cli(env=env)
+        self.assertEqual(code, 2)
+        self.assertIn("still holds", out)
+        code, out, _ = self.run_cli("--dry-run", env=env)                   # a dry run never needs the lock
+        self.assertEqual(code, 0)
+        si.release_lock(holder)                                             # its owner ends (or dies): the OS drops the lock
+        code, out, _ = self.run_cli("--if-changed", env=env)
+        self.summary(out, created=2)
+        with mock.patch.dict(os.environ, env):
+            again = si.acquire_lock(SOURCE, 0)                              # the finished run released it
+            self.assertTrue(again)
+            si.release_lock(again)
+
+    def test_lock_dies_with_its_process(self):
+        state = self.root / "state"
+        child = subprocess.Popen([sys.executable, "-c", (
+            "import importlib.util,os,sys,time\n"
+            "spec=importlib.util.spec_from_file_location('si', sys.argv[1]); si=importlib.util.module_from_spec(spec)\n"
+            "spec.loader.exec_module(si)\n"
+            "h=si.acquire_lock(sys.argv[2], 0); print('held' if h else 'no', flush=True); time.sleep(60)"),
+            str(Path(si.__file__)), SOURCE], stdout=subprocess.PIPE, text=True, env=dict(os.environ, SKILLS_INVENTORY_STATE=str(state)))
+        self.addCleanup(child.wait)
+        self.addCleanup(child.kill)
+        self.assertEqual(child.stdout.readline().strip(), "held")
+        with mock.patch.dict(os.environ, {"SKILLS_INVENTORY_STATE": str(state)}):
+            self.assertIs(si.acquire_lock(SOURCE, 0), False)
+            child.kill()                                                    # killed like a hook past its timeout
+            child.wait()
+            h = si.acquire_lock(SOURCE, 0)
+            self.assertTrue(h)
+            si.release_lock(h)
 
     def test_global_label_from_environment(self):
         class A:

@@ -20,6 +20,10 @@ What it reads (never writes anything on disk):
   --if-changed (for the plugin hooks, hooks/hooks.json): a local fingerprint of the collected rows is kept per Source under
     ~/.cache/skills-inventory (SKILLS_INVENTORY_STATE overrides); when it matches the last successful run and that run is less
     than 7 days old, the Notion round trip is skipped and nothing is read from the network.
+  One writer per Source: a run that writes holds an OS file lock (flock / msvcrt) on <hash>.lock next to those fingerprints. When
+    several sessions start at once, the first one writes; an --if-changed run that finds the lock held skips (it records nothing,
+    so the next one runs), any other run waits for it up to LOCK_WAIT seconds. The OS drops the lock when its process exits or is
+    killed (the hook timeout), so there is no stale lock to take over and no run can release another's.
 
 What it writes: one Notion row per skill (or plugin id) keyed by Skill title + Source label. A Claude Code plugin row carries its
 marketplace repo in "Source repo" but never the "Vault skill" flag: that flag means "a skill folder the vault's review covers". Rows of another Source are never
@@ -53,6 +57,7 @@ Optional: NOTION_VERSION (YYYY-MM-DD), NOTION_SKILLS_DS (data source id). Python
 """
 import argparse
 import datetime
+import errno
 import hashlib
 import http.client
 import json
@@ -94,6 +99,7 @@ GITHUB_SOURCE = re.compile(r"^(?:https?://github\.com/)?([A-Za-z0-9_.-]+)/([A-Za
 TOKEN_RE = re.compile(r"[\x21-\x7e]+")
 VERSION_RE = re.compile(r"\d{4}-\d{2}-\d{2}", re.A)
 MAX_TEXT = 2000
+LOCK_WAIT = 180                               # how long a run without --if-changed waits for another run of its Source
 IF_CHANGED_MAX_AGE = 7 * 24 * 3600            # --if-changed runs anyway when the last run is older than this (keeps Last seen fresh)
 GLOBAL_LABEL_ENV = "SKILLS_INVENTORY_GLOBAL_LABEL"   # this computer's --global Project label (e.g. "global:jeff-pc"), for hooks
 STATE_DIR_ENV = "SKILLS_INVENTORY_STATE"            # where --if-changed keeps its fingerprints (default ~/.cache/skills-inventory)
@@ -498,7 +504,7 @@ def fetch_existing(cfg, ds, source, options):
     for key, pages in existing.items():
         pages.sort(key=lambda c: c["created"] or "￿")
         if len(pages) > 1:
-            log(f"duplicate Notion row '{key}' x{len(pages)}; updating the oldest only")
+            log(f"duplicate Notion row '{key}' x{len(pages)}; keeping the oldest, extra copies become Removed")
     return existing
 
 
@@ -543,6 +549,9 @@ def make_plan(rows, existing, project, source, today):
         cur = pages[0]
         if key not in keys and cur["Status"] != "Removed":
             plan["remove"].append({"skill": key, "id": cur["id"], "values": {"Status": "Removed"}})
+        for extra in pages[1:]:                   # copies left by runs that raced on a new Source: retire, never delete
+            if extra["Status"] != "Removed":
+                plan["remove"].append({"skill": key, "id": extra["id"], "values": {"Status": "Removed"}})
     return plan
 
 
@@ -831,6 +840,54 @@ def unchanged_since_last_run(source, digest):
         return False
 
 
+def lock_path(source):
+    return state_path(source).with_suffix(".lock")
+
+
+def _try_lock(f):
+    if os.name == "nt":
+        import msvcrt
+        f.seek(0)
+        msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+    else:
+        import fcntl
+        fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+
+def acquire_lock(source, wait):
+    """An open file holding the Source's OS lock; None when no lock can be made here (the run goes on unlocked); False when
+    another run still holds it after `wait` seconds. The lock file is never deleted: the OS lock, not the file, is the lock."""
+    path = lock_path(source)
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        f = open(path, "a+", encoding="utf-8")
+    except OSError:
+        return None
+    deadline = time.time() + wait
+    while True:
+        try:
+            _try_lock(f)
+            return f
+        except (BlockingIOError, PermissionError):
+            pass                                       # held by another run
+        except OSError as e:
+            if getattr(e, "errno", None) not in (errno.EACCES, errno.EAGAIN, errno.EDEADLK):
+                f.close()
+                return None                            # locking unsupported here: run unlocked rather than not at all
+        if time.time() >= deadline:
+            f.close()
+            return False
+        time.sleep(1)
+
+
+def release_lock(handle):
+    if handle:
+        try:
+            handle.close()                             # closing drops the OS lock (an exiting process drops it too)
+        except OSError:
+            pass
+
+
 def remember_run(source, digest):
     path = state_path(source)
     try:
@@ -872,6 +929,21 @@ def run(args):
             return res, 0
         raise Stop(2, "NOTION_TOKEN not set")
     cfg = token_config(token, version, override)
+    if args.dry_run:
+        return sync(cfg, args, res, rows, project, source, today, digest)
+    handle = acquire_lock(source, 0 if args.if_changed else LOCK_WAIT)
+    if handle is False:
+        if args.if_changed:
+            res["skipped"] = "busy"
+            return res, 0
+        raise Stop(2, f"another run for Source '{source}' still holds {lock_path(source)} after {LOCK_WAIT} s")
+    try:
+        return sync(cfg, args, res, rows, project, source, today, digest)
+    finally:
+        release_lock(handle)
+
+
+def sync(cfg, args, res, rows, project, source, today, digest):
     try:
         ds, options = resolve(cfg, args)
         res["data_source"] = ds
@@ -918,6 +990,9 @@ def render(res, as_json):
         head = "dry-run " if res["dry_run"] else ""
         emit(f"skills-inventory: {head}enriched={c['enriched']} unchanged={c['unchanged']} failed={c['failed']} "
              f"vault_skills={res['vault_skills']} data_source={res['data_source']}\n")
+        return
+    if res.get("skipped") == "busy":
+        emit(f"skills-inventory: another run for this Source is writing; skipped (--if-changed) source={res['source']}\n")
         return
     if res.get("skipped"):
         emit(f"skills-inventory: unchanged since the last run (--if-changed) rows={len(res['rows'])} source={res['source']}\n")
