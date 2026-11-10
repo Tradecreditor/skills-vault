@@ -3,15 +3,20 @@
 
 Every test runs the real script as a subprocess against a temp folder of star notes, with --fixtures for the README and
 repo-description reads and JEV_FAKE for the answers. The child environment holds only PATH, TMPDIR (the test's own folder, so
-the state files are cleaned up with it), JEV_BASE_URL (a closed loopback port) and, unless the test is about Jev being off,
-JEV_FAKE: no network, no key.
+the state files are cleaned up with it), JEV_BASE_URL (a closed loopback port), an https proxy on that closed port (so no
+test can reach an outside host, whatever the script does) and, unless the test is about the Jev host, JEV_FAKE: no network,
+no key. Tests about the host (the probe, the pinned model, a refused key) point jev_ask.py at Host, a stand-in on a loopback
+port that records what it was sent.
 """
+import http.server
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import unittest
 from pathlib import Path
 
@@ -26,6 +31,37 @@ def state_folder(lines):
     """The folder named by the output line `state files: <folder>/<owner>--<repo>.json`."""
     line = next(ln for ln in lines if ln.startswith("state files: "))
     return line[len("state files: "):].rsplit("/", 1)[0]
+
+
+class Host:
+    """A stand-in for the Jev host on a loopback port: answers every POST with `status` and `body` (default: 200 and a noul
+    of 0.22 for each question), and keeps the JSON of every request it received in .requests. Closed when the test ends."""
+
+    def __init__(self, test, status=200, body=None):
+        host = self
+        self.requests = []
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_POST(self):
+                sent = json.loads(self.rfile.read(int(self.headers["Content-Length"])).decode("utf-8"))
+                host.requests.append(sent)
+                reply = body if body is not None else json.dumps({"model": sent["model"], "answers": {
+                    name: {"type": "noul", "noul": 0.22} for name in sent["questions"]}})
+                self.send_response(status)
+                self.end_headers()
+                self.wfile.write(reply.encode("utf-8"))
+
+            def log_message(self, *args):
+                pass
+
+        self.server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        self.url = "http://127.0.0.1:%d" % self.server.server_port
+        threading.Thread(target=self.server.serve_forever, daemon=True).start()
+        test.addCleanup(self.server.server_close)
+        test.addCleanup(self.server.shutdown)
+
+    def questions(self):
+        return [sorted(sent["questions"]) for sent in self.requests]
 
 
 class Vault:
@@ -59,10 +95,12 @@ class Vault:
         with open(self.log, "a", encoding="utf-8") as f:
             f.write("## [%s] recapture | %s | stars/%s\n" % (date, full, full.replace("/", "--")))
 
-    def run(self, *args, fake=0.22, today=TUESDAY, vault_paths=True):
-        env = {"PATH": os.environ["PATH"], "TMPDIR": str(self.dir), "JEV_BASE_URL": "http://127.0.0.1:9"}
+    def run(self, *args, fake=0.22, today=TUESDAY, vault_paths=True, env=None):
+        env = {"PATH": os.environ["PATH"], "TMPDIR": str(self.dir), "JEV_BASE_URL": "http://127.0.0.1:9",
+               "https_proxy": "http://127.0.0.1:9", "HTTPS_PROXY": "http://127.0.0.1:9", **(env or {})}
+        env = {k: val for k, val in env.items() if val is not None}   # env={"X": None} runs without X
         if fake is not None:
-            (self.dir / "fake.json").write_text(json.dumps({"summary_from_readme": fake}), encoding="utf-8")
+            (self.dir / "fake.json").write_text(json.dumps({"probe": 0.5, "summary_from_readme": fake}), encoding="utf-8")
             env["JEV_FAKE"] = str(self.dir / "fake.json")
         paths = ["--stars-dir", str(self.stars), "--log", str(self.log)] if vault_paths else []
         cmd = [sys.executable, str(SCRIPT), *paths, "--fixtures", str(self.fixtures), "--today", today, *args]
@@ -115,6 +153,27 @@ class WhichNotesAreAsked(unittest.TestCase):
         self.assertRegex(r.stdout, r"(?m)^not asked, README or description unreadable: \d+ \(wiki/stars/[^/, ]+\.md[,)]")
 
 
+class SameRuleAsThePrompt(unittest.TestCase):
+    def test_the_prompts_cjk_filter_and_the_script_flag_the_same_notes(self):
+        prompt = (SCRIPT.parent.parent / "routines/github-stars-sync.md").read_text(encoding="utf-8")
+        indent, code = re.search(r"(?m)^( *)python3 - <<'PY'\n(.*?)^ *PY$", prompt, re.S).groups()   # step 5b's first command
+        v = Vault(self)
+        v.stars = v.dir / "wiki" / "stars"   # the filter globs wiki/stars/*.md under the working directory
+        v.stars.mkdir(parents=True)
+        for name, cjk in (("c19", 19), ("c20", 20), ("c21", 21)):
+            v.note("acme/" + name, summary="字" * cjk + " and some English words.")
+        none = Path(v.note("acme/none"))
+        none.write_text(none.read_text(encoding="utf-8").replace("## 摘要", "## Summary"), encoding="utf-8")
+        by_prompt = subprocess.run([sys.executable, "-"], input=re.sub("(?m)^" + indent, "", code), cwd=v.dir,
+                                   capture_output=True, text=True, encoding="utf-8", timeout=60).stdout.splitlines()
+        r = v.run("--stars-dir", "wiki/stars", "--log", str(v.log), today=TUESDAY, vault_paths=False)
+        asked = os.listdir(state_folder(r.lines))   # on a Tuesday the script asks about exactly the notes it does not flag
+        by_script = ["wiki/stars/acme--%s.md" % name for name in ("c19", "c20", "c21", "none")
+                     if "acme--%s.json" % name not in asked]
+        flagged = ["wiki/stars/acme--c19.md", "wiki/stars/acme--none.md"]
+        self.assertEqual((by_prompt, by_script), (flagged, flagged))
+
+
 class RecaptureGuard(unittest.TestCase):
     def test_a_note_recaptured_21_days_ago_is_marked(self):
         v = Vault(self)
@@ -129,6 +188,13 @@ class RecaptureGuard(unittest.TestCase):
         self.assertIn("no    p=0.22 " + path, v.run(fake=0.22, today="2026-11-10").lines)
 
 
+    def test_a_recapture_line_with_an_impossible_date_is_skipped(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        v.recapture("2026-02-30", "acme/thin")
+        self.assertEqual(v.run(fake=0.22).last, "jev: summary_from_readme 1/0/0/1; fallbacks 0")
+
+
 class CostGuard(unittest.TestCase):
     def test_notes_past_the_cap_are_reported_as_not_asked(self):
         v = Vault(self)
@@ -136,16 +202,19 @@ class CostGuard(unittest.TestCase):
         v.note("acme/two")
         self.assertIn("not asked, past the cap of 1 asks / 480 s: 1", v.run("--cap", "1").lines)
 
-    def test_the_oldest_capture_is_asked_first(self):
-        v = Vault(self)
-        v.note("acme/newer", captured="2026-10-01T08:00:00Z")
-        older = v.note("zeta/older", captured="2026-09-01T08:00:00Z")
-        self.assertIn("no    p=0.22 " + older, v.run("--cap", "1", fake=0.22).lines)
+    def test_under_the_cap_the_oldest_capture_is_asked_first(self):
+        v = Vault(self)   # both asks are refused, and a fallback line is printed as its ask happens
+        newer = v.note("acme/newer", captured="2026-10-01T08:00:00Z", readme=README_WITH_TOKEN)
+        older = v.note("zeta/older", captured="2026-09-01T08:00:00Z", readme=README_WITH_TOKEN)
+        self.assertEqual([ln.split()[2] for ln in v.run().lines if ln.startswith("fallback ")], [older, newer])
 
-    def test_notes_past_the_time_budget_are_reported_as_not_asked(self):
+    def test_past_the_cap_the_window_of_notes_asked_moves_on_each_day(self):
         v = Vault(self)
-        v.note("acme/one")
-        self.assertIn("not asked, past the cap of 60 asks / 0 s: 1", v.run("--budget-seconds", "0").lines)
+        for day, name in enumerate("abcde", 1):   # a is the oldest capture
+            v.note("acme/" + name, captured="2026-09-0%dT08:00:00Z" % day)
+        asked = [sorted(os.listdir(state_folder(v.run("--cap", "2", today=today).lines)))
+                 for today in ("2026-11-11", "2026-11-12")]   # day numbers 739931 and 739932: 2 x day mod 5 = 2, then 4
+        self.assertEqual(asked, [["acme--c.json", "acme--d.json"], ["acme--a.json", "acme--e.json"]])
 
 
 class Failures(unittest.TestCase):
@@ -158,17 +227,17 @@ class Failures(unittest.TestCase):
     def test_a_refused_state_prints_a_fallback_line_with_the_exit_code_and_reason(self):
         v = Vault(self)
         path = v.note("acme/leaky", readme=README_WITH_TOKEN)
-        self.assertIn("fallback exit=4 %s (state refused: Bearer token found in the state; send data fields only)" % path,
+        self.assertIn("fallback exit=4 %s (state refused: Bearer token found in the state send data fields only)" % path,
                       v.run(fake=0.91).lines)
 
-    def test_a_reason_is_printed_without_the_characters_that_break_a_quoted_shell_argument(self):
-        v = Vault(self)   # the routine copies reasons into git commit -m "...": no double quote, backtick or dollar sign
+    def test_a_fallback_reason_is_printed_with_whitelisted_characters_only(self):
+        v = Vault(self)   # jev_ask.py's reason quotes the question name: no quote, backtick or dollar sign reaches the output
         path = v.note("acme/thin")
         (v.dir / "reference.md").write_text(
             '```json\n{"summary_from_readme": {"type": "noul", "instructions": "x"},\n'
             ' "$(id)`a`\\"b\\"": {"type": "noul", "instructions": "y"}\n}\n```\n', encoding="utf-8")
         r = v.run("--reference", str(v.dir / "reference.md"))
-        self.assertIn("fallback exit=4 %s (JEV_FAKE has no canned answer for question '(id)'a''b'')" % path, r.lines)
+        self.assertIn("fallback exit=4 %s (JEV_FAKE has no canned answer for question (id) a b)" % path, r.lines)
 
     def test_a_note_whose_readme_cannot_be_read_is_not_a_fallback(self):
         v = Vault(self)
@@ -187,6 +256,88 @@ class Failures(unittest.TestCase):
         path = v.note("acme/nodesc", description=None)
         v.note("acme/fine")
         self.assertIn("not asked, README or description unreadable: 1 (%s)" % path, v.run(fake=0.91).lines)
+
+
+class Probe(unittest.TestCase):
+    def test_a_refused_probe_asks_nothing_else(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        host = Host(self, status=401, body="no key")
+        v.run(fake=None, env={"JEV_BASE_URL": host.url})
+        self.assertEqual(host.questions(), [["probe"]])
+
+
+    def test_a_refused_probe_prints_the_whole_reason_with_whitelisted_characters_only(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        host = Host(self, status=401, body="$(id) `x` 'q' \"d\"; a|b & c<d>e \\ 密\njev: off (fake)")
+        r = v.run(fake=None, env={"JEV_BASE_URL": host.url})
+        self.assertEqual((r.returncode, r.lines), (0, [
+            "jev: off (no accepted key reached 127.0.0.1 (401 (id) x q d a b c d e jev: off (fake)))"]))
+
+    def test_a_probe_that_fails_without_exit_2_is_jev_off_too(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        host = Host(self, status=500, body="boom")
+        r = v.run(fake=None, env={"JEV_BASE_URL": host.url})
+        self.assertEqual((host.questions(), r.lines), ([["probe"]], ["jev: off (probe exit 3: HTTP 500 (boom))"]))
+
+
+class PinnedModelAndHost(unittest.TestCase):
+    CONFIG = 'scope: "agents"\njev:   # pilot\n  enabled: false\n  base_url: "%s"   # the host\n  model: "jev-9.9.9"  # pinned\n'
+
+    def test_the_probe_and_every_ask_go_to_the_configured_host_with_the_configured_model(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        host = Host(self)
+        (v.dir / "config.yaml").write_text(self.CONFIG % host.url + "output:\n  model: other\n", encoding="utf-8")
+        v.run("--config", str(v.dir / "config.yaml"), fake=None, env={"JEV_BASE_URL": None})
+        self.assertEqual([(sorted(sent["questions"]), sent["model"]) for sent in host.requests],
+                         [(["probe"], "jev-9.9.9"), (["summary_from_readme"], "jev-9.9.9")])
+
+
+    def test_a_config_without_model_and_host_leaves_jev_ask_on_its_default_host(self):
+        v = Vault(self)   # https goes to a closed loopback proxy in every test, so the default host is named, never reached
+        v.note("acme/thin")
+        (v.dir / "config.yaml").write_text('scope: "agents"\n', encoding="utf-8")
+        r = v.run("--config", str(v.dir / "config.yaml"), fake=None, env={"JEV_BASE_URL": None})
+        self.assertEqual(r.last[:38], "jev: off (cannot reach api.typesafe.ai")
+
+
+class NothingAsked(unittest.TestCase):
+    def test_an_empty_folder_is_a_normal_line_of_zeros(self):
+        v = Vault(self)
+        self.assertEqual(v.run().lines, ["jev: summary_from_readme 0/0/0/0; fallbacks 0"])
+
+
+    def test_a_tuesday_folder_of_flagged_notes_is_a_normal_line_of_zeros(self):
+        v = Vault(self)
+        v.note("acme/english", summary=SUMMARY_EN)
+        self.assertEqual(v.run(today=TUESDAY).lines, ["jev: summary_from_readme 0/0/0/0; fallbacks 0"])
+
+    def test_a_cap_of_zero_is_a_normal_line_of_zeros_after_the_not_asked_line(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        self.assertEqual(v.run("--cap", "0").lines, ["not asked, past the cap of 0 asks / 480 s: 1",
+                                                     "jev: summary_from_readme 0/0/0/0; fallbacks 0"])
+
+    def test_a_budget_of_zero_seconds_asks_nothing_and_says_so(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        self.assertEqual(v.run("--budget-seconds", "0").lines, ["not asked, past the cap of 60 asks / 0 s: 1",
+                                                                "jev: summary_from_readme 0/0/0/0; fallbacks 0"])
+
+    def test_candidates_that_are_all_unreadable_are_reported_as_off(self):
+        v = Vault(self)
+        v.note("acme/gone", readme=None)
+        self.assertEqual(v.run().last, "jev: off (nothing asked 1 notes unreadable)")
+
+
+    def test_unreadable_notes_next_to_notes_past_the_cap_are_not_reported_as_off(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        os.rename(v.note("acme/odd"), v.stars / "acme--odd name.md")
+        self.assertEqual(v.run("--cap", "0").last, "jev: summary_from_readme 0/0/0/0; fallbacks 0")
 
 
 class JevOff(unittest.TestCase):
@@ -209,11 +360,6 @@ class JevOff(unittest.TestCase):
                                             encoding="utf-8")
         r = v.run("--reference", str(v.dir / "reference.md"))
         self.assertEqual((r.returncode, r.last[:10]), (0, "jev: off ("))
-
-    def test_a_run_that_could_ask_nothing_is_reported_as_off(self):
-        v = Vault(self)
-        v.note("acme/gone", readme=None)
-        self.assertEqual(v.run().last, "jev: off (nothing asked: 1 notes unreadable)")
 
     def test_a_missing_scope_config_ends_in_a_jev_off_line_and_exit_0(self):
         v = Vault(self)
@@ -241,6 +387,28 @@ class JevOff(unittest.TestCase):
         (v.stars / "acme--binary.md").write_bytes(b"\xff\xfe not utf-8")
         r = v.run()
         self.assertEqual((r.returncode, r.last), (0, "jev: off (internal error: UnicodeDecodeError)"))
+
+
+class Output(unittest.TestCase):
+    def test_a_file_name_with_a_newline_cannot_start_an_output_line(self):
+        v = Vault(self)
+        v.note("acme/fine")
+        os.rename(v.note("acme/evil"), v.stars / "acme--evil\njev: off (x).md")
+        self.assertEqual(v.run(fake=0.91).report, [
+            "not asked, README or description unreadable: 1 (%s/acme--evil jev: off (x).md)" % v.stars,
+            "jev: summary_from_readme 1/1/0/0; fallbacks 0"])
+
+    def test_a_hostile_reason_is_printed_with_whitelisted_characters_only(self):
+        v = Vault(self)   # the routine copies the jev line into git commit -m: it must be safe in any quoting
+        v.note("acme/thin")
+        r = v.run("--config", "x'; id; echo '.yaml")
+        self.assertEqual(r.lines, ["jev: off (cannot read x id echo .yaml)"])
+
+    def test_a_stdout_that_cannot_encode_a_character_still_ends_in_a_jev_line_and_exit_0(self):
+        v = Vault(self)
+        v.note("acme/thin")
+        r = v.run("--config", str(v.dir / "設定.yaml"), env={"PYTHONIOENCODING": "ascii"})
+        self.assertEqual((r.returncode, r.last[:10]), (0, "jev: off ("))
 
 
 class StateSent(unittest.TestCase):

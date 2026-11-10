@@ -70,18 +70,15 @@ You are the GitHub-stars sync routine for Jeff's skills vault (GitHub account: T
    merely rewords the repo description passes it. Jev (TypeSafe's decision model, skills/judging-with-jev/SKILL.md) is asked which
    notes are like that. It only chooses which notes get backfilled: it never changes how a summary is written, a star count, a
    frontmatter field or any other step. The run never fails because of Jev: every failure below ends in the CJK-only pick.
-   J1. On or off: python3 skills/judging-with-jev/scripts/jev_ask.py probe
-      Exit 0 = Jev is on, go to J2. Exit 2 (whatever the reason: no accepted key reached TypeSafe, host not allowed by the network
-      policy, the JEV_DISABLED kill switch), the command denied by the permission system, or any other exit or error = Jev is off
-      for the whole run: skip J2 and J3, the candidates are the CJK filter's paths alone, and the jev line is `jev: off (<reason>)`,
-      copying the `reason` from the JSON the script printed (`permission denied` for a denial, the error in a few words otherwise;
-      write ' for any " or backtick in it so it stays one shell argument in step 6). The key is the TYPESAFE_API_KEY environment
-      variable and the script reads it itself: never print it, never conclude anything from `env`, and never hand-write a curl or
-      Python request to TypeSafe (the auto-mode permission classifier denied exactly that on 2026-10-02).
-   J2. Ask: python3 scripts/stars-jev-s2.py
+   J1. Run: python3 scripts/stars-jev-s2.py
       Run it exactly like that, with no options and nothing piped into it, and a 10-minute timeout on the Bash call (600000 ms;
-      the default 2 minutes can kill it). It always exits 0 and the last line it prints always starts with `jev:`.
-      What it does (the script's docstring has the detail; scripts/test_stars_jev_s2.py tests it): on the Monday run (UTC) it
+      the default 2 minutes can kill it). It exits 0 and the last line it prints starts with `jev:`. This one command is all
+      of Jev in this step: it probes and asks by itself, so do not run jev_ask.py yourself. The key is the TYPESAFE_API_KEY
+      environment variable and the scripts read it themselves: never print it, never conclude anything from `env`, and never
+      hand-write a curl or Python request to TypeSafe (the auto-mode permission classifier denied exactly that on 2026-10-02).
+      What it does (the script's docstring has the detail; scripts/test_stars_jev_s2.py tests it): first it probes Jev
+      (`jev_ask.py probe`). If the probe exits 2, whatever the reason, or fails in any other way, Jev is off for the whole run:
+      the script asks nothing and its last line is `jev: off (<reason>)`. Otherwise, on the Monday run (UTC) it
       asks about every wiki/stars/*.md, on other days only about the notes the CJK filter did not flag (the flagged ones are
       candidates already), oldest captured_at first, one `jev_ask.py ask --state <file> --act-min 0.80 --defer-min 0.50` call per
       note. 0.80 and 0.50 are the reference's default thresholds for S2
@@ -92,12 +89,17 @@ You are the GitHub-stars sync routine for Jeff's skills vault (GitHub account: T
       writes nothing in the repository: the state files go to a temp folder.
       Cost guard: at most 60 asks and 8 minutes per run; past either it stops asking and prints how many notes it left
       (39 notes on 2026-11-10, about 70k input tokens, about US$0.003 a run).
-   J3. Read the output. Its last line is the jev line: copy it verbatim into the commit body (step 6) and the final message
-      (step 8). Two cases mean Jev is off for the whole run exactly as in J1 (the candidates are the CJK filter's paths alone):
-      - the line reads `jev: off (<reason>)`: an ask exited 2, nothing could be read, a file the script needs is missing, or it
-        hit an error. The script wrote the reason; copy the line as it is.
-      - there is no line starting with `jev:` (the command was denied, the timeout killed it, or it could not start): the jev
-        line is `jev: off (permission denied)`, `jev: off (timed out)` or `jev: off (<the error in a few words>)`.
+   J2. Read the output. Its last line is the jev line: copy it verbatim, never edited, into the commit body (step 6) and the
+      final message (step 8). Two cases mean Jev is off for the whole run (the candidates are the CJK filter's paths alone):
+      - the line reads `jev: off (<reason>)`: the probe failed, an ask exited 2, every note it tried was unreadable, a file the
+        script needs is missing, or it hit an error. The script wrote the reason; copy the line as it is.
+      - there is no line starting with `jev:`, because the command itself could not run. Then the jev line is one of exactly
+        these three strings, and you never write words of your own inside a jev line: `jev: off (permission denied)` when the
+        permission system denied the command, `jev: off (timed out)` when the timeout killed it, `jev: off (script failed)`
+        for anything else.
+      `jev: summary_from_readme 0/0/0/0; fallbacks 0` is a normal line, not a failure: there was nothing to ask (no note
+      beyond the ones the CJK filter flagged), or a `not asked, past the cap` line above it says the cap or the time ran out
+      first. The candidates are then the CJK filter's paths, and the line is copied like any other.
       Otherwise p is the probability that the 摘要 states facts from the README beyond the description, and each note is in one band:
       - `act` (p >= 0.80): the summary is fine. Counted, not listed, never a candidate on Jev's word.
       - `no` (p < 0.50): the summary only rewords the description. Listed lowest p first; the three lowest are backfill candidates.
@@ -117,11 +119,14 @@ You are the GitHub-stars sync routine for Jeff's skills vault (GitHub account: T
    Re-run the CJK command (the first one) afterwards: if a note you just rewrote still prints, your rewrite did not take. Do not ask
    Jev again after a rewrite.
    Do not touch their other frontmatter, do not rename the file, and log each as "## [date] recapture | <owner>/<repo> | stars/<owner>--<repo>"
-   (J2's 30-day rule reads these lines, so keep that shape exactly).
+   (J1's 30-day rule reads these lines, so keep that shape exactly).
    Include these in the commit; if the run added no new stars at all, commit them alone as "stars: enrich <n>".
 6. git add -A; git commit -m "stars: +<N>" -m "<jev line>"; git pull --rebase origin main; git push origin HEAD:main.
-   <jev line> is step 5b's line: `jev: summary_from_readme <asked>/<act>/<defer>/<no>; fallbacks <n>` copied verbatim from J3, or
-   `jev: off (<reason>)` when Jev failed (J1 or J3). If step 5b did not run at all there is no jev line: commit with the subject
+   <jev line> is step 5b's line, copied verbatim and never edited: the last line scripts/stars-jev-s2.py printed
+   (`jev: summary_from_readme <asked>/<act>/<defer>/<no>; fallbacks <n>`, or `jev: off (<reason>)` when Jev failed), or one of
+   J2's three fixed strings when the command could not run. The script prints that line in plain ASCII with no quote, $,
+   backtick or backslash in it, so it goes between the double quotes exactly as printed.
+   If step 5b did not run at all there is no jev line: commit with the subject
    alone, git commit -m "stars: +<N>", and never write `jev: off` for it - `off` means Jev failed, and vault-lint check 8 warns
    on every off line. The subject stays `stars: +<N>` / `stars: enrich <n>`; the jev line, when there is one, is the last
    line of the commit body, on a line of its own that starts with `jev:`. If your session adds
