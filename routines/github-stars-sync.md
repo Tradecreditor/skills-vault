@@ -88,7 +88,8 @@ You are the GitHub-stars sync routine for Jeff's skills vault (GitHub account: T
       README lines); the question JSON is read from the reference itself. Nothing else is sent: no secrets, no whole files. It
       writes nothing in the repository: the state files go to a temp folder.
       Cost guard: at most 60 asks and 8 minutes per run; past either it stops asking and prints how many notes it left
-      (39 notes on 2026-11-10, about 70k input tokens, about US$0.003 a run).
+      (39 notes on 2026-11-10, about 70k input tokens, about US$0.003 a run). The note it starts from moves on each day, so
+      the notes one run leaves are reached by the next runs.
    J2. Read the output. Its last line is the jev line: copy it verbatim, never edited, into the commit body (step 6) and the
       final message (step 8). Two cases mean Jev is off for the whole run (the candidates are the CJK filter's paths alone):
       - the line reads `jev: off (<reason>)`: the probe failed, an ask exited 2, every note it tried was unreadable, a file the

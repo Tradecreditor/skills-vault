@@ -8,9 +8,10 @@ rewords the repo description, so the routine can pick them for backfill.
 What it does: first `jev_ask.py probe`; unless that exits 0, Jev is off for the run and nothing is asked. Then, on a Monday
 (UTC) it asks about every wiki/stars/*.md, on other days only about the notes step 5b's CJK filter does not flag (a 摘要 with
 at least 20 CJK characters; the flagged ones are candidates already), oldest captured_at first, one
-`jev_ask.py ask --state <file> --act-min 0.80 --defer-min 0.50` call per note. With more notes to ask than the cap, the
-oldest-first order starts <cap> notes further on each day (today's day number x cap, modulo the number of notes) and wraps
-round, so successive runs reach every note. The state holds exactly the fields the reference names for S2
+`jev_ask.py ask --state <file> --act-min 0.80 --defer-min 0.50` call per note. The oldest-first order starts further on each
+day and wraps round (today's day number x a stride, modulo the number of notes; the stride is about one run's worth of notes
+and shares no factor with their number), so whatever stops a run early, the cap or the time budget, successive runs reach
+every note. The state holds exactly the fields the reference names for S2
 (skills/judging-with-jev/references/vault-routine-questions.md): goal, vault_scope (the `scope:` string of
 wiki/hot-list/_config.yaml), full_name, description (GitHub API), summary (the note's ## 摘要) and readme_head (the first 100
 README lines). The question JSON is read from that reference, not kept here. Nothing in the vault is written: the state files go
@@ -61,6 +62,7 @@ needs a `probe` value too) with no key and no network. Python 3.9+, stdlib only.
 import argparse
 import datetime
 import glob
+import math
 import json
 import os
 import re
@@ -217,6 +219,17 @@ def jev(pinned, *args):
     return code, out if isinstance(out, dict) else {}
 
 
+def stride(n, cap):
+    """How many notes the start of the order moves each day: close to one run's worth (the cap when there are more notes than
+    that, else a third of them) and sharing no factor with n, so the daily starts visit every position."""
+    want = cap if 0 < cap < n else max(1, n // 3)
+    for d in range(n):
+        for s in (want - d, want + d):
+            if 1 <= s < n and math.gcd(s, n) == 1:
+                return s
+    return 0
+
+
 def ask_about_star_notes(args):
     """The whole run: probe, ask, print the report. Raises Off when Jev is off for the run."""
     t0 = time.monotonic()
@@ -256,8 +269,8 @@ def ask_about_star_notes(args):
     asked, fallbacks, left, rows = 0, 0, 0, []
     bands = {"act": 0, "defer": 0, "no": 0}
     notes.sort()                                               # oldest capture first: the thin notes date from the early runs
-    if len(notes) > args.cap > 0:                              # more notes than one run asks: each day's window starts where
-        start = today.toordinal() * args.cap % len(notes)      # the day before's ended, so every note is reached in turn
+    if len(notes) > 1:                                         # the start moves each day, so a run the cap or the time budget
+        start = today.toordinal() * stride(len(notes), args.cap) % len(notes)   # cuts short never leaves the same notes unasked
         notes = notes[start:] + notes[:start]
     for _, path, file, full, summary in notes:
         if asked >= args.cap or time.monotonic() - t0 >= args.budget_seconds:

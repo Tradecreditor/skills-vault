@@ -202,11 +202,21 @@ class CostGuard(unittest.TestCase):
         v.note("acme/two")
         self.assertIn("not asked, past the cap of 1 asks / 480 s: 1", v.run("--cap", "1").lines)
 
-    def test_under_the_cap_the_oldest_capture_is_asked_first(self):
+    def test_notes_are_asked_in_capture_order_from_a_start_that_moves_each_day(self):
         v = Vault(self)   # both asks are refused, and a fallback line is printed as its ask happens
         newer = v.note("acme/newer", captured="2026-10-01T08:00:00Z", readme=README_WITH_TOKEN)
         older = v.note("zeta/older", captured="2026-09-01T08:00:00Z", readme=README_WITH_TOKEN)
-        self.assertEqual([ln.split()[2] for ln in v.run().lines if ln.startswith("fallback ")], [older, newer])
+        order = [[ln.split()[2] for ln in v.run(today=today).lines if ln.startswith("fallback ")]
+                 for today in ("2026-11-10", "2026-11-11")]   # day numbers 739930 (even) and 739931 (odd), two notes
+        self.assertEqual(order, [[older, newer], [newer, older]])
+
+    def test_under_the_cap_every_note_gets_to_be_asked_first_within_as_many_days_as_there_are_notes(self):
+        v = Vault(self)   # a run the time budget cuts short must not leave the same notes unasked every day
+        paths = [v.note("acme/" + name, captured="2026-09-0%dT08:00:00Z" % day, readme=README_WITH_TOKEN)
+                 for day, name in enumerate("abcdef", 1)]
+        first = {[ln.split()[2] for ln in v.run(today="2026-11-%02d" % day).lines if ln.startswith("fallback ")][0]
+                 for day in range(10, 16)}
+        self.assertEqual(first, set(paths))
 
     def test_past_the_cap_the_window_of_notes_asked_moves_on_each_day(self):
         v = Vault(self)
