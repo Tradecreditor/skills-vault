@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DeHdzMIRHzK"
 engagement: "likes=392 comments=251"
 tags: [topic/agent-tooling, cua, computer-use, lume, sandbox, open-source]
-related: []
+related: [20260929-openai-agents-api-computer-use-guide]
 needs_manual_text: false
 ---
 ## 摘要
@@ -35,4 +35,4 @@ needs_manual_text: false
 - Reader: Instagram embed endpoint via curl (Jina was rate-limited, Exa timed out).
 
 ## Related
-- (none found; search script not executable in this run)
+- [[20260929-openai-agents-api-computer-use-guide|OpenAI Agents API: Computer Use to Multi-Agent Guide]] - the platform view of Computer use: sandboxes, approval points and prompt-injection risks.

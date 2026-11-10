@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:Dd9R75ej5jv"
 engagement: "likes=1.9K comments=452 (order inferred from page)"
 tags: [topic/agent-tooling, claude-skills, ai-skills, instagram, teaser]
-related: []
+related: [20261005-nick-saraev-11-claude-plugins-job-roles, 20260917-7-repos-i-install-on-every-claude-code-project]
 needs_manual_text: true
 ---
 ## 摘要
@@ -32,5 +32,7 @@ needs_manual_text: true
 - https://www.instagram.com/p/Dd9R75ej5jv/ · okaashish · 2026-10-01 · likes 1.9K / 452 · reader: Jina (caption only; image post, no Supadata)
 
 ## Related
+- [[20261005-nick-saraev-11-claude-plugins-job-roles|Nick Saraev: 11 free Claude plugins for job roles]] — 同一類 Instagram 引流帖：留言換 Claude plugin / skill 清單。
+- [[20260917-7-repos-i-install-on-every-claude-code-project|7 repos I install on every Claude Code project]] — 同一類帖：清單內容喺圖片入面，caption 讀唔到。
 
 ## Notes

@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:Dd73RAzma9k"
 engagement: ""
 tags: [topic/agent-tooling, mcp, whatsapp, claude, open-source]
-related: []
+related: [20260828-nvidia-skillspector-skill-security-scanner]
 needs_manual_text: false
 ---
 ## 摘要
@@ -34,3 +34,4 @@ Simplifying AI 嘅 Instagram 帖文介紹「WhatsApp MCP Server」，一個免�
 
 ## Related
 - [[../../skills/scanning-agent-skills/SKILL|skill: scanning-agent-skills]]
+- [[20260828-nvidia-skillspector-skill-security-scanner|NVIDIA SkillSpector: Security Scanner for Agent Skills]] — 呢個 MCP 會接觸個人 WhatsApp 帳戶，安裝前可以用 SkillSpector 掃描 skill / MCP server。

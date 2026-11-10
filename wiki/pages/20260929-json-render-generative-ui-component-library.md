@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "threads:Dd2h9cGAueD"
 engagement: "likes=65 replies=5 reposts=8 shares=62 views=6.5K"
 tags: [topic/agent-tooling, json-render, generative-ui, component-library, jev, agent-ui, constrained-output]
-related: [20260925-jev-seo-geo-audit-cost-down-90, 20260928-claude-code-fable-advisor-jev-tree, 20260920-fast-jev-compaction]
+related: [20260925-jev-seo-geo-audit-cost-down-90, 20260928-claude-code-fable-advisor-jev-tree, 20260920-fast-jev-compaction, 20261005-opendots-copilotkit-ai-coworkers]
 needs_manual_text: false
 ---
 
@@ -52,3 +52,4 @@ Keith Rumjahn（@krumjahn）介紹 json-render，一個將「生成式介面」�
 - [[pages/20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit-and-fix cost by 90%]] — Jev as a typed-judgment model, same author
 - [[pages/20260928-claude-code-fable-advisor-jev-tree|Claude Code: Fable 5.1 Advisor + Jev Routing Tree]] — Jev used for routing in Claude Code
 - [[pages/20260920-fast-jev-compaction|fast-jev-compaction — verbatim Jev-scored compaction for Claude Code]] — another Jev tool in the vault
+- [[20261005-opendots-copilotkit-ai-coworkers|OpenDots — CopilotKit's open-source, self-hosted template for always-on AI coworkers]] — 同樣處理 agent 點樣喺 UI 度出嘢（OpenDots 用 AG-UI 協議、human-in-the-loop 卡片）。

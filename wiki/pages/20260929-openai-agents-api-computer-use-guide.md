@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "url:400cf7debe5ba276ecc375fda29d11389b006346"
 engagement: "none"
 tags: [topic/agent-platforms, openai, agents-api, computer-use, multi-agent, sandbox, mcp, devday-2026]
-related: [20260928-claude-code-fable-advisor-jev-tree, openai--codex-plugin-cc, microsoft--playwright-mcp]
+related: [20260928-claude-code-fable-advisor-jev-tree, openai--codex-plugin-cc, microsoft--playwright-mcp, 20261006-cua-computer-use-agent-sandbox]
 needs_manual_text: false
 ---
 
@@ -53,3 +53,4 @@ needs_manual_text: false
 - [[pages/20260928-claude-code-fable-advisor-jev-tree|Claude Code: Fable 5.1 Advisor + Jev Routing Tree]] - Claude-side multi-agent routing, a comparison point for Agents API orchestration.
 - [[stars/openai--codex-plugin-cc|openai--codex-plugin-cc]] - Codex tooling, the harness the Agents API is said to expose.
 - [[stars/microsoft--playwright-mcp|microsoft--playwright-mcp]] - a structured browser-control alternative to screenshot-based Computer use.
+- [[20261006-cua-computer-use-agent-sandbox|Cua: give your AI agent its own computer (buildwithneej)]] - an open-source sandboxed computer for agents, another way to run Computer use.
