@@ -1,6 +1,6 @@
 ---
 name: model-tiering
-description: "Picks the Claude model tier and effort level for a task: expensive models (Fable/Opus) plan, advise and review, Sonnet executes. Use when spawning subagents, workflows or cron agents, writing code that calls the Claude API (advisor tool), or weighing cost vs quality of Fable/Opus vs Sonnet."
+description: "Picks the Claude model tier and effort level for a task: expensive models (Fable/Opus) plan, advise and review, Sonnet executes. Use when choosing a model or effort for subagents, workflow stages or cron agents, pairing models in the Claude API advisor tool, or weighing Fable/Opus cost vs Sonnet."
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-09-26"
@@ -20,7 +20,7 @@ metadata:
 1. **Inside Claude Code sessions** → tier via subagents and workflow options (Part A).
 2. **Code that calls the Claude API** (Hermes, cron jobs, pipelines, scripts) → tier via the **advisor tool** (Part B).
 
-Current pricing per MTok (in/out): Fable 5 $10/$50 · Opus 4.8 $5/$25 · Sonnet 5 $3/$15 (intro $2/$10 through 2026-08-31) .
+Per-MTok prices change, so none are listed here: check the current price list before quoting a cost comparison.
 
 ## Part A — Inside Claude Code sessions
 
@@ -31,7 +31,6 @@ Current pricing per MTok (in/out): Fable 5 $10/$50 · Opus 4.8 $5/$25 · Sonnet 
 | Planning, design, ambiguity resolution, final review | Main loop (Fable/Opus) — do NOT delegate |
 | Bulk mechanical coding, broad codebase search, multi-file sweeps | `Agent` tool with `model: "sonnet"` |
 | Trivial classification, extraction, formatting, one-fact lookups | `Agent` tool with `model: "sonnet"` |
-| Typed yes/no, pick-one or score judgments over many items (classify, gate, rank, dedupe) | Jev via the `judging-with-jev` skill (Part C); Sonnet only for the 0.50–0.80 band |
 | Workflow stages that are mechanical (fan-out readers, transforms) | `agent(..., {model: "sonnet", effort: "low"})` |
 | Workflow stages that judge (verify, adversarial refute, synthesize) | omit `model` (inherit main-loop model), effort `high`+ |
 | First draft of a client-facing proposal (tender / ballpark / quotation) or a slide deck | `Agent` with `model: "opus"` — user rule 2026-09-22; reviewer is a separate Opus agent |
@@ -64,18 +63,15 @@ response = client.beta.messages.create(
 ```
 
 Default pairings for my projects:
-- **Sonnet executor + Opus 5 advisor** — similar-or-lower total cost than before, higher quality; advisor advice visible in plaintext.
-- **Sonnet executor + Fable 5.1 advisor** — maximum quality lift; advice comes back encrypted (`advisor_redacted_result`) — round-trip it verbatim, don't parse it.
-- **Sonnet executor + Opus advisor** — step up from Sonnet alone, still cheaper than switching executor to Sonnet/Opus.
+- **Sonnet executor + Opus 4.8 advisor** — similar-or-lower total cost than Sonnet alone on complex tasks, higher quality; advisor advice visible in plaintext (`advisor_result`).
+- **Sonnet executor + Fable 5 advisor** — the Fable tier, for the largest quality lift; advice comes back encrypted (`advisor_redacted_result`) — round-trip it verbatim, don't parse it.
 - Skip the advisor for single-turn Q&A or tasks where every turn genuinely needs the big model.
 
-**Before writing any advisor-tool code, read [references/advisor-tool.md](references/advisor-tool.md)** — it has the valid model-pair table, multi-turn round-trip rules (removing the tool mid-conversation 400s unless you also strip result blocks), pause_turn resumption, caching break-even, the measured system-prompt blocks for coding tasks, and per-executor nudge guidance (helps Sonnet, neutral on Sonnet, hurts Opus).
+**Before writing any advisor-tool code, read [references/advisor-tool.md](references/advisor-tool.md)** — it has the valid model-pair table, multi-turn round-trip rules (removing the tool mid-conversation 400s unless you also strip result blocks), pause_turn resumption, caching break-even, the measured system-prompt blocks for coding tasks, and per-executor nudge guidance (helps Haiku, neutral on Sonnet, hurts Opus).
 
-## Part C — Below Sonnet: Jev for judgments
+## Part C — Typed judgments over many items: not this skill
 
-TypeSafe's Jev is a decision model, not a writer: it answers typed yes/no (`noul`), pick-one (`choice`) and rubric (`score`) questions with calibrated probabilities, billed on input tokens only (published median ≈ US$0.000068 per decision). When a step is a judgment over many items rather than a rewrite — is this candidate in scope, is this repo an agent skill, are these two titles the same thing, which 40 of these 450 hits deserve a fetch — ask Jev first and let Sonnet/Opus read only what survives.
-
-Rules: never ask Jev for prose; threshold the probability (`≥ 0.80` act, `0.50–0.80` hand to the routine's own model, `< 0.50` negative branch); never let it override a deterministic gate or regex; keep today's path as the fallback when the key is missing or the call fails, and count the fallbacks; log question, probability and model version. Procedure, request shape and the per-routine question sets: [[../judging-with-jev/SKILL|judging-with-jev]]. Where it pays in this vault and where it does not: `outputs/20261002-jev-in-vault-routines.md`.
+This skill tiers Claude models only and sends nothing to any other provider. For typed yes/no / choice / score judgments over many items (classify, gate, rank, dedupe) see [[../judging-with-jev/SKILL|judging-with-jev]]: that skill asks TypeSafe's Jev, a third-party API, and owns the procedure, the key and the thresholds.
 
 ## Common mistakes
 
@@ -86,9 +82,8 @@ Rules: never ask Jev for prose; threshold the probability (`≥ 0.80` act, `0.50
 | Advisor with no `max_tokens` cap | Advisor output is its largest cost driver; start at 2048 |
 | Enabling advisor `caching` on short tasks | Break-even is ~3 advisor calls/conversation; off below that |
 | Dropping the advisor tool from `tools` mid-conversation | 400 error — also strip all `advisor_tool_result` blocks from history |
-| Adding the advisor-call nudge to Opus executors | Measured to lower Opus pass rates; Sonnet +7pp, Sonnet neutral |
+| Adding the advisor-call nudge to Opus executors | Measured to lower Opus pass rates; Haiku +7pp, Sonnet neutral |
 
 ## Evidence
 
 - 2026-09-29 — Charlie Hills ran the same 4 motion-graphics prompts in Claude Code on Sonnet 5.5 vs Opus 5.5, first try, no fixes: $4.95 vs $8.44 (41% less), 19.5 vs 34.7 min; Opus still leads 7 of 8 of Anthropic's benchmarks by 2–3 pts → "Sonnet for daily work, Opus for the hard, open-ended stuff" ([[../../wiki/pages/20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost|20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost]]). One run, small sample.
-- 2026-10-02 — Jev against the vault's four Routines: the saving is in weekly-hot-list prefiltering (~1,250 decisions a week ≈ US$0.09 at the published median, replacing Opus reads of ~450 snippets and ~390 repo objects); capture-link saves almost nothing because Sonnet reads the full text anyway (`outputs/20261002-jev-in-vault-routines.md`).
