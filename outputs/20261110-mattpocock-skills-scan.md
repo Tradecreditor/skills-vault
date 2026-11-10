@@ -41,6 +41,10 @@ Excluding the script does not lower the score (`--exclude 'scripts/*'` gives 37:
 `npx skills@latest add mattpocock/skills@4ae2317ddb22b046e26455e4f9c9b3aaaf62212d -a claude-code -s <the 14 names> --copy -y`
 (`skills` CLI 1.7.6): copies, no symlinks, 44 files under `.claude/skills/`, 14 entries added to `skills-lock.json`
 (`source: mattpocock/skills`, `sourceType: github`). `diff -r` of every installed folder against the scanned clone: identical.
+That diff is what ties the install to the scanned commit, not the `@4ae2317…` in the command: `skills` 1.7.6 accepts
+`owner/repo@<ref>` but installs the default branch whatever the ref is (tested 2026-11-10: a ref that does not exist installs
+without an error), and `4ae2317` was the default branch's head at the time. To install a chosen commit, clone it, check it out
+and run `npx skills add <local path>`.
 
 Installed: `to-spec`, `to-tickets`, `implement`, `implement-spec`, `tdd`, `diagnosing-bugs`, `pr`, `setup-matt-pocock-skills`,
 `codebase-design`, `domain-modeling`, `research`, `prototype` (from `skills/engineering/`), `writing-for-agents`, `grilling`
