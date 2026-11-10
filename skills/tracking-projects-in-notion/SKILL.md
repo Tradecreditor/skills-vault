@@ -4,7 +4,7 @@ description: "Runs Jeff's cross-project kanban in Notion under one board policy,
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-06"
-  vault_status: "reviewer-approved"
+  vault_status: "draft"
   reviewed_at: "2026-10-07T17:52:41Z"
   reviewed_by: "claude-code-cloud:vault-skill-reviewer"
   review_hash: "ae26b8c4da7095986a74feeef74a0f66b33959a48212bc908b695761e328c627"
@@ -58,7 +58,7 @@ CREATE TABLE ("Project" TITLE,
 
 Board view configuration: `GROUP BY "Status"; SORT BY "Last update" DESC`.
 
-**Per-Area board views.** Every project's board is a Board view of this one database filtered by its Area, a tab named after the Area (for example **skills-vault**). A new Area gets a new filtered Board view: `GROUP BY "Status"; FILTER "Area" = "<area>"`, added by a session with the connector on Jeff's word (the sync never changes views or the schema). Never create a separate database or board per project; the policy explains why ([section 1](references/board-policy.md)).
+**Per-Area board views.** Every project's board is a Board view of this one database filtered by its Area, a tab named after the Area (for example **skills-vault**). A new Area gets a new filtered Board view: `GROUP BY "Status"; FILTER "Area" = "<area>"`, added by the first session in a new project (policy section 1) or by a session with the connector on Jeff's word (the sync never changes views or the schema). Never create a separate database or board per project; the policy explains why ([section 1](references/board-policy.md)).
 
 ## Working the board (session protocol)
 
@@ -214,7 +214,7 @@ A session with the connector adds them, on Jeff's word, with Source `manual` and
 The step-by-step guide for an agent in the other project is [`references/joining-projects-hq.md`](references/joining-projects-hq.md): Jeff pastes its raw GitHub link into a session there and the agent follows it. It covers the approval check (status and `review_hash` on one clone of the vault), whose repo it is and whether it is public, the Area and Source options and the project's Board tab, copying the script from that clone, the 7-column handoff, the `CLAUDE.md` / `AGENTS.md` block, `NOTION_TOKEN` on a local computer (Windows and macOS), Jeff confirming the rows and files before anything is written, writing and committing in one go (a PR repo stops until the merge), the first sync, dropping the project's old manual cards once their synced cards exist, and resuming a join that spans several sessions. The join itself is tracked by one manual card, `Projects HQ join: <source>`, in the project's Area: its Next step names the next step and its private page body lists the cards to drop, so the join advances and closes through the connector without extra commits. In short:
 
 - **A repo** becomes one Area. A session with the connector adds its Area option, its Source option (`<repo>/handoff.md`) and a Board tab (`GROUP BY "Status"; FILTER "Area" = "<area>"`), never a separate database. The repo gets `scripts/notion-sync.py` (copied from this skill's `scripts/` folder in a reviewed clone), a 7-column In flight table, and the block in its agent instructions. It is synced by the next session in it, or by its own Routine: `python3 scripts/notion-sync.py --area "<area>" --source "<repo>/handoff.md"`. Run from that repo, `--audit` names only that repo's cards. Same token, same board.
-- **A project without a repo** has manual cards only. On Jeff's word, a session with the connector adds the Area option and creates the cards with Source `manual`, then follows the same protocol (open, move, close with a Link to the evidence). No script, no handoff.
+- **A project without a repo** has manual cards only. At the start of its first session (policy section 1), a session with the connector adds the Area option and its Board tab and creates the cards with Source `manual`, then follows the same protocol (open, move, close with a Link to the evidence). No script, no handoff.
 
 `scripts/notion-sync.py` in this skill is a byte-identical copy of the vault's `scripts/notion-sync.py`, so the copy other projects download is covered by this skill's review. Edit both together; `scripts/test_notion_sync.py` fails when they differ.
 
