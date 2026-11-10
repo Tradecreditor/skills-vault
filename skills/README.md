@@ -30,7 +30,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | researching-competitor-landing-pages | reviewer-approved | post | Compares competitor landing pages on five fields with a ready agent prompt |
 | saving-tokens-with-caveman | reviewer-approved | repo | Installs and uses caveman to cut agent token use (short replies, compressed tool output) |
 | scanning-agent-skills | reviewer-approved | post | Scans third-party agent skills, plugins and MCP servers with NVIDIA SkillSpector before install |
-| stacking-coding-agent-plugins | draft | post | Installs pinned Graphify and chosen Agent Skills skills; describes Ponytail and OmniRoute without installing them |
+| stacking-coding-agent-plugins | draft | post | Scans, then installs pinned Graphify and chosen Agent Skills skills when the scan gate allows; describes Ponytail and OmniRoute without installing them |
 | targeting-purchase-intent-keywords | reviewer-approved | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |
 | tracking-projects-in-notion | reviewer-approved | vault-operations | Runs Jeff's cross-project kanban in Notion under one board policy; mirrors handoff.md In flight rows and audits the board weekly |
 | tracking-skill-installs-in-notion | reviewer-approved | vault-operations | Records which skills and plugins are installed in which project or computer in Jeff's Notion database Skill Installs (`scripts/skills-inventory.py`) |

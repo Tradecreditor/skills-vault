@@ -1,6 +1,6 @@
 ---
 name: stacking-coding-agent-plugins
-description: Installs Graphify (pinned PyPI CLI, a /graphify skill and a CLAUDE.md entry) and chosen addyosmani/agent-skills skills from a pinned tag; only describes Ponytail (session hooks) and OmniRoute (API gateway). Use when asked to set up Graphify or Agent Skills, or to assess Ponytail or OmniRoute.
+description: Scans, then installs what passes the scan gate - Graphify (pinned PyPI CLI, /graphify skill, CLAUDE.md entry) and chosen addyosmani/agent-skills skills at a pinned tag; only describes Ponytail (hooks) and OmniRoute (gateway). Use when asked to set up Graphify or Agent Skills, or to assess Ponytail or OmniRoute.
 metadata:
   source_url: "https://www.instagram.com/reel/DdjkD4xi1ma/"
   source_platform: "instagram"
@@ -38,7 +38,7 @@ Start an install only when the user asked for that tool. A slow session or a usa
 ## Ground rules
 
 1. Before each step, tell the user what it changes (listed under the step). Run every command through the agent's normal permission prompts.
-2. Scan before installing, with the vault's `scanning-agent-skills` skill, and apply its gate: 20 or lower install, 21 to 50 read every finding and ask the user, above 50 stop and report.
+2. Scan before installing, with the vault's `scanning-agent-skills` skill, and apply its gate: 20 or lower install, 21 to 50 read every finding and ask the user, above 50 do not install: report the findings as the scanner gives them and stop. Do not explain findings away on the user's behalf. After a stop, the step continues only if the user, having read the findings, tells you to install anyway; that is the user's decision, not this skill's advice.
 3. Keep the pins. A newer version is a different thing: read its release notes, scan it, then change the number.
 
 ## Steps
@@ -49,8 +49,9 @@ Graphify is a Python command-line tool from Graphify Labs (`github.com/Graphify-
 `graphifyy`, with two y's: the project README names that package as the official one and says other `graphify*` packages on
 PyPI are not affiliated, and the PyPI entry links back to the same repository. Needs Python 3.10+ and uv.
 
-**Scan first.** The text the agent will read is the skill Graphify registers. Download the pinned wheel without installing
-it, unpack it, and scan that text (`python3` where that is the command name):
+**Scan first.** The text the agent will read is the skill Graphify registers. In an empty scratch folder outside the
+project, download the pinned wheel without installing it, unpack it, and scan that text (`python3` where that is the
+command name):
 
 ```bash
 python -m pip download graphifyy==0.9.103 --no-deps -d graphify-wheel
@@ -60,10 +61,10 @@ skillspector scan graphify-wheel/unpacked/graphify/skills/claude --no-llm
 ```
 
 On Windows the registered files are `skill-windows.md` and `skills/windows`. Result on 2026-11-10 with SkillSpector 2.12.0,
-static pass: `skill.md` scored 88 and its references 49. The six HIGH findings were four clean-up lines that delete Graphify's
-own temporary files under `graphify-out/` and two sentences flagged for their wording (a rule that starts with "Never" and a
-note that a tool "reports NO error"). At 88 the gate says stop: show the user the findings, and continue only when the user
-has read them and accepts them.
+static pass: `skill.md` scored 88, with six HIGH findings, and its references 49. Under ground rule 2 a score of 88 means do
+not install, so expect this step to stop here: show the user the findings and leave Graphify uninstalled. Your own scan of the
+version you are about to install decides, not this figure. The commands below are for a scan at or under the gate, or for a
+user who has read the findings and told you to install anyway.
 
 ```bash
 uv tool install graphifyy==0.9.103
@@ -87,7 +88,7 @@ graphify update .
   - **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
   When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
   ```
-  Show the user this block before running the command. In 0.9.103 this form of the command registers no hook and leaves the
+  Show the user this block and wait for their yes before running the command. In 0.9.103 this form of the command registers no hook and leaves the
   settings file alone. The bare command targets Claude Code, and on Windows it installs the Windows variant of the skill.
 - `graphify update .` writes a `graphify-out/` folder in the repository.
 - Code is parsed on the machine with tree-sitter; the README states that nothing leaves the machine for code and that there is
