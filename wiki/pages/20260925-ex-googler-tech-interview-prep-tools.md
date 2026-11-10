@@ -11,7 +11,7 @@ captured_at: "2026-09-27T15:01:08Z"
 captured_by: "claude-code-cloud"
 canonical_id: "instagram:DdvZqVXxAlW"
 engagement: "likes=163 comments=39 (unlabelled numbers in Jina footer; unverified)"
-tags: [interview-prep, system-design, tools, wispr-flow, voice-dictation, excalidraw, claude, comment-to-dm]
+tags: [topic/repo-picks, interview-prep, system-design, tools, wispr-flow, voice-dictation, excalidraw, claude, comment-to-dm]
 related: []
 needs_manual_text: false
 ---

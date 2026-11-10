@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:Deo4JZfEuI4"
 engagement: "likes=1447 comments=1945"
 tags: [topic/ai-news, instagram, carousel]
-related: []
+related: [20261019-chase-h-ai-ponytail-carousel]
 needs_manual_text: true
 ---
 ## 摘要
@@ -31,3 +31,4 @@ needs_manual_text: true
 - https://www.instagram.com/p/Deo4JZfEuI4/ — denghao.0304 — 2026-10-18 — likes=1447 comments=1945 — readers: Jina (403), Exa (not available), instagram embed + Supadata metadata (no caption).
 
 ## Related
+- [[20261019-chase-h-ai-ponytail-carousel|chase.h.ai：Comment “ponytail” 輪播帖]] — 同一類 Instagram 圖片輪播帖：內容全喺圖片入面，讀唔到，疑似留言換資源嘅引流帖。

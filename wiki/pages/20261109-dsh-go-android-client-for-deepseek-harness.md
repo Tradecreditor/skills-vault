@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:ccch1mneyyy/dsh-Go"
 engagement: "stars=16793 forks=723 (2026-11-09; 5203 in the 2026-11-02 snapshot, +11582 in 7 days)"
 tags: [hot-list, 2026-W45, coding-agents, agent-harness, deepseek, dsh, android, mobile, phone-control, flutter]
-related: [hot-list/2026-W45]
+related: [hot-list/2026-W45, 20261019-dsh-our-free-model-plugin]
 needs_manual_text: false
 ---
 
@@ -44,3 +44,4 @@ DSH Go 係社群開發、非官方嘅 DeepSeek Harness（dsh）Android 客戶端
 - [[hot-list/2026-W45]]
 - [[pages/20261026-deepseek-harness-everything-is-a-plugin]]: the harness it runs (W43 winner)
 - [[pages/20261102-dsh-superagent-proactive-coding-agent]]: another dsh bundle (W44 winner)
+- [[20261019-dsh-our-free-model-plugin|dsh-our-free-model]] — a dsh model plugin (free model lanes) that adds models to the same harness.

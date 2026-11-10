@@ -12,6 +12,7 @@ captured_by: routine:capture-link
 canonical_id: instagram:Ddqj0svm6yq
 engagement: ""
 tags:
+  - topic/agent-tooling
   - design
   - vibe-coding
   - claude

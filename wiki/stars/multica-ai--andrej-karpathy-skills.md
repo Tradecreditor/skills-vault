@@ -41,3 +41,4 @@ needs_manual_text: false
 - Reader: routine:github-stars-sync (Exa, raw README)
 
 ## Related
+- [[DietrichGebert--ponytail|ponytail]] — 兩者都係約束 coding agent 行為嘅準則（Simplicity First 對 YAGNI 判斷梯），目標同樣係避免過度複雜嘅代碼。

@@ -11,7 +11,7 @@ captured_at: "2026-09-19T11:09:28.036193Z"
 captured_by: "routine:github-stars-sync"
 canonical_id: "github:googleanalytics/google-analytics-mcp"
 engagement: "stars=3242 forks=693"
-tags: []
+tags: [mcp, google-analytics, analytics, python]
 related: [microsoft--playwright-mcp, upstash--context7]
 needs_manual_text: false
 ---

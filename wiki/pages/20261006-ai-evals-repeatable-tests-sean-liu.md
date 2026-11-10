@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "facebook:10163515237828595"
 engagement: "reactions=9 shares=1"
 tags: [topic/agent-tooling, ai-evaluation, evals, llm-as-judge, test-cases]
-related: []
+related: [20260923-promptfoo]
 needs_manual_text: false
 ---
 
@@ -39,3 +39,4 @@ needs_manual_text: false
 
 ## Related
 - [[20260929-rubric-data-semiconductor-packaging-ai-checks|Rubric Data]]
+- [[20260923-promptfoo|promptfoo: LLM Evals & Red Teaming]] — 一個落實可重複評估嘅開源 CLI 工具。

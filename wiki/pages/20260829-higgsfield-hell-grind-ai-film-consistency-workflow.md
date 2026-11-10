@@ -11,7 +11,7 @@ captured_at: "2026-09-27T15:01:42Z"
 captured_by: "claude-code-cloud"
 canonical_id: "url:9795257bfad1798ff19bc2bb95b3b1e93a18f9b2"
 engagement: "views=1K reactions=711 comments=647 shares=288"
-tags: [ai-video, ai-film, higgsfield, seedance, character-consistency, prompt-engineering, short-form-content]
+tags: [topic/video-gen, ai-video, ai-film, higgsfield, seedance, character-consistency, prompt-engineering, short-form-content]
 related: [Forget-C--Jellyfish, 20260924-video-shotcraft]
 needs_manual_text: false
 ---

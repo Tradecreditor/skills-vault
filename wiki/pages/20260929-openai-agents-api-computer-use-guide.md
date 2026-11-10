@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "url:400cf7debe5ba276ecc375fda29d11389b006346"
 engagement: "none"
 tags: [topic/agent-platforms, openai, agents-api, computer-use, multi-agent, sandbox, mcp, devday-2026]
-related: [20260928-claude-code-fable-advisor-jev-tree, openai--codex-plugin-cc, microsoft--playwright-mcp, 20261006-cua-computer-use-agent-sandbox]
+related: [20260928-claude-code-fable-advisor-jev-tree, openai--codex-plugin-cc, microsoft--playwright-mcp, 20261006-cua-computer-use-agent-sandbox, 20261011-kelly-tsai-multi-agent-architecture-creao]
 needs_manual_text: false
 ---
 
@@ -54,3 +54,4 @@ needs_manual_text: false
 - [[stars/openai--codex-plugin-cc|openai--codex-plugin-cc]] - Codex tooling, the harness the Agents API is said to expose.
 - [[stars/microsoft--playwright-mcp|microsoft--playwright-mcp]] - a structured browser-control alternative to screenshot-based Computer use.
 - [[20261006-cua-computer-use-agent-sandbox|Cua: give your AI agent its own computer (buildwithneej)]] - an open-source sandboxed computer for agents, another way to run Computer use.
+- [[20261011-kelly-tsai-multi-agent-architecture-creao|Kelly Tsai ft. Creao AI: multi-agent architecture]] — a video on the same "when is multi-agent worth it" question (title and description only, no transcript).

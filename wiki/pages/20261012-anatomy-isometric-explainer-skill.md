@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:wheresryan22/anatomy"
 engagement: "stars=4232 forks=330 (created 2026-10-08); X @wheresryan22 likes=13292 reposts=1121 views=1447839"
 tags: [hot-list, 2026-W41, agent-skills, claude-code, svg, webgl, visualization, explainer]
-related: [hot-list/2026-W41]
+related: [hot-list/2026-W41, 20261008-claude-tips-opus55-motion-graphics-six-prompts]
 needs_manual_text: false
 ---
 
@@ -45,6 +45,7 @@ Anatomy 係 @wheresryan22 開源（MIT）嘅 Agent Skill，主要畀 Claude Code
 
 - [[hot-list/2026-W41]]
 - [[pages/20261008-claude-tips-opus55-motion-graphics-six-prompts]]: code-drawn motion graphics with Opus 5.5, the same "draw it in code" trend
+- [[20261008-claude-tips-opus55-motion-graphics-six-prompts|Claude Tips: Opus 5.5 motion graphics six prompts]] — code-drawn animation with Claude, the same "draw it in code" trend.
 
 ## Notes
 

@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:opensandbox-group/OpenSandbox"
 engagement: "stars=17004 forks=1605"
 tags: ["sandbox", "ai-agent", "ai-infra", "kubernetes", "aaif"]
-related: []
+related: [20261006-cua-computer-use-agent-sandbox]
 needs_manual_text: false
 ---
 ## 摘要
@@ -37,3 +37,6 @@ OpenSandbox 係一個俾 AI agent 用嘅沙盒執行環境，可以喺自己嘅�
 - URL: https://github.com/opensandbox-group/OpenSandbox
 - Created: 2025-12-17
 - Reader: raw.githubusercontent.com README + Jina Reader (GitHub API JSON)
+
+## Related
+- [[../pages/20261006-cua-computer-use-agent-sandbox|Cua: give your AI agent its own computer]] — 同樣俾 agent 獨立環境，Cua 係針對桌面操作（Lume 虛擬 Mac）。

@@ -11,7 +11,7 @@ captured_at: "2026-09-27T15:03:15Z"
 captured_by: "claude-code-cloud"
 canonical_id: "instagram:Ddt893riBb7"
 engagement: "likes=1543 comments=1573"
-tags: [claude-opus-5-5, motion-graphics, video-generation, prompt-engineering, short-form-content, comment-to-dm]
+tags: [topic/video-gen, claude-opus-5-5, motion-graphics, video-generation, prompt-engineering, short-form-content, comment-to-dm]
 related: [LottieFiles--motion-design-skill, motion-canvas--motion-canvas, greensock--gsap-skills, nolangz--pixel2motion, 20260924-4-free-design-sites-for-vibe-coders]
 needs_manual_text: true
 ---

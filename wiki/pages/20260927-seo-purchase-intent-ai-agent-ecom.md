@@ -11,7 +11,7 @@ captured_at: "2026-09-27T20:24:00Z"
 captured_by: "routine:capture-link"
 canonical_id: "threads:DduzlRvGaDf"
 engagement: "likes=14 reposts=2 views=253"
-tags: [seo, purchase-intent, ai-agent, ecom, organic-revenue, content-strategy, internal-linking]
+tags: [topic/seo-geo, seo, purchase-intent, ai-agent, ecom, organic-revenue, content-strategy, internal-linking]
 related: [20260925-jev-seo-geo-audit-cost-down-90, 20260910-clay-ai-b2b-sales-automation]
 needs_manual_text: false
 ---

@@ -11,7 +11,7 @@ captured_at: "2026-09-19T11:09:28.036052Z"
 captured_by: "routine:github-stars-sync"
 canonical_id: "github:lewislulu/html-ppt-skill"
 engagement: "stars=8430 forks=722"
-tags: []
+tags: [agent-skills, presentation, slides, html, css, javascript]
 related: [hakimel--reveal.js, zarazhangrui--frontend-slides, hugohe3--ppt-master]
 needs_manual_text: false
 ---

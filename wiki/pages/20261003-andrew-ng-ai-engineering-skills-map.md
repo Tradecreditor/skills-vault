@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "threads:DeBPsmGoGoa"
 engagement: "likes=118 replies=3 reposts=18 shares=56 views=12.9K"
 tags: [topic/ai-news, ai-engineering, andrew-ng, deeplearning-ai, skills-map, career]
-related: [20260923-promptfoo, stars/Fission-AI--OpenSpec]
+related: [20260923-promptfoo, stars/Fission-AI--OpenSpec, 20260927-loops-graphs-agent-layers-ng-course-claim]
 needs_manual_text: false
 ---
 
@@ -54,3 +54,4 @@ Tino Su（@tino.su）用中文整理 DeepLearning.AI／Andrew Ng 發表嘅「The
 
 - [[../pages/20260923-promptfoo|promptfoo: LLM Evals & Red Teaming]] — a concrete eval tool; fits the "disciplined evals loop" in skill 1
 - [[../stars/Fission-AI--OpenSpec|OpenSpec]] — spec-driven development with AI; fits "Shaping the Build" (engineers deciding the spec)
+- [[20260927-loops-graphs-agent-layers-ng-course-claim|Loops and Graphs for Agents (Ng course claim, unverified)]] — another post attributed to Andrew Ng; treat with caution, the course claim is unverified.

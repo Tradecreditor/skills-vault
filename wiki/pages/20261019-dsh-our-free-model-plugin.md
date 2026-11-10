@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:Ebony-Vinyl/dsh-our-free-model"
 engagement: "stars=26054 forks=564 (+15863 stars since 2026-10-12 snapshot)"
 tags: [hot-list, 2026-W42, deepseek-harness, dsh-plugin, free-model, model-provider, openai-compatible, llm-gateway]
-related: [hot-list/2026-W42]
+related: [hot-list/2026-W42, 20261109-dsh-go-android-client-for-deepseek-harness]
 needs_manual_text: false
 ---
 
@@ -44,6 +44,7 @@ dsh-our-free-model 係 DeepSeek Harness（dsh）嘅模型插件：裝咗之後�
 
 - [[hot-list/2026-W42]]
 - [[pages/20261002-magpie-agent-model-switcher]]: routes Codex / Claude Code to other models from the menu bar; same "any agent, any model" demand
+- [[20261109-dsh-go-android-client-for-deepseek-harness|DSH Go: Android client for DeepSeek Harness]] — same DeepSeek Harness (dsh) ecosystem: a phone client for the harness this plugin extends.
 
 ## Notes
 

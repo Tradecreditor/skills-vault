@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "x:tweet:2104300857928098075"
 engagement: "likes=4049 reposts=567 replies=40 quotes=13 bookmarks=11517 views=1664798"
 tags: [topic/agent-tooling, agent-loops, graph-orchestration, x, engagement-bait, course]
-related: [20260928-agent-patterns-andrew-ng-4-anthropic-5-workflows, 20260928-claude-code-fable-advisor-jev-tree]
+related: [20260928-agent-patterns-andrew-ng-4-anthropic-5-workflows, 20260928-claude-code-fable-advisor-jev-tree, 20261003-andrew-ng-ai-engineering-skills-map]
 needs_manual_text: true
 ---
 
@@ -57,3 +57,4 @@ needs_manual_text: true
 
 - [[../pages/20260928-agent-patterns-andrew-ng-4-anthropic-5-workflows|9 agent patterns: Andrew Ng's 4 + Anthropic's 5 workflows]] - the vault's existing agent-patterns note; a comparison point for the loop and graph layers described here.
 - [[../pages/20260928-claude-code-fable-advisor-jev-tree|Claude Code: Fable 5.1 Advisor + Jev Routing Tree]] - a Claude Code multi-agent tree where cheap Jev gates decide which forks need the big model.
+- [[20261003-andrew-ng-ai-engineering-skills-map|Andrew Ng's AI Engineering Skills Map]] — another Andrew Ng / DeepLearning.AI item in the vault; this one is a skills map from a named source, a contrast to the unverified course claim.

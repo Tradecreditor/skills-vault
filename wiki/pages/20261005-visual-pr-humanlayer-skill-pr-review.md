@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DeHKRM2hLNn"
 engagement: "likes=59 comments=2"
 tags: [topic/agent-tooling, claude-code, code-review, humanlayer, visual-pr, show-me]
-related: []
+related: [20261102-elephant-goldfish-model-spec-review-plugin]
 needs_manual_text: false
 ---
 ## 摘要
@@ -34,3 +34,4 @@ Romi Patel 指 AI agent 寫 code 只需幾分鐘，但 code review 仍要幾個�
 
 ## Related
 - [[pages/20261005-cloudflare-security-audit-skill|cloudflare/security-audit-skill]]
+- [[20261102-elephant-goldfish-model-spec-review-plugin|google/elephant-goldfish-model]] — 同樣針對 agent 產出嘅 review 瓶頸：用冇記憶嘅 subagent 審 spec。

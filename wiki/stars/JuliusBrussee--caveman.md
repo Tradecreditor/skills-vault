@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:JuliusBrussee/caveman"
 engagement: "stars=118720 forks=6906"
 tags: ["claude-code", "skill", "tokens", "prompt-engineering", "llm"]
-related: []
+related: [DietrichGebert--ponytail]
 needs_manual_text: false
 ---
 ## 摘要
@@ -38,3 +38,6 @@ Token 成本係長時間 agent session 最實際嘅開支，而 caveman 唔止�
 - URL: https://github.com/JuliusBrussee/caveman
 - Created: 2026-04-04
 - Reader: raw.githubusercontent.com README + Jina Reader (GitHub API JSON)
+
+## Related
+- [[DietrichGebert--ponytail|ponytail]] — 另一個減少 coding agent 成本嘅 skill：ponytail 減代碼量，caveman 減輸入同輸出 token。

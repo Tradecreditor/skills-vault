@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "threads:DeBUAFsH310"
 engagement: "likes=37 reposts=3 shares=49 views=4.5K"
 tags: [topic/knowledge-mgmt, agent-skills, backup, workflow, skill-md, github]
-related: [stars/vercel-labs--skills, 20260930-ui-ux-pro-max]
+related: [stars/vercel-labs--skills, 20260930-ui-ux-pro-max, 20261025-aiposthub-google-three-markdown-files]
 needs_manual_text: false
 ---
 
@@ -52,3 +52,4 @@ MC Chan（@rico.ai.solo）提醒用 Grokbot 或 Claude 嘅人，要備份自己�
 
 - [[../stars/vercel-labs--skills|skills]] — `npx skills add` CLI for installing Agent Skills from GitHub; the install side of a GitHub-backed skill backup
 - [[../pages/20260930-ui-ux-pro-max|UI UX Pro Max]] — an example of a Skill-format repo distributed through GitHub
+- [[20261025-aiposthub-google-three-markdown-files|AI郵報：Google 三份 Markdown 分工]] — 講 SKILL.md 同 AGENTS.md / DESIGN.md 嘅分工，補充 Skill 格式嘅用途。

@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "threads:Dd_5unfATy9"
 engagement: "likes=41 replies=5 reposts=4 shares=34 views=3.3K"
 tags: [topic/video-gen, svg-animation, html, claude, prompting, tutorial]
-related: [stars/nolangz--pixel2motion, 20260925-opus-5-5-motion-graphics-showreel-prompt, stars/LottieFiles--motion-design-skill]
+related: [stars/nolangz--pixel2motion, 20260925-opus-5-5-motion-graphics-showreel-prompt, stars/LottieFiles--motion-design-skill, 20261008-claude-tips-opus55-motion-graphics-six-prompts, 20261002-claude-opus-5-5-code-animated-tutorial-video]
 needs_manual_text: false
 ---
 
@@ -58,3 +58,5 @@ AI郵報（@aiposthub）分享用 Claude 製作 HTML＋SVG 動畫嘅入門教學
 - [[../stars/nolangz--pixel2motion|pixel2motion]] — logo to SVG animation skill; the tool route to the same logo-animation use case
 - [[../pages/20260925-opus-5-5-motion-graphics-showreel-prompt|Opus 5.5 One-Prompt Motion-Graphics Showreels]] — another prompt-driven Claude motion-graphics post
 - [[../stars/LottieFiles--motion-design-skill|motion-design-skill]] — motion principles (timing, easing, choreography) for agents; fits the "stagger the timing" tip
+- [[20261008-claude-tips-opus55-motion-graphics-six-prompts|Claude Tips: Opus 5.5 motion graphics six prompts]] — another prompt set for Claude-written animation, rendered to video frame by frame.
+- [[20261002-claude-opus-5-5-code-animated-tutorial-video|Claude Opus 5.5 code-animated tutorial video]] — a full tutorial video made entirely from Claude-written code, the long-form version of the same idea.

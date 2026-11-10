@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:google/elephant-goldfish-model"
 engagement: "stars=9544 forks=623 (+8316 stars from 1209 in the 2026-10-26 snapshot to 9525 at the W44 sweep)"
 tags: [hot-list, 2026-W44, agent-skills, claude-code-plugin, codex-plugin, spec-driven-development, design-review, subagents, google]
-related: [hot-list/2026-W44]
+related: [hot-list/2026-W44, 20261005-visual-pr-humanlayer-skill-pr-review]
 needs_manual_text: false
 ---
 
@@ -44,3 +44,4 @@ Elephant-Goldfish Model（EGM）係 Google 開源嘅 coding agent 插件，口�
 - [[hot-list/2026-W44]]
 - [[pages/20261003-matt-pocock-skills-repo-agent-skills]]: Matt Pocock's skills (grill-me, to-spec) cover the same spec-before-code ground
 - [[pages/20261005-cloudflare-security-audit-skill]]: another multi-phase skill with independently verified findings
+- [[20261005-visual-pr-humanlayer-skill-pr-review|visual-pr (HumanLayer)]] — another answer to the review bottleneck on agent output: visual outline in each PR instead of zero-context spec review.

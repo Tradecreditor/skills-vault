@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DeOuCSrDCj8"
 engagement: ""
 tags: [topic/video-gen, motion-graphics, opus-5-5, headless-browser, claude-tips]
-related: []
+related: [20261012-anatomy-isometric-explainer-skill, 20261002-claude-html-svg-animation-5-part-prompt]
 needs_manual_text: true
 ---
 
@@ -36,3 +36,5 @@ https://www.instagram.com/p/DeOuCSrDCj8/ — claudetipsandtricks, 2026-10-08. No
 - [[20260925-opus-5-5-motion-graphics-showreel-prompt]]
 - [[20260927-hyperframes-camera-3d-captions-skill]]
 - [[20260924-video-shotcraft]]
+- [[20261012-anatomy-isometric-explainer-skill|wheresryan22/anatomy]] — 同一個「叫 Claude 用代碼畫出嚟」嘅趨勢：anatomy 用代碼砌等軸測互動機器。
+- [[20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 5-part prompt]] — 同樣教 Claude 用代碼出動畫，呢篇係 HTML+SVG 同五段式 prompt。

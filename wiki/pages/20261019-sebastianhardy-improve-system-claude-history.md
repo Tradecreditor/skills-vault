@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:Deh3cvbxFnv"
 engagement: "likes=395 comments=1284"
 tags: [topic/agent-tooling, instagram, claude-code, session-history, skill-generation]
-related: []
+related: [20261020-princegupta-harness2-self-improving-agents, 20261109-anthropic-components-of-agent-memory-dreaming]
 needs_manual_text: false
 ---
 ## 摘要
@@ -35,3 +35,5 @@ needs_manual_text: false
 
 ## Related
 - [[../../skills/scanning-agent-skills/SKILL|skill: scanning-agent-skills]]
+- [[20261020-princegupta-harness2-self-improving-agents|Prince Gupta：Harness² 自我升級]] — 同樣係令 agent 靠過往紀錄自我改進，Harness² 自動改 harness，improve-system 係草擬新 skills。
+- [[20261109-anthropic-components-of-agent-memory-dreaming|Anthropic: agent memory and dreaming]] — 同樣回頭讀 session transcript 去整理同改正；Anthropic 嘅 dreaming 係記憶層面嘅做法。

@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "youtube:wDk6OVRLtPs"
 engagement: ""
 tags: [topic/agent-platforms, multi-agent, creao, sponsored]
-related: []
+related: [20260929-openai-agents-api-computer-use-guide]
 needs_manual_text: true
 ---
 ## 摘要
@@ -30,3 +30,4 @@ needs_manual_text: true
 https://www.youtube.com/watch?v=wDk6OVRLtPs · Kelly Tsai · reader: Exa (description only) + YouTube oEmbed. Re-run locally with yt-dlp to get subtitles, or paste transcript under Notes.
 
 ## Related
+- [[20260929-openai-agents-api-computer-use-guide|OpenAI Agents API: Computer Use to Multi-Agent Guide]] — 同樣討論幾時先值得用多代理架構（指南有「多代理唔一定好」嘅三問判斷），可以對照。
