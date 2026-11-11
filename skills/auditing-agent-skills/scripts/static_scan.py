@@ -23,7 +23,7 @@ import os
 import re
 import sys
 
-VERSION = "static_scan.py 4"
+VERSION = "static_scan.py 5"
 MAX_TEXT_BYTES = 2_000_000
 IMAGE_EXT = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".bmp"}
 EXEC_EXT = {".sh", ".bash", ".zsh", ".ps1", ".psm1", ".bat", ".cmd", ".py", ".js", ".mjs", ".cjs", ".ts",
@@ -42,9 +42,11 @@ B64_LINE = re.compile(r"^[A-Za-z0-9+/]{40,}={0,2}$")
 # Invisible or direction-changing characters, Unicode tag characters and variation selectors (the usual carriers of
 # invisible instructions). U+FE0E / U+FE0F are allowed only singly, right after a non-ASCII character (emoji presentation).
 HIDDEN = re.compile("[\u200b-\u200f\u202a-\u202e\u2060-\u2064\u2066-\u2069\ufeff\u00ad\ufe00-\ufe0d"
+                    "\u3164\u061c\u180e"
                     "\U000e0000-\U000e007f\U000e0100-\U000e01ef]")
 EMOJI_VS = re.compile("[\ufe0e\ufe0f]")
 SHOW = re.compile("[\u200b-\u200f\u202a-\u202e\u2060-\u2064\u2066-\u2069\ufeff\u00ad\ufe00-\ufe0f"
+                  "\u3164\u061c\u180e"
                   "\U000e0000-\U000e007f\U000e0100-\U000e01ef]")
 IMAGE_MAGIC = {".png": (b"\x89PNG\r\n\x1a\n",), ".jpg": (b"\xff\xd8\xff",), ".jpeg": (b"\xff\xd8\xff",),
                ".gif": (b"GIF87a", b"GIF89a"), ".webp": (b"RIFF",), ".ico": (b"\x00\x00\x01\x00",), ".bmp": (b"BM",)}
