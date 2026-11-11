@@ -45,7 +45,6 @@ Anatomy 係 @wheresryan22 開源（MIT）嘅 Agent Skill，主要畀 Claude Code
 
 - [[hot-list/2026-W41]]
 - [[pages/20261008-claude-tips-opus55-motion-graphics-six-prompts]]: code-drawn motion graphics with Opus 5.5, the same "draw it in code" trend
-- [[20261008-claude-tips-opus55-motion-graphics-six-prompts|Claude Tips: Opus 5.5 motion graphics six prompts]] — code-drawn animation with Claude, the same "draw it in code" trend.
 
 ## Notes
 
