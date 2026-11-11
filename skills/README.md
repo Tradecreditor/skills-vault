@@ -19,7 +19,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | auditing-agent-skills | draft | vault-operations | Audits a skill folder for safety and quality and returns a PASS/FAIL verdict |
 | auditing-seo-with-crawlie | reviewer-approved | post | Runs crawlie, an open-source local SEO + GEO crawler with CLI and MCP server |
 | automating-browsers-with-playwright | reviewer-approved | repo | Connects an agent to a real browser via the Playwright MCP server |
-| configuring-fable-advisor-jev-tree | draft | post | Configures Claude Code with Fable 5.1 as advisor and an Opus 5.5 + Jev-routed multi-agent tree |
+| configuring-fable-advisor-jev-tree | draft | post | Configures one Claude Code tree: Opus main session at high effort, Fable as /advisor, three Opus subagents, optional Jev judgment leaf through judging-with-jev |
 | delegating-to-codex | reviewer-approved | repo | Calls OpenAI Codex from inside Claude Code for a code review or a delegated task |
 | evaluating-llms-with-promptfoo | draft | repo | Evaluates LLM prompts, agents and RAG pipelines with promptfoo, including red teaming |
 | judging-with-jev | draft | vault-operations | Asks TypeSafe's Jev typed yes/no, choice or score questions to classify, gate or dedupe |
