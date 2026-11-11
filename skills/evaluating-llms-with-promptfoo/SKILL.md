@@ -79,15 +79,15 @@ promptfoo redteam report     # view vulnerability report
 Add to your pipeline:
 
 ```sh
-promptfoo eval --ci
+promptfoo eval --fail-on-error
 ```
 
-Returns non-zero exit code on failures; use with GitHub Actions, CircleCI, etc.
+Per the CLI docs, `promptfoo eval` exits with code 100 when at least one test case fails or the pass rate is below `PROMPTFOO_PASS_RATE_THRESHOLD`, and 1 for other errors; use it with GitHub Actions, GitLab CI, Jenkins, etc.
 
 ## Pitfalls
 
 - Datacenter IPs may be rate-limited by some LLM providers; use local keys
-- Evals run 100% locally — no data leaves your machine, but you need valid API keys
+- The eval runner is local, but prompts and test cases are sent to whichever model provider you configure: with OpenAI or Anthropic keys (steps 3-4) they go to those APIs. A local provider such as Ollama keeps requests on your machine. Sharing (`--share`, `promptfoo share`) creates an online URL, and promptfoo documents telemetry and hosted generation fallbacks (`PROMPTFOO_DISABLE_REMOTE_GENERATION`) as separate controls, so check them before using sensitive data
 - Red team scans can be slow depending on model and attack surface
 
 ## Source
