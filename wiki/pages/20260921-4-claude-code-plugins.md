@@ -61,3 +61,7 @@ needs_manual_text: false
 - [[../stars/DietrichGebert--ponytail|ponytail]] — 文中四個插件之一，呢個 star 頁有實測數字（代碼 -54%、成本 -20%）可以互相對照。
 - [[20260920-fast-jev-compaction|fast-jev-compaction — verbatim Jev-scored compaction for Claude Code]] — 同樣係解決 Claude Code context 瓶頸嘅插件，可以同文中嘅 Graphify（context 層）擺埋一齊比較。
 - [[../stars/upstash--context7|context7]] — 另一個攻 context 準確性嘅工具：Graphify 建代碼知識圖譜、Context7 攞最新官方文件，兩者都係減少 agent 亂噏或者重複讀檔嘅方案。
+
+## Notes
+
+- 2026-11-10: the reel's figures above (Ponytail about 54% less code and 20% lower cost, OmniRoute 352 providers) are the reel's claims and were not checked. After the skill fix in PR #56, [[../../skills/stacking-coding-agent-plugins/SKILL|skill: stacking-coding-agent-plugins]] installs only Graphify and chosen Agent Skills, each pinned and behind a scan gate, and only describes Ponytail (hooks on every session start and prompt) and OmniRoute (a gateway that carries every model request and holds the provider credentials).

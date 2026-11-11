@@ -60,3 +60,7 @@ needs_manual_text: false
 - [[20260925-jev-seo-geo-audit-cost-down-90|Jev cuts agent SEO/GEO audit-and-fix cost by 90%]]
 - [[20260920-fast-jev-compaction|fast-jev-compaction]]
 - [[../../skills/judging-with-jev/SKILL|skill: judging-with-jev]] — how to ask Jev typed questions and where the vault's four Routines can route judgments to it.
+
+## Notes
+
+- 2026-11-10: the post's top-level `effortLevel: "high"` in the user settings does not count for Opus 5.5 or later models according to the Claude Code documentation (code.claude.com/docs/en/model-config), so Opus 5.5 would stay at `medium`. The skill fix in PR #55 has the user run `/effort high` instead, which is saved under `modelSettings`; see [[../../skills/configuring-fable-advisor-jev-tree/SKILL|skill: configuring-fable-advisor-jev-tree]].
