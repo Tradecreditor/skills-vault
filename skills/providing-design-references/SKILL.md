@@ -1,6 +1,6 @@
 ---
 name: providing-design-references
-description: Provides Claude with visual design references so it can match real layouts and UI decisions instead of inventing generic styles. Use when vibe-coding an app, improving UI output, matching spacing or typography, or building pitch decks with Claude.
+description: Gives Claude visual references (screenshots, optional third-party transitions.dev skill) to match real UI decisions. Use when vibe-coding an app, improving generic UI output, matching spacing or type, or planning pitch decks.
 metadata:
   source_url: "https://instagram.com/p/Ddqj0svm6yq/"
   source_platform: instagram
@@ -33,9 +33,9 @@ Give Claude something to see before asking it to design. Claude matches visual d
 | Goal | Site | How |
 |---|---|---|
 | Website layout / spacing / type | godly.design | Browse curated sites, screenshot the one you like |
-| UI transitions (menus, modals, counters) | transitions.dev | Copy-paste the code, or install the Claude Code skill for 27+ transitions |
-| App launch video | animos.app | Upload your app screenshot, pick one of 25 templates |
-| Pitch deck structure | deck.gallery | Browse 200+ real decks (OpenAI, Perplexity, etc.), screenshot the structure |
+| UI transitions (menus, modals, counters) | transitions.dev | Copy-paste the code, or optionally install its Claude Code skill (see below) |
+| App launch video | animos.app | Upload your app screenshot, pick a template (the post says 25) |
+| Pitch deck structure | deck.gallery | Browse real decks (the post says 200+, from brands like OpenAI and Perplexity), screenshot the structure |
 
 ### 2. Give Claude the screenshot
 
@@ -52,15 +52,17 @@ Not the brand — the decisions: spacing rhythm, type sizes, one accent color.
 - Do not copy brand colors, logos, or actual text
 - Ask Claude to apply those decisions to your own content
 
-## Install transitions.dev as a Claude Code skill
+## Optional: transitions.dev skill (third-party)
 
-transitions.dev ships as an Agent Skills package. To install:
+transitions.dev is a third-party project (GitHub `Jakubantalik/transitions.dev`, its own "Transitions.dev License"). Its README and https://transitions.dev/skill.html document the install as `npx skills add Jakubantalik/transitions.dev`; the vault has not audited that code. That command is unpinned and installs every skill the repo ships (`transitions-dev`, `transitions-polish`, `transitions-ui-generation`). To install only `transitions-dev`, from a commit you have scanned, clone the repo at the commit that was its HEAD when this skill was written (2026-11-08; it has no release tags), scan the clone with the vault's `scanning-agent-skills` skill, then install from the clone:
 
 ```
-npx skills add transitions-dev
+git clone https://github.com/Jakubantalik/transitions.dev
+git -C transitions.dev checkout 20d70c1262bf721c0300c2946cbe1fc7605a555c
+npx skills@1.7.6 add ./transitions.dev --skill transitions-dev
 ```
 
-Once installed, Claude Code knows 27+ transitions by name — no pasting code or explaining the pattern.
+Do not pin with `owner/repo@<commit>`: `skills` 1.7.6 accepts that form but installs the default branch whatever follows the `@` (tested 2026-11-10: a ref that does not exist installs without an error), so it gives no pin. The local-path and `--skill` forms are in the `skills` CLI reference (https://github.com/vercel-labs/skills/blob/main/docs/commands.md); the `skills@1.7.6` version is this skill's addition. Upstream says the skill includes a library of 27+ transitions and adds commands such as `transitions reveal`, `transitions review` and `transitions apply`. Do not run the `npx transitions-dev ...` commands on that page: they are a separate npm package, and the Pro ones sign in through a browser.
 
 ## Pitfalls
 
@@ -70,4 +72,5 @@ Once installed, Claude Code knows 27+ transitions by name — no pasting code or
 
 ## Source
 
-- https://instagram.com/p/Ddqj0svm6yq/ — @nocodealex, 2026-09-24
+- https://instagram.com/p/Ddqj0svm6yq/ — @nocodealex, 2026-09-24 (the four sites; it names no install command)
+- https://transitions.dev/skill.html and https://raw.githubusercontent.com/Jakubantalik/transitions.dev/main/README.md — install command, read 2026-11-10
