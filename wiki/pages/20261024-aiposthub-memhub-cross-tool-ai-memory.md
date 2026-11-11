@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:De3Ot-UE8oE"
 engagement: "likes=304 comments=164"
 tags: [topic/agent-tooling, instagram, memory, memhub, hy-memory, claude-code, codex]
-related: []
+related: [20261026-xerj-local-search-engine-mcp-for-agents]
 needs_manual_text: false
 ---
 
@@ -35,3 +35,4 @@ AI郵報介紹騰訊開源嘅 Hy Memory 2.0，其中 MemHub 想解決「由 Clau
 
 ## Related
 - [[pages/20260918-obsidian-skills|obsidian-skills]]
+- [[20261026-xerj-local-search-engine-mcp-for-agents|xerj-org/xerj]] — 另一個俾 agent 用嘅本機記憶 / 搜尋層（有 `/_memory`），同 MemHub 嘅跨工具記憶可以對照。

@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:pbakaus/impeccable"
 engagement: "stars=88193 forks=5267 (+5341 stars since 2026-10-19 snapshot); X @pbakaus 598 likes (2026-10-20)"
 tags: [hot-list, 2026-W43, agent-skills, frontend-design, ui-design, anti-slop, claude-code, codex, cursor]
-related: [hot-list/2026-W43]
+related: [hot-list/2026-W43, 20261102-benji-taylor-stageshow-faux-ui-skill]
 needs_manual_text: false
 ---
 
@@ -45,6 +45,7 @@ Impeccable 係 Paul Bakaus 做嘅設計 skill（Apache-2.0），俾 Claude Code�
 - [[stars/Leonxlnx--taste-skill]]: agent skills that give coding agents taste, the closest neighbour
 - [[stars/VoltAgent--awesome-design-md]]: DESIGN.md files that a coding agent can follow
 - [[pages/20260924-4-free-design-sites-for-vibe-coders]]: design references for vibe coders
+- [[20261102-benji-taylor-stageshow-faux-ui-skill|Benji Taylor: Stageshow]] — another front-end design skill for coding agents, aimed at faux product UI for demos.
 
 ## Notes
 

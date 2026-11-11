@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "threads:DeBeoDtgAo5"
 engagement: "likes=108 replies=3 reposts=12 shares=123"
 tags: [topic/repo-picks, agent-skills, matt-pocock, github, coding-agents, skill-md]
-related: [vercel-labs--skills, 20260921-4-claude-code-plugins, 20260918-obsidian-skills]
+related: [vercel-labs--skills, 20260921-4-claude-code-plugins, 20260918-obsidian-skills, 20261023-autobrandhk-pstack-lauren-tan-coding-skills]
 needs_manual_text: false
 ---
 
@@ -58,6 +58,7 @@ needs_manual_text: false
 - [[../stars/vercel-labs--skills|skills (vercel-labs)]] — the `npx skills` installer the README uses to deliver these skills
 - [[../pages/20260921-4-claude-code-plugins|4 Claude Code Plugins That Fix the Real Bottlenecks]] — another bundle of skills and plugins for Claude Code
 - [[../pages/20260918-obsidian-skills|obsidian-skills: Agent Skills for Obsidian]] — another Agent Skills repo already in the vault
+- [[20261023-autobrandhk-pstack-lauren-tan-coding-skills|AutoBrand.HK：pstack]] — another coding-skills suite with a tdd skill and verification workflows, to compare with these skills.
 
 ## Notes
 

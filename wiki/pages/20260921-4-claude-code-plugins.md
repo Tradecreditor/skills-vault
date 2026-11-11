@@ -12,6 +12,7 @@ captured_by: routine:capture-link
 canonical_id: instagram:DdjkD4xi1ma
 engagement: ""
 tags:
+  - topic/agent-tooling
   - claude-code
   - plugins
   - graphify

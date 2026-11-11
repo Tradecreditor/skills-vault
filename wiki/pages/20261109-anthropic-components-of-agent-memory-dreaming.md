@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "x:tweet:2118814753154064501"
 engagement: "likes=13976 reposts=1289 views=1969091 replies=1012 bookmarks=12727"
 tags: [topic/knowledge-mgmt, hot-list, 2026-W45, agent-memory, dreaming, llm-wiki, claude, managed-agents, anthropic]
-related: [hot-list/2026-W45]
+related: [hot-list/2026-W45, 20261019-sebastianhardy-improve-system-claude-history]
 needs_manual_text: false
 ---
 
@@ -44,3 +44,4 @@ Anthropic 喺 2026-11-06 發佈 Engineering Blog〈The components of agent memor
 
 - [[hot-list/2026-W45]]
 - [[pages/20261024-aiposthub-memhub-cross-tool-ai-memory]]: cross-tool shared memory for AI agents
+- [[20261019-sebastianhardy-improve-system-claude-history|sebastianhardy_：/improve-system]] — a user-built skill that re-reads Claude session history to find recurring mistakes and draft new skills, a hands-on cousin of dreaming.

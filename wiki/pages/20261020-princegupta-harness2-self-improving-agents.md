@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DepnbyJsLYK"
 engagement: "likes=2127 comments=664"
 tags: [topic/agent-tooling, instagram, harness2, google-research, self-improving-agents]
-related: ["20261019-harness2-recursive-agent-harnessing"]
+related: ["20261019-harness2-recursive-agent-harnessing", 20261019-sebastianhardy-improve-system-claude-history]
 needs_manual_text: false
 ---
 ## 摘要
@@ -33,3 +33,4 @@ needs_manual_text: false
 
 ## Related
 - [[20261019-harness2-recursive-agent-harnessing]]
+- [[20261019-sebastianhardy-improve-system-claude-history|sebastianhardy_：/improve-system]] — 另一個由過往對話紀錄入手改進 agent 嘅做法（草擬 skills 而唔係自動改 harness）。

@@ -12,7 +12,7 @@ captured_by: "routine:github-stars-sync"
 canonical_id: "github:DietrichGebert/ponytail"
 engagement: "stars=142274 forks=7629"
 tags: ["agent-skills", "ai-agents", "claude", "claude-code", "claude-code-plugin", "cursor-rules", "developer-tools", "llm", "prompt-engineering", "yagni"]
-related: [zarazhangrui--frontend-slides, LottieFiles--motion-design-skill, pages/20260921-4-claude-code-plugins, Leonxlnx--taste-skill]
+related: [zarazhangrui--frontend-slides, LottieFiles--motion-design-skill, pages/20260921-4-claude-code-plugins, Leonxlnx--taste-skill, multica-ai--andrej-karpathy-skills, JuliusBrussee--caveman]
 needs_manual_text: false
 ---
 ## 摘要
@@ -45,3 +45,5 @@ Ponytail 係一套令 AI agent 寫代碼變得「夠用就好」嘅 skill，靈�
 - [[LottieFiles--motion-design-skill|motion-design-skill]] — 同屬 Agent Skills 規範打包嘅技能，可比較唔同領域點樣寫 skill 文件。
 - [[../pages/20260921-4-claude-code-plugins|4 Claude Code Plugins]] — 呢篇貼文專門介紹咗 Ponytail 嘅 -54% 代碼行數數字。
 - [[Leonxlnx--taste-skill|taste-skill]] — 兩個都係「品味判斷」型 skill，一個管代碼精簡一個管前端美感。
+- [[multica-ai--andrej-karpathy-skills|andrej-karpathy-skills]] — 同樣約束 coding agent 寫代碼行為嘅準則（先諗後寫、簡單優先），用一個 CLAUDE.md 做到。
+- [[JuliusBrussee--caveman|caveman]] — 另一個減成本嘅 skill，路線係壓縮 token 而唔係精簡代碼。

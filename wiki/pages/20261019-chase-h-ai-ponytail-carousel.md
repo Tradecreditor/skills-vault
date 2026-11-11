@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DeqPvXDnPIH"
 engagement: "likes=797 comments=105"
 tags: [topic/ai-news, instagram, carousel, lead-magnet]
-related: []
+related: [20261019-denghao-carousel-no-caption]
 needs_manual_text: true
 ---
 ## 摘要
@@ -32,4 +32,4 @@ needs_manual_text: true
 - Reader: instagram embed (caption) + Supadata metadata. Jina was 403-blocked; Supadata transcript refused (carousel). needs_manual_text: true — paste slide text under a Notes heading.
 
 ## Related
-(none found)
+- [[20261019-denghao-carousel-no-caption|等號 (denghao.0304) 圖片輪播帖]] — 同一類只有 metadata 嘅圖片輪播帖，兩者都要人手補圖片文字。

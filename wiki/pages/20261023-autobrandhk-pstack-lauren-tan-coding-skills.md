@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DerbKjMILF8"
 engagement: "not shown by reader"
 tags: [topic/agent-tooling, instagram, pstack, coding-skills, verification, tdd]
-related: []
+related: [20261003-matt-pocock-skills-repo-agent-skills]
 needs_manual_text: false
 ---
 
@@ -35,3 +35,4 @@ AutoBrand.HK 推介名為 pstack 嘅 coding skills 套件，作者 Lauren Tan（
 
 ## Related
 - [[pages/20261021-snapai-three-tools-take-over-seo|snapai.io：三個工具接管 SEO]] (same comment-to-DM funnel pattern)
+- [[20261003-matt-pocock-skills-repo-agent-skills|Matt Pocock skills repo]] — 另一套 coding skills（同樣有 tdd 同先審視再寫嘅工作流程），可以同 pstack 比較。

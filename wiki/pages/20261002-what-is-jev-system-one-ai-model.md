@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "youtube:YGgNBcIgI4s"
 engagement: ""
 tags: [topic/agent-tooling, jev, typesafe, system-one, classification, calibrated-probabilities, llm-routing, rlcd]
-related: []
+related: [20261007-jev-five-builds-romi-patel, 20261002-decision-models-strands-decider-clef-jev]
 needs_manual_text: false
 ---
 
@@ -55,3 +55,5 @@ Jev 是 TypeSafe 推出的「系統一」（System 1）AI 模型——快速、�
 - [[../../wiki/pages/20260920-fast-jev-compaction|fast-jev-compaction: Jev-scored context compaction for Claude Code]]
 - [[../../wiki/pages/20260928-claude-code-fable-advisor-jev-tree|Claude Code: Fable 5.1 Advisor + Jev Routing Tree]]
 - [[../../skills/judging-with-jev/SKILL|skill: judging-with-jev]] — how the vault asks Jev typed questions in its own Routines; this video's threshold and prompt-injection points are folded into its rules.
+- [[20261007-jev-five-builds-romi-patel|Jev：五個人哋用緊嘅 build]] — five concrete things people build with Jev (triage, moderation, routing), a use-case follow-up to this explainer.
+- [[20261002-decision-models-strands-decider-clef-jev|Decision Models After Jev]] — the wave of decision models that followed Jev (Strands Decider, Clef, OpenAI Decisions API).

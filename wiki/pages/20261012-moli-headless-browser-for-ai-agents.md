@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:lexmount/moli"
 engagement: "stars=16732 forks=409 (+8633 stars since 2026-10-05 snapshot)"
 tags: [hot-list, 2026-W41, browser-agent, headless-browser, rust, cdp, webdriver, agent-skills]
-related: [hot-list/2026-W41]
+related: [hot-list/2026-W41, 20261028-moli-rust-browser-for-ai-agents]
 needs_manual_text: false
 ---
 
@@ -43,3 +43,4 @@ Moli 係 Lexmount 用 Rust 寫嘅開源 headless browser（Apache-2.0 或 MIT）
 
 - [[hot-list/2026-W41]]
 - [[stars/browser-use--browser-use]]: agent framework that drives a browser; Moli is a browser engine it could connect to over CDP
+- [[20261028-moli-rust-browser-for-ai-agents|小礦工挖挖礦：Moli，專為 AI 代理而設的 Rust 瀏覽器]] — a later Instagram post about the same project, with its own benchmark claims.

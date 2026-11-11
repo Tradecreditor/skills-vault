@@ -12,6 +12,7 @@ captured_by: claude-code-local
 canonical_id: x:tweet:2095750518941659567
 engagement: likes=1070 retweets=244 views=414258 bookmarks=2673
 tags:
+  - topic/knowledge-mgmt
   - obsidian
   - llm-wiki
   - knowledge-management

@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DeHdzMIRHzK"
 engagement: "likes=392 comments=251"
 tags: [topic/agent-tooling, cua, computer-use, lume, sandbox, open-source]
-related: [20260929-openai-agents-api-computer-use-guide]
+related: [20260929-openai-agents-api-computer-use-guide, opensandbox-group--OpenSandbox]
 needs_manual_text: false
 ---
 ## 摘要
@@ -36,3 +36,4 @@ needs_manual_text: false
 
 ## Related
 - [[20260929-openai-agents-api-computer-use-guide|OpenAI Agents API: Computer Use to Multi-Agent Guide]] - the platform view of Computer use: sandboxes, approval points and prompt-injection risks.
+- [[../stars/opensandbox-group--OpenSandbox|OpenSandbox]] — another way to give an agent an isolated execution environment, self-hosted (Docker / Kubernetes) rather than a virtual desktop.

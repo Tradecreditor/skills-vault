@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "threads:De7IuM5gQlC"
 engagement: "likes=21 replies=2 reposts=2 shares=25 views=2700"
 tags: [topic/agent-tooling, threads, agents-md, design-md, skill-md, progressive-disclosure, google-cloud]
-related: []
+related: [20261003-backup-agent-workflows-as-skill-zips]
 needs_manual_text: false
 ---
 
@@ -37,3 +37,4 @@ AI郵報引述 Google Cloud 分享嘅 AI Agent 工作方式：唔好將所有規
 
 ## Related
 - [[skills/vault-capture/SKILL|skill: vault-capture]]
+- [[20261003-backup-agent-workflows-as-skill-zips|Back up agent workflows as Skill-format zips]] — 同樣圍繞 SKILL.md 格式：將 agent 工作流程打包成 Skill zip。

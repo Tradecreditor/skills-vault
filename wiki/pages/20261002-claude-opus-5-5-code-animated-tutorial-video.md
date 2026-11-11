@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "url:02aa64ff45ac1d2e3affc4b08ddbee5335137894"
 engagement: "reactions=299 comments=12 shares=134 views=41596"
 tags: [topic/video-gen, claude, opus-5-5, hyperframes, elevenlabs, animation, tutorial-video, facebook]
-related: [20260927-hyperframes-camera-3d-captions-skill, 20260928-claude-opus-5-5-tutorial-animation-prompt, 20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost]
+related: [20260927-hyperframes-camera-3d-captions-skill, 20260928-claude-opus-5-5-tutorial-animation-prompt, 20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost, 20261002-claude-html-svg-animation-5-part-prompt]
 needs_manual_text: false
 ---
 
@@ -58,3 +58,4 @@ needs_manual_text: false
 - [[../pages/20260927-hyperframes-camera-3d-captions-skill|HyperFrames camera-3d-captions: agent-installable 3D-camera caption skill]]
 - [[../pages/20260928-claude-opus-5-5-tutorial-animation-prompt|Claude Opus 5.5 tutorial-animation prompt (research, compare, build, deliver)]]
 - [[../pages/20260929-sonnet-5-5-vs-opus-5-5-motion-graphics-cost|Sonnet 5.5 vs Opus 5.5: Same 4 Motion-Graphics Prompts, 41% Cheaper]]
+- [[20261002-claude-html-svg-animation-5-part-prompt|Claude HTML+SVG animation: 3 practice cases and a 5-part prompt]] — 細規模嘅同類做法：用 HTML+SVG 同五段式 prompt 出動畫。

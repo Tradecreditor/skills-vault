@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:morluto/rea"
 engagement: "stars=122874 forks=27598 (+119603 stars since 2026-10-05 snapshot); X @MatthewBerman likes=37504 reposts=3280 views=3233963"
 tags: [hot-list, 2026-W41, mcp, reverse-engineering, coding-agents, claude-code, codex, binary-analysis]
-related: [hot-list/2026-W41]
+related: [hot-list/2026-W41, 20261109-craft-anything-rebuild-any-software-with-agents]
 needs_manual_text: false
 ---
 
@@ -45,6 +45,7 @@ REA（Reverse Engineer Anything）係 morluto 開源（MIT）嘅 MCP server 加 
 
 - [[hot-list/2026-W41]]
 - [[pages/20261005-universal-modder-claude-code-game-modding]]: another repo that gives Claude Code reverse-engineering tools, for game modding
+- [[20261109-craft-anything-rebuild-any-software-with-agents|storytold/craft-anything]] — 同一方向：用 coding agent 研究現成軟件再重做，Craft Anything 走 clean-room 重建路線。
 
 ## Notes
 
