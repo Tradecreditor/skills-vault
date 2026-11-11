@@ -5,10 +5,10 @@ metadata:
   origin_type: "vault-operations"
   captured_at: "2026-10-06"
   vault_status: "draft"
-  reviewed_at: "2026-10-07T17:52:41Z"
-  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
-  review_hash: "ae26b8c4da7095986a74feeef74a0f66b33959a48212bc908b695761e328c627"
-  review_report: "outputs/skill-reviews/2026-10-07-tracking-projects-in-notion.md"
+  reviewed_at: "2026-11-11T07:50:23Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "ab2c50858db5f26f519638493c1642c68af94b38ac97fe5abfdbf6c1c81034a0"
+  review_report: "outputs/skill-reviews/2026-11-11-tracking-projects-in-notion.md"
 ---
 
 # tracking-projects-in-notion — one Notion board for every project
