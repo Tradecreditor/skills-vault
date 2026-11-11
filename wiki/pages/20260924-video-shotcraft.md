@@ -66,3 +66,7 @@ Video Shotcraft 是建立在 Remotion 上的 Agent Skill，讓 Claude Code 和 C
 - [[../../skills/making-product-videos/SKILL|skill: making-product-videos]]
 - [[20260829-higgsfield-hell-grind-ai-film-consistency-workflow|拆解 Higgsfield《Hell Grind》AI 長片三大一致性技巧]] — AI 影片嘅角色同場景一致性技巧，產品片同短劇都用得著。
 - [[20261001-melies-cinematic-techniques-for-ai-video|melies.co: 424 Cinematic Techniques]] — 另一個鏡頭語言資源庫（424 種技法附 prompt），同 Shotcraft 嘅鏡頭配方卡互補。
+
+## Notes
+
+- 2026-11-10: the 157 recipe cards above are the source's figure at capture (2026-09-24). Upstream at commit `3ac67b7` (2026-11-09), read for the skill fix in PR #54, has 124 recipe cards (150 shots); [[../../skills/making-product-videos/SKILL|skill: making-product-videos]] uses the newer count.
