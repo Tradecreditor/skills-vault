@@ -11,6 +11,7 @@ early again. Set it back to `no` by hand if you ever suspect the ledger has gaps
 
 | starred_at | repo | note |
 |---|---|---|
+| 2026-11-11 | addyosmani/agent-skills | 25 production-grade engineering lifecycle skills + 9 slash commands for coding agents (MIT) |
 | 2026-11-10 | JuliusBrussee/caveman | Token-saving suite for coding agents: short replies, compressed tool output, Auto model routing (Apache-2.0) |
 | 2026-11-10 | opensandbox-group/OpenSandbox | Self-hosted sandbox runtime for AI agents: Docker to Kubernetes, Firecracker, Credential Vault (Apache-2.0) |
 | 2026-11-01 | ai-job-search-dev/ai-job-search | Rename of MadsLorentzen/ai-job-search (same project, new org); see stars/MadsLorentzen--ai-job-search |

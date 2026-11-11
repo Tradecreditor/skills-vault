@@ -139,3 +139,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | 20261109-anthropic-components-of-agent-memory-dreaming | post | Anthropic: The components of agent memory, and how dreaming lets Claude organize and correct it | x | 2026-11-09 | draft | topic/knowledge-mgmt, hot-list, 2026-W45, agent-memory, dreaming, llm-wiki, claude, managed-agents, anthropic | x:tweet:2118814753154064501 |
 | JuliusBrussee--caveman | repo | caveman | github | 2026-11-10 | draft | claude-code, skill, tokens, prompt-engineering, llm | github:JuliusBrussee/caveman |
 | opensandbox-group--OpenSandbox | repo | OpenSandbox | github | 2026-11-10 | draft | sandbox, ai-agent, ai-infra, kubernetes, aaif | github:opensandbox-group/OpenSandbox |
+| addyosmani--agent-skills | repo | agent-skills | github | 2026-11-11 | draft | agent-skills, claude-code, codex, cursor, antigravity, skills | github:addyosmani/agent-skills |

@@ -5,10 +5,10 @@ metadata:
   origin_type: "vault-operations"
   captured_at: "2026-11-09"
   vault_status: "reviewer-approved"
-  reviewed_at: "2026-11-10T07:49:51Z"
+  reviewed_at: "2026-11-11T07:50:23Z"
   reviewed_by: "routine:skill-review"
-  review_hash: "6cce53cc177a5a19c73698c5bbdae7445307117dfba2157a6dbd07e261671bc4"
-  review_report: "outputs/skill-reviews/2026-11-10-tracking-skill-installs-in-notion.md"
+  review_hash: "06f74a6ecdedb522676af1d0f01650d9b97381677695482638a975a04b8d2b34"
+  review_report: "outputs/skill-reviews/2026-11-11-tracking-skill-installs-in-notion.md"
 ---
 
 # tracking-skill-installs-in-notion — one Notion database for every installed skill
