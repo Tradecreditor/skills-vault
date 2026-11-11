@@ -215,3 +215,4 @@
 ## [2026-11-10] star | JuliusBrussee/caveman | stars/JuliusBrussee--caveman
 ## [2026-11-10] review | saving-tokens-with-caveman approved | outputs/skill-reviews/2026-11-10-saving-tokens-with-caveman
 ## [2026-11-10] review | tracking-skill-installs-in-notion approved | outputs/skill-reviews/2026-11-10-tracking-skill-installs-in-notion
+## [2026-11-11] star | addyosmani/agent-skills | stars/addyosmani--agent-skills
