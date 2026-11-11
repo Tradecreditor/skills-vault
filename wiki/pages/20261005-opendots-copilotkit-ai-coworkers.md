@@ -12,7 +12,7 @@ captured_by: "routine:weekly-hot-list"
 canonical_id: "github:CopilotKit/OpenDots"
 engagement: "stars=3325 forks=442; X launch post likes=6035 reposts=570 views=1031751"
 tags: [hot-list, 2026-W40, ai-agents, ag-ui, copilotkit, computer-use, slack, self-hosted]
-related: [hot-list/2026-W40]
+related: [hot-list/2026-W40, 20260929-json-render-generative-ui-component-library]
 needs_manual_text: false
 ---
 
@@ -44,3 +44,4 @@ OpenDots 係 CopilotKit 喺 OpenAI 2026-09-29 推出 Dots 之後兩日開源（M
 
 - [[hot-list/2026-W40]]
 - [[pages/20261002-zcode-zai-harness]]
+- [[20260929-json-render-generative-ui-component-library|json-render: generative UI constrained to your own component library]]: another take on agent-driven UI, limiting the model to a fixed component set

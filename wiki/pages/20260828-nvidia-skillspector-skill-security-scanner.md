@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "instagram:DcllmSNv_Bk"
 engagement: "likes=3.9K comments=3.3K"
 tags: [agent-skills, ai-security, security-scanner, prompt-injection, supply-chain-security, claude-code, codex, mcp, nvidia]
-related: [skills/scanning-agent-skills, 20260923-promptfoo, stars/vercel-labs--skills, 20260921-4-claude-code-plugins, stars/OWASP--secure-coding-practices-quick-reference-guide]
+related: [skills/scanning-agent-skills, 20260923-promptfoo, stars/vercel-labs--skills, 20260921-4-claude-code-plugins, stars/OWASP--secure-coding-practices-quick-reference-guide, 20261004-whatsapp-mcp-server-claude]
 needs_manual_text: false
 ---
 
@@ -54,3 +54,4 @@ needs_manual_text: false
 - [[../stars/vercel-labs--skills|skills (vercel-labs)]] — `npx skills add` 一句就裝第三方 skill，正正係 SkillSpector 想擋喺前面嘅入口。
 - [[20260921-4-claude-code-plugins|4 Claude Code Plugins That Fix the Real Bottlenecks]] — 同樣係 IG 上推薦裝一堆 plugin / skill 嘅內容；裝之前可以先用 SkillSpector 掃一次。
 - [[../stars/OWASP--secure-coding-practices-quick-reference-guide|OWASP secure coding practices]] — 一般安全編碼清單，可以配合 SkillSpector 嘅供應鏈 / AST 類別一齊睇。
+- [[20261004-whatsapp-mcp-server-claude|WhatsApp MCP Server — 讓 Claude 搜尋 WhatsApp 對話並代發訊息]] — 一個會接觸個人帳戶嘅第三方 MCP server，正正係裝之前應該掃描嘅例子。

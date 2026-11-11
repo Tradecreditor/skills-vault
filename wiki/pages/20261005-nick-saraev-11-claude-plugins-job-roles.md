@@ -12,7 +12,7 @@ captured_by: "routine:capture-link"
 canonical_id: "instagram:DeHUaCoPFTV"
 engagement: ""
 tags: [topic/agent-tooling, claude-plugins, claude-code, role-plugins, lead-magnet]
-related: []
+related: [20261004-okaashish-claude-skills-links-teaser]
 needs_manual_text: false
 ---
 
@@ -35,3 +35,4 @@ Nick Saraev 喺 Instagram reel 話 Anthropic 推出 11 個免費 Claude plugin�
 
 ## Related
 - [[20260921-4-claude-code-plugins|4 Claude Code plugins]]
+- [[20261004-okaashish-claude-skills-links-teaser|okaashish: Claude skills link list (comment-bait teaser)]] — 同一類留言換連結嘅 Claude skills 清單帖。

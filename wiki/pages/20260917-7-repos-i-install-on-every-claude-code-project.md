@@ -12,7 +12,7 @@ captured_by: "claude-code-cloud"
 canonical_id: "instagram:DdY1o78mxiA"
 engagement: "likes=208 comments=1"
 tags: [topic/repo-picks, claude-code, repos, carousel, teaser]
-related: [20260925-5-github-repos-43k-stars-week, 20260921-4-claude-code-plugins]
+related: [20260925-5-github-repos-43k-stars-week, 20260921-4-claude-code-plugins, 20261004-okaashish-claude-skills-links-teaser]
 needs_manual_text: true
 ---
 
@@ -39,5 +39,6 @@ Gaurav（@gauravbuild）發佈一個 carousel，caption 得一句「You’re fal
 ## Related
 - [[../pages/20260925-5-github-repos-43k-stars-week|5 GitHub Repos That Gained ~43k Stars in a Week]]
 - [[../pages/20260921-4-claude-code-plugins|4 Claude Code Plugins That Fix the Real Bottlenecks]]
+- [[../pages/20261004-okaashish-claude-skills-links-teaser|okaashish: Claude skills link list (comment-bait teaser)]] — 同一類圖片清單帖，內容同樣要人手補。
 
 ## Notes
