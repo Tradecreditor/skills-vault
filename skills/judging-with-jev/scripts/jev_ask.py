@@ -10,8 +10,8 @@ Output: one JSON object on stdout; one log line per question on stderr
 
 Exit codes (the routine branches on these, never on the message text):
     0  answered
-    2  Jev is OFF for the whole run: no accepted key reached the host (401, or 403 with an authentication_error body) or the
-       host cannot be reached (proxy CONNECT refused, DNS, connection error)
+    2  Jev is OFF for the whole run: no accepted key reached the host (401, or 403 with an authentication_error body), the
+       host cannot be reached (proxy CONNECT refused, DNS, connection error), or JEV_DISABLED is set (the kill switch)
     3  per-item fallback: 402 / 408 / 429 / 5xx, timeout, malformed or incomplete answer, or a 4xx that means the question
        JSON is wrong - do that item as the routine would without Jev, count it, keep going
     4  refused locally before any request: the state looks like it carries a secret or cookie, is far above the request
@@ -19,7 +19,9 @@ Exit codes (the routine branches on these, never on the message text):
 
 Credentials: TYPESAFE_API_KEY from the environment, sent as a Bearer header to the configured base_url host only, never
 printed or logged. Defaults can also come from JEV_BASE_URL and JEV_MODEL. JEV_FAKE=<file.json> answers from canned
-values with no key and no network (see ../references/jev-fake.example.json). No third-party dependencies.
+values with no key and no network (see ../references/jev-fake.example.json). JEV_DISABLED set to anything but empty or 0
+is the kill switch: probe and ask exit 2 with a reason naming JEV_DISABLED before the input, JEV_FAKE, the key or the
+network is touched. No third-party dependencies.
 """
 import argparse
 import hashlib
@@ -177,6 +179,10 @@ def main(argv=None):
     a.add_argument("--act-min", type=float, help="value >= act-min -> band act")
     a.add_argument("--defer-min", type=float, help="defer-min <= value < act-min -> band defer; below -> no")
     args = p.parse_args(argv)
+
+    # Kill switch, ahead of everything that reads input, JEV_FAKE, the key or the network: both commands pass through here.
+    if os.environ.get("JEV_DISABLED", "") not in ("", "0"):
+        fail(2, "JEV_DISABLED is set: Jev is switched off for every routine", off=True)
 
     if args.cmd == "probe":
         questions = {"probe": {"type": "noul", "instructions": "The state is the single word probe."}}
