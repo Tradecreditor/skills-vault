@@ -8,11 +8,11 @@ metadata:
   captured_at: "2026-09-18"
   engagement: "commits=46"
   origin_type: "repo"
-  vault_status: "draft"
-  reviewed_at: "2026-10-07T16:04:28Z"
-  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
-  review_hash: "c91c7b03fa42fe33d7a82e2c93fed9b26768883061ecada214083ed694554cd2"
-  review_report: "outputs/skill-reviews/2026-10-07-using-obsidian-skills.md"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-11-12T07:51:49Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "0e6b3c37034ee19f1bfdb0f175368c90c35613e6f8ca70b6b8cc340ee72a0adb"
+  review_report: "outputs/skill-reviews/2026-11-12-using-obsidian-skills.md"
 ---
 
 # using-obsidian-skills

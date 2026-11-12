@@ -19,23 +19,23 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | auditing-agent-skills | draft | vault-operations | Audits a skill folder for safety and quality and returns a PASS/FAIL verdict |
 | auditing-seo-with-crawlie | reviewer-approved | post | Runs crawlie, an open-source local SEO + GEO crawler with CLI and MCP server |
 | automating-browsers-with-playwright | reviewer-approved | repo | Connects an agent to a real browser via the Playwright MCP server |
-| configuring-fable-advisor-jev-tree | draft | post | Configures one Claude Code tree: Opus main session at high effort, Fable as /advisor, three Opus subagents, optional Jev judgment leaf through judging-with-jev |
+| configuring-fable-advisor-jev-tree | reviewer-approved | post | Configures one Claude Code tree: Opus main session at high effort, Fable as /advisor, three Opus subagents, optional Jev judgment leaf through judging-with-jev |
 | delegating-to-codex | reviewer-approved | repo | Calls OpenAI Codex from inside Claude Code for a code review or a delegated task |
-| evaluating-llms-with-promptfoo | draft | repo | Evaluates LLM prompts, agents and RAG pipelines with promptfoo, including red teaming |
-| judging-with-jev | draft | vault-operations | Asks TypeSafe's Jev typed yes/no, choice or score questions to classify, gate or dedupe |
+| evaluating-llms-with-promptfoo | reviewer-approved | repo | Evaluates LLM prompts, agents and RAG pipelines with promptfoo, including red teaming |
+| judging-with-jev | reviewer-approved | vault-operations | Asks TypeSafe's Jev typed yes/no, choice or score questions to classify, gate or dedupe |
 | keeping-handoff-docs | reviewer-approved | vault-operations | Keeps one handoff.md per project: read it first, update it before a session that changed state ends |
-| making-product-videos | draft | repo | Creates cinematic product demo videos using Video Shotcraft (Remotion + Agent Skill) |
-| model-tiering | draft | vault-operations | Picks the model tier and effort level: expensive models advise and review, Sonnet executes |
-| providing-design-references | draft | post | Provides Claude with visual design references so it can match real layouts and UI decisions |
+| making-product-videos | reviewer-approved | repo | Creates cinematic product demo videos using Video Shotcraft (Remotion + Agent Skill) |
+| model-tiering | reviewer-approved | vault-operations | Picks the model tier and effort level: expensive models advise and review, Sonnet executes |
+| providing-design-references | reviewer-approved | post | Provides Claude with visual design references so it can match real layouts and UI decisions |
 | researching-competitor-landing-pages | reviewer-approved | post | Compares competitor landing pages on five fields with a ready agent prompt |
 | saving-tokens-with-caveman | reviewer-approved | repo | Installs and uses caveman to cut agent token use (short replies, compressed tool output) |
 | scanning-agent-skills | reviewer-approved | post | Scans third-party agent skills, plugins and MCP servers with NVIDIA SkillSpector before install |
-| stacking-coding-agent-plugins | draft | post | Scans, then installs pinned Graphify and chosen Agent Skills skills when the scan gate allows; describes Ponytail and OmniRoute without installing them |
+| stacking-coding-agent-plugins | reviewer-approved | post | Scans, then installs pinned Graphify and chosen Agent Skills skills when the scan gate allows; describes Ponytail and OmniRoute without installing them |
 | targeting-purchase-intent-keywords | reviewer-approved | post | Finds purchase-intent keywords, adds content + internal links, optimises conversion pages for e-com SEO |
 | tracking-projects-in-notion | draft | vault-operations | Runs Jeff's cross-project kanban in Notion under one board policy; mirrors handoff.md In flight rows and audits the board weekly |
 | tracking-skill-installs-in-notion | reviewer-approved | vault-operations | Records which skills and plugins are installed in which project or computer in Jeff's Notion database Skill Installs (`scripts/skills-inventory.py`) |
 | tracking-tasks-with-backlog-md | reviewer-approved | repo | Tracks agent and human work as Markdown task files with Backlog.md |
-| using-obsidian-skills | draft | repo | Installs kepano/obsidian-skills into a project or Obsidian vault and helps choose its skills |
+| using-obsidian-skills | reviewer-approved | repo | Installs kepano/obsidian-skills into a project or Obsidian vault and helps choose its skills |
 | using-ui-ux-pro-max | reviewer-approved | repo | Installs and applies the UI UX Pro Max skill for AI design system generation (192 rules, 79 styles) |
 | vault-capture | verified | vault-operations | Captures a pasted link (X, Threads, Instagram, YouTube, GitHub, any page) into the vault |
 | vault-search | verified | vault-operations | Searches the vault (index, skill descriptions, pages) for tools, skills and notes |

@@ -8,11 +8,11 @@ metadata:
   captured_at: "2026-09-23"
   engagement: "stars=24793 forks=2258"
   origin_type: "repo"
-  vault_status: "draft"
-  reviewed_at: "2026-10-04T15:35:29Z"
-  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
-  review_hash: "26c39aef27c8158448e486953fafcbaa64d9cd19a1b587dc6bc551315f5f3794"
-  review_report: "outputs/skill-reviews/2026-10-04-evaluating-llms-with-promptfoo.md"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-11-12T07:51:49Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "1a046af3d94ed935f161233ff3704243d1b4d0a2121809368e5399eee5119152"
+  review_report: "outputs/skill-reviews/2026-11-12-evaluating-llms-with-promptfoo.md"
 ---
 
 # evaluating-llms-with-promptfoo

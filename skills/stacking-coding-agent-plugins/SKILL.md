@@ -8,11 +8,11 @@ metadata:
   captured_at: "2026-09-26"
   engagement: ""
   origin_type: "post"
-  vault_status: "draft"
-  reviewed_at: "2026-11-07T07:48:47Z"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-11-12T07:51:49Z"
   reviewed_by: "routine:skill-review"
-  review_hash: "665efe4c655de4c0532073782826114b9b73a91012810a7598a7711b5e3d994b"
-  review_report: "outputs/skill-reviews/2026-11-07-stacking-coding-agent-plugins.md"
+  review_hash: "d9602d78986cfd5c182a67162aa24314c07a48e069d8d7a6d22c83a721daf024"
+  review_report: "outputs/skill-reviews/2026-11-12-stacking-coding-agent-plugins.md"
 ---
 
 # stacking-coding-agent-plugins

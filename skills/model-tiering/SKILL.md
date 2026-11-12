@@ -4,11 +4,11 @@ description: "Picks the Claude model tier and effort level for a task: expensive
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-09-26"
-  vault_status: "draft"
-  reviewed_at: "2026-10-04T15:35:29Z"
-  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
-  review_hash: "83e5bb68182b63012b777f0ed9af13a35fb49398313b02190443bc19bf905b7d"
-  review_report: "outputs/skill-reviews/2026-10-04-model-tiering.md"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-11-12T07:51:49Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "d49c630788a67befcfca6099f74554dafb7711098013ac1719026875eec48571"
+  review_report: "outputs/skill-reviews/2026-11-12-model-tiering.md"
 ---
 
 # Model Tiering SOP — expensive models advise, cheap models execute

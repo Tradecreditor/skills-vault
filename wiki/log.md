@@ -218,3 +218,11 @@
 ## [2026-11-11] star | addyosmani/agent-skills | stars/addyosmani--agent-skills
 ## [2026-11-11] review | tracking-skill-installs-in-notion approved | outputs/skill-reviews/2026-11-11-tracking-skill-installs-in-notion
 ## [2026-11-11] review | tracking-projects-in-notion rejected | outputs/skill-reviews/2026-11-11-tracking-projects-in-notion
+## [2026-11-12] review | using-obsidian-skills approved | outputs/skill-reviews/2026-11-12-using-obsidian-skills
+## [2026-11-12] review | evaluating-llms-with-promptfoo approved | outputs/skill-reviews/2026-11-12-evaluating-llms-with-promptfoo
+## [2026-11-12] review | model-tiering approved | outputs/skill-reviews/2026-11-12-model-tiering
+## [2026-11-12] review | stacking-coding-agent-plugins approved | outputs/skill-reviews/2026-11-12-stacking-coding-agent-plugins
+## [2026-11-12] review | making-product-videos approved | outputs/skill-reviews/2026-11-12-making-product-videos
+## [2026-11-12] review | providing-design-references approved | outputs/skill-reviews/2026-11-12-providing-design-references
+## [2026-11-12] review | configuring-fable-advisor-jev-tree approved | outputs/skill-reviews/2026-11-12-configuring-fable-advisor-jev-tree
+## [2026-11-12] review | judging-with-jev approved | outputs/skill-reviews/2026-11-12-judging-with-jev

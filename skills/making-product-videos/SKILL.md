@@ -8,11 +8,11 @@ metadata:
   captured_at: "2026-09-27"
   engagement: "stars=18439 forks=1747"
   origin_type: "repo"
-  vault_status: "draft"
-  reviewed_at: "2026-10-04T15:35:29Z"
-  reviewed_by: "claude-code-cloud:vault-skill-reviewer"
-  review_hash: "81807eda3689d6b4f682b4c2c964c6c5ae5a7851e36f1c2893813ec5c319186b"
-  review_report: "outputs/skill-reviews/2026-10-04-making-product-videos.md"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-11-12T07:51:49Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "01ffb1ad140aca5776400443b92d2105d23db4d6edf91ee82bcf8ca55c778a32"
+  review_report: "outputs/skill-reviews/2026-11-12-making-product-videos.md"
 ---
 
 # making-product-videos
