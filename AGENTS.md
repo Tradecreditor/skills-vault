@@ -23,9 +23,10 @@ Do not grep the whole repo before reading the index; the index exists so you do 
 | `wiki/reads.base` | core (rarely) | Obsidian Bases view of every `post` / `video` / `article` page, grouped by `topic/*` tag. A live query over `wiki/pages`: nothing to append, a page appears by having the right `type` and a topic tag |
 | `skills/<name>/` | agents (drafts) / skill-review routine (reviewer-approved) / core (verified) | Agent-Skills spec folders installable in any agent; folder name == `name` (gerund, e.g. `reviewing-supabase-rls`) |
 | `agents/<agent-name>/` | that agent | scratch area for non-core agents; the core agent promotes good material into `wiki/` or `skills/` |
-| `outputs/` | agents | long-form answers and `outputs/health/` lint reports. AI long-form output goes here, never into `wiki/pages/` |
+| `outputs/` | agents | long-form answers and `outputs/health/` lint reports. AI long-form output goes here, never into `wiki/pages/`. `outputs/<yyyymmdd>-<feature>/` holds a feature's spec and tickets ("Agent skills" below) |
 | `routines/` | core | the prompts used by the cloud Routines (edit here, not in the Routine UI) |
 | `commands/` | core | slash commands of the vault's Claude Code plugin (`/skills-vault:projecthq`, `/skills-vault:skillsync`); they run as prompts in every project that installs the plugin |
+| `docs/` | core | `docs/agents/` = the configuration the Matt Pocock engineering skills read ("Agent skills" below); `docs/adr/` = decision records, created only when one is written |
 | `hooks/` | core | the plugin's hooks (`hooks.json` + scripts), run by Claude Code in every project that has the plugin: today `skill-install-sync` keeps the Skill Installs database current |
 
 ## Who is "core" (enforced by the GitHub ruleset on `main` + `.github/workflows/vault-guard.yml`)
@@ -190,6 +191,18 @@ approved skill sends it back to `draft` and through review again. Captures may a
 - Dedupe before writing: `grep -rF "<canonical_id>" wiki/index.md wiki/pages wiki/stars` — a hit means the item exists; append to its `## Notes` instead of creating a new page.
 - `wiki/log.md` line: `## [YYYY-MM-DD] <init|capture|recapture|star|hot-list|lint|review|promote|deprecate> | <title> | <slug or file>` (append at the end, never edit old lines)
 - `wiki/hot.md`: keep "最近 20 項" and "本週熱門榜" sections current; trim the list, never the history in `log.md`.
+
+## Agent skills
+Configuration for the Matt Pocock engineering skills in `.claude/skills/` (`to-spec`, `to-tickets`, `implement`,
+`implement-spec`, …), written by `/setup-matt-pocock-skills` on 2026-11-12.
+
+### Issue tracker
+The card is the `handoff.md` In flight row (Projects HQ); specs and tickets are files under `outputs/<yyyymmdd>-<feature>/`.
+GitHub Issues are not used. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+Single-context: `GLOSSARY.md` and `docs/adr/` at the repo root, created only when there is something to record.
+See `docs/agents/domain.md`.
 
 ## Commit messages
 `capture: <slug>` · `stars: +<n>` · `stars: enrich <n>` · `hot-list: YYYY-Www` · `lint: YYYY-Www` · `review: <a> approved, <r> rejected` · `promote: <slug>` · `deprecate: <slug>` · `docs: <what>` · `scripts: <what>` · `routines: <what>` · `wiki: <what>` · `supabase: <what>` · `chore: <what>` (maintenance commits)
