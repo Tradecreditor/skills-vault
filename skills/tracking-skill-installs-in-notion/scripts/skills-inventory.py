@@ -13,6 +13,8 @@ What it reads (never writes anything on disk):
     computedHash, ...}), the agent skill folders <root>/.claude/skills/*, <root>/.agents/skills/* and <root>/skills/*
     (OpenClaw; skipped when <root> is the vault itself, whose skills/ is the library), and the Claude Code plugins enabled in
     <root>/.claude/settings.json and .claude/settings.local.json (enabledPlugins set to true).
+    When <root> is the home directory (or --home) nothing is collected: those folders are the computer's global installs,
+    which --global records, so a session opened in the home folder never duplicates them as a project named after it.
   --global: the per-computer equivalents under <home>: ~/.claude/skills, ~/.agents/skills, ~/.gemini/skills, ~/.cursor/skills,
     ~/.openclaw/skills, ~/.claude/plugins/installed_plugins.json and ~/.claude/settings.json enabledPlugins. Project defaults to
     --project, else the SKILLS_INVENTORY_GLOBAL_LABEL environment variable, else "global:<hostname>"; that label is written to
@@ -898,6 +900,16 @@ def remember_run(source, digest):
         log(f"warn: could not write {path} ({e.__class__.__name__}); --if-changed will run again next time")
 
 
+def is_home_dir(root, home=None):
+    """True when root is the user's home directory (or --home), compared case-insensitively where the OS is."""
+    def norm(p):
+        try:
+            return os.path.normcase(str(Path(p).resolve()))
+        except OSError:
+            return os.path.normcase(os.path.abspath(str(p)))
+    return norm(root) == norm(home or Path.home())
+
+
 def run(args):
     if args.audit:
         return run_audit(args)
@@ -915,7 +927,14 @@ def run(args):
         if not root.is_dir():
             raise Stop(3, f"--root {root} is not a directory")
         root_is_vault = (root / "skills" / "vault-capture" / "SKILL.md").is_file() and (root / "CLAUDE.md").is_file()
-        rows = dedupe(collect_project(root, root_is_vault))
+        if is_home_dir(root, args.home):
+            # a session opened in the home folder is not a project: its .claude/skills, .agents/skills and settings are this
+            # computer's global installs, which --global records. Record nothing here, so rows an earlier run wrote under the
+            # home folder's name (e.g. "user") become Removed instead of duplicating the global:<computer> rows.
+            log(f"note: --root {root} is the home directory; its installs are recorded by --global, not as a project")
+            rows = []
+        else:
+            rows = dedupe(collect_project(root, root_is_vault))
     project, source = default_labels(args)
     res = {"ok": True, "dry_run": args.dry_run, "project": project, "source": source, "data_source": None,
            "rows": rows, "plan": None, "counts": None}
@@ -1015,7 +1034,7 @@ def main(argv=None):
     p.add_argument("--source", help="Source label, the rows this run owns (default: <project>/skills-lock.json or the global label)")
     p.add_argument("--root", help="project checkout to scan (default: this script's repo root)")
     p.add_argument("--global", dest="global_scope", action="store_true", help="scan the computer's global skill folders instead")
-    p.add_argument("--home", help="home directory for --global (default: the user's)")
+    p.add_argument("--home", help="home directory for --global, and the folder a project run treats as home (default: the user's)")
     p.add_argument("--enrich", action="store_true", help="vault only: fill Vault status on every vault-skill row from skills/README.md")
     p.add_argument("--vault", help="vault checkout for --enrich (default: this script's repo root)")
     p.add_argument("--data-source", help="data source id (default: NOTION_SKILLS_DS, else search)")

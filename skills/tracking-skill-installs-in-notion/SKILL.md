@@ -4,7 +4,7 @@ description: "Records which agent skills and Claude Code plugins are installed i
 metadata:
   origin_type: "vault-operations"
   captured_at: "2026-11-09"
-  vault_status: "reviewer-approved"
+  vault_status: "draft"
   reviewed_at: "2026-11-11T07:50:23Z"
   reviewed_by: "routine:skill-review"
   review_hash: "06f74a6ecdedb522676af1d0f01650d9b97381677695482638a975a04b8d2b34"
@@ -175,6 +175,10 @@ fingerprints, so when several sessions start at once only the first writes; an `
 (no stamp, so the next session runs) and a manual run waits up to 3 minutes. The OS drops the lock when its process ends or is
 killed (the hook's 90 s timeout), so nothing goes stale. Should duplicate rows
 exist anyway (one Skill title twice under one Source), every run keeps the oldest as the live row and marks the copies `Removed`.
+
+A session opened in the home folder is not a project: there `.claude/skills`, `.agents/skills` and `.claude/settings.json` are
+the computer's global installs, which `--global` records. So a project run whose `--root` is the home directory (or `--home`)
+collects nothing, and rows an earlier run wrote under the home folder's name (`user` on Jeff's PC, 2026-11-12) become `Removed`.
 
 ## Per project: manually
 

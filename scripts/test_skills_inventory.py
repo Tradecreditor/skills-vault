@@ -496,6 +496,19 @@ class SyncTests(unittest.TestCase):
         code, out, _ = self.run_cli("--if-changed", env={"SKILLS_INVENTORY_STATE": state})
         self.assertTrue(out.startswith("skills-inventory: created=0 updated=2 removed=0"), out)   # both became bare folders
 
+    def test_home_directory_is_not_a_project(self):
+        # a session opened in the home folder: its .claude/skills are the computer's global installs (recorded by --global),
+        # so a project run there records nothing and retires rows an earlier run wrote under the home folder's name
+        stale = self.fake.seed("keeping-handoff-docs", SOURCE)
+        code, out, err = self.run_cli("--home", str(self.root))
+        self.assertEqual(code, 0)
+        self.summary(out, removed=1)
+        self.assertIn("is the home directory", err)
+        self.assertEqual(self.fake.prop(stale, "Status")["select"]["name"], "Removed")
+        self.assertEqual(len(self.fake.pages), 1)                           # nothing created
+        self.assertTrue(si.is_home_dir(self.root, str(self.root) + os.sep))
+        self.assertFalse(si.is_home_dir(self.root / ".claude", self.root))
+
     def test_extra_copies_of_a_row_are_retired_and_the_oldest_kept(self):
         # two runs that raced on a new Source each created the rows: keep the oldest, mark the copies Removed
         old = self.fake.seed("keeping-handoff-docs", SOURCE, status="Removed")
