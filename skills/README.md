@@ -16,7 +16,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 ## Skills in this vault
 | name | vault_status | origin_type | what it does |
 |---|---|---|---|
-| auditing-agent-skills | draft | vault-operations | Audits a skill folder for safety and quality and returns a PASS/FAIL verdict |
+| auditing-agent-skills | reviewer-approved | vault-operations | Audits a skill folder for safety and quality and returns a PASS/FAIL verdict |
 | auditing-seo-with-crawlie | reviewer-approved | post | Runs crawlie, an open-source local SEO + GEO crawler with CLI and MCP server |
 | automating-browsers-with-playwright | reviewer-approved | repo | Connects an agent to a real browser via the Playwright MCP server |
 | configuring-fable-advisor-jev-tree | reviewer-approved | post | Configures one Claude Code tree: Opus main session at high effort, Fable as /advisor, three Opus subagents, optional Jev judgment leaf through judging-with-jev |
