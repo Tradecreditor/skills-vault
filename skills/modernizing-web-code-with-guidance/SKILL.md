@@ -6,7 +6,11 @@ metadata:
   source_platform: "github"
   author: "GoogleChrome"
   origin_type: "repo"
-  vault_status: "draft"
+  vault_status: "reviewer-approved"
+  reviewed_at: "2026-11-14T07:48:11Z"
+  reviewed_by: "routine:skill-review"
+  review_hash: "2e6abaa7cc5c3c9ecbe505ab7754d81493a2f1b9816f55ab02c54104bf88a5b1"
+  review_report: "outputs/skill-reviews/2026-11-14-modernizing-web-code-with-guidance.md"
 ---
 
 # modernizing-web-code-with-guidance

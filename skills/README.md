@@ -25,6 +25,7 @@ says which), `reviewer-approved` = passed the `skill-review` routine's audit, `v
 | judging-with-jev | reviewer-approved | vault-operations | Asks TypeSafe's Jev typed yes/no, choice or score questions to classify, gate or dedupe |
 | keeping-handoff-docs | reviewer-approved | vault-operations | Keeps one handoff.md per project: read it first, update it before a session that changed state ends |
 | making-product-videos | reviewer-approved | repo | Creates cinematic product demo videos using Video Shotcraft (Remotion + Agent Skill) |
+| modernizing-web-code-with-guidance | reviewer-approved | repo | Steers coding agents toward modern web platform APIs with the Modern Web Guidance CLI (search, retrieve, legacy-scan) |
 | model-tiering | reviewer-approved | vault-operations | Picks the model tier and effort level: expensive models advise and review, Sonnet executes |
 | providing-design-references | reviewer-approved | post | Provides Claude with visual design references so it can match real layouts and UI decisions |
 | researching-competitor-landing-pages | reviewer-approved | post | Compares competitor landing pages on five fields with a ready agent prompt |
