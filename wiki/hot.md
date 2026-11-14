@@ -10,6 +10,7 @@
 你貼嘅 link 有一個合資格：[[pages/20261003-matt-pocock-skills-repo-agent-skills|mattpocock/skills]]（一星期 +9,423 stars），輸咗同分排序，已喺頁面加 Notes。
 
 ## 最近 20 項
+- 2026-11-14 · repo · [[stars/GoogleChrome--modern-web-guidance|GoogleChrome/modern-web-guidance — 令 agent 用現代網頁 API 嘅官方指引]]
 - 2026-11-11 · repo · [[stars/addyosmani--agent-skills|addyosmani/agent-skills — 25 個工程生命週期 skill]]
 - 2026-11-10 · repo · [[stars/JuliusBrussee--caveman|JuliusBrussee/caveman — agent 慳 token 工具組]]
 - 2026-11-10 · repo · [[stars/opensandbox-group--OpenSandbox|opensandbox-group/OpenSandbox — AI agent 沙盒執行環境]]

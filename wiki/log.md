@@ -227,3 +227,4 @@
 ## [2026-11-12] review | configuring-fable-advisor-jev-tree approved | outputs/skill-reviews/2026-11-12-configuring-fable-advisor-jev-tree
 ## [2026-11-12] review | judging-with-jev approved | outputs/skill-reviews/2026-11-12-judging-with-jev
 ## [2026-11-13] review | auditing-agent-skills approved | outputs/skill-reviews/2026-11-13-auditing-agent-skills
+## [2026-11-14] star | GoogleChrome/modern-web-guidance | stars/GoogleChrome--modern-web-guidance
