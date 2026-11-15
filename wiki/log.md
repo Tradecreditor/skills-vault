@@ -229,3 +229,4 @@
 ## [2026-11-13] review | auditing-agent-skills approved | outputs/skill-reviews/2026-11-13-auditing-agent-skills
 ## [2026-11-14] star | GoogleChrome/modern-web-guidance | stars/GoogleChrome--modern-web-guidance
 ## [2026-11-14] review | modernizing-web-code-with-guidance approved | outputs/skill-reviews/2026-11-14-modernizing-web-code-with-guidance
+## [2026-11-15] star | joe2643/qwen3-asr-cantonese-hk | stars/joe2643--qwen3-asr-cantonese-hk

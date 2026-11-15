@@ -141,3 +141,4 @@ One row per entry. Agents: read `hot.md` first, then this file, then the page yo
 | opensandbox-group--OpenSandbox | repo | OpenSandbox | github | 2026-11-10 | draft | sandbox, ai-agent, ai-infra, kubernetes, aaif | github:opensandbox-group/OpenSandbox |
 | addyosmani--agent-skills | repo | agent-skills | github | 2026-11-11 | draft | agent-skills, claude-code, codex, cursor, antigravity, skills | github:addyosmani/agent-skills |
 | GoogleChrome--modern-web-guidance | repo | modern-web-guidance | github | 2026-11-14 | draft | agent-skills, web-platform, css, accessibility, chrome | github:GoogleChrome/modern-web-guidance |
+| joe2643--qwen3-asr-cantonese-hk | repo | qwen3-asr-cantonese-hk | github | 2026-11-15 | draft | asr, cantonese, speech-to-text, qwen3-asr, llama-cpp, gguf | github:joe2643/qwen3-asr-cantonese-hk |
