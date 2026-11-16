@@ -53,3 +53,4 @@ REA（Reverse Engineer Anything）係 morluto 開源（MIT）嘅 MCP server 加 
 - also trending 2026-W43 (386,840 stars / 96,900 forks on 2026-10-26, +59,050 since 2026-10-19; GitHub search API; see [[hot-list/2026-W43]])
 - also trending 2026-W44 (420,123 stars / 104,924 forks on 2026-11-02, +33,283 since 2026-10-26; GitHub search API; see [[hot-list/2026-W44]])
 - also trending 2026-W45 (444,841 stars on 2026-11-09, +24,718 since 2026-11-02; GitHub search API; see [[hot-list/2026-W45]])
+- also trending 2026-W46 (462,661 stars on 2026-11-16, +17,820 since 2026-11-09; GitHub search API; see [[hot-list/2026-W46]])

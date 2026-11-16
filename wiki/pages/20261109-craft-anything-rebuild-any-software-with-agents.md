@@ -45,3 +45,6 @@ Craft Anything 係 storytold（ArtCraft 團隊）2026-10-31 開源嘅 Rust 引�
 
 - [[hot-list/2026-W45]]
 - [[pages/20261012-rea-reverse-engineer-anything]]: reverse engineering with agents (W41 winner)
+
+## Notes
+- also trending 2026-W46 (34,167 stars on 2026-11-16, +10,772 since 2026-11-09; GitHub search API; see [[hot-list/2026-W46]])

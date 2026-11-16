@@ -230,3 +230,6 @@
 ## [2026-11-14] star | GoogleChrome/modern-web-guidance | stars/GoogleChrome--modern-web-guidance
 ## [2026-11-14] review | modernizing-web-code-with-guidance approved | outputs/skill-reviews/2026-11-14-modernizing-web-code-with-guidance
 ## [2026-11-15] star | joe2643/qwen3-asr-cantonese-hk | stars/joe2643--qwen3-asr-cantonese-hk
+## [2026-11-16] capture | milind-soni/OpenMausBot — open-source Grok Bot alternative with local Claude / Codex agents | 20261116-openmausbot-open-source-grok-bot-alternative
+## [2026-11-16] capture | awesome-dsh-plugin/awesome-dsh-plugin — curated DeepSeek Harness plugin list | 20261116-awesome-dsh-plugin-curated-dsh-plugins
+## [2026-11-16] hot-list | 2026-W46 | hot-list/2026-W46
