@@ -233,3 +233,5 @@
 ## [2026-11-16] capture | milind-soni/OpenMausBot — open-source Grok Bot alternative with local Claude / Codex agents | 20261116-openmausbot-open-source-grok-bot-alternative
 ## [2026-11-16] capture | awesome-dsh-plugin/awesome-dsh-plugin — curated DeepSeek Harness plugin list | 20261116-awesome-dsh-plugin-curated-dsh-plugins
 ## [2026-11-16] hot-list | 2026-W46 | hot-list/2026-W46
+
+## [2026-11-16] lint | 2026-W47 | outputs/health/2026-W47
