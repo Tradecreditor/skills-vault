@@ -235,3 +235,5 @@
 ## [2026-11-16] hot-list | 2026-W46 | hot-list/2026-W46
 
 ## [2026-11-16] lint | 2026-W47 | outputs/health/2026-W47
+
+## [2026-11-21] star | koelony/qwen3-asr-cantonese-hk (rename of joe2643/qwen3-asr-cantonese-hk) | stars/joe2643--qwen3-asr-cantonese-hk
